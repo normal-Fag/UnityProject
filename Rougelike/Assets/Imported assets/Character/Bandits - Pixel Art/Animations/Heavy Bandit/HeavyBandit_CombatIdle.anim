@@ -4,9 +4,8 @@
 AnimationClip:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: jump_up
+  m_PrefabInternal: {fileID: 0}
+  m_Name: HeavyBandit_CombatIdle
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,22 +19,18 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: 522b1a324fd814dc58efe3b1731dfd1d, type: 3}
-    - time: 0.083333336
-      value: {fileID: 21300000, guid: 522b1a324fd814dc58efe3b1731dfd1d, type: 3}
-    - time: 0.16666667
-      value: {fileID: 21300000, guid: 8d9a839930f7a4ee0a934e9fb4c8fd53, type: 3}
+      value: {fileID: 21300008, guid: 317b8365a4649ab459f6cb58ec8f9f18, type: 3}
     - time: 0.25
-      value: {fileID: 21300000, guid: fc97ac1f2cb2b4e43ba97ffdaa3fd62a, type: 3}
-    - time: 0.33333334
-      value: {fileID: 21300000, guid: 4dc7a6fcd5bed479c9f99b6ae00571db, type: 3}
-    - time: 0.41666666
-      value: {fileID: 21300000, guid: 081bb08baa1c54dd9a08dcd7a5174c8a, type: 3}
+      value: {fileID: 21300010, guid: 317b8365a4649ab459f6cb58ec8f9f18, type: 3}
+    - time: 0.5
+      value: {fileID: 21300012, guid: 317b8365a4649ab459f6cb58ec8f9f18, type: 3}
+    - time: 0.75
+      value: {fileID: 21300014, guid: 317b8365a4649ab459f6cb58ec8f9f18, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
-  m_SampleRate: 60
+  m_SampleRate: 4
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -50,18 +45,16 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 522b1a324fd814dc58efe3b1731dfd1d, type: 3}
-    - {fileID: 21300000, guid: 522b1a324fd814dc58efe3b1731dfd1d, type: 3}
-    - {fileID: 21300000, guid: 8d9a839930f7a4ee0a934e9fb4c8fd53, type: 3}
-    - {fileID: 21300000, guid: fc97ac1f2cb2b4e43ba97ffdaa3fd62a, type: 3}
-    - {fileID: 21300000, guid: 4dc7a6fcd5bed479c9f99b6ae00571db, type: 3}
-    - {fileID: 21300000, guid: 081bb08baa1c54dd9a08dcd7a5174c8a, type: 3}
+    - {fileID: 21300008, guid: 317b8365a4649ab459f6cb58ec8f9f18, type: 3}
+    - {fileID: 21300010, guid: 317b8365a4649ab459f6cb58ec8f9f18, type: 3}
+    - {fileID: 21300012, guid: 317b8365a4649ab459f6cb58ec8f9f18, type: 3}
+    - {fileID: 21300014, guid: 317b8365a4649ab459f6cb58ec8f9f18, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.43333334
+    m_StopTime: 1
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -80,4 +73,5 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
+  m_GenerateMotionCurves: 0
   m_Events: []
