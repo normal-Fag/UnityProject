@@ -5,25 +5,30 @@ using UnityEngine;
 public class Player_Controller : MonoBehaviour
 {
 
-
     [Header("Variables")]
     [SerializeField] float m_maxSpeed = 4.5f;
     [SerializeField] float m_jumpForce = 7.5f;
     [SerializeField] float timer = 0;
     [SerializeField] int attackDamage = 20;
-
     private Animator m_animator;
     private Rigidbody2D m_body2d;
     private Sensor_Prototype m_groundSensor;
     private bool m_grounded = false;
     private bool m_moving = false;
-    private int m_facingDirection = 1;
+    public static int m_facingDirection = 1;
     private float m_disableMovementTimer = 0.0f;
     private bool isAttack1 = false;
     private bool isChargeAttack = false;
     public Transform attackPoint;
+    public Transform sp_atk_point;
+    public Transform throwPoint;
     public float attackRange = 0.5f;
+    public float sp_atk_range = 0.5f;
     public LayerMask enemyLayers;
+    public GameObject dagger_throw;
+    public GameObject player;
+
+
 
 
 
@@ -39,7 +44,7 @@ public class Player_Controller : MonoBehaviour
     void Update()
     {
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-
+        Collider2D[] sp_hitEnemies = Physics2D.OverlapCircleAll(sp_atk_point.position, sp_atk_range, enemyLayers);
         // Decrease timer that disables input movement. Used when attacking
         m_disableMovementTimer -= Time.deltaTime;
 
@@ -75,14 +80,16 @@ public class Player_Controller : MonoBehaviour
         // Swap direction of sprite depending on move direction
         if (inputRaw > 0 && !isChargeAttack)
         {
-            GetComponent<SpriteRenderer>().flipX = false;
             m_facingDirection = 1;
+            transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         }
 
         else if (inputRaw < 0 && !isChargeAttack)
         {
-            GetComponent<SpriteRenderer>().flipX = true;
+       
             m_facingDirection = -1;
+            transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+
         }
 
         // SlowDownSpeed helps decelerate the characters when stopping
@@ -93,7 +100,7 @@ public class Player_Controller : MonoBehaviour
         // Set AirSpeed in animator
         m_animator.SetFloat("AirSpeedY", m_body2d.velocity.y);
 
-        // Set Animation layer for hiding sword
+    
 
         // -- Handle Animations --
         //Jump
@@ -106,60 +113,70 @@ public class Player_Controller : MonoBehaviour
             m_groundSensor.Disable(0.2f);
         }
 
-        else if (Input.GetKeyDown("j") && !isAttack1)
-        {
+          else if (Input.GetKeyDown("j") && !isAttack1)
+            {
                 m_animator.SetTrigger("Attack");
                 timer = 0;
                 isAttack1 = true;
 
-            foreach (Collider2D enemy in hitEnemies)
-            {
-                enemy.GetComponent<Bandit_test>().Take_Damage(attackDamage);
+                foreach (Collider2D enemy in hitEnemies)
+                {
+                    enemy.GetComponent<Bandit_test>().Take_Damage(attackDamage);
+                }
             }
-        }
-        else if(Input.GetKeyDown("j") && isAttack1)
-        {
-            m_animator.SetTrigger("Attack_2");
-            timer = 0;
-            isAttack1 = false;
-
-            foreach (Collider2D enemy in hitEnemies)
+          else  if (Input.GetKeyDown("j") && isAttack1)
             {
-                enemy.GetComponent<Bandit_test>().Take_Damage(attackDamage);
-            }
-        }
-      
-        if (Input.GetKey("j"))
-        {
-            timer += Time.deltaTime;
-        }
-
-        if (m_animator.GetCurrentAnimatorStateInfo(0).IsName("3_atk"))
-        {
-            m_maxSpeed = 0;
-            isChargeAttack = true;
-        }
-        else
-        {
-            m_maxSpeed = 4.5f;
-            isChargeAttack = false;
-        }
-            
-
-        if (Input.GetKeyUp("j") || Input.GetKeyDown("j"))
-        {
-            if (timer > 0.4 && m_grounded)
-            {
-                m_animator.SetTrigger("Attack_3");
+                m_animator.SetTrigger("Attack_2");
                 timer = 0;
+                isAttack1 = false;
 
                 foreach (Collider2D enemy in hitEnemies)
                 {
                     enemy.GetComponent<Bandit_test>().Take_Damage(attackDamage);
-              
+                }
+
+            }
+
+            if (Input.GetKey("j"))
+            {
+                timer += Time.deltaTime;
+            }
+
+            if (m_animator.GetCurrentAnimatorStateInfo(0).IsName("3_atk"))
+            {
+                m_maxSpeed = 0;
+                isChargeAttack = true;
+            }
+            else
+            {
+                m_maxSpeed = 4.5f;
+                isChargeAttack = false;
+            }
+
+
+            if (Input.GetKeyUp("j") || Input.GetKeyDown("j"))
+            {
+                float first_atk = 0;
+                if (timer > 0.4 && m_grounded)
+                {
+                    m_animator.SetTrigger("Attack_3");
+                    timer = 0;
+                    for (int i = 0; i < 5; i++)
+                    {
+                        StartCoroutine(ManySlashAttcak(i, first_atk));
+                        first_atk = 0.8f;
+                    }
+
                 }
             }
+
+
+        else if (Input.GetKeyUp("i"))
+        {
+            m_animator.SetTrigger("Throw_dagger");
+            StartCoroutine(Shoot());
         }
+
         //Run
         else if (m_moving)
             m_animator.SetInteger("AnimState", 1);
@@ -167,14 +184,35 @@ public class Player_Controller : MonoBehaviour
         //Idle
         else
             m_animator.SetInteger("AnimState", 0);
-    }
 
+      
+    }
     // Function used to spawn a dust effect
     // All dust effects spawns on the floor
     // dustXoffset controls how far from the player the effects spawns.
     // Default dustXoffset is zero
+    IEnumerator ManySlashAttcak(float time, float first_atk)
+    {
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+
+        yield return new WaitForSeconds(first_atk + time * 0.1f);
+
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            enemy.GetComponent<Bandit_test>().Take_Damage(attackDamage);
+        }
 
 
+    }
+
+    IEnumerator Shoot()
+    {
+        yield return new WaitForSeconds(0.3f);
+
+        Instantiate(dagger_throw, throwPoint.position, throwPoint.rotation);
+
+    }
+       
     void SpawnDustEffect(GameObject dust, float dustXOffset = 0)
     {
         if (dust != null)
@@ -192,8 +230,11 @@ public class Player_Controller : MonoBehaviour
 
         if (attackPoint == null)
             return;
+        if (sp_atk_point == null)
+            return;
 
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+        
     }
 
     // Animation Events
