@@ -45,8 +45,8 @@ public class Player_Controller : MonoBehaviour
     void Update()
     {
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-        Collider2D[] sp_hitEnemies = Physics2D.OverlapBoxAll(attackPoint.position, sp_atk_range, 90f);
-
+        Collider2D[] sp_hitEnemies = Physics2D.OverlapBoxAll(sp_atk_point.position, sp_atk_range, 90f);
+        
         // Decrease timer that disables input movement. Used when attacking
         m_disableMovementTimer -= Time.deltaTime;
 
@@ -181,10 +181,14 @@ public class Player_Controller : MonoBehaviour
         else if (Input.GetKeyUp("l"))
         {
             m_animator.SetTrigger("sp_atk");
+
             foreach (Collider2D enemy in sp_hitEnemies)
             {
                 enemy.GetComponent<Bandit_test>().Take_Damage(attackDamage);
             }
+
+
+
         }
 
         //Run
