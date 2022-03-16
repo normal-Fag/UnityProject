@@ -23,10 +23,11 @@ public class Player_Controller : MonoBehaviour
     public Transform sp_atk_point;
     public Transform throwPoint;
     public float attackRange = 0.5f;
-    public float sp_atk_range = 0.5f;
+    public Vector2 sp_atk_range = new Vector2(0.5f, 0.5f);
     public LayerMask enemyLayers;
     public GameObject dagger_throw;
     public GameObject player;
+    
 
 
 
@@ -44,7 +45,8 @@ public class Player_Controller : MonoBehaviour
     void Update()
     {
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-        Collider2D[] sp_hitEnemies = Physics2D.OverlapCircleAll(sp_atk_point.position, sp_atk_range, enemyLayers);
+        Collider2D[] sp_hitEnemies = Physics2D.OverlapBoxAll(attackPoint.position, sp_atk_range, 90f);
+
         // Decrease timer that disables input movement. Used when attacking
         m_disableMovementTimer -= Time.deltaTime;
 
@@ -176,6 +178,14 @@ public class Player_Controller : MonoBehaviour
             m_animator.SetTrigger("Throw_dagger");
             StartCoroutine(Shoot());
         }
+        else if (Input.GetKeyUp("l"))
+        {
+            m_animator.SetTrigger("sp_atk");
+            foreach (Collider2D enemy in sp_hitEnemies)
+            {
+                enemy.GetComponent<Bandit_test>().Take_Damage(attackDamage);
+            }
+        }
 
         //Run
         else if (m_moving)
@@ -234,7 +244,8 @@ public class Player_Controller : MonoBehaviour
             return;
 
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
-        
+        Gizmos.DrawWireCube(sp_atk_point.position, sp_atk_range);
+
     }
 
     // Animation Events
