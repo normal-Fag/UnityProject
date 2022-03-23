@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player_Controller : MonoBehaviour
@@ -174,44 +173,14 @@ public class Player_Controller : MonoBehaviour
             }
         }
         //Trap
-        else if (Input.GetKeyDown("u") && m_grounded)
-        {
-            m_animator.SetTrigger("trap_skill");
-            isTraping = true;
-            m_body2d.velocity = Vector2.zero;
-            currentDashTimmer = startDashTimer;
-
-            if(m_facingDirection == 1)
-            {
-                throwPoint.rotation = Quaternion.Euler(0, 0, 135);
-            }
-            else
-            {
-                throwPoint.rotation = Quaternion.Euler(0, 0, 45);
-            }
-          
-        }
-
-        else if (isTraping)
-        {
-
-            m_body2d.velocity = transform.right * trapDistanceEvade * m_facingDirection * -1f;
-            currentDashTimmer -= Time.deltaTime;
-            
-
-            if (currentDashTimmer <= 0)
-            {
-                isTraping = false;
-                StartCoroutine(SkillDagger());
-            }
-        }
+       
 
         else if (Input.GetKey("j"))
         {
             timer += Time.deltaTime;
         }
 
-        else if (m_animator.GetCurrentAnimatorStateInfo(0).IsName("3_atk") || m_animator.GetCurrentAnimatorStateInfo(0).IsName("sp_atk"))
+        else if (m_animator.GetCurrentAnimatorStateInfo(0).IsName("3_atk") || m_animator.GetCurrentAnimatorStateInfo(0).IsName("sp_atk") || isTraping || m_animator.GetCurrentAnimatorStateInfo(0).IsName("trap_cast"))
         {
             stopMoving = 0;
             isChargeAttack = true;
@@ -239,7 +208,38 @@ public class Player_Controller : MonoBehaviour
             }
         }
 
-       
+        else if (Input.GetKeyDown("u") && m_grounded)
+        {
+            isTraping = true;
+            m_animator.SetTrigger("trap_skill");
+            m_body2d.velocity = Vector2.zero;
+            currentDashTimmer = startDashTimer;
+
+            if (m_facingDirection == 1)
+            {
+                throwPoint.rotation = Quaternion.Euler(0, 0, 135);
+            }
+            else
+            {
+                throwPoint.rotation = Quaternion.Euler(0, 0, 45);
+            }
+
+        }
+
+        else if (isTraping)
+        {
+
+            m_body2d.velocity = transform.right * trapDistanceEvade * m_facingDirection * -1f;
+            currentDashTimmer -= Time.deltaTime;
+
+
+            if (currentDashTimmer <= 0)
+            {
+                StartCoroutine(SkillDagger());
+                isTraping = false;
+            }
+        }
+
 
         else if (Input.GetKeyUp("i"))
         {

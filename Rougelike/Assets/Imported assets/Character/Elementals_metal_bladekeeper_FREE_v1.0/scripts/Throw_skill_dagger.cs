@@ -11,6 +11,10 @@ public class Throw_skill_dagger : MonoBehaviour
     private Animator d_animator;
     private Sensor_Prototype d_groundSensor;
     private bool d_grounded = false;
+    public Transform t_dagger;
+    public Transform trapPoint;
+    public Vector2 trap_atk_range = new Vector2(12f, 3f);
+    public LayerMask enemyLayers;
     void Start()
     {
         d_animator = GetComponent<Animator>();
@@ -30,33 +34,50 @@ public class Throw_skill_dagger : MonoBehaviour
 
     void Update()
     {
+        Collider2D[] trap_hitEnemies = Physics2D.OverlapBoxAll(trapPoint.position, trap_atk_range, 0f, enemyLayers);
+
         if (!d_grounded && d_groundSensor.State())
         {
             d_grounded = true;
-            d_animator.SetBool("Grounded", d_grounded);
+            d_animator.SetTrigger("Grounded");
             rb_dagger.velocity = transform.right * speed * 0;
-            StartCoroutine(DestroyTrapDagger());
+            t_dagger.rotation = Quaternion.Euler(0, 0, 0);
+            StartCoroutine(active_damage(trap_hitEnemies));
         }
 
     }
 
-    
-
-private void OnTriggerEnter2D(Collider2D hitInfo)
+    IEnumerator active_damage(Collider2D[] trap_hitEnemies)
     {
-        Bandit_test enemy = hitInfo.GetComponent<Bandit_test>();
-        if (enemy != null)
+
+        yield return new WaitForSeconds(0.5f);
+
+        foreach (Collider2D enemy in trap_hitEnemies)
         {
-            enemy.Take_Damage(dagger_damage);
+            enemy.GetComponent<Bandit_test>().Take_Damage(dagger_damage);
         }
-        
+        StartCoroutine(DestroyTrapDagger());
+
     }
 
-    IEnumerator DestroyTrapDagger()
+     
+
+
+IEnumerator DestroyTrapDagger()
     {
-        yield return new WaitForSeconds(10f);
+
+        yield return new WaitForSeconds(0.25f);
 
         Destroy(gameObject);
+
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (trapPoint == null)
+            return;
+
+        Gizmos.DrawWireCube(trapPoint.position, trap_atk_range);
 
     }
 }
