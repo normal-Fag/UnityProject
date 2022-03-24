@@ -36,7 +36,12 @@ public class Player_Controller : MonoBehaviour
     public float trapDistanceEvade;
 
     bool isTraping = false;
-    
+
+
+    public float attackRate = 2f;
+    float nextAttackTime = 0f;
+
+
 
 
 
@@ -116,48 +121,64 @@ public class Player_Controller : MonoBehaviour
         //Jump
         if (Input.GetButtonDown("Jump") && m_grounded && m_disableMovementTimer < 0.0f)
         {
-            m_animator.SetTrigger("Jump");
-            m_grounded = false;
-            m_animator.SetBool("Grounded", m_grounded);
-            m_body2d.velocity = new Vector2(m_body2d.velocity.x, m_jumpForce);
-            m_groundSensor.Disable(0.2f);
+            Jump();
         }
+        //Run
+        else if (m_moving)
+            m_animator.SetInteger("AnimState", 1);
 
-          else if (Input.GetKeyDown("j") && !isAttack1)
-            {
-                m_animator.SetTrigger("Attack");
-                timer = 0;
-                isAttack1 = true;
+        //Idle
+        else
+            m_animator.SetInteger("AnimState", 0);
 
-                foreach (Collider2D enemy in hitEnemies)
-                {
-                    enemy.GetComponent<Bandit_test>().Take_Damage(attackDamage);
-                }
-            }
-          else  if (Input.GetKeyDown("j") && isAttack1)
-            {
-                m_animator.SetTrigger("Attack_2");
-                timer = 0;
-                isAttack1 = false;
-
-                foreach (Collider2D enemy in hitEnemies)
-                {
-                    enemy.GetComponent<Bandit_test>().Take_Damage(attackDamage);
-                }
-
-            }
 
         //Roll
-        else if (Input.GetKeyDown("k") && m_grounded)
+        if (Time.time >= nextAttackTime)
         {
-            m_animator.SetTrigger("Roll");
-            isRolling = true;
-            currentDashTimmer = startDashTimer;
-            m_body2d.velocity = Vector2.zero;
-                              
-        }
+            if (Input.GetKeyDown("k") && m_grounded)
+            {
+                Roll();
+                nextAttackTime = Time.time + 1f / attackRate;
+            }
 
-        else if (isRolling)
+            else if (Input.GetKeyDown("j") && !isAttack1)
+            {
+                Attack1(hitEnemies);
+                nextAttackTime = Time.time + 1f / attackRate;
+            }
+            else if (Input.GetKeyDown("j") && isAttack1)
+            {
+                Attack2(hitEnemies);
+                nextAttackTime = Time.time + 1f / attackRate;
+            }
+
+            else if (Input.GetKeyDown("u") && m_grounded)
+            {
+                TrapCast();
+                nextAttackTime = Time.time + 1f / attackRate;
+            }
+
+            else if (Input.GetKeyUp("i"))
+            {
+                ThrowDagger();
+                nextAttackTime = Time.time + 1f / attackRate;
+            }
+
+            else if (Input.GetKeyDown("l") && m_grounded)
+            {
+                SpecialAttack(sp_hitEnemies);
+                nextAttackTime = Time.time + 1f / attackRate;
+            }
+
+            else if (Input.GetKeyUp("j") || Input.GetKeyDown("j"))
+            {
+                ChargeAttack();
+                nextAttackTime = Time.time + 1f / attackRate;
+            }
+        }
+       
+
+        if (isRolling)
         {
             m_animator.SetInteger("RollingState", 1);
             Physics2D.IgnoreLayerCollision(3, 6, true);
@@ -165,15 +186,13 @@ public class Player_Controller : MonoBehaviour
 
             currentDashTimmer -= Time.deltaTime;
 
-            if(currentDashTimmer <= 0)
+            if (currentDashTimmer <= 0)
             {
                 isRolling = false;
                 m_animator.SetInteger("RollingState", 0);
                 Physics2D.IgnoreLayerCollision(3, 6, false);
             }
         }
-        //Trap
-       
 
         else if (Input.GetKey("j"))
         {
@@ -191,44 +210,9 @@ public class Player_Controller : MonoBehaviour
             isChargeAttack = false;
         }
 
-
-        if (Input.GetKeyUp("j") || Input.GetKeyDown("j"))
+        //Trap
+        if (isTraping)
         {
-            float first_atk = 0;
-            if (timer > 0.4 && m_grounded)
-            {
-                m_animator.SetTrigger("Attack_3");
-                timer = 0;
-                for (int i = 0; i < 5; i++)
-                {
-                    StartCoroutine(ManySlashAttcak(i, first_atk));
-                    first_atk = 0.8f;
-                }
-
-            }
-        }
-
-        else if (Input.GetKeyDown("u") && m_grounded)
-        {
-            isTraping = true;
-            m_animator.SetTrigger("trap_skill");
-            m_body2d.velocity = Vector2.zero;
-            currentDashTimmer = startDashTimer;
-
-            if (m_facingDirection == 1)
-            {
-                throwPoint.rotation = Quaternion.Euler(0, 0, 135);
-            }
-            else
-            {
-                throwPoint.rotation = Quaternion.Euler(0, 0, 45);
-            }
-
-        }
-
-        else if (isTraping)
-        {
-
             m_body2d.velocity = transform.right * trapDistanceEvade * m_facingDirection * -1f;
             currentDashTimmer -= Time.deltaTime;
 
@@ -239,36 +223,98 @@ public class Player_Controller : MonoBehaviour
                 isTraping = false;
             }
         }
+    }
 
+    void Jump()
+    {
+        m_animator.SetTrigger("Jump");
+        m_grounded = false;
+        m_animator.SetBool("Grounded", m_grounded);
+        m_body2d.velocity = new Vector2(m_body2d.velocity.x, m_jumpForce);
+        m_groundSensor.Disable(0.2f);
+    }
 
-        else if (Input.GetKeyUp("i"))
+    void Attack1(Collider2D[] hitEnemies)
+    {
+        m_animator.SetTrigger("Attack");
+        timer = 0;
+        isAttack1 = true;
+
+        foreach (Collider2D enemy in hitEnemies)
         {
-            m_animator.SetTrigger("Throw_dagger");
-            throwPoint.rotation = Quaternion.Euler(0, 0, 0);
-            StartCoroutine(Shoot());
+            enemy.GetComponent<Bandit_test>().Take_Damage(attackDamage);
         }
-        else if (Input.GetKeyDown("l") && m_grounded)
-        {
-            m_animator.SetTrigger("sp_atk");
+    }
 
-            foreach (Collider2D enemy in sp_hitEnemies)
+    void Attack2(Collider2D[] hitEnemies)
+    {
+        m_animator.SetTrigger("Attack_2");
+        timer = 0;
+        isAttack1 = false;
+
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            enemy.GetComponent<Bandit_test>().Take_Damage(attackDamage);
+        }
+    }
+
+    void TrapCast()
+    {
+        isTraping = true;
+        m_animator.SetTrigger("trap_skill");
+        m_body2d.velocity = Vector2.zero;
+        currentDashTimmer = startDashTimer;
+
+        if (m_facingDirection == 1)
+        {
+            throwPoint.rotation = Quaternion.Euler(0, 0, 135);
+        }
+        else
+        {
+            throwPoint.rotation = Quaternion.Euler(0, 0, 45);
+        }
+    }
+
+    void ThrowDagger()
+    {
+        m_animator.SetTrigger("Throw_dagger");
+        throwPoint.rotation = Quaternion.Euler(0, 0, 0);
+        StartCoroutine(Shoot());
+    }
+
+    void SpecialAttack(Collider2D[] sp_hitEnemies)
+    {
+        m_animator.SetTrigger("sp_atk");
+
+        foreach (Collider2D enemy in sp_hitEnemies)
+        {
+            enemy.GetComponent<Bandit_test>().Take_Damage(attackDamage);
+        }
+    }
+    void Roll()
+    {
+        m_animator.SetTrigger("Roll");
+        isRolling = true;
+        currentDashTimmer = startDashTimer;
+        m_body2d.velocity = Vector2.zero;
+    }
+
+    void ChargeAttack()
+    {
+        isAttack1 = false;
+        float first_atk = 0;
+        if (timer > 0.4 && m_grounded)
+        {
+            m_animator.SetTrigger("Attack_3");
+            timer = 0;
+            for (int i = 0; i < 5; i++)
             {
-                enemy.GetComponent<Bandit_test>().Take_Damage(attackDamage);
+                StartCoroutine(ManySlashAttcak(i, first_atk));
+                first_atk = 0.8f;
             }
 
         }
-
-        //Run
-        else if (m_moving)
-            m_animator.SetInteger("AnimState", 1);
-
-        //Idle
-        else
-            m_animator.SetInteger("AnimState", 0);
-
-      
     }
-    
     IEnumerator ManySlashAttcak(float time, float first_atk)
     {
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
