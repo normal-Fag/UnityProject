@@ -1,20 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
 public class Bandit_test : MonoBehaviour
 {
     private Animator m_animator;
+    private Rigidbody2D m_body2d;
+    private Sensor_Bandit m_groundSensor;
+    private bool m_grounded = false;
 
 
 
     public int max_hp = 100;
+    public int damage = 5;
     int currentHp;
-    // Start is called before the first frame update
+    public Transform attackPoint;
+    public float attackRange = 0.5f;
+    public LayerMask playerLayer;
+    bool isAttack = false;
+
+    public AIPath aIPath;
+
     void Start()
     {
         m_animator = GetComponent<Animator>();
         currentHp = max_hp;
+        m_body2d = GetComponent<Rigidbody2D>();
+        m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Bandit>();
     }
 
 
@@ -31,9 +44,58 @@ public class Bandit_test : MonoBehaviour
 
         }
     }
-    // Update is called once per frame
+
     void Update()
     {
-        
+        if (!m_grounded && m_groundSensor.State())
+        {
+            m_grounded = true;
+            m_animator.SetBool("Grounded", m_grounded);
+        }
+
+        //Check if character just started falling
+        if (m_grounded && !m_groundSensor.State())
+        {
+            m_grounded = false;
+            m_animator.SetBool("Grounded", m_grounded);
+        }
+
+
+
+        if (aIPath.desiredVelocity.x >= 0.01f)
+        {
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+        }
+        else
+        {
+            transform.localScale = new Vector3(1f, 1f, 1f);
+        }
+
+        Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayer);
+
+        if(!isAttack)
+            StartCoroutine(Attack(hitPlayer));
+      
+
     }
+
+    IEnumerator Attack(Collider2D[] hitPlayer)
+    {
+        m_animator.SetTrigger("Attack");
+        isAttack = true;
+        yield return new WaitForSeconds(0.6f);
+        foreach (Collider2D player in hitPlayer)
+        {
+            player.GetComponent<Player_Controller>().Take_Damage(damage);
+        }
+        isAttack = false;
+
+    }
+    private void OnDrawGizmosSelected()
+    {
+        if (attackPoint == null)
+            return;
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+    }
+
 }

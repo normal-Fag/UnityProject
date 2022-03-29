@@ -1,9 +1,10 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player_Controller : MonoBehaviour
 {
-
+   
     [Header("Variables")]
     [SerializeField] float m_maxSpeed = 4.5f;
     [SerializeField] float m_jumpForce = 7.5f;
@@ -12,12 +13,18 @@ public class Player_Controller : MonoBehaviour
     private Animator m_animator;
     private Rigidbody2D m_body2d;
     private Sensor_Prototype m_groundSensor;
+    private AudioSource m_audioSource;
+    private AudioEffects m_audioManager;
+
     private bool m_grounded = false;
     private bool m_moving = false;
     public static int m_facingDirection = 1;
+
     private float m_disableMovementTimer = 0.0f;
+
     private bool isAttack1 = false;
     private bool isChargeAttack = false;
+
     public Transform attackPoint;
     public Transform sp_atk_point;
     public Transform throwPoint;
@@ -36,24 +43,26 @@ public class Player_Controller : MonoBehaviour
     public float trapDistanceEvade;
 
     bool isTraping = false;
+    bool isDelayAction = false;
+    public float actionDelay = 0.5f;
 
 
     public float attackRate = 2f;
-    float nextAttackTime = 0f;
 
-
-
-
-
+    public int max_hp = 100;
+    public static int number_of_dagger = 15;
+    public static int currentHp;
 
 
     // Use this for initialization
     void Start()
     {
-        
         m_animator = GetComponent<Animator>();
         m_body2d = GetComponent<Rigidbody2D>();
+        m_audioSource = GetComponent<AudioSource>();
+        m_audioManager = AudioEffects.instance;
         m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Prototype>();
+        currentHp = max_hp;
     }
 
     // Update is called once per frame
@@ -132,56 +141,68 @@ public class Player_Controller : MonoBehaviour
             m_animator.SetInteger("AnimState", 0);
 
 
-        //Roll
-        if (Time.time >= nextAttackTime)
+        if (Input.GetKey("j"))
         {
-            if (Input.GetKeyDown("k") && m_grounded)
-            {
-                Roll();
-                nextAttackTime = Time.time + 1f / attackRate;
-            }
+            timer += Time.deltaTime;
+        }
+        if (Input.GetKeyDown("j"))
+        {
+            timer = 0;
+        }
 
-            else if (Input.GetKeyDown("j") && !isAttack1)
-            {
-                Attack1(hitEnemies);
-                nextAttackTime = Time.time + 1f / attackRate;
-            }
-            else if (Input.GetKeyDown("j") && isAttack1)
-            {
-                Attack2(hitEnemies);
-                nextAttackTime = Time.time + 1f / attackRate;
-            }
 
-            else if (Input.GetKeyDown("u") && m_grounded)
-            {
-                TrapCast();
-                nextAttackTime = Time.time + 1f / attackRate;
-            }
+        if (Input.GetKeyDown("j") && !isAttack1 && !isDelayAction)
+        {
+            StartCoroutine(ActionDelay(actionDelay + actionDelay * 0.3f, "Attack1", hitEnemies));
+ 
+        }
+           
+        
+        else if (Input.GetKeyDown("j") && isAttack1)
+        {
+            Attack2(hitEnemies);
+        }
 
-            else if (Input.GetKeyUp("i"))
-            {
-                ThrowDagger();
-                nextAttackTime = Time.time + 1f / attackRate;
-            }
+        //Roll
+    
+        if (Input.GetKeyDown("k") && m_grounded && !isDelayAction)
+        {
+            StartCoroutine(ActionDelay(actionDelay + actionDelay * 0.2f, "Roll", null));
 
-            else if (Input.GetKeyDown("l") && m_grounded)
-            {
-                SpecialAttack(sp_hitEnemies);
-                nextAttackTime = Time.time + 1f / attackRate;
-            }
+        }
 
-            else if (Input.GetKeyUp("j") || Input.GetKeyDown("j"))
+        else if (Input.GetKeyDown("u") && m_grounded && !isDelayAction && number_of_dagger > 0)
+        {
+            StartCoroutine(ActionDelay(actionDelay, "TrapCast", null));
+
+        }
+
+        else if (Input.GetKeyUp("i") && !isDelayAction && number_of_dagger > 0)
+        {
+            StartCoroutine(ActionDelay(actionDelay, "Throw_Dagger", null));
+
+        }
+
+        else if (Input.GetKeyDown("l") && m_grounded && !isDelayAction)
+        {
+            StartCoroutine(ActionDelay(actionDelay, "SpecialAttack", sp_hitEnemies));
+
+        }
+
+        if (timer > 0.4 && m_grounded)
+        {
+        if ((Input.GetKeyUp("j")) && !isDelayAction)
             {
-                ChargeAttack();
-                nextAttackTime = Time.time + 1f / attackRate;
+                StartCoroutine(ActionDelay(actionDelay * 2, "ChargeAttack", null));
+
             }
         }
-       
 
         if (isRolling)
         {
             m_animator.SetInteger("RollingState", 1);
             Physics2D.IgnoreLayerCollision(3, 6, true);
+            Physics2D.IgnoreLayerCollision(3, 8, true);
             m_body2d.velocity = transform.right * rollDistance * m_facingDirection;
 
             currentDashTimmer -= Time.deltaTime;
@@ -191,13 +212,11 @@ public class Player_Controller : MonoBehaviour
                 isRolling = false;
                 m_animator.SetInteger("RollingState", 0);
                 Physics2D.IgnoreLayerCollision(3, 6, false);
+                Physics2D.IgnoreLayerCollision(3, 8, false);
             }
         }
 
-        else if (Input.GetKey("j"))
-        {
-            timer += Time.deltaTime;
-        }
+        
 
         else if (m_animator.GetCurrentAnimatorStateInfo(0).IsName("3_atk") || m_animator.GetCurrentAnimatorStateInfo(0).IsName("sp_atk") || isTraping || m_animator.GetCurrentAnimatorStateInfo(0).IsName("trap_cast"))
         {
@@ -209,6 +228,16 @@ public class Player_Controller : MonoBehaviour
             stopMoving = 1;
             isChargeAttack = false;
         }
+
+        if (m_animator.GetCurrentAnimatorStateInfo(0).IsName("jump_down"))
+        {
+            m_body2d.gravityScale = 3f;
+        }
+        else
+        {
+            m_body2d.gravityScale = 1f;
+        }
+       
 
         //Trap
         if (isTraping)
@@ -236,9 +265,9 @@ public class Player_Controller : MonoBehaviour
 
     void Attack1(Collider2D[] hitEnemies)
     {
+        isAttack1 = true;
         m_animator.SetTrigger("Attack");
         timer = 0;
-        isAttack1 = true;
 
         foreach (Collider2D enemy in hitEnemies)
         {
@@ -248,9 +277,9 @@ public class Player_Controller : MonoBehaviour
 
     void Attack2(Collider2D[] hitEnemies)
     {
+        isAttack1 = false;
         m_animator.SetTrigger("Attack_2");
         timer = 0;
-        isAttack1 = false;
 
         foreach (Collider2D enemy in hitEnemies)
         {
@@ -264,6 +293,7 @@ public class Player_Controller : MonoBehaviour
         m_animator.SetTrigger("trap_skill");
         m_body2d.velocity = Vector2.zero;
         currentDashTimmer = startDashTimer;
+        number_of_dagger--;
 
         if (m_facingDirection == 1)
         {
@@ -280,6 +310,7 @@ public class Player_Controller : MonoBehaviour
         m_animator.SetTrigger("Throw_dagger");
         throwPoint.rotation = Quaternion.Euler(0, 0, 0);
         StartCoroutine(Shoot());
+
     }
 
     void SpecialAttack(Collider2D[] sp_hitEnemies)
@@ -301,20 +332,50 @@ public class Player_Controller : MonoBehaviour
 
     void ChargeAttack()
     {
-        isAttack1 = false;
         float first_atk = 0;
-        if (timer > 0.4 && m_grounded)
+        isAttack1 = false;
+        m_animator.SetTrigger("Attack_3");
+        timer = 0;
+        for (int i = 0; i < 5; i++)
         {
-            m_animator.SetTrigger("Attack_3");
-            timer = 0;
-            for (int i = 0; i < 5; i++)
-            {
-                StartCoroutine(ManySlashAttcak(i, first_atk));
-                first_atk = 0.8f;
-            }
+            StartCoroutine(ManySlashAttcak(i, first_atk));
+            first_atk = 0.8f;
+        }
+
+
+    }
+    IEnumerator ActionDelay(float time, string action, Collider2D[] hitEnemies)
+    {
+        isDelayAction = true;
+        switch (action) 
+        {
+            case "Roll":
+                Roll();
+                break;
+            case "TrapCast":
+                TrapCast();
+                break;
+            case "Throw_Dagger":
+                ThrowDagger();
+                break;
+            case "ChargeAttack":
+                ChargeAttack();
+                break;
+            case "Attack1":
+                Attack1(hitEnemies);
+                isAttack1 = true;
+                break;
+            case "SpecialAttack":
+                 SpecialAttack(hitEnemies);
+                break;
 
         }
+        yield return new WaitForSeconds(time);
+        isDelayAction = false;
+
+
     }
+
     IEnumerator ManySlashAttcak(float time, float first_atk)
     {
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
@@ -331,7 +392,7 @@ public class Player_Controller : MonoBehaviour
     IEnumerator Shoot()
     {
         yield return new WaitForSeconds(0.3f);
-
+        number_of_dagger--;
         Instantiate(dagger_throw, throwPoint.position, throwPoint.rotation);
 
     }
@@ -368,7 +429,39 @@ public class Player_Controller : MonoBehaviour
 
     }
 
-    // Animation Events
-    // These functions are called inside the animation files
+    public void Take_Damage(int damage)
+    {
+        currentHp -= damage;
+        m_animator.SetTrigger("Hurt");
+
+        if (currentHp <= 0)
+        {
+            m_animator.SetTrigger("Death");
+            GetComponent<BoxCollider2D>().enabled = false;
+            GetComponent<Rigidbody2D>().isKinematic = true;
+
+        }
+    }
+
+    void AE_runStop()
+    {
+        m_audioManager.PlaySound("RunStop");
+    }
+
+    void AE_footstep()
+    {
+        m_audioManager.PlaySound("Footstep");
+    }
+
+    void AE_Jump()
+    {
+        m_audioManager.PlaySound("Jump");
+    }
+
+    void AE_Landing()
+    {
+        m_audioManager.PlaySound("Landing");
+
+    }
 }
 
