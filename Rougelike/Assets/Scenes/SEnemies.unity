@@ -725,11 +725,11 @@ MonoBehaviour:
   target: {fileID: 1523858465}
   activateDistance: 10
   pathUpdateSeconds: 0.5
-  speed: 500
+  speed: 800
   nextWaypointDistance: 3
-  jumpNodeHeightRequirement: 0.5
+  jumpNodeHeightRequirement: 0.8
   jumpModifier: 0.1
-  jumpCheckOffset: 0.9
+  jumpCheckOffset: 1.9
   followingEnabled: 1
   jumpEnebled: 0
   directionLookEnabled: 1
@@ -748,7 +748,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 2.5
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
