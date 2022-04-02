@@ -25,13 +25,16 @@ public class EnemyAI : MonoBehaviour
     private Path path;
     private int currentWayPoint = 0;
     private bool isGrounded = false;
+    private bool isRunning= false;
     private Seeker seeker;
     private Rigidbody2D rb;
+    private Animator animator;
 
     public void Start()
     {
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
 
         InvokeRepeating("UpdatePath", 0f, pathUpdateSeconds);
     }
@@ -78,6 +81,11 @@ public class EnemyAI : MonoBehaviour
         // Движение
         rb.AddForce(force);
 
+        isRunning = rb.velocity.x != 0 ? true : false;
+
+        animator.SetBool("isRunning", isRunning);
+
+
         // Nex Waypoint
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWayPoint]);
         if(distance < nextWaypointDistance)
@@ -87,11 +95,11 @@ public class EnemyAI : MonoBehaviour
 
         if (directionLookEnabled)
         {
-            if (rb.velocity.x > 0.05f)
+            if (rb.velocity.x > 0f)
             {
                 transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), transform.lossyScale.y, transform.localScale.z);
             }
-            else if (rb.velocity.x < 0.05f)
+            else if (rb.velocity.x < 0f)
             {
                 transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
             }
