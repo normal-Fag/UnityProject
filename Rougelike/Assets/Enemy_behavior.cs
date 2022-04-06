@@ -6,17 +6,20 @@ public class Enemy_behavior : MonoBehaviour
 {
 
     #region Public Variables
-    [Header("Raycast")]
+    [Header("Movement")]
+    [SerializeField] public float movementSpeed;
+    [SerializeField] public Transform leftLimit;
+    [SerializeField] public Transform rightLimit;
+
+    [Header("Raycast settings")]
     [SerializeField] public Transform raycast;
     [SerializeField] public LayerMask raycastMask;
     [SerializeField] public float raycastLength;
-    public float raycastRadius;
+    [SerializeField] public float raycastRadius;
 
-    [Header("Movement")]
+    [Header("Attack")]
+    [SerializeField] public int damage = 10;
     [SerializeField] public float attackDistance; // Минимальная дистанция для атаки
-    [SerializeField] public float movementSpeed;
-
-    [Header("Timer")]
     [SerializeField] public float timer; // Таймер для кулдауна между атаками
     #endregion
 
@@ -28,29 +31,31 @@ public class Enemy_behavior : MonoBehaviour
     private float distance; // Дистанция между игроком и врагом
     private float intTimer;
 
-    public bool isAttack;
+    private bool isAttack;
     private bool inRange; // Проверка на нахождение игрока в зоне видимости
-    private bool isReady;
-    private bool isRunning;
     private bool cooling; // Проверка на кулдаун
     #endregion
 
     void Awake()
     {
+        SelectTarget();
         intTimer = timer;
         animator = GetComponent<Animator>();
     }
 
     void Update()
     {
-        //if (!isAttack)
-        //    MoveToPlayer();
+        if (!isAttack)
+            MoveToTarget();
+
+        if(!InsideOfLimits() && !inRange && !animator.GetCurrentAnimatorStateInfo(0).IsName("attack(Bandit)"))
+        {
+            SelectTarget();
+        }
 
         if (inRange)
         {
             hit = Physics2D.CircleCast(raycast.position, raycastRadius, transform.right, raycastLength, raycastMask); // Создаем Raycast если player попал в зону вижимости
-            //isReady = true;
-            RaycastDebugger();
         }
 
         if (hit.collider != null)
@@ -60,11 +65,10 @@ public class Enemy_behavior : MonoBehaviour
 
         if (!inRange)
         {
-            //isReady = false;
-            animator.SetBool("isRunning", false);
             StopAttackPlayer();
         }
-        //animator.SetBool("isReady", isReady);
+
+        Flip();
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -79,11 +83,9 @@ public class Enemy_behavior : MonoBehaviour
     void EnemyTriggered()
     {
         distance = Vector2.Distance(transform.position, target.position);
-        Flip();
-
+    
         if (distance > attackDistance)
         {
-            MoveToPlayer();
             StopAttackPlayer();
         }
         else if (distance <= attackDistance && !cooling)
@@ -92,20 +94,20 @@ public class Enemy_behavior : MonoBehaviour
         if (cooling)
         {
             Cooldown();
-            //isAttack = false;
             animator.SetBool("isAttack", false);
         }
     }
 
-    void MoveToPlayer()
+    void MoveToTarget()
     {
-        //isRunning = true;
         animator.SetBool("isRunning", true);
+        animator.SetBool("isReady", false);
 
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("attack(Bandit)"))
         {
             Vector2 targetPosition = new Vector2(target.position.x, transform.position.y);
-            transform.Translate(targetPosition * movementSpeed * Time.deltaTime);
+            //transform.Translate(targetPosition.normalized * movementSpeed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, targetPosition, movementSpeed * Time.deltaTime);
         }
     }
 
@@ -137,23 +139,46 @@ public class Enemy_behavior : MonoBehaviour
         }
     }
 
-    void RaycastDebugger()
+    private bool InsideOfLimits()
     {
-        if (distance < attackDistance)
-            Debug.DrawRay(raycast.position, transform.right * raycastLength, Color.red);
-        else
-            Debug.DrawRay(raycast.position, transform.right * raycastLength, Color.green);
+        return transform.position.x > leftLimit.position.x &&
+            transform.position.x < rightLimit.position.x;
     }
 
-    void Flip()
+    private void Flip()
     {
-        if (target.position.x > transform.position.x)
-        {
-            transform.localScale = new Vector2(-1 * Mathf.Abs(transform.localScale.x), transform.localScale.y);
-        }
-        else if (target.position.x < transform.position.x)
-            transform.localScale = new Vector2(Mathf.Abs(transform.localScale.x), transform.localScale.y);
+        if (transform.position.x > target.position.x)
+            transform.localScale = new Vector3(Mathf.Abs(transform.lossyScale.x),
+                                               transform.lossyScale.y,
+                                               0);
+        else
+            transform.localScale = new Vector3(-1 * Mathf.Abs(transform.lossyScale.x),
+                                               transform.lossyScale.y,
+                                               0);
     }
+
+    private void SelectTarget()
+    {
+        float distanceToLeft = Vector2.Distance(transform.position, leftLimit.position);
+        float distanceToRight = Vector2.Distance(transform.position, rightLimit.position);
+
+        if (distanceToLeft > distanceToRight)
+        {
+            target = leftLimit;
+        }
+        else
+        {
+            target = rightLimit;
+        }
+    }
+
+    //void RaycastDebugger()
+    //{
+    //    if (distance < attackDistance)
+    //        Debug.DrawRay(raycast.position, transform.right * raycastLength, Color.red);
+    //    else
+    //        Debug.DrawRay(raycast.position, transform.right * raycastLength, Color.green);
+    //}
 
     void TriggerCooling()
     {

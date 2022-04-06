@@ -13,11 +13,8 @@ public class playerMovement : MonoBehaviour
 
     private Rigidbody2D playerRb;
     private Animator playerAnimator;
-    private Sensor_Prototype playerGroundSensor;
 
-    private bool isGrounded;
     private bool isMoving;
-    private int facingDiections = 1;
 
     void Start()
     {
@@ -41,22 +38,24 @@ public class playerMovement : MonoBehaviour
         if (input > 0)
         {
             GetComponent<SpriteRenderer>().flipX = false;
-            facingDiections = 1;
+            //facingDiections = 1;
         }
         else if (input < 0)
         {
             GetComponent<SpriteRenderer>().flipX = true;
-            facingDiections = -1;
+            //facingDiections = -1;
         }
     }
-    public void takeDamage()
+    public void takeDamage(int damage)
     {
-        playerHP--;
+        playerAnimator.SetTrigger("Hurt");
+        playerHP -= damage;
         if (playerHP < 1)
             playerDeath();
     }
     private void playerDeath()
     {
+        playerAnimator.SetTrigger("Death");
         playerAnimator.SetBool("noBlood", false);
     }
 }
