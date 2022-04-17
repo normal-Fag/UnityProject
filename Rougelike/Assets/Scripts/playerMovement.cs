@@ -15,6 +15,8 @@ public class playerMovement : MonoBehaviour
     private Animator playerAnimator;
 
     private bool isMoving;
+    [HideInInspector]
+    public bool isLiving = true;
 
     void Start()
     {
@@ -55,7 +57,10 @@ public class playerMovement : MonoBehaviour
     }
     private void playerDeath()
     {
+        isLiving = false;
         playerAnimator.SetTrigger("Death");
         playerAnimator.SetBool("noBlood", false);
+        playerRb.GetComponent<CapsuleCollider2D>().enabled = false;
+        playerRb.gravityScale = 0;
     }
 }

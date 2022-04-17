@@ -4,49 +4,46 @@ using UnityEngine;
 
 public class Enemy_behavior : MonoBehaviour
 {
-
-    #region Public Variables
     [Header("Movement")]
     [SerializeField] public float movementSpeed;
+
+    [Header("Patroling")]
+    //[SerializeField] public bool onePoint = true;
     [SerializeField] public Transform leftLimit;
     [SerializeField] public Transform rightLimit;
 
-    [Header("Raycast settings")]
-    [SerializeField] public Transform raycast;
-    [SerializeField] public LayerMask raycastMask;
-    [SerializeField] public float raycastLength;
-    [SerializeField] public float raycastRadius;
-
     [Header("Attack")]
+    [SerializeField] public GameObject hotZone;
+    [SerializeField] public GameObject triggerArea;
     [SerializeField] public int damage = 10;
     [SerializeField] public float attackDistance; // Минимальная дистанция для атаки
     [SerializeField] public float timer; // Таймер для кулдауна между атаками
-    #endregion
 
-    #region Private
+    [HideInInspector] public Transform target;
+    [HideInInspector] public bool inRange; // Проверка на нахождение игрока в зоне видимости
     private Animator animator;
-    private Transform target;
-    private RaycastHit2D hit;
 
     private float distance; // Дистанция между игроком и врагом
     private float intTimer;
 
     private bool isAttack;
-    private bool inRange; // Проверка на нахождение игрока в зоне видимости
     private bool cooling; // Проверка на кулдаун
-    #endregion
 
     void Awake()
     {
         SelectTarget();
         intTimer = timer;
         animator = GetComponent<Animator>();
+        //if (onePoint)
+        //    rightLimit = leftLimit;
     }
 
     void Update()
     {
         if (!isAttack)
+        {
             MoveToTarget();
+        }
 
         if(!InsideOfLimits() && !inRange && !animator.GetCurrentAnimatorStateInfo(0).IsName("attack(Bandit)"))
         {
@@ -55,32 +52,13 @@ public class Enemy_behavior : MonoBehaviour
 
         if (inRange)
         {
-            hit = Physics2D.CircleCast(raycast.position, raycastRadius, transform.right, raycastLength, raycastMask); // Создаем Raycast если player попал в зону вижимости
-        }
-
-        if (hit.collider != null)
             EnemyTriggered();
-        else
-            inRange = false;
-
-        if (!inRange)
-        {
-            StopAttackPlayer();
         }
 
         Flip();
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            target = collision.transform;
-            inRange = true;
-        }
-    }
-
-    void EnemyTriggered()
+    private void EnemyTriggered()
     {
         distance = Vector2.Distance(transform.position, target.position);
     
@@ -98,7 +76,7 @@ public class Enemy_behavior : MonoBehaviour
         }
     }
 
-    void MoveToTarget()
+    private void MoveToTarget()
     {
         animator.SetBool("isRunning", true);
         animator.SetBool("isReady", false);
@@ -106,12 +84,11 @@ public class Enemy_behavior : MonoBehaviour
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("attack(Bandit)"))
         {
             Vector2 targetPosition = new Vector2(target.position.x, transform.position.y);
-            //transform.Translate(targetPosition.normalized * movementSpeed * Time.deltaTime);
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, movementSpeed * Time.deltaTime);
         }
     }
 
-    void AttackPlayer()
+    private void AttackPlayer()
     {
         timer = intTimer;
         isAttack = true;
@@ -121,18 +98,18 @@ public class Enemy_behavior : MonoBehaviour
         animator.SetBool("isRunning", false);
     }
 
-    void StopAttackPlayer()
+    private void StopAttackPlayer()
     {
         cooling = false;
         isAttack = false;
         animator.SetBool("isAttack", false);
     }
 
-    void Cooldown()
+    private void Cooldown()
     {
-        animator.SetBool("isReady", true);
+        //animator.SetBool("isReady", true);
         timer -= Time.deltaTime;
-        if(timer < 0 && cooling && isAttack)
+        if(timer < 0 && cooling)
         {
             cooling = false;
             timer = intTimer;
@@ -145,7 +122,7 @@ public class Enemy_behavior : MonoBehaviour
             transform.position.x < rightLimit.position.x;
     }
 
-    private void Flip()
+    public void Flip()
     {
         if (transform.position.x > target.position.x)
             transform.localScale = new Vector3(Mathf.Abs(transform.lossyScale.x),
@@ -157,7 +134,7 @@ public class Enemy_behavior : MonoBehaviour
                                                0);
     }
 
-    private void SelectTarget()
+    public void SelectTarget()
     {
         float distanceToLeft = Vector2.Distance(transform.position, leftLimit.position);
         float distanceToRight = Vector2.Distance(transform.position, rightLimit.position);
@@ -171,14 +148,6 @@ public class Enemy_behavior : MonoBehaviour
             target = rightLimit;
         }
     }
-
-    //void RaycastDebugger()
-    //{
-    //    if (distance < attackDistance)
-    //        Debug.DrawRay(raycast.position, transform.right * raycastLength, Color.red);
-    //    else
-    //        Debug.DrawRay(raycast.position, transform.right * raycastLength, Color.green);
-    //}
 
     void TriggerCooling()
     {
