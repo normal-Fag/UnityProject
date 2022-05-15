@@ -12,4 +12,9 @@ public class spellLogic : MonoBehaviour
             Debug.Log("Enter!");
         }
     }
+
+    public void DestroySpell()
+    {
+        Destroy(this.gameObject, .1f);
+    }
 }

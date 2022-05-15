@@ -4,18 +4,17 @@ using UnityEngine;
 
 public class idleBehaviour : StateMachineBehaviour
 {
+    [Header("Timer for animation")]
     public float minTime;
     public float maxTime;
     public float timer;
 
     private int nextState;
-    //private Transform player;
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         timer = Random.Range(minTime, maxTime);
         nextState = Random.Range(0, 2);
-        //player = animator.GetComponent<bossBehaviour>().target.transform;
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -30,10 +29,5 @@ public class idleBehaviour : StateMachineBehaviour
         {
             timer -= Time.deltaTime;
         }
-    }
-
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-
     }
 }
