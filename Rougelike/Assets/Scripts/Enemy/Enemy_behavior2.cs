@@ -2,55 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_behavior2 : MonoBehaviour
+public class Enemy_behavior2 : Enemy
 {
-    [Header("Targeting")]
-    [SerializeField] public GameObject hotZone;
-    [SerializeField] public GameObject triggerArea;
-
-    [Header("Movement")]
-    //[SerializeField] public TypeOfEnemy typeOfEnemy = TypeOfEnemy.ground;
-    [SerializeField] public bool staticEnemy = false;
-    [Space]
-    [SerializeField] public float movementSpeed = 10f;
-    [Space]
-    [SerializeField]
-    [Tooltip("Активировать патрулирование у врага.\nРаботает при отключенном 'static enemy'.")]
-    public bool activePatroling = true;
-    [SerializeField] public Transform leftLimit;
-    [SerializeField] public Transform rightLimit;
-    [Space]
-    [SerializeField]
-    [Tooltip("Точка возвращения врага.\nРаботает при отключенном 'activate patroling' и 'static enemy'.")]
-    public Transform backPoint;
-
-    [Header("Attack")]
-    [SerializeField] public int damage = 10;
-    [SerializeField] public float attackDistance; // Минимальная дистанция для атаки
-    [SerializeField] public float timer; // Таймер для кулдауна между атаками
-
-    [HideInInspector] public Transform target;
-    [HideInInspector] public bool inRange; // Проверка на нахождение игрока в зоне видимости
-
-    private Animator anim;
-    private bool isAttack;
-    private bool isCooldown;
-    private float intTimer;
-    private float distance;
-    //private playerMovement player;
-
     private void Awake()
     {
         SelectTarget();
         anim = GetComponent<Animator>();
-        //player = GetComponent<playerMovement>();
         intTimer = timer;
     }
 
     private void Update()
     {
-        //if (typeOfEnemy == TypeOfEnemy.ground)
-        //{
             if (staticEnemy && inRange && target.GetComponent<playerMovement>().isLiving)
                 EnemyTrigger();
 
@@ -63,12 +25,11 @@ public class Enemy_behavior2 : MonoBehaviour
                 Patroling();
             else if (inRange)
                 EnemyTrigger();
-        //}
 
         Flip();
     }
 
-    private void EnemyTrigger()
+    override public void EnemyTrigger()
     {
         if (!staticEnemy && !isCooldown)
             Move();
@@ -89,7 +50,7 @@ public class Enemy_behavior2 : MonoBehaviour
         }
     }
 
-    private void Move()
+    override public void Move()
     {
         if (!isAttack)
         {
@@ -99,7 +60,7 @@ public class Enemy_behavior2 : MonoBehaviour
         }
     }
 
-    private void AttackPlayer()
+    override public void AttackPlayer()
     {
         isAttack = true;
         timer = intTimer;
@@ -107,13 +68,13 @@ public class Enemy_behavior2 : MonoBehaviour
         anim.SetBool("isRunning", false);
     }
 
-    private void StopAttackPlayer()
+    override public void StopAttackPlayer()
     {
         isAttack = false;
         anim.SetBool("isAttack", false);
     }
 
-    private void Cooldown()
+    override public void Cooldown()
     {
         anim.SetBool("isReady", true);
         timer -= Time.deltaTime;
@@ -125,7 +86,7 @@ public class Enemy_behavior2 : MonoBehaviour
         }
     }
 
-    private void Patroling()
+    override public void Patroling()
     {
         if(!InsideOfLimits() && !anim.GetCurrentAnimatorStateInfo(0).IsName("attack(Bandit)"))
         {
@@ -136,7 +97,7 @@ public class Enemy_behavior2 : MonoBehaviour
         Move();
     }
 
-    private void BackToPoint()
+    override public void BackToPoint()
     {
         SelectTarget();
         Move();
@@ -146,7 +107,7 @@ public class Enemy_behavior2 : MonoBehaviour
         }
     }
 
-    public void SelectTarget()
+    override public void SelectTarget()
     {
         if (staticEnemy)
         {
@@ -164,38 +125,10 @@ public class Enemy_behavior2 : MonoBehaviour
         }
         else if (!staticEnemy && !activePatroling)
         {
-            if (transform.position != backPoint.position)
+            if (transform.position.x != backPoint.position.x)
                 target = backPoint;
             else
                 target = transform;
         }
-    }
-
-    private bool InsideOfLimits()
-    {
-        return transform.position.x < rightLimit.position.x && transform.position.x > leftLimit.position.x;
-    }
-
-    public void Flip()
-    {
-        if (transform.position.x > target.position.x)
-            transform.localScale = new Vector3(Mathf.Abs(transform.lossyScale.x),
-                                               transform.lossyScale.y,
-                                               0);
-        else
-            transform.localScale = new Vector3(-1 * Mathf.Abs(transform.lossyScale.x),
-                                               transform.lossyScale.y,
-                                               0);
-    }
-
-    public enum TypeOfEnemy
-    {
-        fly,
-        ground
-    }
-
-    void TriggerCooling()
-    {
-        isCooldown = true;
     }
 }

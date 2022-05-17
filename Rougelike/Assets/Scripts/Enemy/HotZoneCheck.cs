@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class HotZoneCheck : MonoBehaviour
 {
-    private Enemy_behavior2 enemyParent;
+    private GroundEnemyBehavior enemyParent;
     private bool inRange;
     private Animator anim;
 
     private void Awake()
     {
-        enemyParent = GetComponentInParent<Enemy_behavior2>();
+        enemyParent = GetComponentInParent<GroundEnemyBehavior>();
         anim = GetComponentInParent<Animator>();
     }
 

@@ -8,7 +8,7 @@ public class HitLogic : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            Enemy_behavior enemy = GetComponentInParent<Enemy_behavior>();
+            Enemy_behavior2 enemy = GetComponentInParent<Enemy_behavior2>();
             playerMovement player = collision.gameObject.GetComponent<playerMovement>();
             
             player.takeDamage(enemy.damage);
