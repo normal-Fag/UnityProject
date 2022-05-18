@@ -25,6 +25,7 @@ public class character_movement : MonoBehaviour
     private int stopMoving;
     private bool isChargeAttack;
 
+    private Inventory inventory;
 
     // Use this for initialization
     void Start()
@@ -35,6 +36,8 @@ public class character_movement : MonoBehaviour
         m_audioManager = AudioEffects.instance;
         m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Prototype>();
         stopingAction = false;
+
+        inventory = new Inventory();
     }
 
     // Update is called once per frame
