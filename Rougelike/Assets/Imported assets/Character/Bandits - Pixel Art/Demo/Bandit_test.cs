@@ -14,14 +14,13 @@ public class Bandit_test : MonoBehaviour
 
     public int max_hp = 100;
     public int damage = 5;
-    public float force_repulsion = 0;
-    public int currentHp;
+    int currentHp;
     public Transform attackPoint;
     public float attackRange = 0.5f;
     public LayerMask playerLayer;
-    public bool isAttack = false;
-    float time;
+    bool isAttack = false;
 
+    public AIPath aIPath;
 
     void Start()
     {
@@ -29,7 +28,6 @@ public class Bandit_test : MonoBehaviour
         currentHp = max_hp;
         m_body2d = GetComponent<Rigidbody2D>();
         m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Bandit>();
-        time = 0;
     }
 
 
@@ -37,8 +35,7 @@ public class Bandit_test : MonoBehaviour
     {
         currentHp -= damage;
         m_animator.SetTrigger("Hurt");
-        gameObject.GetComponent<Rigidbody2D>().AddForce(transform.right * force_repulsion, ForceMode2D.Impulse);
-        force_repulsion = 0;
+
         if (currentHp <= 0)
         {
             m_animator.SetTrigger("Death");
@@ -50,7 +47,6 @@ public class Bandit_test : MonoBehaviour
 
     void Update()
     {
-
         if (!m_grounded && m_groundSensor.State())
         {
             m_grounded = true;
@@ -65,15 +61,20 @@ public class Bandit_test : MonoBehaviour
         }
 
 
+
+        if (aIPath.desiredVelocity.x >= 0.01f)
+        {
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+        }
+        else
+        {
+            transform.localScale = new Vector3(1f, 1f, 1f);
+        }
+
         Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayer);
 
-        time = Time.time;
-        if(!isAttack && time > 1.5f)
-        {
+        if(!isAttack)
             StartCoroutine(Attack(hitPlayer));
-            time = 0;
-        }
-         
       
 
     }
@@ -85,7 +86,7 @@ public class Bandit_test : MonoBehaviour
         yield return new WaitForSeconds(0.6f);
         foreach (Collider2D player in hitPlayer)
         {
-            player.GetComponent<fire_warrior_controler>().Take_Damage(damage, -1);
+            player.GetComponent<Player_Controller>().Take_Damage(damage);
         }
         isAttack = false;
 
@@ -96,6 +97,5 @@ public class Bandit_test : MonoBehaviour
             return;
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
-
 
 }
