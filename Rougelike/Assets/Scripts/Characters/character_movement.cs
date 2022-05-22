@@ -1,12 +1,14 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class character_movement : MonoBehaviour
 {
 
-    [SerializeField] float m_maxSpeed = 4.5f;
-    [SerializeField] float m_jumpForce = 7.5f;
+    [SerializeField] private float m_maxSpeed = 4.5f;
+    [SerializeField] private float m_jumpForce = 7.5f;
+    [SerializeField] private UI_Inventory uiInventory;
 
     private Animator m_animator;
     private Rigidbody2D m_body2d;
@@ -16,7 +18,7 @@ public class character_movement : MonoBehaviour
 
     public static bool m_grounded = false;
     private bool m_moving = false;
-    public int m_facingDirection = 1;
+    public float m_facingDirection = 1;
 
     private float m_disableMovementTimer = 0.0f;
 
@@ -27,8 +29,24 @@ public class character_movement : MonoBehaviour
 
     private Inventory inventory;
 
+
+    public int max_hp = 100;
+    public int currentHp;
+
+
+    private bool hasHPBuff = false;
+    private bool HealthRegCD = false;
+    private int HealthPotionCD;
+    public static float currentHealthPotionCD;
+    private bool hasHealthPotionCD;
+    private int HPBuffCD;
+    public static float currentHPBuffCD;
+    private bool hasHPBuffCD;
+
+
+
     // Use this for initialization
-    void Start()
+    private void Start()
     {
         m_animator = GetComponent<Animator>();
         m_body2d = GetComponent<Rigidbody2D>();
@@ -37,7 +55,11 @@ public class character_movement : MonoBehaviour
         m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Prototype>();
         stopingAction = false;
 
-        inventory = new Inventory();
+        currentHp = max_hp;
+
+        inventory = new Inventory(UseItem);
+        uiInventory.SetInventory(inventory);
+        uiInventory.SetCharacter(this);
     }
 
     // Update is called once per frame
@@ -114,6 +136,13 @@ public class character_movement : MonoBehaviour
             m_animator.SetInteger("AnimState", 0);
 
 
+        if(currentHp > max_hp)
+        {
+            currentHp = max_hp;
+        }
+
+
+
          if (stopingAction)
         {
             stopMoving = 0;
@@ -156,6 +185,177 @@ public class character_movement : MonoBehaviour
             m_audioManager.PlaySound("Landing");
 
         }
+
+        if (hasHPBuffCD)
+        {
+
+            currentHPBuffCD -= 1f / HPBuffCD * Time.deltaTime;
+            CheckCDinInventory(new Item { itemType = Item.ItemType.HPBuff, amount = 1, CD = 10 });
+            if (currentHPBuffCD <= 0)
+            {
+                hasHPBuffCD = false;
+                foreach (Item item in inventory.GetItemList())
+                {
+                    if (item.itemType == Item.ItemType.HPBuff)
+                    {
+                        item.isCD = false;
+                    }
+                }
+            }
+        }
+
+        if (hasHealthPotionCD)
+        {
+            currentHealthPotionCD -= 1f / HealthPotionCD * Time.deltaTime;
+            CheckCDinInventory(new Item { itemType = Item.ItemType.HealthPotion, amount = 1, CD = 30 });
+            if (currentHealthPotionCD <= 0)
+            {
+                hasHealthPotionCD = false;
+                foreach (Item item in inventory.GetItemList())
+                {
+                    if (item.itemType == Item.ItemType.HealthPotion)
+                    {
+                        item.isCD = false;
+                    }
+                }
+            }
+        }
+
+
     }
 
+    public Vector2 GetPosition()
+    {
+        return transform.position;
+    }
+    public float GetFacing()
+    {
+        return m_facingDirection;
+    }
+
+    private void UseItem (Item item, int index)
+    {
+        switch (item.itemType)
+        {
+            default:
+            case Item.ItemType.HealthPotion:
+                HealthPotionCD = item.CD;
+                hasHealthPotionCD = true;
+                CheckCDinInventory(item);
+                inventory.RemoveItem(item, index);
+                currentHealthPotionCD = 1f;
+
+                break;
+            case Item.ItemType.HPBuff:
+                HPBuffCD = item.CD;
+                hasHPBuffCD = true;
+                CheckCDinInventory(item);
+                inventory.RemoveItem(item, index);
+                currentHPBuffCD = 1f;
+
+                break;
+
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        ItemWorld itemWorld = collision.GetComponent<ItemWorld>();
+        if(collision.GetComponent<ItemWorld>() != null)
+        {
+            List<Item> items = inventory.GetItemList();
+            if(items.Count < 6)
+            {
+                if (itemWorld.GetItem().itemType == Item.ItemType.HealthPotion)
+                {
+                    itemWorld.GetItem().isCD = hasHealthPotionCD;
+                }
+                if (itemWorld.GetItem().itemType == Item.ItemType.HPBuff)
+                {
+                    itemWorld.GetItem().isCD = hasHPBuffCD;
+                }
+                inventory.AddItem(itemWorld.GetItem());
+                itemWorld.DestroySelf();
+            }
+            else
+            {
+                foreach (Item item in items)
+                {
+                    if (itemWorld.GetItem().itemType == item.itemType && item.amount < inventory.max_stack)
+                    {
+                        inventory.AddItem(itemWorld.GetItem());
+                        itemWorld.DestroySelf();
+                        break;
+                    }
+                   
+                }
+            }
+           
+            
+        }
+
+    }
+
+
+    public void Take_Damage(int damage, int enemy_facingDirection)
+    {
+        if ((m_animator.GetCurrentAnimatorStateInfo(0).IsName("defend")
+        || m_animator.GetCurrentAnimatorStateInfo(0).IsName("ultimate"))
+        && m_facingDirection != enemy_facingDirection
+        && gameObject.GetComponent<fire_warrior_controler>() != null)
+        {
+            damage = damage / 5;
+            fire_warrior_controler.number_of_rage += 10;
+            Debug.Log("Blocked");
+        }
+        else if (gameObject.GetComponent<fire_warrior_controler>() != null)
+        {
+            fire_warrior_controler.number_of_rage += 3;
+            m_animator.SetTrigger("Hurt");
+            Debug.Log("Not Blocked");
+        }
+       
+        currentHp -= damage;
+
+
+
+        if (currentHp <= 0)
+        {
+            m_animator.SetTrigger("Death");
+            GetComponent<BoxCollider2D>().enabled = false;
+            GetComponent<Rigidbody2D>().isKinematic = true;
+
+        }
+    }
+
+    private void CheckCDinInventory(Item item)
+    {
+        foreach (Item itemCD in inventory.GetItemList())
+        {
+            if (item.itemType == itemCD.itemType)
+            {
+                itemCD.isCD = true;
+            }
+
+        }
+    }
+    public void useHealthPotion()
+    {
+        currentHp += 50;
+        HealthRegCD = true;
+        HealthRegCD = false;
+    }
+
+    public void useHealthBuff()
+    {
+        int procHP = (currentHp * 100) / max_hp;
+        max_hp += 50;
+        currentHp = (max_hp * procHP) / 100;
+        hasHPBuff = true;
+
+
+        procHP = (currentHp * 100) / max_hp;
+        max_hp -= 50;
+        currentHp = (max_hp * procHP) / 100;
+        hasHPBuff = false;
+    }
 }

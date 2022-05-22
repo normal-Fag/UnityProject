@@ -17,10 +17,10 @@ public class fire_warrior_controler : MonoBehaviour
     bool isDelayAction = false;
     public float actionDelay = 0.5f;
 
-    public int max_hp = 100;
-    public int number_of_rage;
+
+    public static int number_of_rage;
     public int max_rage = 100;
-    public int currentHp;
+
 
 
     // Use this for initialization
@@ -29,7 +29,6 @@ public class fire_warrior_controler : MonoBehaviour
         weapon = GameObject.Find("sword_collider");
         character_Movement = GetComponent<character_movement>();
         m_animator = GetComponent<Animator>();
-        currentHp = max_hp;
         weapon_hb = weapon.GetComponent<wp_hitbox>();
         weapon_hb.canAttack = false;
         number_of_rage = 0;
@@ -212,29 +211,5 @@ public class fire_warrior_controler : MonoBehaviour
 
     }
 
-    public void Take_Damage(int damage, int enemy_facingDirection)
-    {
-        if ((m_animator.GetCurrentAnimatorStateInfo(0).IsName("defend") || m_animator.GetCurrentAnimatorStateInfo(0).IsName("ultimate")) && character_Movement.m_facingDirection != enemy_facingDirection)
-        {
-            damage = damage / 5;
-            number_of_rage += 10;
-            Debug.Log("Blocked");
-        }else
-        {
-            number_of_rage += 3;
-            m_animator.SetTrigger("Hurt");
-            Debug.Log("Not Blocked");
-        }
-        currentHp -= damage;
-      
-     
-
-        if (currentHp <= 0)
-        {
-            m_animator.SetTrigger("Death");
-            GetComponent<BoxCollider2D>().enabled = false;
-            GetComponent<Rigidbody2D>().isKinematic = true;
-
-        }
-    }
+    
 }

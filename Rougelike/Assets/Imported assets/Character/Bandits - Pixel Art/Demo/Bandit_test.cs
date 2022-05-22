@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Pathfinding;
 
 public class Bandit_test : MonoBehaviour
 {
@@ -44,6 +42,7 @@ public class Bandit_test : MonoBehaviour
             m_animator.SetTrigger("Death");
             GetComponent<BoxCollider2D>().enabled = false;
             GetComponent<Rigidbody2D>().isKinematic = true;
+            DropItem();
 
         }
     }
@@ -68,7 +67,7 @@ public class Bandit_test : MonoBehaviour
         Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayer);
 
         time = Time.time;
-        if(!isAttack && time > 1.5f)
+        if(!isAttack && time > 1.5f && currentHp > 0)
         {
             StartCoroutine(Attack(hitPlayer));
             time = 0;
@@ -85,7 +84,7 @@ public class Bandit_test : MonoBehaviour
         yield return new WaitForSeconds(0.6f);
         foreach (Collider2D player in hitPlayer)
         {
-            player.GetComponent<fire_warrior_controler>().Take_Damage(damage, -1);
+            player.GetComponent<character_movement>().Take_Damage(damage, -1);
         }
         isAttack = false;
 
@@ -96,6 +95,33 @@ public class Bandit_test : MonoBehaviour
             return;
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
+
+    private void DropItem()
+    {
+       float dropHeight = 1;
+       Item item;
+       if (Random.Range(0f, 1.0f) > 0.0f)
+       {
+            item = new Item { itemType = Item.ItemType.HealthPotion, amount = 1 , CD = 30};
+            ItemWorld.DropItem(transform.position, item, dropHeight, true);
+            dropHeight += 0.2f;
+
+       }
+        if (Random.Range(0f, 1.0f) > 0.0f)
+        {
+            item = new Item { itemType = Item.ItemType.HPBuff, amount = 1, CD = 10 };
+            ItemWorld.DropItem(transform.position, item, dropHeight, true);
+            dropHeight += 0.2f;
+        }
+        if (Random.Range(0f, 1.0f) > 0.0f)
+        {
+            item = new Item { itemType = Item.ItemType.HealthPotion, amount = 1, CD = 30 };
+            ItemWorld.DropItem(transform.position, item, dropHeight, true);
+            dropHeight += 0.2f;
+        }
+
+    }
+
 
 
 }
