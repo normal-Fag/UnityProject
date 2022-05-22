@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class TriggerAreaCheck : MonoBehaviour
 {
-    private GroundEnemyBehavior enemyParent;
+    private Enemy enemyParent;
 
     void Awake()
     {
-        enemyParent = GetComponentInParent<GroundEnemyBehavior>();
+        enemyParent = GetComponentInParent<Enemy>();
     }
 
     void OnTriggerEnter2D(Collider2D collision)

@@ -6,6 +6,7 @@ public class playerMovement : MonoBehaviour
 {
     [Header("General")]
     [SerializeField] public int playerHP = 100;
+    public float damage = 10;
 
     [Header("Movement")]
     [SerializeField] public int playerSpeed = 10;
@@ -18,10 +19,13 @@ public class playerMovement : MonoBehaviour
     [HideInInspector]
     public bool isLiving = true;
 
+    private Animator anim;
+
     void Start()
     {
         playerRb = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
     }
 
     void Update()
@@ -47,6 +51,12 @@ public class playerMovement : MonoBehaviour
             GetComponent<SpriteRenderer>().flipX = true;
             //facingDiections = -1;
         }
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            anim.SetTrigger("Attack1");
+        }
+            
     }
     public void takeDamage(int damage)
     {
