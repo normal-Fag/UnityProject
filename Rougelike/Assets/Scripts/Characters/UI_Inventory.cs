@@ -15,8 +15,7 @@ public class UI_Inventory : MonoBehaviour
     private character_movement character;
     Vector3 checkPos;
 
-
-
+    private bool isTouched;
 
     private void Awake()
     {
@@ -55,6 +54,7 @@ public class UI_Inventory : MonoBehaviour
 
         foreach (Item item in inventory.GetItemList())
         {
+            isTouched = false;
             Transform itemSlotRectTransform = Instantiate(itemSlot, itemSlotContainder).GetComponent<Transform>();
             itemSlotRectTransform.gameObject.SetActive(true);
 
@@ -69,19 +69,32 @@ public class UI_Inventory : MonoBehaviour
                 SetCooldown(item);
                 item.isCD = true;
                 RefreshInventoryItems();
-
-
+               
 
             };
-            itemSlotRectTransform.GetComponent<Button_UI>().MouseRightClickFunc = () => {
+
+      
+            itemSlotRectTransform.GetComponent<Button_UI>().MouseOverFunc = () => {
                 Item duplicateItem = new Item { itemType = item.itemType, amount = 1, CD = item.CD , isCD = false};
                 inventory.RemoveItem(item, itemSlotRectTransform.GetSiblingIndex() - 1);
                 SetCooldown(item);
                 ItemWorld.DropItem(character.GetPosition(), duplicateItem, character.GetFacing(), false);
                 RefreshInventoryItems();
 
-
             };
+            
+            itemSlotRectTransform.GetComponent<Button_UI>().MouseDownOnceFunc = () => {
+
+                itemSlotRectTransform.GetComponent<Button_UI>().isEnterSlot = true;
+            };
+            itemSlotRectTransform.GetComponent<Button_UI>().MouseUpFunc = () => {
+
+                itemSlotRectTransform.GetComponent<Button_UI>().isEnterSlot = false;
+            };
+        
+
+
+
 
             if (item.amount > 1)
                 uiText.SetText(item.amount.ToString());
@@ -117,9 +130,8 @@ public class UI_Inventory : MonoBehaviour
                         child.gameObject.SetActive(true);
                         child.GetComponent<ItemCooldown>().item = item;
                        
-                        child.GetComponent<Button_UI>().MouseRightClickFunc = () => {
+                        child.GetComponent<Button_UI>().MouseOverFunc = () => {
                             Item duplicateItem = new Item { itemType = item.itemType, amount = 1, CD = item.CD, isCD = false };
-                    
                             inventory.RemoveItem(item, child.GetSiblingIndex());
                             for (int j = 0; j < inventory.GetItemList().Count; j++)
                             {
@@ -129,11 +141,20 @@ public class UI_Inventory : MonoBehaviour
                                 }
                             }
                             ItemWorld.DropItem(character.GetPosition(), duplicateItem, character.GetFacing(), false);
-       
+                            SetCooldown(item);
+
+
 
                         };
-                      
+                        child.GetComponent<Button_UI>().MouseDownOnceFunc = () => {
 
+                            child.GetComponent<Button_UI>().isEnterCDSlot = true;
+                            isTouched = true;
+                        };
+                        if (!isTouched)
+                        {
+                            child.GetComponent<Button_UI>().isEnterCDSlot = false;
+                        }
 
                     }
                     else if (!item.isCD)
@@ -141,6 +162,7 @@ public class UI_Inventory : MonoBehaviour
                         child.gameObject.SetActive(false);
 
                     }
+                   
                 }
 
             }
@@ -154,7 +176,7 @@ public class UI_Inventory : MonoBehaviour
                 itemCDContainder.GetChild(0).gameObject.SetActive(false);
             }
 
-
+           
 
         }
        

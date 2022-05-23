@@ -39,6 +39,13 @@ namespace CodeMonkey.Utils {
         public Action MouseUpdate = null;
         public Action<PointerEventData> OnPointerClickFunc;
 
+        private float timer = 0f;
+        private bool isClicked = false;
+        public bool isEnterSlot = false;
+        public bool isEnterCDSlot = false; 
+        private float holdTimer = 0;
+        public int cacheCountInventory;
+
         public enum HoverBehaviour {
             Custom,
             Change_Color,
@@ -73,7 +80,10 @@ namespace CodeMonkey.Utils {
             if (internalOnPointerEnterFunc != null) internalOnPointerEnterFunc();
             if (hoverBehaviour_Move) transform.GetComponent<RectTransform>().anchoredPosition = posEnter;
             if (hoverBehaviourFunc_Enter != null) hoverBehaviourFunc_Enter();
-            if (MouseOverOnceFunc != null) MouseOverOnceFunc();
+            if (MouseOverOnceFunc != null)
+            {
+                MouseOverOnceFunc();
+            }
             if (MouseOverOnceTooltipFunc != null) MouseOverOnceTooltipFunc();
             mouseOver = true;
             mouseOverPerSecFuncTimer = 0f;
@@ -95,7 +105,15 @@ namespace CodeMonkey.Utils {
                 if (triggerMouseOutFuncOnClick) {
                     OnPointerExit(eventData);
                 }
-                if (ClickFunc != null) ClickFunc();
+                if (ClickFunc != null && isClicked && timer < 0.6f) {
+                    ClickFunc();
+                    isClicked = false;
+
+                }
+                else
+                {
+                    isClicked = true;
+                }
             }
             if (eventData.button == PointerEventData.InputButton.Right)
                 if (MouseRightClickFunc != null) MouseRightClickFunc();
@@ -121,14 +139,44 @@ namespace CodeMonkey.Utils {
 
         private void Update() {
             if (mouseOver) {
-                if (MouseOverFunc != null) MouseOverFunc();
+                if (MouseOverFunc != null)
+                {
+                    if (holdTimer > 0.5f)
+                    {
+                        MouseOverFunc();
+                        holdTimer = 0;
+                    }
+                   
+                }
                 mouseOverPerSecFuncTimer -= Time.unscaledDeltaTime;
-                if (mouseOverPerSecFuncTimer <= 0) {
+                if (mouseOverPerSecFuncTimer <= 0f) {
                     mouseOverPerSecFuncTimer += 1f;
-                    if (MouseOverPerSecFunc != null) MouseOverPerSecFunc();
+                    if (MouseOverPerSecFunc != null) {
+                        MouseOverPerSecFunc();
+                    }
                 }
             }
             if (MouseUpdate != null) MouseUpdate();
+
+            if (isClicked && timer < 0.6f)
+            {
+                timer += Time.deltaTime;
+            }
+            else if(timer >= 0.6f)
+            {
+                timer = 0;
+                isClicked = false;
+            }
+
+            if (isEnterSlot && holdTimer < 0.6f)
+            {
+                holdTimer += Time.deltaTime;
+            }
+            if (isEnterCDSlot && holdTimer < 0.6f)
+            {
+                holdTimer += Time.deltaTime;
+            }
+
 
         }
 
