@@ -10,7 +10,7 @@ public class Throw_Dagger : MonoBehaviour
     void Start()
     {
         
-        if (Player_Controller.m_facingDirection == 1)
+        if (character_movement.m_facingDirection == 1)
         {
             transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
             rb_dagger.velocity = transform.right * speed;

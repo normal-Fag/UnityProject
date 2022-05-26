@@ -16,7 +16,7 @@ public class HP_UI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        fill = Player_Controller.currentHp / 100f;
+        fill = character_movement.currentHp / 100f;
         health_bar.fillAmount = fill;
 
     }

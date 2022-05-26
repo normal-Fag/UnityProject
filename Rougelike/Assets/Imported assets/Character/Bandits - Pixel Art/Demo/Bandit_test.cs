@@ -100,22 +100,22 @@ public class Bandit_test : MonoBehaviour
     {
        float dropHeight = 1;
        Item item;
-       if (Random.Range(0f, 1.0f) > 0.0f)
+       if (Random.Range(0f, 1.0f) > 0.5f)
        {
             item = new Item { itemType = Item.ItemType.HealthPotion, amount = 1 , CD = 30};
             ItemWorld.DropItem(transform.position, item, dropHeight, true);
             dropHeight += 0.2f;
 
        }
-        if (Random.Range(0f, 1.0f) > 0.0f)
+        if (Random.Range(0f, 1.0f) > 0.5f)
         {
             item = new Item { itemType = Item.ItemType.HPBuff, amount = 1, CD = 10 };
             ItemWorld.DropItem(transform.position, item, dropHeight, true);
             dropHeight += 0.2f;
         }
-        if (Random.Range(0f, 1.0f) > 0.0f)
+        if (Random.Range(0f, 1.0f) > 0.5f)
         {
-            item = new Item { itemType = Item.ItemType.HealthPotion, amount = 1, CD = 30 };
+            item = new Item { itemType = Item.ItemType.HPBuff, amount = 1, CD = 10 };
             ItemWorld.DropItem(transform.position, item, dropHeight, true);
             dropHeight += 0.2f;
         }

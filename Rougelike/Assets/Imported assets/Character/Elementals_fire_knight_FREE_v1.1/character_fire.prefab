@@ -149,7 +149,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -168,9 +168,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_maxSpeed: 4.5
-  m_jumpForce: 7.5
+  m_jumpForce: 12
+  uiInventory: {fileID: 0}
   m_facingDirection: 1
   stopingAction: 0
+  max_hp: 100
+  currentHp: 0
 --- !u!114 &7459479091116077308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,10 +189,7 @@ MonoBehaviour:
   timer: 0
   sword_collider: {fileID: 0}
   actionDelay: 0.7
-  max_hp: 100
-  number_of_rage: 0
   max_rage: 100
-  currentHp: 0
 --- !u!1 &7459479092051631336
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 909febcca56508349b641674cefacd53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 100
   canAttack: 0
   hasContact: 0
   hasRepulsion: 0

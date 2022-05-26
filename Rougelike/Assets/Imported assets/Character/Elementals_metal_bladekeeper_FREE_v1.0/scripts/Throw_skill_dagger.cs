@@ -20,7 +20,7 @@ public class Throw_skill_dagger : MonoBehaviour
         d_animator = GetComponent<Animator>();
         d_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Prototype>();
 
-        if (Player_Controller.m_facingDirection == 1)
+        if (character_movement.m_facingDirection == 1)
         {
             transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
         }
@@ -52,9 +52,11 @@ public class Throw_skill_dagger : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
 
-        foreach (Collider2D enemy in trap_hitEnemies)
+         foreach (Collider2D enemy in trap_hitEnemies)
         {
-            enemy.GetComponent<Bandit_test>().Take_Damage(dagger_damage);
+            if(enemy.tag == "Enemy")
+                enemy.GetComponent<Bandit_test>().Take_Damage(dagger_damage);
+            
         }
         StartCoroutine(DestroyTrapDagger());
 

@@ -11,14 +11,14 @@ public class character_movement : MonoBehaviour
     [SerializeField] private UI_Inventory uiInventory;
 
     private Animator m_animator;
-    private Rigidbody2D m_body2d;
+    public Rigidbody2D m_body2d;
     private Sensor_Prototype m_groundSensor;
     private AudioSource m_audioSource;
     private AudioEffects m_audioManager;
 
-    public static bool m_grounded = false;
+    public bool m_grounded = false;
     private bool m_moving = false;
-    public float m_facingDirection = 1;
+    public static float m_facingDirection = 1;
 
     private float m_disableMovementTimer = 0.0f;
 
@@ -31,7 +31,7 @@ public class character_movement : MonoBehaviour
 
 
     public int max_hp = 100;
-    public int currentHp;
+    public static int currentHp;
 
 
     private bool hasHPBuff = false;
@@ -42,6 +42,15 @@ public class character_movement : MonoBehaviour
     private int HPBuffCD;
     public static float currentHPBuffCD;
     private bool hasHPBuffCD;
+
+
+    float currentDashTimmer;
+    bool isRolling = false;
+    public float rollDistance;
+    public float startDashTimer;
+    public float trapDistanceEvade;
+
+    bool isTraping = false;
 
 
 
@@ -222,6 +231,36 @@ public class character_movement : MonoBehaviour
         }
 
 
+
+        if (isRolling)
+        {
+            m_animator.SetInteger("RollingState", 1);
+            m_body2d.velocity = transform.right * rollDistance * character_movement.m_facingDirection;
+            Physics2D.IgnoreLayerCollision(3, 7, true);
+            currentDashTimmer -= Time.deltaTime;
+
+            if (currentDashTimmer <= 0)
+            {
+                isRolling = false;
+                m_animator.SetInteger("RollingState", 0);
+                Physics2D.IgnoreLayerCollision(3, 7, false);
+            }
+        }
+
+        if (isTraping)
+        {
+            Physics2D.IgnoreLayerCollision(3, 7, true);
+            m_body2d.velocity = transform.right * trapDistanceEvade * character_movement.m_facingDirection * -1f;
+            currentDashTimmer -= Time.deltaTime;
+
+
+            if (currentDashTimmer <= 0)
+            {
+                Physics2D.IgnoreLayerCollision(3, 7, false);
+                isTraping = false;
+            }
+        }
+
     }
 
     public Vector2 GetPosition()
@@ -244,6 +283,7 @@ public class character_movement : MonoBehaviour
                 CheckCDinInventory(item);
                 inventory.RemoveItem(item, index);
                 currentHealthPotionCD = 1f;
+                StartCoroutine(useHealthPotion(item.CD));
 
                 break;
             case Item.ItemType.HPBuff:
@@ -252,6 +292,7 @@ public class character_movement : MonoBehaviour
                 CheckCDinInventory(item);
                 inventory.RemoveItem(item, index);
                 currentHPBuffCD = 1f;
+                StartCoroutine(useHealthBuff(item.CD));
 
                 break;
 
@@ -314,9 +355,12 @@ public class character_movement : MonoBehaviour
             Debug.Log("Not Blocked");
         }
        
-        currentHp -= damage;
-
-
+        if((!isRolling || !isTraping) && gameObject.GetComponent<rouge_controller>() != null)
+        {
+            currentHp -= damage;
+            m_animator.SetTrigger("Hurt");
+        }
+ 
 
         if (currentHp <= 0)
         {
@@ -338,24 +382,45 @@ public class character_movement : MonoBehaviour
 
         }
     }
-    public void useHealthPotion()
+    public IEnumerator useHealthPotion(int seconds)
     {
-        currentHp += 50;
+
+        currentHp += (max_hp * 40) / 100;
         HealthRegCD = true;
+
+        yield return new WaitForSeconds(seconds);
         HealthRegCD = false;
     }
 
-    public void useHealthBuff()
+    public IEnumerator useHealthBuff(int seconds)
     {
         int procHP = (currentHp * 100) / max_hp;
         max_hp += 50;
         currentHp = (max_hp * procHP) / 100;
         hasHPBuff = true;
 
+        yield return new WaitForSeconds(seconds);
 
         procHP = (currentHp * 100) / max_hp;
         max_hp -= 50;
         currentHp = (max_hp * procHP) / 100;
         hasHPBuff = false;
+    }
+
+    public void Roll()
+    {
+        m_animator.SetTrigger("Roll");
+        isRolling = true;
+        currentDashTimmer = startDashTimer;
+        m_body2d.velocity = Vector2.zero;
+    }
+
+    public void TrapCast()
+    {
+        isTraping = true;
+        m_animator.SetTrigger("trap_skill");
+        m_body2d.velocity = Vector2.zero;
+        currentDashTimmer = startDashTimer;
+
     }
 }

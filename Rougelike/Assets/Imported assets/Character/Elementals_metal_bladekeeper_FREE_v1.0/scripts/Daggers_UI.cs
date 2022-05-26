@@ -17,7 +17,7 @@ public class Daggers_UI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        number_of_daggers = Player_Controller.number_of_dagger;
+        number_of_daggers = rouge_controller.number_of_dagger;
         daggersUI.text = "x " + number_of_daggers;
     }
 }

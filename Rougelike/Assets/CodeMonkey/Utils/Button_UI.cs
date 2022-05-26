@@ -44,7 +44,6 @@ namespace CodeMonkey.Utils {
         public bool isEnterSlot = false;
         public bool isEnterCDSlot = false; 
         private float holdTimer = 0;
-        public int cacheCountInventory;
 
         public enum HoverBehaviour {
             Custom,

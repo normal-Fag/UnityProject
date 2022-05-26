@@ -9,9 +9,9 @@ public class fire_warrior_controler : MonoBehaviour
 
     public Collider2D sword_collider;
 
-    GameObject weapon;
-    wp_hitbox weapon_hb;
-    character_movement character_Movement;
+    private GameObject weapon;
+    private wp_hitbox weapon_hb;
+    private character_movement character_Movement;
 
 
     bool isDelayAction = false;
@@ -55,7 +55,7 @@ public class fire_warrior_controler : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown("j") && !isDelayAction && character_movement.m_grounded)
+        if (Input.GetKeyDown("j") && !isDelayAction && character_Movement.m_grounded)
         {
             StartCoroutine(ActionDelay(actionDelay, "Attack"));
 
@@ -63,34 +63,34 @@ public class fire_warrior_controler : MonoBehaviour
 
         }
         
-        if (Input.GetKeyDown("j") && !isDelayAction && !character_movement.m_grounded)
+        if (Input.GetKeyDown("j") && !isDelayAction && !character_Movement.m_grounded)
         {
             StartCoroutine(ActionDelay(actionDelay + actionDelay * 0.3f, "air_attack"));
         }
 
 
 
-        else if (Input.GetKeyDown("u") && character_movement.m_grounded && !isDelayAction && number_of_rage >= 45 )
+        else if (Input.GetKeyDown("u") && character_Movement.m_grounded && !isDelayAction && number_of_rage >= 45 )
         {
             StartCoroutine(ActionDelay(actionDelay * 1.5f, "ultimate"));
             number_of_rage = 0;
 
         }
 
-        else if (Input.GetKeyDown("l") && character_movement.m_grounded && !isDelayAction && number_of_rage >= 25)
+        else if (Input.GetKeyDown("l") && character_Movement.m_grounded && !isDelayAction && number_of_rage >= 25)
         {
             StartCoroutine(ActionDelay(actionDelay * 0.8f, "sp_attack" ));
             number_of_rage -= 25;
 
         }
 
-        else if (Input.GetKeyDown("k") && character_movement.m_grounded && !isDelayAction)
+        else if (Input.GetKeyDown("k") && character_Movement.m_grounded && !isDelayAction)
         {
             StartCoroutine(ActionDelay(actionDelay, "defend"));
 
         }
 
-        if (timer > 0.4 && character_movement.m_grounded)
+        if (timer > 0.4 && character_Movement.m_grounded)
         {
             if ((Input.GetKeyUp("j")) && !isDelayAction)
             {
