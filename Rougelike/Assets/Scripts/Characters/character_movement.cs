@@ -345,22 +345,50 @@ public class character_movement : MonoBehaviour
         && gameObject.GetComponent<fire_warrior_controler>() != null)
         {
             damage = damage / 5;
+            currentHp -= damage;
             fire_warrior_controler.number_of_rage += 10;
             Debug.Log("Blocked");
         }
         else if (gameObject.GetComponent<fire_warrior_controler>() != null)
         {
             fire_warrior_controler.number_of_rage += 3;
-            m_animator.SetTrigger("Hurt");
+            currentHp -= damage;
             Debug.Log("Not Blocked");
         }
        
         if((!isRolling || !isTraping) && gameObject.GetComponent<rouge_controller>() != null)
         {
             currentHp -= damage;
+        }
+
+        if (m_animator.GetCurrentAnimatorStateInfo(0).IsName("defend")
+       && m_facingDirection != enemy_facingDirection
+       && gameObject.GetComponent<character_water_priest_controller>() != null)
+        {
+            character_water_priest_controller.number_of_mana -= (character_water_priest_controller.max_mana * 25)/ character_water_priest_controller.number_of_mana;
+            character_water_priest_controller.manaCharge += 0.34f;
+            Debug.Log("Blocked");
+        }
+        else if (gameObject.GetComponent<character_water_priest_controller>() != null)
+        {
+             currentHp -= damage;
+            Debug.Log("Not Blocked");
+        }
+
+
+        if(m_animator.GetCurrentAnimatorStateInfo(0).IsName("defend") 
+            || m_animator.GetCurrentAnimatorStateInfo(0).IsName("ultimate") 
+            || m_animator.GetCurrentAnimatorStateInfo(0).IsName("heal")
+            || m_animator.GetCurrentAnimatorStateInfo(0).IsName("roll") 
+            || m_animator.GetCurrentAnimatorStateInfo(0).IsName("trap_cast")
+            || m_animator.GetCurrentAnimatorStateInfo(0).IsName("tumble")
+            || m_animator.GetCurrentAnimatorStateInfo(0).IsName("sp_atk")
+            || m_animator.GetCurrentAnimatorStateInfo(0).IsName("sp_attack")) { }
+        else
+        {
             m_animator.SetTrigger("Hurt");
         }
- 
+
 
         if (currentHp <= 0)
         {
