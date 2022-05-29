@@ -14,6 +14,8 @@ public class Item
     public int amount;
     public int CD;
     public bool isCD;
+    public string name;
+    public string description;
 
 
     public Sprite GetSprite()

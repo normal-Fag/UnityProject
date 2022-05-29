@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class character_movement : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class character_movement : MonoBehaviour
 
 
     public int max_hp = 100;
+    public static float max_hp_for_ui;
     public static int currentHp;
 
 
@@ -65,6 +67,7 @@ public class character_movement : MonoBehaviour
         stopingAction = false;
 
         currentHp = max_hp;
+        max_hp_for_ui = max_hp;
 
         inventory = new Inventory(UseItem);
         uiInventory.SetInventory(inventory);
@@ -74,6 +77,7 @@ public class character_movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        max_hp_for_ui = max_hp;
         // Decrease timer that disables input movement. Used when attacking
         m_disableMovementTimer -= Time.deltaTime;
 
@@ -95,10 +99,10 @@ public class character_movement : MonoBehaviour
         float inputX = 0.0f;
 
         if (m_disableMovementTimer < 0.0f)
-            inputX = Input.GetAxis("Horizontal");
+            inputX = CrossPlatformInputManager.GetAxis("Horizontal");
 
         // GetAxisRaw returns either -1, 0 or 1
-        float inputRaw = Input.GetAxisRaw("Horizontal");
+        float inputRaw = CrossPlatformInputManager.GetAxisRaw("Horizontal");
         // Check if current move input is larger than 0 and the move direction is equal to the characters facing direction
         if (Mathf.Abs(inputRaw) > Mathf.Epsilon && Mathf.Sign(inputRaw) == m_facingDirection)
             m_moving = true;
@@ -132,7 +136,7 @@ public class character_movement : MonoBehaviour
 
         // -- Handle Animations --
         //Jump
-        if (Input.GetButtonDown("Jump") && m_grounded && m_disableMovementTimer < 0.0f)
+        if (CrossPlatformInputManager.GetButtonDown("Jump") && m_grounded && m_disableMovementTimer < 0.0f)
         {
             Jump();
         }
@@ -365,7 +369,7 @@ public class character_movement : MonoBehaviour
        && m_facingDirection != enemy_facingDirection
        && gameObject.GetComponent<character_water_priest_controller>() != null)
         {
-            character_water_priest_controller.number_of_mana -= (character_water_priest_controller.max_mana * 25)/ character_water_priest_controller.number_of_mana;
+            character_water_priest_controller.number_of_mana -= (character_water_priest_controller.max_mana_for_ui * 25) / 100;
             character_water_priest_controller.manaCharge += 0.34f;
             Debug.Log("Blocked");
         }

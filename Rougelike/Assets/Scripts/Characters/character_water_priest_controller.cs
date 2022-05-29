@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class character_water_priest_controller : MonoBehaviour
 {
@@ -19,7 +20,8 @@ public class character_water_priest_controller : MonoBehaviour
 
 
     public static int number_of_mana;
-    public static int max_mana = 100;
+    public int max_mana = 100;
+    public static int max_mana_for_ui;
     private float manaTimer = 0;
 
 
@@ -36,6 +38,8 @@ public class character_water_priest_controller : MonoBehaviour
         weapon_hb.canAttack = false;
         number_of_mana = max_mana;
         hasManaCharge = false;
+        max_mana_for_ui = max_mana;
+
     }
 
     // Update is called once per frame
@@ -77,34 +81,34 @@ public class character_water_priest_controller : MonoBehaviour
         }
 
 
-        if (Input.GetKey("j"))
+        if (CrossPlatformInputManager.GetButton("Attack"))
         {
             timer += Time.deltaTime;
         }
-        if (Input.GetKeyDown("j"))
+        if (CrossPlatformInputManager.GetButtonDown("Attack"))
         {
             timer = 0;
         }
 
 
-        if (Input.GetKeyDown("j") && !isDelayAction && character_Movement.m_grounded && !hasManaCharge)
+        if (CrossPlatformInputManager.GetButtonDown("Attack") && !isDelayAction && character_Movement.m_grounded && !hasManaCharge)
         {
             StartCoroutine(ActionDelay(actionDelay * 1.2f, "Attack"));
         }
 
-        if (Input.GetKeyDown("j") && !isDelayAction && !character_Movement.m_grounded)
+        if (CrossPlatformInputManager.GetButtonDown("Attack") && !isDelayAction && !character_Movement.m_grounded)
         {
             StartCoroutine(ActionDelay(actionDelay + actionDelay * 0.3f, "air_attack"));
         }
 
-        if (Input.GetKeyDown("j") && !isDelayAction && hasManaCharge)
+        if (CrossPlatformInputManager.GetButtonDown("Attack") && !isDelayAction && hasManaCharge)
         {
             StartCoroutine(ActionDelay(actionDelay * 2.8f, "buff_attack"));
         }
 
 
 
-        else if (Input.GetKeyDown("u") && character_Movement.m_grounded && !isDelayAction && number_of_mana > 50)
+        else if (CrossPlatformInputManager.GetButtonDown("Ultimate") && character_Movement.m_grounded && !isDelayAction && number_of_mana > 50)
         {
             StartCoroutine(ActionDelay(actionDelay * 4f, "ultimate"));
             number_of_mana -= 50;
@@ -114,7 +118,7 @@ public class character_water_priest_controller : MonoBehaviour
 
 
         }
-        else if (Input.GetKeyDown("i") && character_Movement.m_grounded && !isDelayAction && number_of_mana > 25)
+        else if (CrossPlatformInputManager.GetButtonDown("Heal") && character_Movement.m_grounded && !isDelayAction && number_of_mana > 25)
         {
             StartCoroutine(ActionDelay(actionDelay * 1.5f, "heal"));
             number_of_mana -= 25;
@@ -124,13 +128,13 @@ public class character_water_priest_controller : MonoBehaviour
 
         }
 
-        else if (Input.GetKeyDown("l") && character_Movement.m_grounded && !isDelayAction )
+        else if (CrossPlatformInputManager.GetButtonDown("Trumble") && character_Movement.m_grounded && !isDelayAction )
         {
             StartCoroutine(ActionDelay(actionDelay * 1f, "tumble"));
 
         }
 
-        else if (Input.GetKeyDown("k") && character_Movement.m_grounded && !isDelayAction && number_of_mana > (max_mana * 25) / number_of_mana)
+        else if (CrossPlatformInputManager.GetButtonDown("Defend") && character_Movement.m_grounded && !isDelayAction && number_of_mana > (max_mana * 25) / 100)
         {
             StartCoroutine(ActionDelay(actionDelay * 2, "defend"));
 
@@ -138,7 +142,7 @@ public class character_water_priest_controller : MonoBehaviour
 
         if (timer > 0.4 && character_Movement.m_grounded)
         {
-            if ((Input.GetKeyUp("j")) && !isDelayAction)
+            if ((CrossPlatformInputManager.GetButtonUp("Attack")) && !isDelayAction)
             {
                 StartCoroutine(ActionDelay(actionDelay * 4f, "heavy_attack"));
 

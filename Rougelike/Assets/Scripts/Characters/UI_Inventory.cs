@@ -12,8 +12,17 @@ public class UI_Inventory : MonoBehaviour
     public Transform itemSlot;
     public Transform itemCDContainder;
     public Transform itemCD;
+    public Transform buffEffectContainder;
+    public Transform buffEffectItem;
+
+
+
+    public Transform itemDescrtptionContainer;
+    public Transform itemDescrtptionSlot;
+
+    public Transform popupChoise;
+
     private character_movement character;
-    Vector3 checkPos;
 
     private bool isTouched;
 
@@ -23,7 +32,12 @@ public class UI_Inventory : MonoBehaviour
         itemSlot = itemSlotContainder.Find("ItemSlot");
         itemCDContainder = transform.Find("CDSlotContainer"); 
         itemCD = itemCDContainder.Find("CD");
-}
+        buffEffectContainder = transform.Find("BuffEffectContainer");
+        buffEffectItem = buffEffectContainder.Find("BuffEffectItem");
+        itemDescrtptionContainer = transform.Find("PopUpDescriptionContainer");
+        itemDescrtptionSlot = itemDescrtptionContainer.Find("ItemForSlot");
+        popupChoise = transform.Find("PopUpChoise");
+    }
 
 
     public void SetCharacter(character_movement character)
@@ -50,50 +64,119 @@ public class UI_Inventory : MonoBehaviour
         }
         int x = 0;
 
-        float itemSize = 60f;
+        float itemSize = transform.Find("Slot_2").position.x  - transform.Find("Slot_1").position.x;
 
         foreach (Item item in inventory.GetItemList())
         {
             isTouched = false;
             Transform itemSlotRectTransform = Instantiate(itemSlot, itemSlotContainder).GetComponent<Transform>();
             itemSlotRectTransform.gameObject.SetActive(true);
-
-            itemSlotRectTransform.position = new Vector2(itemSlotContainder.position.x + itemSize * x, itemSlotContainder.position.y);
+            itemSlotRectTransform.position = new Vector2(itemSlot.position.x + itemSize * x, itemSlotContainder.position.y);
             Image image = itemSlotRectTransform.Find("Item").GetComponent<Image>();
             image.sprite = item.GetSprite();
             TextMeshProUGUI uiText = itemSlotRectTransform.Find("amount").GetComponent<TextMeshProUGUI>();
 
+          
+   
             itemSlotRectTransform.GetComponent<Button_UI>().ClickFunc = () => {
 
                 inventory.UseItem(item, itemSlotRectTransform.GetSiblingIndex() - 1);
+                SetBuffCD(item);
                 SetCooldown(item);
                 item.isCD = true;
+                popupChoise.gameObject.SetActive(false);
+                if (itemDescrtptionContainer.childCount > 1)
+                {
+                    bool isSecond = false;
+                    foreach (Transform child in itemDescrtptionContainer)
+                    {
+                        if (isSecond)
+                        {
+                            Destroy(child.gameObject);
+                        }
+                        else
+                        {
+                            isSecond = true;
+                        }
+                    }
+                }
                 RefreshInventoryItems();
                
 
             };
 
-      
             itemSlotRectTransform.GetComponent<Button_UI>().MouseOverFunc = () => {
-                Item duplicateItem = new Item { itemType = item.itemType, amount = 1, CD = item.CD , isCD = false};
-                inventory.RemoveItem(item, itemSlotRectTransform.GetSiblingIndex() - 1);
-                SetCooldown(item);
-                ItemWorld.DropItem(character.GetPosition(), duplicateItem, character.GetFacing(), false);
-                RefreshInventoryItems();
+
+                if (itemDescrtptionContainer.childCount > 1)
+                {
+                    bool isSecond = false;
+                    foreach (Transform child in itemDescrtptionContainer)
+                    {
+                        if (isSecond)
+                        {
+                            Destroy(child.gameObject);
+                        }
+                        else
+                        {
+                            isSecond = true;
+                        }
+                    }
+                }
+
+                popupChoise.gameObject.SetActive(true);
+                popupChoise.position = new Vector2(itemSlotRectTransform.position.x, itemSlotRectTransform.position.y + itemSize);
+                popupChoise.Find("drop").GetComponent<Button_UI>().MouseDownOnceFunc = () =>
+                {
+                    Item duplicateItem = new Item { itemType = item.itemType, amount = 1, CD = item.CD, isCD = false, description = item.description, name = item.name };
+                    inventory.RemoveItem(item, itemSlotRectTransform.GetSiblingIndex() - 1);
+                    SetCooldown(item);
+                    ItemWorld.DropItem(character.GetPosition(), duplicateItem, character.GetFacing(), false);
+                    popupChoise.gameObject.SetActive(false);
+                    RefreshInventoryItems();
+                };
+
+
+                popupChoise.Find("info").GetComponent<Button_UI>().MouseDownOnceFunc = () =>
+                {
+                    
+                    popupChoise.gameObject.SetActive(false);
+                    Transform itemInfoRectTransform = Instantiate(itemDescrtptionSlot, itemDescrtptionContainer).GetComponent<Transform>();
+                    itemInfoRectTransform.gameObject.SetActive(true);
+                    itemInfoRectTransform.position = new Vector2(itemSlotRectTransform.position.x, itemSlotRectTransform.position.y + itemSize);
+                    itemInfoRectTransform.GetComponent<Popup_items>().item = item;
+
+                };
+               
 
             };
-            
-            itemSlotRectTransform.GetComponent<Button_UI>().MouseDownOnceFunc = () => {
 
+
+            itemSlotRectTransform.GetComponent<Button_UI>().MouseDownOnceFunc = () => {
+                popupChoise.gameObject.SetActive(false);
+                if (itemDescrtptionContainer.childCount > 1)
+                {
+                    bool isSecond = false;
+                    foreach (Transform child in itemDescrtptionContainer)
+                    {
+                        if (isSecond)
+                        {
+                            Destroy(child.gameObject);
+                        }
+                        else
+                        {
+                            isSecond = true;
+                        }
+                    }
+                }
                 itemSlotRectTransform.GetComponent<Button_UI>().isEnterSlot = true;
             };
+        
             itemSlotRectTransform.GetComponent<Button_UI>().MouseUpFunc = () => {
-
                 itemSlotRectTransform.GetComponent<Button_UI>().isEnterSlot = false;
             };
         
 
-
+       
 
 
             if (item.amount > 1)
@@ -110,12 +193,27 @@ public class UI_Inventory : MonoBehaviour
             {
                 SetCooldown(item);
             }
-          
+
+                     
+        }
+    }
+
+    private void SetBuffCD(Item item)
+    {
+        if (item.itemType != Item.ItemType.HealthPotion)
+        {
+            Transform buffEffectslotRectTransform = Instantiate(buffEffectItem, buffEffectContainder).GetComponent<Transform>();
+            buffEffectslotRectTransform.gameObject.SetActive(true);
+            buffEffectslotRectTransform.GetComponent<BuffEffect_UI>().item = item;
+            Image image_buff = buffEffectslotRectTransform.Find("item").GetComponent<Image>();
+            image_buff.sprite = item.GetSprite();
         }
     }
 
     private void SetCooldown(Item item) 
     {
+
+        float itemSize = transform.Find("Slot_2").position.x - transform.Find("Slot_1").position.x;
         foreach (Transform child in itemCDContainder)
         {
             for (int i = 0; i < inventory.GetItemList().Count; i++)
@@ -131,22 +229,73 @@ public class UI_Inventory : MonoBehaviour
                         child.GetComponent<ItemCooldown>().item = item;
                        
                         child.GetComponent<Button_UI>().MouseOverFunc = () => {
-                            Item duplicateItem = new Item { itemType = item.itemType, amount = 1, CD = item.CD, isCD = false };
-                            inventory.RemoveItem(item, child.GetSiblingIndex());
-                            for (int j = 0; j < inventory.GetItemList().Count; j++)
+
+                            if (itemDescrtptionContainer.childCount > 1)
                             {
-                                if (!inventory.GetItemList()[j].isCD)
+                                bool isSecond = false;
+                                foreach (Transform child in itemDescrtptionContainer)
                                 {
-                                    itemCDContainder.GetChild(j).gameObject.SetActive(false);
+                                    if (isSecond)
+                                    {
+                                        Destroy(child.gameObject);
+                                    }
+                                    else
+                                    {
+                                        isSecond = true;
+                                    }
                                 }
                             }
-                            ItemWorld.DropItem(character.GetPosition(), duplicateItem, character.GetFacing(), false);
-                            SetCooldown(item);
+                            isTouched = false;
+                            popupChoise.gameObject.SetActive(true);
+                            popupChoise.position = new Vector2(child.position.x, child.position.y + itemSize);
+                            popupChoise.Find("drop").GetComponent<Button_UI>().MouseDownOnceFunc = () =>
+                            {
+                                Item duplicateItem = new Item { itemType = item.itemType, amount = 1, CD = item.CD, isCD = false, description = item.description, name = item.name };
+                                inventory.RemoveItem(item, child.GetSiblingIndex());
+                                for (int j = 0; j < inventory.GetItemList().Count; j++)
+                                {
+                                    if (!inventory.GetItemList()[j].isCD)
+                                    {
+                                        itemCDContainder.GetChild(j).gameObject.SetActive(false);
+                                    }
+                                }
+                                ItemWorld.DropItem(character.GetPosition(), duplicateItem, character.GetFacing(), false);
+                                popupChoise.gameObject.SetActive(false);
+                                SetCooldown(item);
+                      
+                            };
+
+                            popupChoise.Find("info").GetComponent<Button_UI>().MouseDownOnceFunc = () =>
+                            {
+
+                                popupChoise.gameObject.SetActive(false);
+                                Transform itemInfoRectTransform = Instantiate(itemDescrtptionSlot, itemDescrtptionContainer).GetComponent<Transform>();
+                                itemInfoRectTransform.gameObject.SetActive(true);
+                                itemInfoRectTransform.position = new Vector2(child.position.x, child.position.y + itemSize);
+                                itemInfoRectTransform.GetComponent<Popup_items>().item = item;
+
+                            };
 
 
 
                         };
                         child.GetComponent<Button_UI>().MouseDownOnceFunc = () => {
+                            popupChoise.gameObject.SetActive(false);
+                            if (itemDescrtptionContainer.childCount > 1)
+                            {
+                                bool isSecond = false;
+                                foreach (Transform child in itemDescrtptionContainer)
+                                {
+                                    if (isSecond)
+                                    {
+                                        Destroy(child.gameObject);
+                                    }
+                                    else
+                                    {
+                                        isSecond = true;
+                                    }
+                                }
+                            }
 
                             child.GetComponent<Button_UI>().isEnterCDSlot = true;
                             isTouched = true;
