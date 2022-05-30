@@ -5,29 +5,16 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
-  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Platform
+  - Player
   - Water
   - UI
-<<<<<<< HEAD
-<<<<<<< HEAD
-  - Ground
   - 
+  - Enemy
   - 
-=======
-  - Background
-  - Decorate
-  
->>>>>>> test_env
-=======
-  - Background
-  - Decorate
-  
->>>>>>> 60aabd8ccd4bea7ffc748396446ecd0602fb2196
   - 
   - 
   - 
@@ -54,10 +41,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: New Layer
-    uniqueID: 3394196087
-    locked: 0
-  - name: New Layer
-    uniqueID: 1610555037
     locked: 0

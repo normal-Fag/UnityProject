@@ -267,7 +267,7 @@ public class character_movement : MonoBehaviour
 
     }
 
-    public Vector2 GetPosition()
+    public Vector3 GetPosition()
     {
         return transform.position;
     }

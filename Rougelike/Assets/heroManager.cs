@@ -30,6 +30,6 @@ public class heroManager : MonoBehaviour
     public void playGame()
     {
         PlayerPrefs.SetInt("selectedcharacter", selectedCharecter);
-        SceneManager.LoadScene("testGame", LoadSceneMode.Single);
+        SceneManager.LoadScene("New Scene", LoadSceneMode.Single);
     }
 }
