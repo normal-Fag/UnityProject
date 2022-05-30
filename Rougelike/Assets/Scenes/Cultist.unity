@@ -213,11 +213,11 @@ PrefabInstance:
     - target: {fileID: 5215617963965782382, guid: 804b0f144e5874ea890a0e1e0cdb7161, type: 3}
       propertyPath: leftLimit
       value: 
-      objectReference: {fileID: 1636746830}
+      objectReference: {fileID: 567199341}
     - target: {fileID: 5215617963965782382, guid: 804b0f144e5874ea890a0e1e0cdb7161, type: 3}
       propertyPath: rightLimit
       value: 
-      objectReference: {fileID: 567199341}
+      objectReference: {fileID: 1636746830}
     - target: {fileID: 5215617963965782382, guid: 804b0f144e5874ea890a0e1e0cdb7161, type: 3}
       propertyPath: staticEnemy
       value: 0

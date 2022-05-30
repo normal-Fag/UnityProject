@@ -85,7 +85,6 @@ public class Enemy : MonoBehaviour
         {
             health -= damage;
             anim.SetTrigger("Hurt");
-            //anim.SetBool("isHurt", true);
         }
 
         switch (typeOfDamage)

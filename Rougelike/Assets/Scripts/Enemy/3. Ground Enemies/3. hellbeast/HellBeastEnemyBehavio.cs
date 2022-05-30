@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HellBeastEnemyBehavio : GroundEnemyBehavior2
+public class HellBeastEnemyBehavio : Enemy
 {
+    
+
     [Header("Hell Beast settings")]
     [SerializeField] public GameObject fireballPrefab;
     public float shootForce = 20;
@@ -13,20 +15,30 @@ public class HellBeastEnemyBehavio : GroundEnemyBehavior2
     private float shootIntTimer;
     private bool isShootCooldown;
 
-    private void Start()
+    private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
-        intTimer = cooldownTimer;
         shootIntTimer = shootCooldownTimer;
+    }
+
+    public override void Update()
+    {
+        base.Update();
+
+        if (inRange && health > 0)
+            EnemyTrigger();
     }
 
     public override void EnemyTrigger()
     {
         base.EnemyTrigger();
 
-        if (isShootCooldown)
+        if (isShootCooldown || isCooldown)
             Cooldown();
+
+        if (distance <= attackDistance && !isCooldown)
+            AttackPlayer();
+        else if (!isShootCooldown)
+            ShootPlayer();
     }
 
     protected override void AttackPlayer()
@@ -34,14 +46,14 @@ public class HellBeastEnemyBehavio : GroundEnemyBehavior2
         base.AttackPlayer();
 
         anim.SetTrigger("Attack");
-        anim.SetBool("isRunning", false);
+        //anim.SetBool("isRunning", false);
     }
 
-    protected override void StopAttackPlayer()
+    protected void ShootPlayer()
     {
-        base.StopAttackPlayer();
+        anim.ResetTrigger("Attack");
 
-        if (!isShootCooldown)
+        //if (!isShootCooldown)
             anim.SetTrigger("Fire");
     }
 
