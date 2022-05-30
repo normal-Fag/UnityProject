@@ -1721,8 +1721,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 927ffa84441be3a41ba576f7fe07ab0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxSpeed: 4.5
-  m_jumpForce: 12
+  m_maxSpeed: 9
+  m_jumpForce: 15
   uiInventory: {fileID: 1726498091656844147}
   m_body2d: {fileID: 0}
   m_grounded: 0

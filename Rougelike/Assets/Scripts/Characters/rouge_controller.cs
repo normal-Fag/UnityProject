@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
+
 
 public class rouge_controller : MonoBehaviour
 {
@@ -52,49 +54,49 @@ public class rouge_controller : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKey("j"))
+        if (CrossPlatformInputManager.GetButton("Attack"))
         {
             timer += Time.deltaTime;
         }
-        if (Input.GetKeyDown("j"))
+        if (CrossPlatformInputManager.GetButtonDown("Attack"))
         {
             timer = 0;
         }
 
 
-        if (Input.GetKeyDown("j") && !isAttack1 && !isDelayAction)
+        if (CrossPlatformInputManager.GetButtonDown("Attack") && !isAttack1 && !isDelayAction)
         {
             StartCoroutine(ActionDelay(actionDelay + actionDelay * 0.3f, "Attack1"));
 
         }
 
 
-        else if (Input.GetKeyDown("j") && isAttack1)
+        else if (CrossPlatformInputManager.GetButtonDown("Attack") && isAttack1)
         {
             Attack2();
         }
 
         //Roll
 
-        if (Input.GetKeyDown("k") && character_Movement.m_grounded && !isDelayAction)
+        if (CrossPlatformInputManager.GetButtonDown("Roll") && character_Movement.m_grounded && !isDelayAction)
         {
             StartCoroutine(ActionDelay(actionDelay + actionDelay * 0.2f, "Roll"));
 
         }
 
-        else if (Input.GetKeyDown("u") && character_Movement.m_grounded && !isDelayAction && number_of_dagger > 0)
+        else if (CrossPlatformInputManager.GetButtonDown("Trap") && character_Movement.m_grounded && !isDelayAction && number_of_dagger > 0)
         {
             StartCoroutine(ActionDelay(actionDelay * 2, "TrapCast"));
 
         }
 
-        else if (Input.GetKeyUp("i") && !isDelayAction && number_of_dagger > 0)
+        else if (CrossPlatformInputManager.GetButtonDown("Throw") && !isDelayAction && number_of_dagger > 0)
         {
             StartCoroutine(ActionDelay(actionDelay, "Throw_Dagger"));
 
         }
 
-        else if (Input.GetKeyDown("l") && character_Movement.m_grounded && !isDelayAction)
+        else if (CrossPlatformInputManager.GetButtonDown("Ultimate") && character_Movement.m_grounded && !isDelayAction)
         {
             StartCoroutine(ActionDelay(actionDelay, "SpecialAttack"));
 
@@ -102,7 +104,7 @@ public class rouge_controller : MonoBehaviour
 
         if (timer > 0.4 && character_Movement.m_grounded)
         {
-            if ((Input.GetKeyUp("j")) && !isDelayAction)
+            if ((CrossPlatformInputManager.GetButtonUp("Attack")) && !isDelayAction)
             {
                 StartCoroutine(ActionDelay(actionDelay * 3, "ChargeAttack"));
 
