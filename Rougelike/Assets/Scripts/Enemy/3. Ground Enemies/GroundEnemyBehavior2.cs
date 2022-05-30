@@ -26,18 +26,23 @@ public class GroundEnemyBehavior2 : Enemy
     {
         base.Update();
 
-        if (inRange)
+        if (inRange &&  health > 0)
             EnemyTrigger();
-        else if (!staticEnemy && !activePatroling && !isPointed)
+
+        else if (!staticEnemy && !activePatroling && !isPointed && health > 0)
             BackToPoint();
-        else if (!staticEnemy && activePatroling)
+
+        else if (!staticEnemy && activePatroling && health > 0)
            StartCoroutine(Patroling());
     }
 
     public override void EnemyTrigger()
     {
         base.EnemyTrigger();
-        Debug.Log("Trigger");
+
+        if (isCooldown)
+            Cooldown();
+
         if (!staticEnemy && distance > attackDistance)
             Move();
 
@@ -46,8 +51,6 @@ public class GroundEnemyBehavior2 : Enemy
         else
             StopAttackPlayer();
 
-        if (isCooldown)
-            Cooldown();
     }
 
     public override void Move()
@@ -61,7 +64,9 @@ public class GroundEnemyBehavior2 : Enemy
                 new Vector3(target.position.x, transform.position.y, target.position.z),
                 movementSpeed * Time.fixedDeltaTime
             );
+
             rb.MovePosition(moveDirection);
+
             anim.SetBool("isRunning", true);
         }
     }
@@ -69,11 +74,12 @@ public class GroundEnemyBehavior2 : Enemy
     protected override void AttackPlayer()
     {
         cooldownTimer = intTimer;
+
         anim.SetTrigger("Attack");
         anim.SetBool("isRunning", false);
     }
 
-    protected override void StopAttackPlayer()
+    public override void StopAttackPlayer()
     {
         anim.ResetTrigger("Attack");
     }
@@ -89,6 +95,7 @@ public class GroundEnemyBehavior2 : Enemy
 
             if (distanceToLeft > distanceToRight)
                 target = leftLimit;
+
             else
                 target = rightLimit;
         }
@@ -106,6 +113,7 @@ public class GroundEnemyBehavior2 : Enemy
     override protected void Cooldown()
     {
         cooldownTimer -= Time.deltaTime;
+
         if (cooldownTimer <= 0 && isCooldown)
         {
             isCooldown = false;
@@ -118,7 +126,9 @@ public class GroundEnemyBehavior2 : Enemy
         if (!InsideOfLimits())
         {
             anim.SetBool("isRunning", false);
+
             SelectTarget();
+
             yield return new WaitForSeconds(2f);
         }
         Move();
@@ -127,7 +137,9 @@ public class GroundEnemyBehavior2 : Enemy
     protected virtual void BackToPoint()
     {
         SelectTarget();
+
         Move();
+
         if (Vector2.Distance(transform.position, target.position) < 2)
         {
             anim.SetBool("isRunning", false);

@@ -29,7 +29,7 @@ public class HellBeastEnemyBehavio : GroundEnemyBehavior2
             Cooldown();
     }
 
-    protected override void StopAttackPlayer()
+    public override void StopAttackPlayer()
     {
         base.StopAttackPlayer();
         if (!isShootCooldown)

@@ -11,7 +11,7 @@ public class Bandit2Bihhavior : GroundEnemyBehavior2
         anim.SetBool("isRunning", false);
     }
 
-    protected override void StopAttackPlayer()
+    public override void StopAttackPlayer()
     {
         anim.SetBool("isAttack", false);
     }

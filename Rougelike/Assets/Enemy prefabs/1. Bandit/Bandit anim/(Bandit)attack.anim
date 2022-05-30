@@ -319,7 +319,7 @@ AnimationClip:
     - time: 0.78333336
       value: {fileID: 21300046, guid: f2ed27d6c1c3ccc48959bcca269d88f0, type: 3}
     attribute: m_Sprite
-    path: EnemyGFX
+    path: 
     classID: 212
     script: {fileID: 0}
   m_SampleRate: 60
@@ -358,7 +358,7 @@ AnimationClip:
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 1178356827
+      path: 0
       attribute: 0
       script: {fileID: 0}
       typeID: 212

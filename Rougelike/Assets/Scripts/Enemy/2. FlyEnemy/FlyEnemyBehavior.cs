@@ -42,7 +42,7 @@ public class FlyEnemyBehavior : Enemy
         anim.SetTrigger("Attack");
     }
 
-    protected override void StopAttackPlayer()
+    public override void StopAttackPlayer()
     {
         base.StopAttackPlayer();
         anim.ResetTrigger("Attack");

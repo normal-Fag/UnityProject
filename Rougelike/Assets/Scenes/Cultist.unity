@@ -23779,5 +23779,13 @@ PrefabInstance:
       propertyPath: rightLimit
       value: 
       objectReference: {fileID: 1636746830}
+    - target: {fileID: 6096701569122994023, guid: 804b0f144e5874ea890a0e1e0cdb7161, type: 3}
+      propertyPath: staticEnemy
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6096701569122994023, guid: 804b0f144e5874ea890a0e1e0cdb7161, type: 3}
+      propertyPath: activePatroling
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 804b0f144e5874ea890a0e1e0cdb7161, type: 3}

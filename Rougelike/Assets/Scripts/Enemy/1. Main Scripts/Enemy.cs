@@ -38,7 +38,6 @@ public class Enemy : MonoBehaviour
     protected float intTimer;
     protected float distance;
 
-
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -49,6 +48,12 @@ public class Enemy : MonoBehaviour
     virtual public void Update()
     {
         Flip();
+
+        if (health <= 0)
+        {
+            anim.SetTrigger("Death");
+            Destroy(this.gameObject, 2);
+        }
     }
 
     virtual protected void Cooldown()
@@ -78,14 +83,8 @@ public class Enemy : MonoBehaviour
         if (health > 0)
         {
             health -= damage;
-            //anim.SetTrigger("Hurt");
-            anim.SetBool("isHurt", true);
-        }
-
-        if (health <= 0)
-        {
-            anim.SetTrigger("Death");
-            Destroy(this.gameObject, 2);
+            anim.SetTrigger("Hurt");
+            //anim.SetBool("isHurt", true);
         }
 
         switch (typeOfDamage)
@@ -134,7 +133,7 @@ public class Enemy : MonoBehaviour
         cooldownTimer = intTimer;
     }
 
-    virtual protected void StopAttackPlayer() { }
+    virtual public void StopAttackPlayer() { }
 
     virtual public void Move() { }
 

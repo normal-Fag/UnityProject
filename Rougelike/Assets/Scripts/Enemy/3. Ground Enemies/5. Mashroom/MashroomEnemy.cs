@@ -17,33 +17,35 @@ public class MashroomEnemy : GroundEnemyBehavior2
     {
         SelectTarget();
         poopPrefab.GetComponent<MashroomPjectileLogic>().damage = poopDamage;
+        attackType = Random.Range(0, 2);
     }
 
     protected override void AttackPlayer()
     {
-        attackType = Random.Range(0, 2);
         cooldownTimer = intTimer;
 
         anim.SetBool("isRunning", false);
 
-        switch(attackType)
+        if (!isAttack && attackType == 0)
         {
-            case 0:
-                anim.SetBool("isAttack1", true);
-                //anim.SetTrigger("Attack1");
-                break;
-            case 1:
-                anim.SetBool("isAttack2", true);
-                //anim.SetTrigger("Attack2");
-                break;
+            anim.SetTrigger("Attack1");
+            attackType = Random.Range(0, 2);
+        }
+
+        else if (!isAttack && attackType == 1)
+        {
+            anim.SetTrigger("Attack2");
+            attackType = Random.Range(0, 2);
         }
     }
 
-    protected override void StopAttackPlayer()
+    public override void StopAttackPlayer()
     {
         attackType = Random.Range(0, 2);
-        anim.SetBool("isAttack1", false);
-        anim.SetBool("isAttack2", false);
+        //anim.SetBool("isAttack1", false);
+        //anim.SetBool("isAttack2", false);
+        anim.ResetTrigger("Attack1");
+        anim.ResetTrigger("Attack2");
 
         if (attackType == 1 && !isCooldown)
         {
