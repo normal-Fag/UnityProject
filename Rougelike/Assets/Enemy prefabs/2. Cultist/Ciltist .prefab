@@ -332,10 +332,10 @@ GameObject:
   - component: {fileID: 6096701569122994016}
   - component: {fileID: 6096701569122994017}
   - component: {fileID: 6096701569122994022}
-  - component: {fileID: 6096701569122994023}
   - component: {fileID: 6096701569122994018}
   - component: {fileID: 6096701569122994019}
   - component: {fileID: 3253479514683118393}
+  - component: {fileID: 5215617963965782382}
   m_Layer: 7
   m_Name: 'Ciltist '
   m_TagString: Enemy
@@ -354,9 +354,9 @@ Transform:
   m_LocalPosition: {x: 28.85, y: -4.92, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
-  - {fileID: 6096701569969039768}
-  - {fileID: 6096701569222584793}
   - {fileID: 6096701570500625309}
+  - {fileID: 6096701569222584793}
+  - {fileID: 6096701569969039768}
   - {fileID: 7634806703214459897}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -431,42 +431,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &6096701569122994023
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6096701569122994020}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6d733d9700034c10a3535f64b5526cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hotZone: {fileID: 6096701570500625280}
-  triggerArea: {fileID: 6096701569222584796}
-  health: 100
-  movementSpeed: 5.5
-  firePrefab: {fileID: 6863192391745941111, guid: ac1acad79b6be4a319a95a4a8976a355, type: 3}
-  fireDamage: 5
-  fireTimer: 5
-  poisonPrefab: {fileID: 5298019677433071509, guid: 4c3ac61d27cc94bd3b5167ba1064381b, type: 3}
-  poisonDamage: 5
-  poisonTimer: 5
-  damage: 10
-  attackDistance: 1.8
-  cooldownTimer: 1.5
-  target: {fileID: 0}
-  inRange: 0
-  facingDirection: 0
-  isBurning: 0
-  isPoisoning: 0
-  isAttack: 0
-  staticEnemy: 0
-  activePatroling: 1
-  leftLimit: {fileID: 0}
-  rightLimit: {fileID: 0}
-  backPoint: {fileID: 0}
 --- !u!70 &6096701569122994018
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -518,6 +482,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasUI: {fileID: 1740304018344545815}
   slider: {fileID: 5305450125043669418}
+--- !u!114 &5215617963965782382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6096701569122994020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 517ad885292e3433cb2a0c086983b80a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hotZone: {fileID: 6096701570500625280}
+  triggerArea: {fileID: 6096701569222584796}
+  health: 200
+  movementSpeed: 3
+  firePrefab: {fileID: 6863192391745941111, guid: ac1acad79b6be4a319a95a4a8976a355, type: 3}
+  fireDamage: 5
+  fireTimer: 5
+  poisonPrefab: {fileID: 5298019677433071509, guid: 4c3ac61d27cc94bd3b5167ba1064381b, type: 3}
+  poisonDamage: 5
+  poisonTimer: 5
+  damage: 25
+  attackDistance: 2.5
+  cooldownTimer: 2
+  target: {fileID: 0}
+  inRange: 0
+  facingDirection: 0
+  isBurning: 0
+  isPoisoning: 0
+  isAttack: 0
+  staticEnemy: 1
+  activePatroling: 0
+  leftLimit: {fileID: 0}
+  rightLimit: {fileID: 0}
+  backPoint: {fileID: 0}
 --- !u!1 &6096701569222584796
 GameObject:
   m_ObjectHideFlags: 0
@@ -618,7 +618,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6096701569122994016}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6096701569969039771
 MonoBehaviour:
@@ -678,7 +678,7 @@ Transform:
   m_LocalScale: {x: 17.06729, y: 7.89244, z: 1}
   m_Children: []
   m_Father: {fileID: 6096701569122994016}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &6096701570500625282
 BoxCollider2D:

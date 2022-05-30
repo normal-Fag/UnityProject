@@ -29,9 +29,18 @@ public class HellBeastEnemyBehavio : GroundEnemyBehavior2
             Cooldown();
     }
 
-    public override void StopAttackPlayer()
+    protected override void AttackPlayer()
+    {
+        base.AttackPlayer();
+
+        anim.SetTrigger("Attack");
+        anim.SetBool("isRunning", false);
+    }
+
+    protected override void StopAttackPlayer()
     {
         base.StopAttackPlayer();
+
         if (!isShootCooldown)
             anim.SetTrigger("Fire");
     }
@@ -41,8 +50,8 @@ public class HellBeastEnemyBehavio : GroundEnemyBehavior2
         Vector2 targetPosition = target.transform.position;
         Vector2 shootDirection = new Vector2(
             targetPosition.x - transform.position.x,
-            targetPosition.y - transform.position.y
-            ).normalized;
+            targetPosition.y - transform.position.y).normalized;
+
         Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y, -2);
 
         Instantiate(fireballPrefab, spawnPosition, Quaternion.EulerRotation(shootDirection))
@@ -56,6 +65,7 @@ public class HellBeastEnemyBehavio : GroundEnemyBehavior2
         if (isShootCooldown)
         {
             shootCooldownTimer -= Time.deltaTime;
+
             if (shootCooldownTimer <= 0)
             {
                 isShootCooldown = false;
@@ -65,6 +75,7 @@ public class HellBeastEnemyBehavio : GroundEnemyBehavior2
         else
         {
             cooldownTimer -= Time.deltaTime;
+
             if (cooldownTimer <= 0 && isCooldown)
             {
                 isCooldown = false;

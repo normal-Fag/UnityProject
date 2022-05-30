@@ -51,6 +51,7 @@ public class Enemy : MonoBehaviour
 
         if (health <= 0)
         {
+            StopAttackPlayer();
             anim.SetTrigger("Death");
             Destroy(this.gameObject, 2);
         }
@@ -133,7 +134,7 @@ public class Enemy : MonoBehaviour
         cooldownTimer = intTimer;
     }
 
-    virtual public void StopAttackPlayer() { }
+    virtual protected void StopAttackPlayer() { }
 
     virtual public void Move() { }
 

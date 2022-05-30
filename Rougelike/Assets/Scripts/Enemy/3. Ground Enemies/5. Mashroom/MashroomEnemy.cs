@@ -22,7 +22,7 @@ public class MashroomEnemy : GroundEnemyBehavior2
 
     protected override void AttackPlayer()
     {
-        cooldownTimer = intTimer;
+        base.AttackPlayer();
 
         anim.SetBool("isRunning", false);
 
@@ -39,11 +39,10 @@ public class MashroomEnemy : GroundEnemyBehavior2
         }
     }
 
-    public override void StopAttackPlayer()
+    protected override void StopAttackPlayer()
     {
         attackType = Random.Range(0, 2);
-        //anim.SetBool("isAttack1", false);
-        //anim.SetBool("isAttack2", false);
+
         anim.ResetTrigger("Attack1");
         anim.ResetTrigger("Attack2");
 
@@ -53,11 +52,6 @@ public class MashroomEnemy : GroundEnemyBehavior2
         }
     }
 
-    public void StopPooping()
-    {
-        anim.SetBool("isAttack3", false);
-    }
-
     public void Poop()
     {
         Vector3 Vo = CalculateVelocity();
@@ -65,6 +59,11 @@ public class MashroomEnemy : GroundEnemyBehavior2
         Instantiate(poopPrefab, transform.position, Quaternion.identity)
             .GetComponent<Rigidbody2D>().velocity = Vo;
         
+    }
+
+    public void StopPooping()
+    {
+        anim.SetBool("isAttack3", false);
     }
 
     private Vector3 CalculateVelocity ()

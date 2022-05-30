@@ -5,13 +5,15 @@ using UnityEngine;
 public class GroundEnemyBehavior2 : Enemy
 {
     [Header("State settings")]
-    [SerializeField] public bool staticEnemy = false;[Space]
-    [SerializeField]
+    public bool staticEnemy = false;[Space]
+
+    [Header("Patroling mode")]
     [Tooltip("Активировать патрулирование у врага.\nРаботает при отключенном 'static enemy'.")]
     public bool activePatroling = true;
-    [SerializeField] public Transform leftLimit;
-    [SerializeField] public Transform rightLimit;[Space]
-    [SerializeField]
+    public Transform leftLimit;
+    public Transform rightLimit;[Space]
+
+    [Header("Back to point mode")]
     [Tooltip("Точка возвращения врага.\nРаботает при отключенном 'activate patroling' и 'static enemy'.")]
     public Transform backPoint;
 
@@ -45,6 +47,8 @@ public class GroundEnemyBehavior2 : Enemy
 
         if (!staticEnemy && distance > attackDistance)
             Move();
+        else
+            anim.SetBool("isRunning", false);
 
         if (distance <= attackDistance && !isCooldown)
             AttackPlayer();
@@ -69,19 +73,6 @@ public class GroundEnemyBehavior2 : Enemy
 
             anim.SetBool("isRunning", true);
         }
-    }
-
-    protected override void AttackPlayer()
-    {
-        cooldownTimer = intTimer;
-
-        anim.SetTrigger("Attack");
-        anim.SetBool("isRunning", false);
-    }
-
-    public override void StopAttackPlayer()
-    {
-        anim.ResetTrigger("Attack");
     }
 
     public override void SelectTarget()
