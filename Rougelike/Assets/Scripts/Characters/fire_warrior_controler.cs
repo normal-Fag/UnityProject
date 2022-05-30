@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityStandardAssets.CrossPlatformInput;
-
 
 public class fire_warrior_controler : MonoBehaviour
 {
@@ -22,7 +20,6 @@ public class fire_warrior_controler : MonoBehaviour
 
     public static int number_of_rage;
     public int max_rage = 100;
-    public static int max_rage_for_ui;
 
 
 
@@ -35,14 +32,11 @@ public class fire_warrior_controler : MonoBehaviour
         weapon_hb = weapon.GetComponent<wp_hitbox>();
         weapon_hb.canAttack = false;
         number_of_rage = 0;
-        max_rage_for_ui = max_rage;
     }
 
     // Update is called once per frame
     void Update()
     {
-        max_rage_for_ui = max_rage;
-
         if (weapon_hb.hasContact 
             && !m_animator.GetCurrentAnimatorStateInfo(0).IsName("sp_attack") 
             && !m_animator.GetCurrentAnimatorStateInfo(0).IsName("ultimate"))
@@ -51,17 +45,17 @@ public class fire_warrior_controler : MonoBehaviour
             weapon_hb.hasContact = false;
         }
 
-        if (CrossPlatformInputManager.GetButton("Attack"))
+        if (Input.GetKey("j"))
         {
             timer += Time.deltaTime;
         }
-        if (CrossPlatformInputManager.GetButtonDown("Attack"))
+        if (Input.GetKeyDown("j"))
         {
             timer = 0;
         }
 
 
-        if (CrossPlatformInputManager.GetButtonDown("Attack") && !isDelayAction && character_Movement.m_grounded)
+        if (Input.GetKeyDown("j") && !isDelayAction && character_Movement.m_grounded)
         {
             StartCoroutine(ActionDelay(actionDelay, "Attack"));
 
@@ -69,28 +63,28 @@ public class fire_warrior_controler : MonoBehaviour
 
         }
         
-        if (CrossPlatformInputManager.GetButtonDown("Attack") && !isDelayAction && !character_Movement.m_grounded)
+        if (Input.GetKeyDown("j") && !isDelayAction && !character_Movement.m_grounded)
         {
             StartCoroutine(ActionDelay(actionDelay + actionDelay * 0.3f, "air_attack"));
         }
 
 
 
-        else if (CrossPlatformInputManager.GetButtonDown("Ultimate") && character_Movement.m_grounded && !isDelayAction && number_of_rage >= 45 )
+        else if (Input.GetKeyDown("u") && character_Movement.m_grounded && !isDelayAction && number_of_rage >= 45 )
         {
             StartCoroutine(ActionDelay(actionDelay * 1.5f, "ultimate"));
             number_of_rage = 0;
 
         }
 
-        else if (CrossPlatformInputManager.GetButtonDown("Special") && character_Movement.m_grounded && !isDelayAction && number_of_rage >= 25)
+        else if (Input.GetKeyDown("l") && character_Movement.m_grounded && !isDelayAction && number_of_rage >= 25)
         {
             StartCoroutine(ActionDelay(actionDelay * 0.8f, "sp_attack" ));
             number_of_rage -= 25;
 
         }
 
-        else if (CrossPlatformInputManager.GetButtonDown("Defend") && character_Movement.m_grounded && !isDelayAction)
+        else if (Input.GetKeyDown("k") && character_Movement.m_grounded && !isDelayAction)
         {
             StartCoroutine(ActionDelay(actionDelay, "defend"));
 
@@ -98,7 +92,7 @@ public class fire_warrior_controler : MonoBehaviour
 
         if (timer > 0.4 && character_Movement.m_grounded)
         {
-            if (CrossPlatformInputManager.GetButtonUp("Attack") && !isDelayAction)
+            if ((Input.GetKeyUp("j")) && !isDelayAction)
             {
                 StartCoroutine(ActionDelay(actionDelay * 1.7f, "heavy_attack" ));
 
