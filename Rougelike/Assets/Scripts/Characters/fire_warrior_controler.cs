@@ -24,7 +24,14 @@ public class fire_warrior_controler : MonoBehaviour
     public int max_rage = 100;
     public static int max_rage_for_ui;
 
+    public int fire_dmg = 1;
+    public int atk_dmg = 10;
+    public int ult_dmg = 20;
+    
 
+
+    public bool hasMajorBuff;
+    public bool hasSkullOfRage;
 
     // Use this for initialization
     void Start()
@@ -213,9 +220,53 @@ public class fire_warrior_controler : MonoBehaviour
             isDelayAction = false;
         }
 
-
-
     }
 
-    
+    public void UseItem(Item item, int index)
+    {
+        switch (item.itemType)
+        {
+            default:
+            case Item.ItemType.AttackBuff:
+         
+                StartCoroutine(useAttackBuff(item.CD));
+                break;
+            case Item.ItemType.SkillBuff:
+                StartCoroutine(useSkillBuff(item.CD));
+                break;
+            case Item.ItemType.DropOfFury:
+                character_Movement.inventory.RemoveItem(item, index);
+                max_rage += 10;
+                break;
+            case Item.ItemType.PhoenixFeather:
+                character_Movement.inventory.RemoveItem(item, index);
+                fire_dmg = 5;
+                hasMajorBuff = true;
+                break;
+            case Item.ItemType.SkullOfRage:
+                character_Movement.inventory.RemoveItem(item, index);
+                hasSkullOfRage = true;
+                hasMajorBuff = true;
+                break;
+
+        }
+    }
+    public IEnumerator useAttackBuff(int seconds)
+    {
+
+        atk_dmg += 15;
+
+        yield return new WaitForSeconds(seconds);
+        atk_dmg -= 15;
+    }
+
+    public IEnumerator useSkillBuff(int seconds)
+    {
+        ult_dmg += 10;
+        
+        yield return new WaitForSeconds(seconds);
+
+        ult_dmg -= 10;
+    }
+
 }

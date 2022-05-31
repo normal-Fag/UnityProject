@@ -13,6 +13,23 @@ public class ItemAssets : MonoBehaviour
 
     public Sprite hpPotionSprite;
     public Sprite hpBuffSprite;
-    public Sprite rageBuffSprite;
     public Sprite InfinityHpBuffSprite;
+    public Sprite AttackBuffSprite;
+    public Sprite SkillBuffSprite;
+
+
+    public Sprite PoisonSprite;
+    public Sprite ManaPotionSprite;
+    public Sprite RegenManaPotionSprite;
+    public Sprite ManaStoneSprite;
+    public Sprite DaggerSprite;
+    public Sprite InfinityBagSprite;
+    public Sprite PosionBagSprite;
+    public Sprite InfinityAttackBuffSprite;
+    public Sprite SpareBagSprite;
+    public Sprite PhoenixFeatherSprite;
+    public Sprite BurstStoneSprite;
+    public Sprite DropOfFurySprite;
+    public Sprite SkullOfRageSprite;
+
 }

@@ -42,6 +42,21 @@ public class ItemCooldown : MonoBehaviour
 
         }
 
+        if (item.itemType == Item.ItemType.AttackBuff)
+        {
+
+            image.fillAmount = character_movement.currentAttackBuffCD;
+
+        }
+
+
+        if (item.itemType == Item.ItemType.SkillBuff)
+        {
+
+            image.fillAmount = character_movement.currentSkillBuffCD;
+
+        }
+
 
         if (!item.isCD)
             {

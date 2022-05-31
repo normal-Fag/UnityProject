@@ -102,20 +102,26 @@ public class Bandit_test : MonoBehaviour
        Item item;
        if (Random.Range(0f, 1.0f) > 0.0f)
        {
-            item = new Item { itemType = Item.ItemType.HealthPotion, amount = 1 , CD = 30};
+            item = new Item { itemType = Item.ItemType.SkillBuff, amount = 1 , CD = 30};
             ItemWorld.DropItem(transform.position, item, dropHeight, true);
             dropHeight += 0.2f;
 
        }
         if (Random.Range(0f, 1.0f) > 0.0f)
         {
-            item = new Item { itemType = Item.ItemType.HPBuff, amount = 1, CD = 10 };
+            item = new Item { itemType = Item.ItemType.AttackBuff, amount = 1, CD = 10 };
             ItemWorld.DropItem(transform.position, item, dropHeight, true);
             dropHeight += 0.2f;
         }
         if (Random.Range(0f, 1.0f) > 0.0f)
         {
-            item = new Item { itemType = Item.ItemType.InfinityHpBuff, amount = 1 };
+            item = new Item { itemType = Item.ItemType.DropOfFury, amount = 1 };
+            ItemWorld.DropItem(transform.position, item, dropHeight, true);
+            dropHeight += 0.2f;
+        }
+        if (Random.Range(0f, 1.0f) > 0.0f)
+        {
+            item = new Item { itemType = Item.ItemType.PhoenixFeather, amount = 1 };
             ItemWorld.DropItem(transform.position, item, dropHeight, true);
             dropHeight += 0.2f;
         }

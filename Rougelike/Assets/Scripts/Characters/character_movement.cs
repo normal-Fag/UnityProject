@@ -28,7 +28,7 @@ public class character_movement : MonoBehaviour
     private int stopMoving;
     private bool isChargeAttack;
 
-    private Inventory inventory;
+    public Inventory inventory;
 
 
     public int max_hp = 100;
@@ -46,10 +46,20 @@ public class character_movement : MonoBehaviour
     private bool hasHPBuffCD;
 
 
+
+    private int AttackBuffCD;
+    public static float currentAttackBuffCD;
+    public bool hasAttackBuffCD;
+
+    private int SkillBuffCD;
+    public static float currentSkillBuffCD;
+    public bool hasSkillBuffCD;
+
+
     float currentDashTimmer;
     bool isRolling = false;
     public float rollDistance;
-    public float startDashTimer;
+    public  float startDashTimer;
     public float trapDistanceEvade;
 
     bool isTraping = false;
@@ -238,6 +248,41 @@ public class character_movement : MonoBehaviour
             }
         }
 
+        if (hasAttackBuffCD)
+        {
+
+            currentAttackBuffCD -= 1f / AttackBuffCD * Time.deltaTime;
+            CheckCDinInventory(new Item { itemType = Item.ItemType.AttackBuff, amount = 1, CD = 10 });
+            if (currentAttackBuffCD <= 0)
+            {
+                hasAttackBuffCD = false;
+                foreach (Item item in inventory.GetItemList())
+                {
+                    if (item.itemType == Item.ItemType.AttackBuff)
+                    {
+                        item.isCD = false;
+                    }
+                }
+            }
+        }
+
+        if (hasSkillBuffCD)
+        {
+            currentSkillBuffCD -= 1f / SkillBuffCD * Time.deltaTime;
+            CheckCDinInventory(new Item { itemType = Item.ItemType.SkillBuff, amount = 1, CD = 30 });
+            if (currentSkillBuffCD <= 0)
+            {
+                hasSkillBuffCD = false;
+                foreach (Item item in inventory.GetItemList())
+                {
+                    if (item.itemType == Item.ItemType.SkillBuff)
+                    {
+                        item.isCD = false;
+                    }
+                }
+            }
+        }
+
 
 
         if (isRolling)
@@ -292,7 +337,6 @@ public class character_movement : MonoBehaviour
                 inventory.RemoveItem(item, index);
                 currentHealthPotionCD = 1f;
                 StartCoroutine(useHealthPotion(item.CD));
-
                 break;
             case Item.ItemType.HPBuff:
                 HPBuffCD = item.CD;
@@ -305,6 +349,46 @@ public class character_movement : MonoBehaviour
             case Item.ItemType.InfinityHpBuff:
                 inventory.RemoveItem(item, index);
                 max_hp += 50;
+                break;
+            case Item.ItemType.AttackBuff:
+               if(gameObject.GetComponent<fire_warrior_controler>() != null)
+                {
+                    gameObject.GetComponent<fire_warrior_controler>().UseItem(item, index);
+                }
+                AttackBuffCD = item.CD;
+                hasAttackBuffCD = true;
+                currentAttackBuffCD = 1f;
+                CheckCDinInventory(item);
+                inventory.RemoveItem(item, index);
+                break;
+            case Item.ItemType.SkillBuff:
+                if (gameObject.GetComponent<fire_warrior_controler>() != null)
+                {
+                    gameObject.GetComponent<fire_warrior_controler>().UseItem(item, index);
+                }
+                SkillBuffCD = item.CD;
+                hasSkillBuffCD = true;
+                currentSkillBuffCD = 1f;
+                CheckCDinInventory(item);
+                inventory.RemoveItem(item, index);
+                break;
+            case Item.ItemType.DropOfFury:
+                if (gameObject.GetComponent<fire_warrior_controler>() != null)
+                {
+                    gameObject.GetComponent<fire_warrior_controler>().UseItem(item, index);
+                }
+                break;
+            case Item.ItemType.PhoenixFeather:
+                if (gameObject.GetComponent<fire_warrior_controler>() != null)
+                {
+                    gameObject.GetComponent<fire_warrior_controler>().UseItem(item, index);
+                }
+                break;
+            case Item.ItemType.SkullOfRage:
+                if (gameObject.GetComponent<fire_warrior_controler>() != null)
+                {
+                    gameObject.GetComponent<fire_warrior_controler>().UseItem(item, index);
+                }
                 break;
 
         }
@@ -325,6 +409,14 @@ public class character_movement : MonoBehaviour
                 {
                     itemWorld.GetItem().isCD = hasHPBuffCD;
                 }
+                if (itemWorld.GetItem().itemType == Item.ItemType.AttackBuff)
+                {
+                    itemWorld.GetItem().isCD = hasAttackBuffCD;
+                }
+                if (itemWorld.GetItem().itemType == Item.ItemType.SkillBuff)
+                {
+                    itemWorld.GetItem().isCD = hasSkillBuffCD;
+                }
                 inventory.AddItem(itemWorld.GetItem());
                 itemWorld.DestroySelf();
             }
@@ -332,7 +424,7 @@ public class character_movement : MonoBehaviour
             {
                 foreach (Item item in items)
                 {
-                    if (itemWorld.GetItem().itemType == item.itemType && item.amount < inventory.max_stack)
+                    if (itemWorld.GetItem().itemType == item.itemType && item.amount < inventory.max_stack && item.IsStackable())
                     {
                         inventory.AddItem(itemWorld.GetItem());
                         itemWorld.DestroySelf();
@@ -410,7 +502,7 @@ public class character_movement : MonoBehaviour
         }
     }
 
-    private void CheckCDinInventory(Item item)
+    public void CheckCDinInventory(Item item)
     {
         foreach (Item itemCD in inventory.GetItemList())
         {
