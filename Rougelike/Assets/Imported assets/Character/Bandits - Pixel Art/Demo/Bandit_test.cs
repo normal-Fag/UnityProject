@@ -102,20 +102,20 @@ public class Bandit_test : MonoBehaviour
        Item item;
        if (Random.Range(0f, 1.0f) > 0.0f)
        {
-            item = new Item { itemType = Item.ItemType.HealthPotion, amount = 1 , CD = 30, name = "Heal Potion", description = "Heal 50 health point"};
+            item = new Item { itemType = Item.ItemType.HealthPotion, amount = 1 , CD = 30};
             ItemWorld.DropItem(transform.position, item, dropHeight, true);
             dropHeight += 0.2f;
 
        }
         if (Random.Range(0f, 1.0f) > 0.0f)
         {
-            item = new Item { itemType = Item.ItemType.HPBuff, amount = 1, CD = 10, name = "Heal Buff", description = "Gives 50 health point for max hp" };
+            item = new Item { itemType = Item.ItemType.HPBuff, amount = 1, CD = 10 };
             ItemWorld.DropItem(transform.position, item, dropHeight, true);
             dropHeight += 0.2f;
         }
         if (Random.Range(0f, 1.0f) > 0.0f)
         {
-            item = new Item { itemType = Item.ItemType.HPBuff, amount = 1, CD = 10, name = "Heal Buff", description = "Gives 50 health point for max hp" };
+            item = new Item { itemType = Item.ItemType.InfinityHpBuff, amount = 1 };
             ItemWorld.DropItem(transform.position, item, dropHeight, true);
             dropHeight += 0.2f;
         }

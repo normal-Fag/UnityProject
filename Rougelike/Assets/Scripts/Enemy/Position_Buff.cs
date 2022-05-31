@@ -10,7 +10,6 @@ public class Position_Buff : MonoBehaviour
         cacheChild = transform.childCount;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(cacheChild != transform.childCount)

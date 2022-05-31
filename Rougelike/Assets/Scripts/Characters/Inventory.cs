@@ -8,7 +8,7 @@ public class Inventory
     public event EventHandler OnItemListChanged;
     private List<Item> itemList;
     private Action<Item, int> useItemAction;
-    public int max_stack = 2;
+    public int max_stack = 5;
 
     public Inventory(Action<Item, int> useItemAction)
     {

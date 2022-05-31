@@ -153,10 +153,14 @@ public class character_movement : MonoBehaviour
         {
             currentHp = max_hp;
         }
+        if (currentHp < 0)
+        {
+            currentHp = 0;
+        }
 
 
 
-         if (stopingAction)
+        if (stopingAction)
         {
             stopMoving = 0;
             isChargeAttack = true;
@@ -297,7 +301,10 @@ public class character_movement : MonoBehaviour
                 inventory.RemoveItem(item, index);
                 currentHPBuffCD = 1f;
                 StartCoroutine(useHealthBuff(item.CD));
-
+                break;
+            case Item.ItemType.InfinityHpBuff:
+                inventory.RemoveItem(item, index);
+                max_hp += 50;
                 break;
 
         }
@@ -397,7 +404,7 @@ public class character_movement : MonoBehaviour
         if (currentHp <= 0)
         {
             m_animator.SetTrigger("Death");
-            GetComponent<BoxCollider2D>().enabled = false;
+            GetComponent<CapsuleCollider2D>().enabled = false;
             GetComponent<Rigidbody2D>().isKinematic = true;
 
         }

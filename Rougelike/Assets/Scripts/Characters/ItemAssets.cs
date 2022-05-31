@@ -14,5 +14,5 @@ public class ItemAssets : MonoBehaviour
     public Sprite hpPotionSprite;
     public Sprite hpBuffSprite;
     public Sprite rageBuffSprite;
-    public Sprite CD_BackGround;
+    public Sprite InfinityHpBuffSprite;
 }

@@ -11,6 +11,7 @@ public class BuffEffect_UI : MonoBehaviour
     private Text CDTimer;
     private float timer;
     private int currentCDTimmer;
+    public int countBuff = 1;
     void Start()
     {
         image = transform.Find("GreenBackground").GetComponent<Image>();
@@ -23,27 +24,43 @@ public class BuffEffect_UI : MonoBehaviour
 
     void Update()
     {
-        timer += Time.deltaTime;
-        if (item.isCD)
+        if (!item.IsInfinityBuff())
         {
-            image.fillAmount -= 1f / item.CD  * Time.deltaTime;
-        }
-        if(!item.isCD || image.fillAmount <= 0.0009)
-        {
-            Destroy(gameObject);
-        }
+            timer += Time.deltaTime;
+            if (item.isCD)
+            {
+                image.fillAmount -= 1f / item.CD * Time.deltaTime;
+            }
+            if (!item.isCD || image.fillAmount <= 0.0009)
+            {
+                Destroy(gameObject);
+            }
 
-        if(timer >= 1)
-        {
-            currentCDTimmer -= 1;
-            CDTimer.text = currentCDTimmer.ToString();
-            timer = 0;
+            if (timer >= 1)
+            {
+                currentCDTimmer -= 1;
+                CDTimer.text = currentCDTimmer.ToString();
+                timer = 0;
 
+            }
+            if (currentCDTimmer <= 0)
+            {
+                Destroy(CDTimer);
+            }
         }
-        if(currentCDTimmer <= 0)
+        else
         {
+            transform.Find("Background").GetComponent<Image>().color = new Color (0.9184315f, 0.5829477f, 0.9433962f);
             Destroy(CDTimer);
+            Destroy(image);
+            if(countBuff > 1)
+            {
+                transform.Find("buffCount").gameObject.SetActive(true);
+                transform.Find("buffCount").GetComponent<Text>().text = countBuff.ToString();
+            }
+         
         }
+
         
     }
 }

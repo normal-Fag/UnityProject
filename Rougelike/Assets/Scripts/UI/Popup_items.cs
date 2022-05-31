@@ -14,8 +14,8 @@ public class Popup_items : MonoBehaviour
     {
         nameItem = transform.Find("ItemName").GetComponent<Text>();
         descriptionItem = transform.Find("Description").GetComponent<Text>();
-        nameItem.text = item.name;
-        descriptionItem.text = item.description;
+        nameItem.text = item.GetName();
+        descriptionItem.text = item.GetDescription();
 
     }
 

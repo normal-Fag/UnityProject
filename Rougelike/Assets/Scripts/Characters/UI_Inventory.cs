@@ -127,7 +127,7 @@ public class UI_Inventory : MonoBehaviour
                 popupChoise.position = new Vector2(itemSlotRectTransform.position.x, itemSlotRectTransform.position.y + itemSize);
                 popupChoise.Find("drop").GetComponent<Button_UI>().MouseDownOnceFunc = () =>
                 {
-                    Item duplicateItem = new Item { itemType = item.itemType, amount = 1, CD = item.CD, isCD = false, description = item.description, name = item.name };
+                    Item duplicateItem = new Item { itemType = item.itemType, amount = 1, CD = item.CD, isCD = false};
                     inventory.RemoveItem(item, itemSlotRectTransform.GetSiblingIndex() - 1);
                     SetCooldown(item);
                     ItemWorld.DropItem(character.GetPosition(), duplicateItem, character.GetFacing(), false);
@@ -200,7 +200,29 @@ public class UI_Inventory : MonoBehaviour
 
     private void SetBuffCD(Item item)
     {
-        if (item.itemType != Item.ItemType.HealthPotion)
+
+        if (item.IsInfinityBuff())
+        {
+            bool hasInScreen = false;
+            foreach (Transform child in buffEffectContainder)
+            {
+                if (child.GetComponent<BuffEffect_UI>().item != null && child.GetComponent<BuffEffect_UI>().item.itemType == item.itemType)
+                {
+                    child.GetComponent<BuffEffect_UI>().countBuff += 1;
+                    hasInScreen = true;
+                }
+            }
+            if (!hasInScreen)
+            {
+                Transform buffEffectslotRectTransform = Instantiate(buffEffectItem, buffEffectContainder).GetComponent<Transform>();
+                buffEffectslotRectTransform.gameObject.SetActive(true);
+                buffEffectslotRectTransform.GetComponent<BuffEffect_UI>().item = item;
+                Image image_buff = buffEffectslotRectTransform.Find("item").GetComponent<Image>();
+                image_buff.sprite = item.GetSprite();
+            }
+        }
+      
+       if (item.itemType != Item.ItemType.HealthPotion && !item.IsInfinityBuff())
         {
             Transform buffEffectslotRectTransform = Instantiate(buffEffectItem, buffEffectContainder).GetComponent<Transform>();
             buffEffectslotRectTransform.gameObject.SetActive(true);
@@ -208,6 +230,7 @@ public class UI_Inventory : MonoBehaviour
             Image image_buff = buffEffectslotRectTransform.Find("item").GetComponent<Image>();
             image_buff.sprite = item.GetSprite();
         }
+
     }
 
     private void SetCooldown(Item item) 
@@ -219,7 +242,7 @@ public class UI_Inventory : MonoBehaviour
             for (int i = 0; i < inventory.GetItemList().Count; i++)
             {
 
-                if (item.itemType == inventory.GetItemList()[i].itemType)
+                if (item.itemType == inventory.GetItemList()[i].itemType && !item.IsInfinityBuff())
                 {
 
                     if (i == child.GetSiblingIndex())
@@ -250,7 +273,7 @@ public class UI_Inventory : MonoBehaviour
                             popupChoise.position = new Vector2(child.position.x, child.position.y + itemSize);
                             popupChoise.Find("drop").GetComponent<Button_UI>().MouseDownOnceFunc = () =>
                             {
-                                Item duplicateItem = new Item { itemType = item.itemType, amount = 1, CD = item.CD, isCD = false, description = item.description, name = item.name };
+                                Item duplicateItem = new Item { itemType = item.itemType, amount = 1, CD = item.CD, isCD = false };
                                 inventory.RemoveItem(item, child.GetSiblingIndex());
                                 for (int j = 0; j < inventory.GetItemList().Count; j++)
                                 {
