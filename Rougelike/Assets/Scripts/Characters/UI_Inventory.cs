@@ -206,15 +206,21 @@ public class UI_Inventory : MonoBehaviour
             bool hasInScreen = false;
             foreach (Transform child in buffEffectContainder)
             {
-                if (child.GetComponent<BuffEffect_UI>().item != null && child.GetComponent<BuffEffect_UI>().item.itemType == item.itemType)
+                if (child.GetComponent<BuffEffect_UI>().item != null && child.GetComponent<BuffEffect_UI>().item.itemType == item.itemType && !item.IsMajorBuff())
                 {
                     child.GetComponent<BuffEffect_UI>().countBuff += 1;
                     hasInScreen = true;
+                }
+                if(child.GetComponent<BuffEffect_UI>().item != null && child.GetComponent<BuffEffect_UI>().item.IsMajorBuff() && item.IsMajorBuff())
+                {
+                    Destroy(child.gameObject);
                 }
             }
             if (!hasInScreen)
             {
                 Transform buffEffectslotRectTransform = Instantiate(buffEffectItem, buffEffectContainder).GetComponent<Transform>();
+                Destroy(buffEffectslotRectTransform.Find("GreenBackground").gameObject);
+                Destroy(buffEffectslotRectTransform.Find("timer").gameObject);
                 buffEffectslotRectTransform.gameObject.SetActive(true);
                 buffEffectslotRectTransform.GetComponent<BuffEffect_UI>().item = item;
                 Image image_buff = buffEffectslotRectTransform.Find("item").GetComponent<Image>();

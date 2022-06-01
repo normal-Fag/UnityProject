@@ -15,6 +15,8 @@ public class fire_warrior_controler : MonoBehaviour
     private wp_hitbox weapon_hb;
     private character_movement character_Movement;
 
+    private Item cacheItemMajor;
+
 
     bool isDelayAction = false;
     public float actionDelay = 0.5f;
@@ -25,13 +27,29 @@ public class fire_warrior_controler : MonoBehaviour
     public static int max_rage_for_ui;
 
     public int fire_dmg = 1;
+    public int cache_atk_dmg;
     public int atk_dmg = 10;
+    public int buff_atk_dmg;
     public int ult_dmg = 20;
+
+    private float furyTimer = 0;
+
+    public int UltCD = 10;
+    public int SPCD = 6;
+
+    public static int UltCD_for_UI;
+    public static int SPCD_for_UI;
+
+    public static bool hasUltCD = false;
+    public static bool hasSpCD = false;
+
+
+    public static bool isFuryActive = false;
     
 
 
     public bool hasMajorBuff;
-    public bool hasSkullOfRage;
+    public static bool hasSkullOfRage = false;
 
     // Use this for initialization
     void Start()
@@ -43,6 +61,8 @@ public class fire_warrior_controler : MonoBehaviour
         weapon_hb.canAttack = false;
         number_of_rage = 0;
         max_rage_for_ui = max_rage;
+        UltCD_for_UI = UltCD;
+        SPCD_for_UI = SPCD;
     }
 
     // Update is called once per frame
@@ -52,7 +72,8 @@ public class fire_warrior_controler : MonoBehaviour
 
         if (weapon_hb.hasContact 
             && !m_animator.GetCurrentAnimatorStateInfo(0).IsName("sp_attack") 
-            && !m_animator.GetCurrentAnimatorStateInfo(0).IsName("ultimate"))
+            && !m_animator.GetCurrentAnimatorStateInfo(0).IsName("ultimate")
+            && !isFuryActive)
         {
             number_of_rage += 5;
             weapon_hb.hasContact = false;
@@ -72,8 +93,6 @@ public class fire_warrior_controler : MonoBehaviour
         {
             StartCoroutine(ActionDelay(actionDelay, "Attack"));
 
-          
-
         }
         
         if (CrossPlatformInputManager.GetButtonDown("Attack") && !isDelayAction && !character_Movement.m_grounded)
@@ -81,16 +100,31 @@ public class fire_warrior_controler : MonoBehaviour
             StartCoroutine(ActionDelay(actionDelay + actionDelay * 0.3f, "air_attack"));
         }
 
+        if (CrossPlatformInputManager.GetButtonDown("Fury") && number_of_rage >= 1)
+        {
+            isFuryActive = !isFuryActive;
+
+            if (isFuryActive )
+            {
+                cache_atk_dmg = atk_dmg;
+                atk_dmg = cache_atk_dmg * 2;
+            }
+            else 
+            {
+                atk_dmg = cache_atk_dmg;
+            }
+        }
 
 
-        else if (CrossPlatformInputManager.GetButtonDown("Ultimate") && character_Movement.m_grounded && !isDelayAction && number_of_rage >= 45 )
+
+        else if (CrossPlatformInputManager.GetButtonDown("Ultimate") && character_Movement.m_grounded && !isDelayAction && number_of_rage >= 45 && !hasUltCD)
         {
             StartCoroutine(ActionDelay(actionDelay * 1.5f, "ultimate"));
             number_of_rage = 0;
 
         }
 
-        else if (CrossPlatformInputManager.GetButtonDown("Special") && character_Movement.m_grounded && !isDelayAction && number_of_rage >= 25)
+        else if (CrossPlatformInputManager.GetButtonDown("Special") && character_Movement.m_grounded && !isDelayAction && number_of_rage >= 25 && !hasSpCD)
         {
             StartCoroutine(ActionDelay(actionDelay * 0.8f, "sp_attack" ));
             number_of_rage -= 25;
@@ -146,6 +180,23 @@ public class fire_warrior_controler : MonoBehaviour
             weapon_hb.canAttack = false;
         }
 
+        if (number_of_rage > 0 && isFuryActive)
+        {
+            furyTimer += Time.deltaTime;
+        }
+
+        if (furyTimer >= 1f && isFuryActive)
+        {
+            number_of_rage -= 2;
+            furyTimer = 0;
+        }
+
+        if(number_of_rage <= 0 && isFuryActive)
+        {
+            isFuryActive = false;
+            atk_dmg = cache_atk_dmg;
+        }
+
         void Attack( )
         {
             m_animator.SetTrigger("Attack");
@@ -166,23 +217,6 @@ public class fire_warrior_controler : MonoBehaviour
 
         }
 
-        void Ultimate( )
-        {
-            m_animator.SetTrigger("ultimate");
-            weapon_hb.hasRepulsion = true;
-            weapon_hb.repulsion = 5;
-        }
-
-
-        void SpecialAttack( )
-        {
-            m_animator.SetTrigger("sp_attack");
-            weapon_hb.hasRepulsion = true;
-            weapon_hb.repulsion = 4;
-
-        }
-
-
         void ChargeAttack( )
         {
             m_animator.SetTrigger("heavy_attack");
@@ -196,7 +230,7 @@ public class fire_warrior_controler : MonoBehaviour
             switch (action)
             {
                 case "ultimate":
-                    Ultimate( );
+                    StartCoroutine(Ultimate(UltCD));
                     break;
                 case "heavy_attack":
                     ChargeAttack( );
@@ -206,10 +240,9 @@ public class fire_warrior_controler : MonoBehaviour
                     break;
                 case "air_attack":
                     AirAttack( );
-
                     break;
                 case "sp_attack":
-                    SpecialAttack( );
+                    StartCoroutine(SpecialAttack(SPCD));
                     break;
                 case "defend":
                     Defend();
@@ -239,14 +272,40 @@ public class fire_warrior_controler : MonoBehaviour
                 max_rage += 10;
                 break;
             case Item.ItemType.PhoenixFeather:
-                character_Movement.inventory.RemoveItem(item, index);
-                fire_dmg = 5;
-                hasMajorBuff = true;
+                if (!hasMajorBuff)
+                {
+                    character_Movement.inventory.RemoveItem(item, index);
+                    fire_dmg = 5;
+                    hasMajorBuff = true;
+                    cacheItemMajor = item;
+                }
+                else
+                {
+                    MajorBuffReset();
+                    character_Movement.inventory.RemoveItem(item, index);
+                    fire_dmg = 5;
+                    hasMajorBuff = true;
+                    cacheItemMajor = item;
+                    isFuryActive = false;
+                }
                 break;
             case Item.ItemType.SkullOfRage:
-                character_Movement.inventory.RemoveItem(item, index);
-                hasSkullOfRage = true;
-                hasMajorBuff = true;
+                if (!hasMajorBuff)
+                {
+                    character_Movement.inventory.RemoveItem(item, index);
+                    hasSkullOfRage = true;
+                    hasMajorBuff = true;
+                    cacheItemMajor = item;
+                }
+                else
+                {
+                    MajorBuffReset();
+                    character_Movement.inventory.RemoveItem(item, index);
+                    hasSkullOfRage = true;
+                    hasMajorBuff = true;
+                    cacheItemMajor = item;
+                    isFuryActive = false;
+                }
                 break;
 
         }
@@ -254,10 +313,10 @@ public class fire_warrior_controler : MonoBehaviour
     public IEnumerator useAttackBuff(int seconds)
     {
 
-        atk_dmg += 15;
-
+        buff_atk_dmg = 15;
         yield return new WaitForSeconds(seconds);
-        atk_dmg -= 15;
+        buff_atk_dmg = 0;
+
     }
 
     public IEnumerator useSkillBuff(int seconds)
@@ -267,6 +326,40 @@ public class fire_warrior_controler : MonoBehaviour
         yield return new WaitForSeconds(seconds);
 
         ult_dmg -= 10;
+    }
+
+    private void MajorBuffReset()
+    {
+       if(cacheItemMajor != null && cacheItemMajor.itemType == Item.ItemType.PhoenixFeather)
+        {
+            fire_dmg = 1;
+        }
+        if (cacheItemMajor != null && cacheItemMajor.itemType == Item.ItemType.SkullOfRage)
+        {
+            hasSkullOfRage = false;
+        }
+    }
+
+    public IEnumerator Ultimate(int cd)
+    {
+        m_animator.SetTrigger("ultimate");
+        weapon_hb.hasRepulsion = true;
+        weapon_hb.repulsion = 5;
+        hasUltCD = true;
+        yield return new WaitForSeconds(cd);
+        hasUltCD = false;
+    }
+
+
+    public IEnumerator SpecialAttack(int cd)
+    {
+        m_animator.SetTrigger("sp_attack");
+        weapon_hb.hasRepulsion = true;
+        weapon_hb.repulsion = 4;
+        hasSpCD = true;
+        yield return new WaitForSeconds(cd);
+        hasSpCD = false;
+
     }
 
 }

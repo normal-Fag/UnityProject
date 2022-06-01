@@ -48,17 +48,20 @@ public class BuffEffect_UI : MonoBehaviour
                 Destroy(CDTimer);
             }
         }
-        else
+        else if(!item.IsMajorBuff())
         {
             transform.Find("Background").GetComponent<Image>().color = new Color (0.9184315f, 0.5829477f, 0.9433962f);
-            Destroy(CDTimer);
-            Destroy(image);
             if(countBuff > 1)
             {
                 transform.Find("buffCount").gameObject.SetActive(true);
                 transform.Find("buffCount").GetComponent<Text>().text = countBuff.ToString();
             }
-         
+
+        }
+        else
+        {
+            transform.Find("Background").GetComponent<Image>().color = new Color(0.9811321f, 0.5313141f, 0);
+ 
         }
 
         

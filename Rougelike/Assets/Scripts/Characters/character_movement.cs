@@ -442,28 +442,50 @@ public class character_movement : MonoBehaviour
 
     public void Take_Damage(int damage, int enemy_facingDirection)
     {
+        //FireWarrior
         if ((m_animator.GetCurrentAnimatorStateInfo(0).IsName("defend")
         || m_animator.GetCurrentAnimatorStateInfo(0).IsName("ultimate"))
         && m_facingDirection != enemy_facingDirection
-        && gameObject.GetComponent<fire_warrior_controler>() != null)
+        && gameObject.GetComponent<fire_warrior_controler>() != null && !fire_warrior_controler.isFuryActive)
         {
             damage = damage / 5;
             currentHp -= damage;
             fire_warrior_controler.number_of_rage += 10;
             Debug.Log("Blocked");
         }
-        else if (gameObject.GetComponent<fire_warrior_controler>() != null)
+        else if (gameObject.GetComponent<fire_warrior_controler>() != null && !fire_warrior_controler.isFuryActive)
         {
+            m_animator.SetTrigger("Hurt");
             fire_warrior_controler.number_of_rage += 3;
             currentHp -= damage;
             Debug.Log("Not Blocked");
         }
-       
-        if((!isRolling || !isTraping) && gameObject.GetComponent<rouge_controller>() != null)
+
+        if ((m_animator.GetCurrentAnimatorStateInfo(0).IsName("defend")
+            && m_facingDirection != enemy_facingDirection
+            && gameObject.GetComponent<fire_warrior_controler>() != null && fire_warrior_controler.isFuryActive))
+            {
+                Debug.Log("Blocked");
+            }
+            else if (gameObject.GetComponent<fire_warrior_controler>() != null && fire_warrior_controler.isFuryActive)
+            {
+                m_animator.SetTrigger("Hurt");
+                damage = damage + damage / 2;
+                currentHp -= damage;
+                Debug.Log("Not Blocked");
+            }
+        
+
+
+
+
+
+        //Rouge
+        if ((!isRolling || !isTraping) && gameObject.GetComponent<rouge_controller>() != null)
         {
             currentHp -= damage;
         }
-
+        //WaterPriest
         if (m_animator.GetCurrentAnimatorStateInfo(0).IsName("defend")
        && m_facingDirection != enemy_facingDirection
        && gameObject.GetComponent<character_water_priest_controller>() != null)
@@ -474,19 +496,20 @@ public class character_movement : MonoBehaviour
         }
         else if (gameObject.GetComponent<character_water_priest_controller>() != null)
         {
-             currentHp -= damage;
+            m_animator.SetTrigger("Hurt");
+            currentHp -= damage;
             Debug.Log("Not Blocked");
         }
 
 
-        if(m_animator.GetCurrentAnimatorStateInfo(0).IsName("defend") 
-            || m_animator.GetCurrentAnimatorStateInfo(0).IsName("ultimate") 
+        if(m_animator.GetCurrentAnimatorStateInfo(0).IsName("ultimate") 
+            || m_animator.GetCurrentAnimatorStateInfo(0).IsName("defend")
             || m_animator.GetCurrentAnimatorStateInfo(0).IsName("heal")
             || m_animator.GetCurrentAnimatorStateInfo(0).IsName("roll") 
             || m_animator.GetCurrentAnimatorStateInfo(0).IsName("trap_cast")
             || m_animator.GetCurrentAnimatorStateInfo(0).IsName("tumble")
             || m_animator.GetCurrentAnimatorStateInfo(0).IsName("sp_atk")
-            || m_animator.GetCurrentAnimatorStateInfo(0).IsName("sp_attack")) { }
+            || m_animator.GetCurrentAnimatorStateInfo(0).IsName("sp_attack")){ }
         else
         {
             m_animator.SetTrigger("Hurt");

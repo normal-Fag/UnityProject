@@ -102,7 +102,7 @@ public class Bandit_test : MonoBehaviour
        Item item;
        if (Random.Range(0f, 1.0f) > 0.0f)
        {
-            item = new Item { itemType = Item.ItemType.SkillBuff, amount = 1 , CD = 30};
+            item = new Item { itemType = Item.ItemType.SkullOfRage, amount = 1 , CD = 30};
             ItemWorld.DropItem(transform.position, item, dropHeight, true);
             dropHeight += 0.2f;
 
