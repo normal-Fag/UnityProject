@@ -47,7 +47,8 @@ public class fire_warrior_controler : MonoBehaviour
 
 
     public static bool isFuryActive = false;
-    
+
+    private int id = 1;
 
 
     public bool hasMajorBuff;
@@ -65,6 +66,7 @@ public class fire_warrior_controler : MonoBehaviour
         max_rage_for_ui = max_rage;
         UltCD_for_UI = UltCD;
         SPCD_for_UI = SPCD;
+        weapon.GetComponent<wp_hitbox>().character_id = id;
     }
 
     // Update is called once per frame
