@@ -25,10 +25,10 @@ public class Throw_Dagger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        Bandit_test enemy = hitInfo.GetComponent<Bandit_test>();
+        Enemy enemy = hitInfo.GetComponent<Enemy>();
         if (enemy != null)
         {
-            enemy.Take_Damage(dagger_damage);
+            enemy.TakeDamage(dagger_damage, 0);
         }
         Destroy(gameObject);
     }

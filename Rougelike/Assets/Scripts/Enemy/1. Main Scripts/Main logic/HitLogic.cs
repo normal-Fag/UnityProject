@@ -9,10 +9,10 @@ public class HitLogic : MonoBehaviour
         if (collision.tag == "Player")
         {
             Enemy enemy = GetComponentInParent<Enemy>();
-            playerMovement player = collision.gameObject.GetComponent<playerMovement>();
+            character_movement player = collision.gameObject.GetComponent<character_movement>();
             
-            player.takeDamage(enemy.damage);
-            player.PlayerPushAway(enemy.transform.position, enemy.repulsiveForce);
+            player.Take_Damage(enemy.damage, enemy.facingDirection);
+           // player.PlayerPushAway(enemy.transform.position, enemy.repulsiveForce);
         }
     }
 }

@@ -345,7 +345,7 @@ public class character_movement : MonoBehaviour
     {
         if ((m_animator.GetCurrentAnimatorStateInfo(0).IsName("defend")
         || m_animator.GetCurrentAnimatorStateInfo(0).IsName("ultimate"))
-        && m_facingDirection != enemy_facingDirection
+        && m_facingDirection == enemy_facingDirection
         && gameObject.GetComponent<fire_warrior_controler>() != null)
         {
             damage = damage / 5;
@@ -366,7 +366,7 @@ public class character_movement : MonoBehaviour
         }
 
         if (m_animator.GetCurrentAnimatorStateInfo(0).IsName("defend")
-       && m_facingDirection != enemy_facingDirection
+       && m_facingDirection == enemy_facingDirection
        && gameObject.GetComponent<character_water_priest_controller>() != null)
         {
             character_water_priest_controller.number_of_mana -= (character_water_priest_controller.max_mana_for_ui * 25) / 100;
