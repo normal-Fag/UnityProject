@@ -9,40 +9,44 @@ public class Enemy : MonoBehaviour
     [SerializeField] public GameObject triggerArea;
 
     [Header("Enemy Characteristics")]
-    [SerializeField] public float health = 100f; [Space]
-    [SerializeField] public float movementSpeed = 10f; [Space]
+    [SerializeField] public float   health = 100f; [Space]
+    [SerializeField] public float   movementSpeed = 10f; [Space]
 
     [Header("Prefabs")]
-    public GameObject firePrefab;
-    public float fireDamage = 5;
-    public float fireTimer = 5;[Space]
-    public GameObject poisonPrefab;
-    public float poisonDamage = 5;
-    public float poisonTimer = 5;
+    public GameObject               firePrefab;
+    public float                    fireDamage = 5;
+    public float                    fireTimer = 5;[Space]
+    public GameObject               poisonPrefab;
+    public float                    poisonDamage = 5;
+    public float                    poisonTimer = 5;
 
     [Header("Attack")]
-    [SerializeField] public int damage = 10;
-    [SerializeField] public float attackDistance;
-    [SerializeField] public float cooldownTimer;
+    [SerializeField] public int     damage = 10;
+    [SerializeField] public float   attackDistance;
+    [SerializeField] public float   cooldownTimer;
+    [SerializeField] public float   repulsiveForce;
 
     [HideInInspector] public Transform target;
-    [HideInInspector] public bool inRange;
-    [HideInInspector] public int facingDirection;
-    [HideInInspector] public bool isBurning = false;
-    [HideInInspector] public bool isPoisoning = false;
-    [HideInInspector] public bool isAttack;
+    [HideInInspector] public playerMovement player;
+    [HideInInspector] public int    facingDirection;
+    [HideInInspector] public bool   inRange;
+    [HideInInspector] public bool   isBurning = false;
+    [HideInInspector] public bool   isPoisoning = false;
+    [HideInInspector] public bool   isAttack;
 
-    protected Animator anim;
-    protected Rigidbody2D rb;
-    protected bool isCooldown;
-    protected float intTimer;
-    protected float distance;
+    protected Animator      anim;
+    protected Rigidbody2D   rb;
+    protected bool          isPushed;
+    protected bool          isCooldown;
+    protected bool          isPlayerGrounded;
+    protected float         intTimer;
+    protected float         distance;
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
-        intTimer = cooldownTimer;
+        rb          = GetComponent<Rigidbody2D>();
+        anim        = GetComponent<Animator>();
+        intTimer    = cooldownTimer;
     }
 
     virtual public void Update()
@@ -53,17 +57,19 @@ public class Enemy : MonoBehaviour
         {
             StopAttackPlayer();
             anim.SetTrigger("Death");
+            rb.velocity = Vector2.zero;
             Destroy(this.gameObject, 2);
         }
     }
 
     virtual protected void Cooldown()
     {
-        cooldownTimer -= Time.deltaTime;
+        cooldownTimer       -= Time.deltaTime;
+
         if (cooldownTimer < 0 && isCooldown)
         {
-            isCooldown = false;
-            cooldownTimer = intTimer;
+            isCooldown      = false;
+            cooldownTimer   = intTimer;
         }
     }
 
@@ -79,7 +85,7 @@ public class Enemy : MonoBehaviour
                         transform.lossyScale.y, 0);
     }
 
-    public void TakeDamage(float damage, int typeOfDamage)
+    public virtual void TakeDamage(float damage, int typeOfDamage)
     {
         if (health > 0)
         {
@@ -97,6 +103,21 @@ public class Enemy : MonoBehaviour
                 break;
         }
 
+    }
+
+    public IEnumerator PushAway(Vector3 pushFrom, float pushPower)
+    {
+
+        if (pushPower == 0 && !isPushed)
+            yield return null;
+
+        isPushed = true;
+        Vector3 pushDirection = (pushFrom - transform.position).normalized;
+        //anim.ResetTrigger("Attack");
+        rb.AddForce(-pushDirection * pushPower, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(.3f);
+        rb.velocity = Vector2.zero;
+        isPushed = false;
     }
 
     private void IgniteTheEnemy()

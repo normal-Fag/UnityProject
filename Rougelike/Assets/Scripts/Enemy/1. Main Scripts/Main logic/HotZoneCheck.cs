@@ -6,20 +6,10 @@ public class HotZoneCheck : MonoBehaviour
 {
     private Enemy enemyParent;
     private bool inRange;
-    private Animator anim;
 
     private void Awake()
     {
         enemyParent = GetComponentInParent<Enemy>();
-        anim = GetComponentInParent<Animator>();
-    }
-
-    private void Update()
-    {
-        if (inRange && !anim.GetCurrentAnimatorStateInfo(0).IsName("attack(Bandit)"))
-        {
-            enemyParent.Flip();
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

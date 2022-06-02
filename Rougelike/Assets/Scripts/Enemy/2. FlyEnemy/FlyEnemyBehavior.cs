@@ -17,7 +17,7 @@ public class FlyEnemyBehavior : Enemy
     public override void EnemyTrigger()
     {
         base.EnemyTrigger();
-        if (!isAttack  && distance > attackDistance)
+        if (!isAttack  && distance > attackDistance && !isPushed)
             Move();
 
         if (distance <= attackDistance && !isCooldown)
@@ -38,7 +38,7 @@ public class FlyEnemyBehavior : Enemy
     protected override void AttackPlayer()
     {
         base.AttackPlayer();
-
+        //rb.velocity = Vector2.zero;
         anim.SetTrigger("Attack");
     }
 

@@ -23622,6 +23622,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 341171981099011851, guid: e911cfb1e03174a5b9de3312594306b9, type: 3}
+      propertyPath: m_Mass
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 341171981099011852, guid: e911cfb1e03174a5b9de3312594306b9, type: 3}
       propertyPath: m_Name
       value: Demon-prefab

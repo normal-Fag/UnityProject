@@ -21,6 +21,9 @@ public class playerMovement : MonoBehaviour
 
     private Animator anim;
 
+    public bool isGrounded;
+    public int facing;
+
     void Start()
     {
         playerRb = GetComponent<Rigidbody2D>();
@@ -44,11 +47,13 @@ public class playerMovement : MonoBehaviour
         if (input > 0)
         {
             GetComponent<SpriteRenderer>().flipX = false;
+            facing = 1;
             //facingDiections = 1;
         }
         else if (input < 0)
         {
             GetComponent<SpriteRenderer>().flipX = true;
+            facing = -1;
             //facingDiections = -1;
         }
 
@@ -65,6 +70,17 @@ public class playerMovement : MonoBehaviour
         if (playerHP < 1)
             playerDeath();
     }
+
+    public void PlayerPushAway(Vector3 pushFrom, float pushPower)
+    {
+        if (pushPower == 0)
+            return;
+
+        Vector3 pushDirection = (pushFrom - transform.position).normalized;
+
+        playerRb.AddForce(-1 * pushDirection * pushPower);
+    }
+
     private void playerDeath()
     {
         isLiving = false;

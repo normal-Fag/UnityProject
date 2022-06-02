@@ -12,6 +12,7 @@ public class HitLogic : MonoBehaviour
             playerMovement player = collision.gameObject.GetComponent<playerMovement>();
             
             player.takeDamage(enemy.damage);
+            player.PlayerPushAway(enemy.transform.position, enemy.repulsiveForce);
         }
     }
 }

@@ -45,7 +45,7 @@ public class GroundEnemyBehavior2 : Enemy
         if (isCooldown)
             Cooldown();
 
-        if (!staticEnemy && distance > attackDistance)
+        if (!staticEnemy && distance > attackDistance && target.position.y - transform.position.y < 3.5f)
             Move();
         else
             anim.SetBool("isRunning", false);
@@ -59,46 +59,35 @@ public class GroundEnemyBehavior2 : Enemy
 
     public override void Move()
     {
-        base.Move();
-
-        if (!isAttack)
+        if (!isAttack && !isPushed)
         {
-            Vector3 moveDirection = Vector3.MoveTowards(
-                transform.position,
-                new Vector3(target.position.x, transform.position.y, target.position.z),
-                movementSpeed * Time.fixedDeltaTime
-            );
+            Vector3 targetPoint     = new Vector3(target.position.x, transform.position.y, target.position.z);
+            Vector3 moveDiraction   = (targetPoint - transform.position).normalized;
 
-            rb.MovePosition(moveDirection);
-
+            rb.velocity = new Vector2(moveDiraction.x * movementSpeed, rb.velocity.y);
             anim.SetBool("isRunning", true);
         }
     }
 
     public override void SelectTarget()
     {
-        base.SelectTarget();
-
         if (activePatroling && !staticEnemy)
         {
-            float distanceToLeft = Vector2.Distance(transform.position, leftLimit.position);
-            float distanceToRight = Vector2.Distance(transform.position, rightLimit.position);
+            float distanceToLeft    = Vector2.Distance(transform.position, leftLimit.position);
+            float distanceToRight   = Vector2.Distance(transform.position, rightLimit.position);
 
             if (distanceToLeft > distanceToRight)
-                target = leftLimit;
-
+                target  = leftLimit;
             else
-                target = rightLimit;
+                target  = rightLimit;
         }
-
         else if (!activePatroling && !staticEnemy)
         {
-            target = transform.position.x != backPoint.position.x ? backPoint : transform;
-            isPointed = Vector2.Distance(transform.position, backPoint.position) < 2 ? true : false;
+            target      = transform.position.x != backPoint.position.x ? backPoint : transform;
+            isPointed   = Vector2.Distance(transform.position, backPoint.position) < 2 ? true : false;
         }
-
         else
-            target = transform;
+            target      = transform;
     }
 
     override protected void Cooldown()
@@ -107,8 +96,8 @@ public class GroundEnemyBehavior2 : Enemy
 
         if (cooldownTimer <= 0 && isCooldown)
         {
-            isCooldown = false;
-            cooldownTimer = intTimer;
+            isCooldown      = false;
+            cooldownTimer   = intTimer;
         }
     }
 
@@ -116,19 +105,17 @@ public class GroundEnemyBehavior2 : Enemy
     {
         if (!InsideOfLimits())
         {
-            anim.SetBool("isRunning", false);
-
             SelectTarget();
-
+            anim.SetBool("isRunning", false);
             yield return new WaitForSeconds(2f);
         }
+
         Move();
     }
 
     protected virtual void BackToPoint()
     {
         SelectTarget();
-
         Move();
 
         if (Vector2.Distance(transform.position, target.position) < 2)

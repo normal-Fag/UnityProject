@@ -204,7 +204,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5215617963965782382, guid: 804b0f144e5874ea890a0e1e0cdb7161, type: 3}
       propertyPath: damage
-      value: 25
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5215617963965782382, guid: 804b0f144e5874ea890a0e1e0cdb7161, type: 3}
       propertyPath: backPoint
@@ -227,8 +227,12 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5215617963965782382, guid: 804b0f144e5874ea890a0e1e0cdb7161, type: 3}
+      propertyPath: repulsiveForce
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5215617963965782382, guid: 804b0f144e5874ea890a0e1e0cdb7161, type: 3}
       propertyPath: activePatroling
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6096701569122994016, guid: 804b0f144e5874ea890a0e1e0cdb7161, type: 3}
       propertyPath: m_RootOrder
@@ -272,6 +276,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6096701569122994016, guid: 804b0f144e5874ea890a0e1e0cdb7161, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6096701569122994019, guid: 804b0f144e5874ea890a0e1e0cdb7161, type: 3}
+      propertyPath: m_Mass
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6096701569122994019, guid: 804b0f144e5874ea890a0e1e0cdb7161, type: 3}
+      propertyPath: m_LinearDrag
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6096701569122994020, guid: 804b0f144e5874ea890a0e1e0cdb7161, type: 3}

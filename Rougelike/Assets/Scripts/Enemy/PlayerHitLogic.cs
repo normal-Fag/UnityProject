@@ -6,19 +6,21 @@ public class PlayerHitLogic : MonoBehaviour
 {
 
     private float damage;
+    playerMovement player;
 
     private void Start()
     {
-        damage = GetComponentInParent<playerMovement>().damage;
+        player = GetComponentInParent<playerMovement>();
+        damage = player.damage;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Enemy")
         {
-            Debug.Log("Hit");
-
-            collision.GetComponent<Enemy>().TakeDamage(damage, 2);
+            Enemy enemy = collision.GetComponent<Enemy>();
+            enemy.TakeDamage(damage, 2);
+            StartCoroutine(enemy.PushAway(player.transform.position, 10));
         }
     }
 }
