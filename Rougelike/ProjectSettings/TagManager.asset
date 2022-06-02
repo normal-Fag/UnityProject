@@ -4,22 +4,18 @@
 TagManager:
   serializedVersion: 2
   tags:
-<<<<<<< HEAD
   - Enemy
   - Stairs
-=======
-  - Ground
->>>>>>> 418f1b0045baa7f3d179ad9b1b68eadb383667a8
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Player
+  - 
   - Water
   - UI
-  - 
+  - Ground
   - Enemy
-  - 
+  - PLayer
   - 
   - 
   - 
