@@ -5,18 +5,15 @@ using UnityEngine;
 public class FlyingEyeProjectileLogic : MonoBehaviour
 {
 
-    public int projectileDamage;
+    public int damage;
+    Animator anim;
+    Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -26,12 +23,17 @@ public class FlyingEyeProjectileLogic : MonoBehaviour
             //HellBeastEnemyBehavio enemy = GetComponent<HellBeastEnemyBehavio>();
             playerMovement player = collision.gameObject.GetComponent<playerMovement>();
 
-            player.takeDamage(projectileDamage);
-
-            Destroy(gameObject);
+            player.takeDamage(damage);
+            rb.velocity = Vector2.zero;
+            anim.SetTrigger("Destroy");
+            Destroy(gameObject, 0.5f);
         }
 
         if (collision.gameObject.layer == 6)
-            Destroy(gameObject);
+        {
+            rb.velocity = Vector2.zero;
+            anim.SetTrigger("Destroy");
+            Destroy(gameObject, 0.5f);
+        }
     }
 }

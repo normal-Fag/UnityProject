@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class FlyingEyeBehavior : FlyEnemyBehavior
 {
-    private int attackType;
-    public float secondaryAttackDistance;
+    [Header("Projectile settings")]
+    public GameObject projectilePrefab;
+    public int projectileDamage = 10;
+
+    private void Awake()
+    {
+        projectilePrefab.GetComponent<FlyingEyeProjectileLogic>().damage = projectileDamage;
+    }
 
     protected override void AttackPlayer()
     {
@@ -31,16 +37,16 @@ public class FlyingEyeBehavior : FlyEnemyBehavior
 
     protected override void StopAttackPlayer()
     {
-        attackType = Random.Range(0, 100);
-
         anim.ResetTrigger("Attack1");
         anim.ResetTrigger("Attack2");
 
-        if (attackType == 1 && !isCooldown)
-        {
-            anim.SetBool("Attack3", true);
-        }
+        if (Random.Range(0, 50) == 1)
+            anim.SetTrigger("Attack3");
     }
 
-    //public void 
+    public void ShootProjectile()
+    {
+        Instantiate(projectilePrefab, transform.position, Quaternion.identity).
+            GetComponent<Rigidbody2D>().AddForce(Vector3.forward * 10, ForceMode2D.Impulse);
+    }
 }
