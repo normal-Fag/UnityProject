@@ -15,6 +15,8 @@ public class fire_warrior_controler : MonoBehaviour
     private wp_hitbox weapon_hb;
     private character_movement character_Movement;
 
+    public GameObject fury_effect;
+
     private Item cacheItemMajor;
 
 
@@ -103,28 +105,34 @@ public class fire_warrior_controler : MonoBehaviour
         if (CrossPlatformInputManager.GetButtonDown("Fury") && number_of_rage >= 1)
         {
             isFuryActive = !isFuryActive;
-
-            if (isFuryActive )
+            if (isFuryActive)
             {
                 cache_atk_dmg = atk_dmg;
                 atk_dmg = cache_atk_dmg * 2;
+                transform.Find("fury_effect").gameObject.SetActive(true);
             }
             else 
             {
                 atk_dmg = cache_atk_dmg;
+                transform.Find("fury_effect").gameObject.SetActive(false);
             }
         }
 
 
 
-        else if (CrossPlatformInputManager.GetButtonDown("Ultimate") && character_Movement.m_grounded && !isDelayAction && number_of_rage >= 45 && !hasUltCD)
+        else if (CrossPlatformInputManager.GetButtonDown("Ultimate") 
+            && character_Movement.m_grounded && !isDelayAction && number_of_rage >= 45 
+            && !hasUltCD && !isFuryActive)
         {
             StartCoroutine(ActionDelay(actionDelay * 1.5f, "ultimate"));
             number_of_rage = 0;
 
         }
 
-        else if (CrossPlatformInputManager.GetButtonDown("Special") && character_Movement.m_grounded && !isDelayAction && number_of_rage >= 25 && !hasSpCD)
+        else if (CrossPlatformInputManager.GetButtonDown("Special") 
+            && character_Movement.m_grounded && !isDelayAction 
+            && number_of_rage >= 25 
+            && !hasSpCD && !isFuryActive)
         {
             StartCoroutine(ActionDelay(actionDelay * 0.8f, "sp_attack" ));
             number_of_rage -= 25;
@@ -195,6 +203,7 @@ public class fire_warrior_controler : MonoBehaviour
         {
             isFuryActive = false;
             atk_dmg = cache_atk_dmg;
+            transform.Find("fury_effect").gameObject.SetActive(false);
         }
 
         void Attack( )
@@ -262,10 +271,10 @@ public class fire_warrior_controler : MonoBehaviour
             default:
             case Item.ItemType.AttackBuff:
          
-                StartCoroutine(useAttackBuff(item.CD));
+                StartCoroutine(useAttackBuff(item.Cooldown()));
                 break;
             case Item.ItemType.SkillBuff:
-                StartCoroutine(useSkillBuff(item.CD));
+                StartCoroutine(useSkillBuff(item.Cooldown()));
                 break;
             case Item.ItemType.DropOfFury:
                 character_Movement.inventory.RemoveItem(item, index);
@@ -287,6 +296,7 @@ public class fire_warrior_controler : MonoBehaviour
                     hasMajorBuff = true;
                     cacheItemMajor = item;
                     isFuryActive = false;
+                    transform.Find("fury_effect").gameObject.SetActive(false);
                 }
                 break;
             case Item.ItemType.SkullOfRage:
@@ -305,6 +315,7 @@ public class fire_warrior_controler : MonoBehaviour
                     hasMajorBuff = true;
                     cacheItemMajor = item;
                     isFuryActive = false;
+                    transform.Find("fury_effect").gameObject.SetActive(false);
                 }
                 break;
 

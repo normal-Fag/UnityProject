@@ -55,7 +55,7 @@ public class Throw_skill_dagger : MonoBehaviour
          foreach (Collider2D enemy in trap_hitEnemies)
         {
             if(enemy.tag == "Enemy")
-                enemy.GetComponent<Bandit_test>().Take_Damage(dagger_damage);
+                enemy.GetComponent<Bandit_test>().Take_Damage(dagger_damage, 0);
             
         }
         StartCoroutine(DestroyTrapDagger());

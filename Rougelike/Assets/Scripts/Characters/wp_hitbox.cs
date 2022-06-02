@@ -10,6 +10,7 @@ public class wp_hitbox : MonoBehaviour
     public bool hasContact = false;
     public bool hasRepulsion = false;
     public int repulsion = 0;
+    public int character_id;
 
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -30,7 +31,7 @@ public class wp_hitbox : MonoBehaviour
         if (hit != null && canAttack)
         {
             hasContact = true;
-            hit.Take_Damage(damage);
+            hit.Take_Damage(damage, character_id);
             hasRepulsion = false;
 
         }

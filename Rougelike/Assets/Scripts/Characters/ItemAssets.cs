@@ -31,5 +31,7 @@ public class ItemAssets : MonoBehaviour
     public Sprite BurstStoneSprite;
     public Sprite DropOfFurySprite;
     public Sprite SkullOfRageSprite;
+    public Sprite ScrollOfKnowledgeSprite;
+
 
 }

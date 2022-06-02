@@ -28,7 +28,7 @@ public class Throw_Dagger : MonoBehaviour
         Bandit_test enemy = hitInfo.GetComponent<Bandit_test>();
         if (enemy != null)
         {
-            enemy.Take_Damage(dagger_damage);
+            enemy.Take_Damage(dagger_damage, 0);
         }
         Destroy(gameObject);
     }

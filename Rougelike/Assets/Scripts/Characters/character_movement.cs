@@ -217,7 +217,7 @@ public class character_movement : MonoBehaviour
         {
 
             currentHPBuffCD -= 1f / HPBuffCD * Time.deltaTime;
-            CheckCDinInventory(new Item { itemType = Item.ItemType.HPBuff, amount = 1, CD = 10 });
+            CheckCDinInventory(new Item { itemType = Item.ItemType.HPBuff, amount = 1});
             if (currentHPBuffCD <= 0)
             {
                 hasHPBuffCD = false;
@@ -234,7 +234,7 @@ public class character_movement : MonoBehaviour
         if (hasHealthPotionCD)
         {
             currentHealthPotionCD -= 1f / HealthPotionCD * Time.deltaTime;
-            CheckCDinInventory(new Item { itemType = Item.ItemType.HealthPotion, amount = 1, CD = 30 });
+            CheckCDinInventory(new Item { itemType = Item.ItemType.HealthPotion, amount = 1});
             if (currentHealthPotionCD <= 0)
             {
                 hasHealthPotionCD = false;
@@ -252,7 +252,7 @@ public class character_movement : MonoBehaviour
         {
 
             currentAttackBuffCD -= 1f / AttackBuffCD * Time.deltaTime;
-            CheckCDinInventory(new Item { itemType = Item.ItemType.AttackBuff, amount = 1, CD = 10 });
+            CheckCDinInventory(new Item { itemType = Item.ItemType.AttackBuff, amount = 1 });
             if (currentAttackBuffCD <= 0)
             {
                 hasAttackBuffCD = false;
@@ -269,7 +269,7 @@ public class character_movement : MonoBehaviour
         if (hasSkillBuffCD)
         {
             currentSkillBuffCD -= 1f / SkillBuffCD * Time.deltaTime;
-            CheckCDinInventory(new Item { itemType = Item.ItemType.SkillBuff, amount = 1, CD = 30 });
+            CheckCDinInventory(new Item { itemType = Item.ItemType.SkillBuff, amount = 1 });
             if (currentSkillBuffCD <= 0)
             {
                 hasSkillBuffCD = false;
@@ -331,20 +331,20 @@ public class character_movement : MonoBehaviour
         {
             default:
             case Item.ItemType.HealthPotion:
-                HealthPotionCD = item.CD;
+                HealthPotionCD = item.Cooldown();
                 hasHealthPotionCD = true;
                 CheckCDinInventory(item);
                 inventory.RemoveItem(item, index);
                 currentHealthPotionCD = 1f;
-                StartCoroutine(useHealthPotion(item.CD));
+                StartCoroutine(useHealthPotion(item.Cooldown()));
                 break;
             case Item.ItemType.HPBuff:
-                HPBuffCD = item.CD;
+                HPBuffCD = item.Cooldown();
                 hasHPBuffCD = true;
                 CheckCDinInventory(item);
                 inventory.RemoveItem(item, index);
                 currentHPBuffCD = 1f;
-                StartCoroutine(useHealthBuff(item.CD));
+                StartCoroutine(useHealthBuff(item.Cooldown()));
                 break;
             case Item.ItemType.InfinityHpBuff:
                 inventory.RemoveItem(item, index);
@@ -355,7 +355,7 @@ public class character_movement : MonoBehaviour
                 {
                     gameObject.GetComponent<fire_warrior_controler>().UseItem(item, index);
                 }
-                AttackBuffCD = item.CD;
+                AttackBuffCD = item.Cooldown();
                 hasAttackBuffCD = true;
                 currentAttackBuffCD = 1f;
                 CheckCDinInventory(item);
@@ -366,7 +366,7 @@ public class character_movement : MonoBehaviour
                 {
                     gameObject.GetComponent<fire_warrior_controler>().UseItem(item, index);
                 }
-                SkillBuffCD = item.CD;
+                SkillBuffCD = item.Cooldown();
                 hasSkillBuffCD = true;
                 currentSkillBuffCD = 1f;
                 CheckCDinInventory(item);
@@ -376,18 +376,51 @@ public class character_movement : MonoBehaviour
                 if (gameObject.GetComponent<fire_warrior_controler>() != null)
                 {
                     gameObject.GetComponent<fire_warrior_controler>().UseItem(item, index);
+                    CheckCDinInventory(item);
                 }
                 break;
             case Item.ItemType.PhoenixFeather:
                 if (gameObject.GetComponent<fire_warrior_controler>() != null)
                 {
                     gameObject.GetComponent<fire_warrior_controler>().UseItem(item, index);
+                    CheckCDinInventory(item);
                 }
                 break;
             case Item.ItemType.SkullOfRage:
                 if (gameObject.GetComponent<fire_warrior_controler>() != null)
                 {
                     gameObject.GetComponent<fire_warrior_controler>().UseItem(item, index);
+                    CheckCDinInventory(item);
+                }
+                break;
+            case Item.ItemType.ManaPotion:
+                if (gameObject.GetComponent<character_water_priest_controller>() != null)
+                {
+                    gameObject.GetComponent<character_water_priest_controller>().UseItem(item, index);
+                }
+                break;
+            case Item.ItemType.RegenManaPotion:
+                if (gameObject.GetComponent<character_water_priest_controller>() != null)
+                {
+                    gameObject.GetComponent<character_water_priest_controller>().UseItem(item, index);
+                }
+                break;
+            case Item.ItemType.ManaStone:
+                if (gameObject.GetComponent<character_water_priest_controller>() != null)
+                {
+                    gameObject.GetComponent<character_water_priest_controller>().UseItem(item, index);
+                }
+                break;
+            case Item.ItemType.BurstStone:
+                if (gameObject.GetComponent<character_water_priest_controller>() != null)
+                {
+                    gameObject.GetComponent<character_water_priest_controller>().UseItem(item, index);
+                }
+                break;
+            case Item.ItemType.ScrollOfKnowledge:
+                if (gameObject.GetComponent<character_water_priest_controller>() != null)
+                {
+                    gameObject.GetComponent<character_water_priest_controller>().UseItem(item, index);
                 }
                 break;
 
@@ -416,6 +449,14 @@ public class character_movement : MonoBehaviour
                 if (itemWorld.GetItem().itemType == Item.ItemType.SkillBuff)
                 {
                     itemWorld.GetItem().isCD = hasSkillBuffCD;
+                }
+                if (itemWorld.GetItem().itemType == Item.ItemType.ManaPotion && gameObject.GetComponent<character_water_priest_controller>() != null)
+                {
+                   itemWorld.GetItem().isCD = gameObject.GetComponent<character_water_priest_controller>().isRefillMana;
+                }
+                if (itemWorld.GetItem().itemType == Item.ItemType.RegenManaPotion && gameObject.GetComponent<character_water_priest_controller>() != null)
+                {
+                    itemWorld.GetItem().isCD = gameObject.GetComponent<character_water_priest_controller>().hasManaRegen;
                 }
                 inventory.AddItem(itemWorld.GetItem());
                 itemWorld.DestroySelf();
@@ -490,7 +531,7 @@ public class character_movement : MonoBehaviour
        && m_facingDirection != enemy_facingDirection
        && gameObject.GetComponent<character_water_priest_controller>() != null)
         {
-            character_water_priest_controller.number_of_mana -= (character_water_priest_controller.max_mana_for_ui * 25) / 100;
+            character_water_priest_controller.number_of_mana -= (character_water_priest_controller.max_mana_for_ui * (25 / character_water_priest_controller.scrollBuff)) / 100;
             character_water_priest_controller.manaCharge += 0.34f;
             Debug.Log("Blocked");
         }

@@ -127,7 +127,7 @@ public class UI_Inventory : MonoBehaviour
                 popupChoise.position = new Vector2(itemSlotRectTransform.position.x, itemSlotRectTransform.position.y + itemSize);
                 popupChoise.Find("drop").GetComponent<Button_UI>().MouseDownOnceFunc = () =>
                 {
-                    Item duplicateItem = new Item { itemType = item.itemType, amount = 1, CD = item.CD, isCD = false};
+                    Item duplicateItem = new Item { itemType = item.itemType, amount = 1, isCD = false};
                     inventory.RemoveItem(item, itemSlotRectTransform.GetSiblingIndex() - 1);
                     SetCooldown(item);
                     ItemWorld.DropItem(character.GetPosition(), duplicateItem, character.GetFacing(), false);
@@ -228,7 +228,7 @@ public class UI_Inventory : MonoBehaviour
             }
         }
       
-       if (item.itemType != Item.ItemType.HealthPotion && !item.IsInfinityBuff())
+       if (item.itemType != Item.ItemType.HealthPotion && item.itemType != Item.ItemType.ManaPotion && !item.IsInfinityBuff())
         {
             Transform buffEffectslotRectTransform = Instantiate(buffEffectItem, buffEffectContainder).GetComponent<Transform>();
             buffEffectslotRectTransform.gameObject.SetActive(true);
@@ -248,10 +248,10 @@ public class UI_Inventory : MonoBehaviour
             for (int i = 0; i < inventory.GetItemList().Count; i++)
             {
 
-                if (item.itemType == inventory.GetItemList()[i].itemType && !item.IsInfinityBuff())
+                if (item.itemType == inventory.GetItemList()[i].itemType)
                 {
 
-                    if (i == child.GetSiblingIndex())
+                    if (i == child.GetSiblingIndex() && !item.IsInfinityBuff())
                     {
                        
                         child.gameObject.SetActive(true);
@@ -279,7 +279,7 @@ public class UI_Inventory : MonoBehaviour
                             popupChoise.position = new Vector2(child.position.x, child.position.y + itemSize);
                             popupChoise.Find("drop").GetComponent<Button_UI>().MouseDownOnceFunc = () =>
                             {
-                                Item duplicateItem = new Item { itemType = item.itemType, amount = 1, CD = item.CD, isCD = false };
+                                Item duplicateItem = new Item { itemType = item.itemType, amount = 1, isCD = false };
                                 inventory.RemoveItem(item, child.GetSiblingIndex());
                                 for (int j = 0; j < inventory.GetItemList().Count; j++)
                                 {

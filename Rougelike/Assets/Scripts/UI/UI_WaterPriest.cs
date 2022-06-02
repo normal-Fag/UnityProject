@@ -31,11 +31,11 @@ public class UI_WaterPriest : MonoBehaviour
     {
         hpText.text = character_movement.currentHp + " / " + character_movement.max_hp_for_ui;
         manaText.text = character_water_priest_controller.number_of_mana + " / " + character_water_priest_controller.max_mana_for_ui;
-        hp_fill = (character_movement.currentHp) / (character_movement.max_hp_for_ui);
+        hp_fill = (character_movement.currentHp) * 1f / (character_movement.max_hp_for_ui);
         health_bar.fillAmount = hp_fill;
-        mana_fill = character_water_priest_controller.number_of_mana / 100f;
+        mana_fill = (character_water_priest_controller.number_of_mana) * 1f / character_water_priest_controller.max_mana_for_ui;
         mana_bar.fillAmount = mana_fill;
-        charge_fill = character_water_priest_controller.manaCharge;
+        charge_fill = character_water_priest_controller.manaCharge * 1f;
         charge_bar.fillAmount = charge_fill;
         if(charge_fill >= 1f)
         {

@@ -34,7 +34,6 @@ public class ItemCooldown : MonoBehaviour
 
         }
      
-       
         if (item.itemType == Item.ItemType.HPBuff)
         {
 
@@ -49,8 +48,26 @@ public class ItemCooldown : MonoBehaviour
 
         }
 
-
         if (item.itemType == Item.ItemType.SkillBuff)
+        {
+
+            image.fillAmount = character_movement.currentSkillBuffCD;
+
+        }
+
+        if (item.itemType == Item.ItemType.ManaPotion)
+        {
+
+            image.fillAmount = character_water_priest_controller.currentManaPotionCD;
+
+        }
+        if (item.itemType == Item.ItemType.RegenManaPotion)
+        {
+
+            image.fillAmount = character_water_priest_controller.currentRegenManaCD;
+
+        }
+        if (item.itemType == Item.ItemType.Poison)
         {
 
             image.fillAmount = character_movement.currentSkillBuffCD;

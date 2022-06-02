@@ -31,7 +31,7 @@ public class Bandit_test : MonoBehaviour
     }
 
 
-    public void Take_Damage(int damage)
+    public void Take_Damage(int damage, int id)
     {
         currentHp -= damage;
         m_animator.SetTrigger("Hurt");
@@ -42,7 +42,7 @@ public class Bandit_test : MonoBehaviour
             m_animator.SetTrigger("Death");
             GetComponent<BoxCollider2D>().enabled = false;
             GetComponent<Rigidbody2D>().isKinematic = true;
-            DropItem();
+            DropItem(id);
 
         }
     }
@@ -96,35 +96,95 @@ public class Bandit_test : MonoBehaviour
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 
-    private void DropItem()
+    private void DropItem(int id)
     {
        float dropHeight = 1;
        Item item;
-       if (Random.Range(0f, 1.0f) > 0.0f)
-       {
-            item = new Item { itemType = Item.ItemType.SkullOfRage, amount = 1 , CD = 30};
-            ItemWorld.DropItem(transform.position, item, dropHeight, true);
-            dropHeight += 0.2f;
 
-       }
-        if (Random.Range(0f, 1.0f) > 0.0f)
+        if (Random.Range(0f, 1.0f) > 1.0f)
         {
-            item = new Item { itemType = Item.ItemType.AttackBuff, amount = 1, CD = 10 };
+            item = new Item { itemType = Item.ItemType.AttackBuff, amount = 1 };
             ItemWorld.DropItem(transform.position, item, dropHeight, true);
             dropHeight += 0.2f;
         }
-        if (Random.Range(0f, 1.0f) > 0.0f)
+        if (Random.Range(0f, 1.0f) > 1.0f)
         {
-            item = new Item { itemType = Item.ItemType.DropOfFury, amount = 1 };
+            item = new Item { itemType = Item.ItemType.SkillBuff, amount = 1 };
             ItemWorld.DropItem(transform.position, item, dropHeight, true);
             dropHeight += 0.2f;
         }
-        if (Random.Range(0f, 1.0f) > 0.0f)
+        if (Random.Range(0f, 1.0f) > 1.0f)
         {
-            item = new Item { itemType = Item.ItemType.PhoenixFeather, amount = 1 };
+            item = new Item { itemType = Item.ItemType.HealthPotion, amount = 1 };
             ItemWorld.DropItem(transform.position, item, dropHeight, true);
             dropHeight += 0.2f;
         }
+        if (Random.Range(0f, 1.0f) > 1.0f)
+        {
+            item = new Item { itemType = Item.ItemType.HPBuff, amount = 1 };
+            ItemWorld.DropItem(transform.position, item, dropHeight, true);
+            dropHeight += 0.2f;
+        }
+        switch (id)
+        {
+            default:
+            case 0:
+                break;
+            case 1:
+                if (Random.Range(0f, 1.0f) > 0.0f)
+                {
+                    item = new Item { itemType = Item.ItemType.SkullOfRage, amount = 1 };
+                    ItemWorld.DropItem(transform.position, item, dropHeight, true);
+                    dropHeight += 0.2f;
+
+                }
+                if (Random.Range(0f, 1.0f) > 0.0f)
+                {
+                    item = new Item { itemType = Item.ItemType.DropOfFury, amount = 1 };
+                    ItemWorld.DropItem(transform.position, item, dropHeight, true);
+                    dropHeight += 0.2f;
+                }
+                if (Random.Range(0f, 1.0f) > 0.0f)
+                {
+                    item = new Item { itemType = Item.ItemType.PhoenixFeather, amount = 1 };
+                    ItemWorld.DropItem(transform.position, item, dropHeight, true);
+                    dropHeight += 0.2f;
+                }
+                break;
+            case 2:
+                if (Random.Range(0f, 1.0f) > 0.0f)
+                {
+                    item = new Item { itemType = Item.ItemType.ManaPotion, amount = 1 };
+                    ItemWorld.DropItem(transform.position, item, dropHeight, true);
+                    dropHeight += 0.2f;
+                }
+                if (Random.Range(0f, 1.0f) > 0.0f)
+                {
+                    item = new Item { itemType = Item.ItemType.ManaStone, amount = 1, isCD = false };
+                    ItemWorld.DropItem(transform.position, item, dropHeight, true);
+                    dropHeight += 0.2f;
+                }
+                if (Random.Range(0f, 1.0f) > 0.0f)
+                {
+                    item = new Item { itemType = Item.ItemType.RegenManaPotion, amount = 1 };
+                    ItemWorld.DropItem(transform.position, item, dropHeight, true);
+                    dropHeight += 0.2f;
+                }
+                if (Random.Range(0f, 1.0f) > 0.0f)
+                {
+                    item = new Item { itemType = Item.ItemType.BurstStone, amount = 1, isCD = false };
+                    ItemWorld.DropItem(transform.position, item, dropHeight, true);
+                    dropHeight += 0.2f;
+                }
+                if (Random.Range(0f, 1.0f) > 0.0f)
+                {
+                    item = new Item { itemType = Item.ItemType.ScrollOfKnowledge, amount = 1, isCD = false };
+                    ItemWorld.DropItem(transform.position, item, dropHeight, true);
+                    dropHeight += 0.2f;
+                }
+                break;
+        }
+      
 
     }
 

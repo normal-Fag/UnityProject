@@ -16,7 +16,7 @@ public class UI_Button_Fire : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (fire_warrior_controler.number_of_rage < 25f || fire_warrior_controler.isFuryActive)
+        if (fire_warrior_controler.number_of_rage < 25f || fire_warrior_controler.isFuryActive || isCDSP)
         {
             special.interactable = false;
         }
@@ -24,13 +24,22 @@ public class UI_Button_Fire : MonoBehaviour
         {
             special.interactable = true;
         }
-        if (fire_warrior_controler.number_of_rage < 45f || fire_warrior_controler.isFuryActive)
+        if (fire_warrior_controler.number_of_rage < 45f || fire_warrior_controler.isFuryActive || isCDUlt)
         {
             ultimate.interactable = false;
         }
         else
         {
             ultimate.interactable = true;
+        }
+
+        if (fire_warrior_controler.number_of_rage < 2f)
+        {
+            fury.interactable = false;
+        }
+        else
+        {
+            fury.interactable = true;
         }
         if (fire_warrior_controler.hasSkullOfRage)
         {
@@ -54,7 +63,7 @@ public class UI_Button_Fire : MonoBehaviour
             ultimate.transform.Find("cd").gameObject.SetActive(true);
             ultimate.transform.Find("cd").GetComponent<Image>().fillAmount = 1f;
             isCDUlt = true;
-     
+
         }
      
         if (fire_warrior_controler.hasSpCD && !isCDSP)

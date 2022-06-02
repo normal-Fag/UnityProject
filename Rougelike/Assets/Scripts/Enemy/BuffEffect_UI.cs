@@ -18,7 +18,7 @@ public class BuffEffect_UI : MonoBehaviour
         CDTimer = transform.Find("timer").GetComponent<Text>();
         parent = transform.parent.parent;
         timer = 0;
-        currentCDTimmer = item.CD;
+        currentCDTimmer = item.Cooldown();
         CDTimer.text = currentCDTimmer.ToString();
     }
 
@@ -29,7 +29,7 @@ public class BuffEffect_UI : MonoBehaviour
             timer += Time.deltaTime;
             if (item.isCD)
             {
-                image.fillAmount -= 1f / item.CD * Time.deltaTime;
+                image.fillAmount -= 1f / item.Cooldown() * Time.deltaTime;
             }
             if (!item.isCD || image.fillAmount <= 0.0009)
             {

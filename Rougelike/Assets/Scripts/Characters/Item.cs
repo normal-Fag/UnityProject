@@ -24,6 +24,7 @@ public class Item
         BurstStone,
         DropOfFury,
         SkullOfRage,
+        ScrollOfKnowledge,
 
 
 
@@ -32,7 +33,6 @@ public class Item
     }
     public ItemType itemType;
     public int amount;
-    public int CD;
     public bool isCD;
 
 
@@ -60,6 +60,7 @@ public class Item
             case ItemType.BurstStone:       return ItemAssets.Instance.BurstStoneSprite;
             case ItemType.DropOfFury:       return ItemAssets.Instance.DropOfFurySprite;
             case ItemType.SkullOfRage:      return ItemAssets.Instance.SkullOfRageSprite;
+            case ItemType.ScrollOfKnowledge: return ItemAssets.Instance.ScrollOfKnowledgeSprite;
 
         }
     }
@@ -87,6 +88,7 @@ public class Item
             case ItemType.BurstStone: return "Burst Stone";
             case ItemType.DropOfFury: return "Drop Of Fury";
             case ItemType.SkullOfRage: return "Skull Of Rage";
+            case ItemType.ScrollOfKnowledge: return "Scroll of Knowledge";
 
         }
     }
@@ -114,6 +116,7 @@ public class Item
             case ItemType.BurstStone: return "x2 burst mode";
             case ItemType.DropOfFury: return "+10 rage";
             case ItemType.SkullOfRage: return "give rage spell";
+            case ItemType.ScrollOfKnowledge: return "in burst mode, spell cd = 0, manacost /2";
         }
     }
 
@@ -141,7 +144,7 @@ public class Item
             case ItemType.BurstStone: return new Color(1, 0.4448357f, 0);
             case ItemType.DropOfFury: return new Color(0.825f, 0, 1);
             case ItemType.SkullOfRage: return new Color(1, 0.4448357f, 0);
-
+            case ItemType.ScrollOfKnowledge: return new Color(1, 0.4448357f, 0);
         }
 
 
@@ -170,6 +173,7 @@ public class Item
             case ItemType.BurstStone:
             case ItemType.DropOfFury:
             case ItemType.SkullOfRage:
+            case ItemType.ScrollOfKnowledge:
                 return false;
         }
     }
@@ -197,6 +201,7 @@ public class Item
             case ItemType.BurstStone:
             case ItemType.DropOfFury:
             case ItemType.SkullOfRage:
+            case ItemType.ScrollOfKnowledge:
                 return true;
         }
     }
@@ -222,10 +227,33 @@ public class Item
             case ItemType.InfinityBag:
             case ItemType.PosionBag:
             case ItemType.BurstStone:
-                // жрице нужен бафф
+            case ItemType.ScrollOfKnowledge:
             case ItemType.SkullOfRage:
             case ItemType.PhoenixFeather:
                 return true;
+        }
+    }
+
+    public int Cooldown()
+    {
+        switch (itemType)
+        {
+            default:
+            case ItemType.HealthPotion:
+                return 30;
+            case ItemType.HPBuff:
+                return 15;
+            case ItemType.AttackBuff:
+                return 15;
+            case ItemType.SkillBuff:
+                return 15;
+            case ItemType.Poison:
+                return 12;
+            case ItemType.ManaPotion:
+                return 30;
+            case ItemType.RegenManaPotion:
+                return 25;
+            
         }
     }
 
