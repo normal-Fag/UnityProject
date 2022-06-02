@@ -15,22 +15,22 @@ public class wp_hitbox : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D collision)
     {
 
-        Enemy hit = collision.GetComponent<Enemy>();
+        Bandit_test hit = collision.GetComponent<Bandit_test>();
 
         if(hasRepulsion && hit != null)
         {
-
+            hit.force_repulsion = repulsion;
 
         }else if (!hasRepulsion && hit != null)
         {
-
+            hit.force_repulsion = 0;
         }
 
        
         if (hit != null && canAttack)
         {
             hasContact = true;
-            hit.TakeDamage(damage, 0);
+            hit.Take_Damage(damage);
             hasRepulsion = false;
 
         }

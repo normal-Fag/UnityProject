@@ -20,7 +20,7 @@ public class MashroomPjectileLogic : MonoBehaviour
 
         if (collision.tag == "Player")
         {
-            collision.gameObject.GetComponent<character_movement>().Take_Damage(damage, 0);
+            collision.gameObject.GetComponent<playerMovement>().takeDamage(damage);
             anim.SetTrigger("Destroy");
             rb.velocity = new Vector3(0, 0, 0);
             Destroy(gameObject, 0.2f);
