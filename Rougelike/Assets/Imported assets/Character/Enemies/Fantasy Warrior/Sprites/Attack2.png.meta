@@ -4,28 +4,28 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: 4668938655123782945
-    second: Attack2_2
+    second: Attack2_1
   - first:
       213: 5683539909772271658
     second: Attack2_3
   - first:
       213: 5764228812365489207
-    second: Attack2_4
+    second: Attack2_2
   - first:
       213: -1191510351576865934
-    second: Attack2_5
+    second: Attack2_3
   - first:
       213: -8937499057154260928
-    second: Attack2_6
+    second: Attack2_4
   - first:
       213: 5293088307283036655
-    second: Attack2_7
+    second: Attack2_5
   - first:
       213: 1817195990524489003
-    second: Attack2_8
+    second: Attack2_6
   - first:
       213: 9220252021294270350
-    second: Attack2_9
+    second: Attack2_0
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -127,7 +127,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Attack2_2
+      name: Attack2_1
       rect:
         serializedVersion: 2
         x: 222
@@ -148,7 +148,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack2_4
+      name: Attack2_2
       rect:
         serializedVersion: 2
         x: 346
@@ -169,7 +169,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack2_5
+      name: Attack2_3
       rect:
         serializedVersion: 2
         x: 512
@@ -190,7 +190,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack2_6
+      name: Attack2_4
       rect:
         serializedVersion: 2
         x: 661
@@ -211,7 +211,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack2_7
+      name: Attack2_5
       rect:
         serializedVersion: 2
         x: 838
@@ -232,7 +232,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack2_8
+      name: Attack2_6
       rect:
         serializedVersion: 2
         x: 976
@@ -253,7 +253,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack2_9
+      name: Attack2_0
       rect:
         serializedVersion: 2
         x: 57

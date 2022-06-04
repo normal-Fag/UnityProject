@@ -352,7 +352,7 @@ Transform:
   m_GameObject: {fileID: 6096701569122994020}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 28.85, y: -4.92, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 4, y: 4, z: 1}
   m_Children:
   - {fileID: 6096701570500625309}
   - {fileID: 6096701569222584793}
@@ -498,18 +498,22 @@ MonoBehaviour:
   triggerArea: {fileID: 6096701569222584796}
   health: 200
   movementSpeed: 3
+  activeBurning: 1
   firePrefab: {fileID: 6863192391745941111, guid: ac1acad79b6be4a319a95a4a8976a355, type: 3}
   fireDamage: 5
   fireTimer: 5
+  activePoisoning: 1
   poisonPrefab: {fileID: 5298019677433071509, guid: 4c3ac61d27cc94bd3b5167ba1064381b, type: 3}
   poisonDamage: 5
   poisonTimer: 5
   damage: 25
   attackDistance: 2.5
   cooldownTimer: 2
+  repulsiveForce: 0
   target: {fileID: 0}
-  inRange: 0
+  player: {fileID: 0}
   facingDirection: 0
+  inRange: 0
   isBurning: 0
   isPoisoning: 0
   isAttack: 0

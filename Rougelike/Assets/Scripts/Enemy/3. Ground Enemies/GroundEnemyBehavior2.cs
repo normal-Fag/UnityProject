@@ -47,8 +47,8 @@ public class GroundEnemyBehavior2 : Enemy
 
         if (!staticEnemy && distance > attackDistance && target.position.y - transform.position.y < 3.5f)
             Move();
-        else
-            anim.SetBool("isRunning", false);
+        else if (!isPushed)
+            StopMoving();
 
         if (distance <= attackDistance && !isCooldown)
             AttackPlayer();
@@ -67,6 +67,12 @@ public class GroundEnemyBehavior2 : Enemy
             rb.velocity = new Vector2(moveDiraction.x * movementSpeed, rb.velocity.y);
             anim.SetBool("isRunning", true);
         }
+    }
+
+    virtual protected void StopMoving()
+    {
+        anim.SetBool("isRunning", false);
+        rb.velocity = new Vector2(Mathf.Lerp(rb.velocity.x, Vector2.zero.x, Time.deltaTime*2.5f), 0);
     }
 
     public override void SelectTarget()

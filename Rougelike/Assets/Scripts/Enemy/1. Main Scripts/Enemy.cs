@@ -13,9 +13,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] public float   movementSpeed = 10f; [Space]
 
     [Header("Prefabs")]
+    public bool                     activeBurning;
     public GameObject               firePrefab;
     public float                    fireDamage = 5;
     public float                    fireTimer = 5;[Space]
+    public bool                     activePoisoning;
     public GameObject               poisonPrefab;
     public float                    poisonDamage = 5;
     public float                    poisonTimer = 5;
@@ -55,10 +57,7 @@ public class Enemy : MonoBehaviour
 
         if (health <= 0)
         {
-            StopAttackPlayer();
-            anim.SetTrigger("Death");
-            rb.velocity = Vector2.zero;
-            Destroy(this.gameObject, 2);
+            Death();
         }
     }
 
@@ -112,24 +111,26 @@ public class Enemy : MonoBehaviour
             yield return null;
 
         isPushed = true;
+
         Vector3 pushDirection = (pushFrom - transform.position).normalized;
-        //anim.ResetTrigger("Attack");
         rb.AddForce(-pushDirection * pushPower, ForceMode2D.Impulse);
+
         yield return new WaitForSeconds(.3f);
+
         rb.velocity = Vector2.zero;
         isPushed = false;
     }
 
     private void IgniteTheEnemy()
     {
-        if (!isBurning)
+        if (!isBurning && activeBurning)
             Instantiate(firePrefab, transform.position, Quaternion.identity)
                 .GetComponent<BurningLogic>().enemyGameObject = this.gameObject;
     }
 
     private void PoisonTheEnemy()
     {
-        if (!isPoisoning)
+        if (!isPoisoning && activePoisoning)
             Instantiate(poisonPrefab, transform.position, Quaternion.identity)
                 .GetComponent<PoisonLogic>().enemyGameObject = this.gameObject;
     }
@@ -137,11 +138,6 @@ public class Enemy : MonoBehaviour
     virtual public void TriggerCooling()
     {
         isCooldown = true;
-    }
-
-    public void StopHurt()
-    {
-        anim.SetBool("isHurt", false);
     }
 
     virtual public void EnemyTrigger()
@@ -159,4 +155,12 @@ public class Enemy : MonoBehaviour
     virtual public void Move() { }
 
     virtual public void SelectTarget() { }
+
+    virtual public void Death()
+    {
+        StopAttackPlayer();
+        anim.SetTrigger("Death");
+        rb.velocity = Vector2.zero;
+        Destroy(this.gameObject, 2);
+    }
 }
