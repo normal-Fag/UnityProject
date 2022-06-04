@@ -125,10 +125,47 @@ public class Bandit_test : MonoBehaviour
             ItemWorld.DropItem(transform.position, item, dropHeight, true);
             dropHeight += 0.2f;
         }
+        if (Random.Range(0f, 1.0f) > 0.0f)
+        {
+            item = new Item { itemType = Item.ItemType.InfinityAttackBuff, amount = 1 };
+            ItemWorld.DropItem(transform.position, item, dropHeight, true);
+            dropHeight += 0.2f;
+        }
         switch (id)
         {
             default:
             case 0:
+                if (Random.Range(0f, 1.0f) > 0.0f)
+                {
+                    item = new Item { itemType = Item.ItemType.Poison, amount = 1 };
+                    ItemWorld.DropItem(transform.position, item, dropHeight, true);
+                    dropHeight += 0.2f;
+
+                }
+                if (Random.Range(0f, 1.0f) > 0.0f)
+                {
+                    item = new Item { itemType = Item.ItemType.InfinityBag, amount = 1 };
+                    ItemWorld.DropItem(transform.position, item, dropHeight, true);
+                    dropHeight += 0.2f;
+                }
+                if (Random.Range(0f, 1.0f) > 0.0f)
+                {
+                    item = new Item { itemType = Item.ItemType.SpareBag, amount = 1 };
+                    ItemWorld.DropItem(transform.position, item, dropHeight, true);
+                    dropHeight += 0.2f;
+                }
+                if (Random.Range(0f, 1.0f) > 0.0f)
+                {
+                    item = new Item { itemType = Item.ItemType.Dagger, amount = 1 };
+                    ItemWorld.DropItem(transform.position, item, dropHeight, true);
+                    dropHeight += 0.2f;
+                }
+                if (Random.Range(0f, 1.0f) > 0.0f)
+                {
+                    item = new Item { itemType = Item.ItemType.PosionBag, amount = 1 };
+                    ItemWorld.DropItem(transform.position, item, dropHeight, true);
+                    dropHeight += 0.2f;
+                }
                 break;
             case 1:
                 if (Random.Range(0f, 1.0f) > 0.0f)

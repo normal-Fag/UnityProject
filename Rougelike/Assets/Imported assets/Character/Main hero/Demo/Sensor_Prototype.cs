@@ -22,11 +22,11 @@ public class Sensor_Prototype : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other)
     {
         m_ColCount++;
-        if(other.GetComponent<Bandit_test>() != null)
+        if(other.GetComponent<Bandit_test>() != null && transform.parent.GetComponent<character_movement>() != null)
         {
             transform.parent.GetComponent<character_movement>().GetComponent<Collider2D>().isTrigger = true;
         }
-        else
+        else if(transform.parent.GetComponent<character_movement>() != null)
         {
             transform.parent.GetComponent<character_movement>().GetComponent<Collider2D>().isTrigger = false;
         }

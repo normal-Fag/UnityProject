@@ -15,10 +15,10 @@ public class Throw_skill_dagger : MonoBehaviour
     public Transform trapPoint;
     public Vector2 trap_atk_range = new Vector2(12f, 3f);
     public LayerMask enemyLayers;
+    public bool isPosion = false;
     void Start()
     {
         d_animator = GetComponent<Animator>();
-        d_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Prototype>();
 
         if (character_movement.m_facingDirection == 1)
         {
@@ -32,21 +32,28 @@ public class Throw_skill_dagger : MonoBehaviour
 
     }
 
-    void Update()
+    void OnTriggerEnter2D(Collider2D other)
     {
         Collider2D[] trap_hitEnemies = Physics2D.OverlapBoxAll(trapPoint.position, trap_atk_range, 0f, enemyLayers);
-
-        if (!d_grounded && d_groundSensor.State())
+        if (other.tag == "Ground")
         {
             d_grounded = true;
             d_animator.SetTrigger("Grounded");
+            t_dagger.position = new Vector2 (t_dagger.position.x, t_dagger.position.y + 0.6f);
             rb_dagger.velocity = transform.right * speed * 0;
             t_dagger.rotation = Quaternion.Euler(0, 0, 0);
             StartCoroutine(active_damage(trap_hitEnemies));
         }
-
+        else if(other.GetComponent<Bandit_test>() != null)
+        {
+            other.GetComponent<Bandit_test>().Take_Damage(dagger_damage / 2, 0);
+            Destroy(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
-
     IEnumerator active_damage(Collider2D[] trap_hitEnemies)
     {
 
@@ -54,9 +61,10 @@ public class Throw_skill_dagger : MonoBehaviour
 
          foreach (Collider2D enemy in trap_hitEnemies)
         {
-            if(enemy.tag == "Enemy")
+            if(enemy.tag == "Enemy" && !isPosion)
                 enemy.GetComponent<Bandit_test>().Take_Damage(dagger_damage, 0);
-            
+            else if(isPosion && enemy.tag == "Enemy")
+                enemy.GetComponent<Bandit_test>().Take_Damage(dagger_damage, 0);
         }
         StartCoroutine(DestroyTrapDagger());
 

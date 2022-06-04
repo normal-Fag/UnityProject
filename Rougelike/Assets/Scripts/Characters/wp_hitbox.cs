@@ -11,6 +11,7 @@ public class wp_hitbox : MonoBehaviour
     public bool hasRepulsion = false;
     public int repulsion = 0;
     public int character_id;
+    public bool isPosion = false;
 
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -27,6 +28,10 @@ public class wp_hitbox : MonoBehaviour
             hit.force_repulsion = 0;
         }
 
+        if (isPosion)
+        {
+            hit.Take_Damage(damage, character_id); // posion
+        }
        
         if (hit != null && canAttack)
         {

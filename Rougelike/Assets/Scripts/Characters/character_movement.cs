@@ -57,7 +57,7 @@ public class character_movement : MonoBehaviour
 
 
     float currentDashTimmer;
-    bool isRolling = false;
+    public bool isRolling = false;
     public float rollDistance;
     public  float startDashTimer;
     public float trapDistanceEvade;
@@ -350,10 +350,33 @@ public class character_movement : MonoBehaviour
                 inventory.RemoveItem(item, index);
                 max_hp += 50;
                 break;
+            case Item.ItemType.InfinityAttackBuff:
+                if (gameObject.GetComponent<fire_warrior_controler>() != null)
+                {
+                    gameObject.GetComponent<fire_warrior_controler>().UseItem(item, index);
+                }
+                if (gameObject.GetComponent<character_water_priest_controller>() != null)
+                {
+                    gameObject.GetComponent<character_water_priest_controller>().UseItem(item, index);
+                }
+                if (gameObject.GetComponent<rouge_controller>() != null)
+                {
+                    gameObject.GetComponent<rouge_controller>().UseItem(item, index);
+                }
+                inventory.RemoveItem(item, index);
+                break;
             case Item.ItemType.AttackBuff:
                if(gameObject.GetComponent<fire_warrior_controler>() != null)
                 {
                     gameObject.GetComponent<fire_warrior_controler>().UseItem(item, index);
+                }
+                if (gameObject.GetComponent<character_water_priest_controller>() != null)
+                {
+                    gameObject.GetComponent<character_water_priest_controller>().UseItem(item, index);
+                }
+                if (gameObject.GetComponent<rouge_controller>() != null)
+                {
+                    gameObject.GetComponent<rouge_controller>().UseItem(item, index);
                 }
                 AttackBuffCD = item.Cooldown();
                 hasAttackBuffCD = true;
@@ -365,6 +388,14 @@ public class character_movement : MonoBehaviour
                 if (gameObject.GetComponent<fire_warrior_controler>() != null)
                 {
                     gameObject.GetComponent<fire_warrior_controler>().UseItem(item, index);
+                }
+                if (gameObject.GetComponent<character_water_priest_controller>() != null)
+                {
+                    gameObject.GetComponent<character_water_priest_controller>().UseItem(item, index);
+                }
+                if (gameObject.GetComponent<rouge_controller>() != null)
+                {
+                    gameObject.GetComponent<rouge_controller>().UseItem(item, index);
                 }
                 SkillBuffCD = item.Cooldown();
                 hasSkillBuffCD = true;
@@ -423,13 +454,45 @@ public class character_movement : MonoBehaviour
                     gameObject.GetComponent<character_water_priest_controller>().UseItem(item, index);
                 }
                 break;
+            case Item.ItemType.Poison:
+                if (gameObject.GetComponent<rouge_controller>() != null)
+                {
+                    gameObject.GetComponent<rouge_controller>().UseItem(item, index);
+                }
+                break;
+            case Item.ItemType.PosionBag:
+                if (gameObject.GetComponent<rouge_controller>() != null)
+                {
+                    gameObject.GetComponent<rouge_controller>().UseItem(item, index);
+                }
+                break;
+            case Item.ItemType.InfinityBag:
+                if (gameObject.GetComponent<rouge_controller>() != null)
+                {
+                    gameObject.GetComponent<rouge_controller>().UseItem(item, index);
+                }
+                break;
+            case Item.ItemType.SpareBag:
+                if (gameObject.GetComponent<rouge_controller>() != null)
+                {
+                    gameObject.GetComponent<rouge_controller>().UseItem(item, index);
+                }
+                break;
 
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         ItemWorld itemWorld = collision.GetComponent<ItemWorld>();
-        if(collision.GetComponent<ItemWorld>() != null)
+
+        if(collision.GetComponent<ItemWorld>() != null 
+            && itemWorld.GetItem().itemType == Item.ItemType.Dagger 
+            && gameObject.GetComponent<rouge_controller>() != null) {
+
+            itemWorld.DestroySelf();
+            rouge_controller.number_of_dagger += 1;
+        }
+        else if (collision.GetComponent<ItemWorld>() != null)
         {
             List<Item> items = inventory.GetItemList();
             if(items.Count < 6)

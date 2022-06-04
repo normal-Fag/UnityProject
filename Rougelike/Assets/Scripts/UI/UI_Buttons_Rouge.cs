@@ -7,6 +7,9 @@ public class UI_Buttons_Rouge : MonoBehaviour
 {
    [SerializeField] public Button throw_dagger;
    [SerializeField] public Button trap;
+   [SerializeField] public Button ultimate;
+
+    private bool isCDUlt;
     void Update()
     {
 
@@ -26,6 +29,29 @@ public class UI_Buttons_Rouge : MonoBehaviour
         {
             trap.interactable = true;
         }
-      
+
+        if (rouge_controller.hasUltCD && !isCDUlt)
+        {
+            ultimate.transform.Find("cd").gameObject.SetActive(true);
+            ultimate.transform.Find("cd").GetComponent<Image>().fillAmount = 1f;
+            isCDUlt = true;
+        }
+
+
+        if (isCDUlt)
+        {
+            ultimate.interactable = false;
+            ultimate.transform.Find("cd").GetComponent<Image>().fillAmount -= 1f / rouge_controller.UltCD_for_UI * Time.deltaTime;
+            if (ultimate.transform.Find("cd").GetComponent<Image>().fillAmount <= 0)
+            {
+
+                isCDUlt = false;
+                ultimate.transform.Find("cd").gameObject.SetActive(false);
+                ultimate.interactable = true;
+
+            }
+        }
+
+
     }
 }

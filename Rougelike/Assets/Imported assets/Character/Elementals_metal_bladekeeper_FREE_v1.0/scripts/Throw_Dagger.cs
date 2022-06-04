@@ -7,6 +7,7 @@ public class Throw_Dagger : MonoBehaviour
     [SerializeField] public float speed = 20f;
     [SerializeField] public int dagger_damage = 5;
     public Rigidbody2D rb_dagger;
+    public bool isPosion = false;
     void Start()
     {
         
@@ -26,7 +27,11 @@ public class Throw_Dagger : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D hitInfo)
     {
         Bandit_test enemy = hitInfo.GetComponent<Bandit_test>();
-        if (enemy != null)
+        if (enemy != null && !isPosion)
+        {
+            enemy.Take_Damage(dagger_damage, 0);
+        }
+        else if(isPosion)
         {
             enemy.Take_Damage(dagger_damage, 0);
         }
