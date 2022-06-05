@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class parallax: MonoBehaviour
 {
     [SerializeField] Transform followingTarget;
     [SerializeField, Range(0f, 1f)] float parallaxStrength = 0.1f;
