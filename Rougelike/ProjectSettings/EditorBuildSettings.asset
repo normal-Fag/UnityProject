@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/character_water_priest.unity
     guid: 2a34b4000df25e04a8787ba67ea3307b
   - enabled: 1
+    path: Assets/Scenes/characters_test.unity
+    guid: 184b1299d742ac145a4551ff05290dcf
+  - enabled: 1
     path: Assets/Scenes/New Scene.unity
     guid: 9ac712abb7052874cbe3dd8ac481e79e
   m_configObjects: {}

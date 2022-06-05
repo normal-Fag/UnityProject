@@ -14,7 +14,7 @@ public class character_water_priest_controller : MonoBehaviour
     private wp_hitbox weapon_hb;
     private character_movement character_Movement;
 
-    private Item cacheItemMajor;
+    public Item cacheItemMajor;
 
 
     bool isDelayAction = false;
@@ -261,7 +261,7 @@ public class character_water_priest_controller : MonoBehaviour
         {
             m_animator.SetTrigger("Attack_1");
             timer = 0;
-
+            weapon.GetComponent<wp_hitbox>().damage = atk_dmg + buff_atk_dmg;
 
         }
 
@@ -269,6 +269,7 @@ public class character_water_priest_controller : MonoBehaviour
         {
             m_animator.SetTrigger("Air_Attack");
             timer = 0;
+            weapon.GetComponent<wp_hitbox>().damage = atk_dmg + buff_atk_dmg;
 
         }
         void Defend()
@@ -290,6 +291,7 @@ public class character_water_priest_controller : MonoBehaviour
             m_animator.SetTrigger("Attack_2");
             weapon_hb.hasRepulsion = true;
             weapon_hb.repulsion = 5;
+            weapon.GetComponent<wp_hitbox>().damage = atk_dmg + buff_atk_dmg;
         }
 
 
@@ -298,6 +300,7 @@ public class character_water_priest_controller : MonoBehaviour
             m_animator.SetTrigger("Attack_3");
             weapon_hb.hasRepulsion = true;
             weapon_hb.repulsion = 3;
+            weapon.GetComponent<wp_hitbox>().damage = atk_dmg + buff_atk_dmg;
 
         }
 
@@ -470,6 +473,7 @@ public class character_water_priest_controller : MonoBehaviour
         hasUltCD = true;
         yield return new WaitForSeconds(cd);
         hasUltCD = false;
+        weapon.GetComponent<wp_hitbox>().damage = ult_dmg;
     }
 
 

@@ -198,7 +198,7 @@ public class UI_Inventory : MonoBehaviour
         }
     }
 
-    private void SetBuffCD(Item item)
+    public void SetBuffCD(Item item)
     {
 
         if (item.IsInfinityBuff())

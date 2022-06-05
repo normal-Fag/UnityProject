@@ -22,11 +22,11 @@ public class Throw_skill_dagger : MonoBehaviour
 
         if (character_movement.m_facingDirection == 1)
         {
-            transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+            transform.localScale = new Vector3(-1.5f, 1.5f, 1.0f);
         }
         else
         {
-            transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+            transform.localScale = new Vector3(-1.5f, 1.5f, 1.0f);
         }
         rb_dagger.velocity = transform.right * speed * -1;
 

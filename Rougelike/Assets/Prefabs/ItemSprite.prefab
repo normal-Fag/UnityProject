@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5594446039677745618
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5594446039677745616}
+  - component: {fileID: 5594446039677745619}
+  m_Layer: 0
+  m_Name: ItemSprite
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5594446039677745616
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5594446039677745618}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 321.4172, y: 231.46075, z: -1260.4281}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5594446039677745619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5594446039677745618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 889ac007ffe970d4fa2a793f4043490e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pfItemWorld: {fileID: 7332206727015923413, guid: 04a86e12001d01a4492092b6957d1ab3, type: 3}
+  hpPotionSprite: {fileID: -9005335331522169240, guid: f7a48f3f199216a47aeec11dce1e8966, type: 3}
+  hpBuffSprite: {fileID: 2087161371906716271, guid: f7a48f3f199216a47aeec11dce1e8966, type: 3}
+  InfinityHpBuffSprite: {fileID: 3592330033892334430, guid: f7a48f3f199216a47aeec11dce1e8966, type: 3}
+  AttackBuffSprite: {fileID: 7365709175831674509, guid: f7a48f3f199216a47aeec11dce1e8966, type: 3}
+  SkillBuffSprite: {fileID: -1624166259545072629, guid: f7a48f3f199216a47aeec11dce1e8966, type: 3}
+  PoisonSprite: {fileID: 4558157525774947841, guid: 11c446266037f7446871438c65d1f347, type: 3}
+  ManaPotionSprite: {fileID: -7622598863637584342, guid: f7a48f3f199216a47aeec11dce1e8966, type: 3}
+  RegenManaPotionSprite: {fileID: 6677159792321785964, guid: f7a48f3f199216a47aeec11dce1e8966, type: 3}
+  ManaStoneSprite: {fileID: 2320252442605897070, guid: f7a48f3f199216a47aeec11dce1e8966, type: 3}
+  DaggerSprite: {fileID: -1575345690769010324, guid: 8fc39286dfea74dc28c2c0ef4e6d78d8, type: 3}
+  InfinityBagSprite: {fileID: -1331280261444877590, guid: f7a48f3f199216a47aeec11dce1e8966, type: 3}
+  PosionBagSprite: {fileID: 6668104043457698281, guid: 11c446266037f7446871438c65d1f347, type: 3}
+  InfinityAttackBuffSprite: {fileID: -6838564810002054336, guid: 4474be8b753ce2d4b9049fe9b2d4fedc, type: 3}
+  SpareBagSprite: {fileID: -6009198046271197863, guid: 48eb6c7c98308d440b57a060d35908f5, type: 3}
+  PhoenixFeatherSprite: {fileID: -7966388172987396441, guid: 4474be8b753ce2d4b9049fe9b2d4fedc, type: 3}
+  BurstStoneSprite: {fileID: -2897956981780156469, guid: 6ad55a5cbc5433b48bde2a19f599c3a4, type: 3}
+  DropOfFurySprite: {fileID: -1020213491760248842, guid: f7a48f3f199216a47aeec11dce1e8966, type: 3}
+  SkullOfRageSprite: {fileID: 434901119778713889, guid: 6ad55a5cbc5433b48bde2a19f599c3a4, type: 3}
+  ScrollOfKnowledgeSprite: {fileID: 21300000, guid: bed4725e3fce140ec9eb9af5bb7562ce, type: 3}

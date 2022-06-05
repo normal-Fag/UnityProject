@@ -3,13 +3,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityStandardAssets.CrossPlatformInput;
+using UnityEngine.SceneManagement;
 
 public class character_movement : MonoBehaviour
 {
 
     [SerializeField] private float m_maxSpeed = 4.5f;
+    private float speed;
     [SerializeField] private float m_jumpForce = 7.5f;
     [SerializeField] private UI_Inventory uiInventory;
+    [SerializeField] private GameObject gameOverScreen;
+    [SerializeField] private GameObject UiController;
 
     private Animator m_animator;
     public Rigidbody2D m_body2d;
@@ -64,6 +68,12 @@ public class character_movement : MonoBehaviour
 
     bool isTraping = false;
 
+    public List<Item> minorBufflist = new List<Item>();
+
+    public bool isPosioned;
+    public bool isExitPosionPool;
+    private float posionDebuffCD = 1;
+    private float posionTimer = 0;
 
 
     // Use this for initialization
@@ -82,6 +92,8 @@ public class character_movement : MonoBehaviour
         inventory = new Inventory(UseItem);
         uiInventory.SetInventory(inventory);
         uiInventory.SetCharacter(this);
+        speed = m_maxSpeed;
+
     }
 
     // Update is called once per frame
@@ -283,6 +295,35 @@ public class character_movement : MonoBehaviour
             }
         }
 
+        if (isPosioned)
+        {
+            posionTimer += Time.deltaTime;
+            m_body2d.gravityScale = 4;
+            if(posionTimer >= 1)
+            {
+                currentHp -= 1;
+                posionTimer = 0;
+            }
+            m_maxSpeed = speed / 2;
+        }
+       
+        if (isExitPosionPool)
+        {
+            posionTimer += Time.deltaTime;
+            posionDebuffCD -= 1f / 5 * Time.deltaTime;
+            m_maxSpeed = speed;
+            m_body2d.gravityScale = 3;
+            if (posionTimer >= 1)
+            {
+                currentHp -= 1;
+                posionTimer = 0;
+            }
+            if(posionDebuffCD <= 0)
+            {
+                posionDebuffCD = 1f;
+                isExitPosionPool = false;
+            }
+        }
 
 
         if (isRolling)
@@ -347,6 +388,7 @@ public class character_movement : MonoBehaviour
                 StartCoroutine(useHealthBuff(item.Cooldown()));
                 break;
             case Item.ItemType.InfinityHpBuff:
+                minorBufflist.Add(item);
                 inventory.RemoveItem(item, index);
                 max_hp += 50;
                 break;
@@ -363,6 +405,7 @@ public class character_movement : MonoBehaviour
                 {
                     gameObject.GetComponent<rouge_controller>().UseItem(item, index);
                 }
+                minorBufflist.Add(item);
                 inventory.RemoveItem(item, index);
                 break;
             case Item.ItemType.AttackBuff:
@@ -409,6 +452,7 @@ public class character_movement : MonoBehaviour
                     gameObject.GetComponent<fire_warrior_controler>().UseItem(item, index);
                     CheckCDinInventory(item);
                 }
+                minorBufflist.Add(item);
                 break;
             case Item.ItemType.PhoenixFeather:
                 if (gameObject.GetComponent<fire_warrior_controler>() != null)
@@ -423,6 +467,7 @@ public class character_movement : MonoBehaviour
                     gameObject.GetComponent<fire_warrior_controler>().UseItem(item, index);
                     CheckCDinInventory(item);
                 }
+
                 break;
             case Item.ItemType.ManaPotion:
                 if (gameObject.GetComponent<character_water_priest_controller>() != null)
@@ -441,6 +486,7 @@ public class character_movement : MonoBehaviour
                 {
                     gameObject.GetComponent<character_water_priest_controller>().UseItem(item, index);
                 }
+                minorBufflist.Add(item);
                 break;
             case Item.ItemType.BurstStone:
                 if (gameObject.GetComponent<character_water_priest_controller>() != null)
@@ -477,6 +523,7 @@ public class character_movement : MonoBehaviour
                 {
                     gameObject.GetComponent<rouge_controller>().UseItem(item, index);
                 }
+                minorBufflist.Add(item);
                 break;
 
         }
@@ -625,6 +672,7 @@ public class character_movement : MonoBehaviour
             m_animator.SetTrigger("Death");
             GetComponent<CapsuleCollider2D>().enabled = false;
             GetComponent<Rigidbody2D>().isKinematic = true;
+            StartCoroutine(ResetLevel());
 
         }
     }
@@ -639,6 +687,14 @@ public class character_movement : MonoBehaviour
             }
 
         }
+    }
+
+    public IEnumerator ResetLevel()
+    {
+        UiController.SetActive(false);
+        gameOverScreen.SetActive(true);
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public IEnumerator useHealthPotion(int seconds)
     {
@@ -679,6 +735,17 @@ public class character_movement : MonoBehaviour
         m_animator.SetTrigger("trap_skill");
         m_body2d.velocity = Vector2.zero;
         currentDashTimmer = startDashTimer;
+
+    }
+
+ 
+    public void SetInventory(List<Item.ItemType> itemTypes, List<int> amount)
+    {
+        for(int i = 0; i < itemTypes.Count; i++)
+        {
+            Item item = new Item { itemType = itemTypes[i], amount = amount[i] };
+            inventory.AddItem(item);
+        }
 
     }
 }

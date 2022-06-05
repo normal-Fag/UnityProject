@@ -17,7 +17,7 @@ public class fire_warrior_controler : MonoBehaviour
 
     public GameObject fury_effect;
 
-    private Item cacheItemMajor;
+    public Item cacheItemMajor;
 
 
     bool isDelayAction = false;
@@ -48,7 +48,7 @@ public class fire_warrior_controler : MonoBehaviour
 
     public static bool isFuryActive = false;
 
-    private int id = 1;
+    public int id = 1;
 
 
     public bool hasMajorBuff;
@@ -123,7 +123,7 @@ public class fire_warrior_controler : MonoBehaviour
 
 
         else if (CrossPlatformInputManager.GetButtonDown("Ultimate") 
-            && character_Movement.m_grounded && !isDelayAction && number_of_rage >= 45 
+            && character_Movement.m_grounded && !isDelayAction && number_of_rage >= 50 
             && !hasUltCD && !isFuryActive)
         {
             StartCoroutine(ActionDelay(actionDelay * 1.5f, "ultimate"));
@@ -212,6 +212,7 @@ public class fire_warrior_controler : MonoBehaviour
         {
             m_animator.SetTrigger("Attack");
             timer = 0;
+            weapon.GetComponent<wp_hitbox>().damage = atk_dmg + buff_atk_dmg;
 
 
         }
@@ -220,6 +221,7 @@ public class fire_warrior_controler : MonoBehaviour
         {
             m_animator.SetTrigger("air_atk");
             timer = 0;
+            weapon.GetComponent<wp_hitbox>().damage = atk_dmg + buff_atk_dmg;
 
         }
         void Defend()
@@ -233,6 +235,7 @@ public class fire_warrior_controler : MonoBehaviour
             m_animator.SetTrigger("heavy_attack");
             weapon_hb.hasRepulsion = true;
             weapon_hb.repulsion = 3;
+            weapon.GetComponent<wp_hitbox>().damage = atk_dmg + buff_atk_dmg;
 
         }
         IEnumerator ActionDelay(float time, string action)
@@ -361,6 +364,7 @@ public class fire_warrior_controler : MonoBehaviour
         hasUltCD = true;
         yield return new WaitForSeconds(cd);
         hasUltCD = false;
+        weapon.GetComponent<wp_hitbox>().damage = ult_dmg + (number_of_rage - 50);
     }
 
 
@@ -372,6 +376,7 @@ public class fire_warrior_controler : MonoBehaviour
         hasSpCD = true;
         yield return new WaitForSeconds(cd);
         hasSpCD = false;
+        weapon.GetComponent<wp_hitbox>().damage = ult_dmg;
 
     }
 

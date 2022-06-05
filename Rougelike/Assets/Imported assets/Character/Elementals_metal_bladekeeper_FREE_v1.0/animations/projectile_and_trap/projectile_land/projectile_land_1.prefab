@@ -60,7 +60,7 @@ Transform:
   m_GameObject: {fileID: 8650663736249125505}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.878049, y: 3.121951, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 0.5}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 0.5}
   m_Children:
   - {fileID: 5549049699801571358}
   m_Father: {fileID: 0}
@@ -191,7 +191,7 @@ MonoBehaviour:
   rb_dagger: {fileID: 6801055810249677648}
   t_dagger: {fileID: 3365896644409670183}
   trapPoint: {fileID: 5549049699801571358}
-  trap_atk_range: {x: 4, y: 1.5}
+  trap_atk_range: {x: 6.7, y: 2.5}
   enemyLayers:
     serializedVersion: 2
     m_Bits: 128

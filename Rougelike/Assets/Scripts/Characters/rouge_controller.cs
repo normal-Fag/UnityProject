@@ -28,7 +28,7 @@ public class rouge_controller : MonoBehaviour
     private character_movement character_Movement;
 
 
-    private Item cacheItemMajor;
+    public Item cacheItemMajor;
 
     bool isDelayAction = false;
     public float actionDelay = 0.5f;
@@ -38,7 +38,7 @@ public class rouge_controller : MonoBehaviour
 
     public int max_number_of_daggers = 15;
     public static int number_of_dagger;
-    private int id = 0;
+    public int id = 0;
 
 
     public int cache_atk_dmg;
@@ -180,6 +180,20 @@ public class rouge_controller : MonoBehaviour
             number_of_dagger = 0;
         }
 
+        if (hasMajorBuff)
+        {
+            if(cacheItemMajor.itemType == Item.ItemType.PosionBag)
+            {
+                hasPosionBag = true;
+                hasInfinityBag = false;
+            }
+            if (cacheItemMajor.itemType == Item.ItemType.InfinityBag)
+            {
+                hasInfinityBag = true;
+                hasPosionBag = false;
+                hasPosion = false;
+            }
+        }
 
         if (hasInfinityBag)
         {
@@ -207,6 +221,7 @@ public class rouge_controller : MonoBehaviour
         isAttack1 = true;
         m_animator.SetTrigger("Attack");
         timer = 0;
+        weapon.GetComponent<wp_hitbox>().damage = atk_dmg + buff_atk_dmg;
     }
 
     void Attack2()
@@ -214,6 +229,7 @@ public class rouge_controller : MonoBehaviour
         isAttack1 = false;
         m_animator.SetTrigger("Attack_2");
         timer = 0;
+        weapon.GetComponent<wp_hitbox>().damage = atk_dmg + buff_atk_dmg;
     }
 
   
@@ -235,6 +251,7 @@ public class rouge_controller : MonoBehaviour
         weapon_hb.hasRepulsion = true;
         weapon_hb.repulsion = 3;
         timer = 0;
+        weapon.GetComponent<wp_hitbox>().damage = (atk_dmg + buff_atk_dmg) / 2;
 
 
     }
@@ -373,44 +390,18 @@ public class rouge_controller : MonoBehaviour
                 StartCoroutine(usePosion(item.Cooldown()));
                 break;
             case Item.ItemType.PosionBag:
-                if (!hasMajorBuff)
-                {
                     character_Movement.inventory.RemoveItem(item, index);
                     hasMajorBuff = true;
                     cacheItemMajor = item;
-                    hasPosionBag = true;
-                }
-                else
-                {
-                    MajorBuffReset();
-                    character_Movement.inventory.RemoveItem(item, index);
-                    hasMajorBuff = true;
-                    cacheItemMajor = item;
-                    hasPosionBag = true;
-
-                }
                 break;
             case Item.ItemType.SpareBag:
                 character_Movement.inventory.RemoveItem(item, index);
                 max_number_of_daggers += 5; 
                 break;
             case Item.ItemType.InfinityBag:
-                if (!hasMajorBuff)
-                {
                     character_Movement.inventory.RemoveItem(item, index);
-                    hasInfinityBag = true;
                     hasMajorBuff = true;
                     cacheItemMajor = item;
-                }
-                else
-                {
-                    MajorBuffReset();
-                    character_Movement.inventory.RemoveItem(item, index);
-                    hasInfinityBag = true;
-                    hasMajorBuff = true;
-                    cacheItemMajor = item;
-
-                }
                 break;
 
         }
@@ -442,26 +433,13 @@ public class rouge_controller : MonoBehaviour
 
         hasPosion = false;
     }
-    private void MajorBuffReset()
-    {
-        if (cacheItemMajor != null && cacheItemMajor.itemType == Item.ItemType.InfinityBag)
-        {
-            hasInfinityBag = false;
-           
-        }
-        if (cacheItemMajor != null && cacheItemMajor.itemType == Item.ItemType.PosionBag)
-        {
-            hasPosionBag = false;
-            hasPosion = false;
-        }
-    }
-
     public IEnumerator SpecialAttack(int cd)
     {
         m_animator.SetTrigger("sp_atk");
         weapon_hb.hasRepulsion = true;
         weapon_hb.repulsion = 5;
         hasUltCD = true;
+        weapon.GetComponent<wp_hitbox>().damage = ult_dmg;
         yield return new WaitForSeconds(cd);
         hasUltCD = false;
     }
