@@ -42,9 +42,6 @@ public class AudioEffects : MonoBehaviour
     // Make it a singleton class that can be accessible everywhere
     public static AudioEffects instance;
 
-    [SerializeField]
-    Sound[] m_sounds;
-
     private void Awake()
     {
         if(instance != null)
@@ -57,27 +54,27 @@ public class AudioEffects : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        for(int i = 0; i < m_sounds.Length; i++)
-        {
-            GameObject go = new GameObject("Sound_" + i + "_" + m_sounds[i].m_name);
-            go.transform.SetParent(transform);
-            m_sounds[i].SetSource(go.AddComponent<AudioSource>());
-        }
-    }
+    //private void Start()
+    //{
+    //    for(int i = 0; i < m_sounds.Length; i++)
+    //    {
+    //        GameObject go = new GameObject("Sound_" + i + "_" + m_sounds[i].m_name);
+    //        go.transform.SetParent(transform);
+    //        m_sounds[i].SetSource(go.AddComponent<AudioSource>());
+    //    }
+    //}
 
-    public void PlaySound (string name)
-    {
-        for(int i = 0; i < m_sounds.Length; i++)
-        {
-            if(m_sounds[i].m_name == name)
-            {
-                m_sounds[i].Play();
-                return;
-            }
-        }
+    //public void PlaySound (string name)
+    //{
+    //    for(int i = 0; i < m_sounds.Length; i++)
+    //    {
+    //        if(m_sounds[i].m_name == name)
+    //        {
+    //            m_sounds[i].Play();
+    //            return;
+    //        }
+    //    }
 
-        Debug.LogWarning("AudioManager: Sound name not found in list: " + name);
-    }
+    //    Debug.LogWarning("AudioManager: Sound name not found in list: " + name);
+    //}
 }

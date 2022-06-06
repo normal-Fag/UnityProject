@@ -20,31 +20,30 @@ public class SaveFromNextStage : MonoBehaviour
         {
             player = collision.gameObject;
             playerScript = collision.GetComponent<character_movement>();
-            Save();
             if (collision.GetComponent<rouge_controller>() != null)
                 characterID = collision.GetComponent<rouge_controller>().id;
             if (collision.GetComponent<fire_warrior_controler>() != null)
                 characterID = collision.GetComponent<fire_warrior_controler>().id;
             if (collision.GetComponent<character_water_priest_controller>() != null)
                 characterID = collision.GetComponent<character_water_priest_controller>().id;
+            Save();
             StartCoroutine(LoadScene());
 
         }
     }
 
-    private void Save() {
+    public void Save() {
 
        Inventory PlayerInventory = playerScript.inventory;
        List<Item> items = PlayerInventory.GetItemList();
        List<Item.ItemType> itemList = new List<Item.ItemType>();
        List<int> itemAmount = new List<int>();
 
-
         List<Item> buffs = playerScript.minorBufflist;
         List<Item.ItemType> minorBuffList = new List<Item.ItemType>();
         List<int> minorBuffAmount = new List<int>();
         int currentHp, max_hp;
-
+        int id = characterID;
         currentHp = character_movement.currentHp;
         max_hp = playerScript.max_hp;
 
@@ -84,7 +83,7 @@ public class SaveFromNextStage : MonoBehaviour
             max_hp = max_hp,
             currentHp = currentHp,
             LevelId = LevelId,
-            characterID = characterID,
+            characterID = id,
 
         };
 
@@ -114,7 +113,7 @@ public class SaveFromNextStage : MonoBehaviour
 
                 };
                 string jsonRouge = JsonUtility.ToJson(saveRouge);
-                File.WriteAllText(Application.dataPath + "/saveRouge.txt", jsonRouge);
+                File.WriteAllText(Application.persistentDataPath + "/Save/saveRouge.txt", jsonRouge);
                 break;
             case 1:
                 int max_rage = player.GetComponent<fire_warrior_controler>().max_rage;
@@ -122,12 +121,12 @@ public class SaveFromNextStage : MonoBehaviour
                 bool hasMajorBuffFire = player.GetComponent<fire_warrior_controler>().hasMajorBuff;
                 Item.ItemType majorBuffFire;
                 if (player.GetComponent<fire_warrior_controler>().cacheItemMajor != null)
-                    majorBuffFire = player.GetComponent<rouge_controller>().cacheItemMajor.itemType;
+                    majorBuffFire = player.GetComponent<fire_warrior_controler>().cacheItemMajor.itemType;
                 else
                     majorBuffFire = 0;
 
 
-                int atk_dmg_fire = player.GetComponent<rouge_controller>().atk_dmg;
+                int atk_dmg_fire = player.GetComponent<fire_warrior_controler>().atk_dmg;
                 SaveWarrior saveFire = new SaveWarrior
                 {
 
@@ -140,7 +139,7 @@ public class SaveFromNextStage : MonoBehaviour
 
                 };
                 string jsonFire = JsonUtility.ToJson(saveFire);
-                File.WriteAllText(Application.dataPath + "/saveWarrior.txt", jsonFire);
+                File.WriteAllText(Application.persistentDataPath + "/Save/saveWarrior.txt", jsonFire);
                 break;
             case 2:
                 int max_mana = player.GetComponent<character_water_priest_controller>().max_mana;
@@ -165,12 +164,12 @@ public class SaveFromNextStage : MonoBehaviour
 
                 };
                 string jsonWater = JsonUtility.ToJson(saveWater);
-                File.WriteAllText(Application.dataPath + "/savePriest.txt", jsonWater);
+                File.WriteAllText(Application.persistentDataPath + "/Save/savePriest.txt", jsonWater);
                 break;
         }
         string json = JsonUtility.ToJson(saveInventory);
-      
-        File.WriteAllText(Application.dataPath + "/save.txt", json);
+
+        File.WriteAllText(Application.persistentDataPath + "/Save/save.txt", json);
         
 
 }

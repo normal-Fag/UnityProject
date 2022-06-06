@@ -9,6 +9,7 @@ public class BurningLogic : MonoBehaviour
     private float damage;
     private float timer;
     private Animator anim;
+    public int id;
 
     private void Start()
     {
@@ -31,7 +32,7 @@ public class BurningLogic : MonoBehaviour
         anim.SetBool("Loop", true);
         for (int i = 0; i < timer; i++)
         {
-            enemy.GetComponent<Enemy>().TakeDamage(damage, 0);
+            enemy.GetComponent<Enemy>().TakeDamage(damage, 0, id);
             if (enemy.health <= 0)
                 Destroy(gameObject);
             yield return new WaitForSeconds(1);

@@ -349,26 +349,6 @@ public class rouge_controller : MonoBehaviour
         StartCoroutine(SkillDagger());
     }
 
-    void AE_runStop()
-    {
-        m_audioManager.PlaySound("RunStop");
-    }
-
-    void AE_footstep()
-    {
-        m_audioManager.PlaySound("Footstep");
-    }
-
-    void AE_Jump()
-    {
-        m_audioManager.PlaySound("Jump");
-    }
-
-    void AE_Landing()
-    {
-        m_audioManager.PlaySound("Landing");
-
-    }
 
 
     public void UseItem(Item item, int index)

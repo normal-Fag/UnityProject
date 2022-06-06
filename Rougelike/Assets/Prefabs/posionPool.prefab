@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8732584506355400931}
-  - component: {fileID: 8732584506355400928}
   - component: {fileID: 8732584506355400929}
+  - component: {fileID: 5141079464255205873}
   m_Layer: 0
   m_Name: posionPool
   m_TagString: Untagged
@@ -27,23 +27,11 @@ Transform:
   m_GameObject: {fileID: 8732584506355400934}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.8545552, y: -0.7803861, z: -168.55423}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 6.05, y: 0.37504, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8732584506355400928
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8732584506355400934}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9aea8ed81ad2c0e46a50461583c86fcf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &8732584506355400929
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -70,3 +58,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 11.996166, y: 4.5801477}
   m_EdgeRadius: 0
+--- !u!114 &5141079464255205873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8732584506355400934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b4a8110c71f83c4cb7bef54f0867053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

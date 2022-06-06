@@ -32,9 +32,9 @@ public class Loading : SaveFromNextStage
     private void Load()
     {
 
-        if (File.Exists(Application.dataPath + "/save.txt"))
+        if (File.Exists(Application.persistentDataPath + "/Save/save.txt"))
         {
-            string saveString = File.ReadAllText(Application.dataPath + "/save.txt");
+            string saveString = File.ReadAllText(Application.persistentDataPath + "/Save/save.txt");
 
 
             SaveGeneral saveInventory = JsonUtility.FromJson<SaveGeneral>(saveString);
@@ -55,9 +55,9 @@ public class Loading : SaveFromNextStage
         {
             default:
             case 0:
-                if (File.Exists(Application.dataPath + "/saveRouge.txt"))
+                if (File.Exists(Application.persistentDataPath + "/Save/saveRouge.txt"))
                 {
-                    string saveString = File.ReadAllText(Application.dataPath + "/saveRouge.txt");
+                    string saveString = File.ReadAllText(Application.persistentDataPath + "/Save/saveRouge.txt");
 
                     SaveRouge saveRouge = JsonUtility.FromJson<SaveRouge>(saveString);
                     Item item = new Item { itemType = saveRouge.majorBuff, amount = 1 };
@@ -73,8 +73,39 @@ public class Loading : SaveFromNextStage
                 }
                 break;
             case 1:
+                if (File.Exists(Application.persistentDataPath + "/Save/saveWarrior.txt"))
+                {
+                    string saveString = File.ReadAllText(Application.persistentDataPath + "/Save/saveWarrior.txt");
+
+                    SaveWarrior saveWarrior = JsonUtility.FromJson<SaveWarrior>(saveString);
+                    Item item = new Item { itemType = saveWarrior.majorBuff, amount = 1 };
+
+                    player.transform.Find("UI").Find("Canvas").Find("UI_Inventory").GetComponent<UI_Inventory>().SetBuffCD(item);
+                    player.GetComponent<fire_warrior_controler>().atk_dmg = saveWarrior.atk_dmg;
+                    player.GetComponent<fire_warrior_controler>().cacheItemMajor = item;
+                    player.GetComponent<fire_warrior_controler>().max_rage = saveWarrior.max_rage;
+                    player.GetComponent<fire_warrior_controler>().hasMajorBuff = saveWarrior.hasMajorBuff;
+
+
+                }
                 break;
             case 2:
+                if (File.Exists(Application.persistentDataPath + "/Save/saveRouge.txt"))
+                {
+                    string saveString = File.ReadAllText(Application.persistentDataPath + "/Save/saveRouge.txt");
+
+                    SavePriest savePriest = JsonUtility.FromJson<SavePriest>(saveString);
+                    Item item = new Item { itemType = savePriest.majorBuff, amount = 1 };
+
+                    player.transform.Find("UI").Find("Canvas").Find("UI_Inventory").GetComponent<UI_Inventory>().SetBuffCD(item);
+                    player.GetComponent<character_water_priest_controller>().atk_dmg = savePriest.atk_dmg;
+                    player.GetComponent<character_water_priest_controller>().cacheItemMajor = item;
+                    player.GetComponent<character_water_priest_controller>().max_mana = savePriest.max_mana;
+                    character_water_priest_controller.number_of_mana = savePriest.number_of_mana;
+                    player.GetComponent<character_water_priest_controller>().hasMajorBuff = savePriest.hasMajorBuff;
+
+
+                }
                 break;
         }
 

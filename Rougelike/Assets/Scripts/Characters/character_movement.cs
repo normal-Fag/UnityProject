@@ -74,6 +74,7 @@ public class character_movement : MonoBehaviour
     public bool isExitPosionPool;
     private float posionDebuffCD = 1;
     private float posionTimer = 0;
+    private int trapUp = 1;
 
 
     // Use this for initialization
@@ -204,27 +205,6 @@ public class character_movement : MonoBehaviour
 
 
 
-        void AE_runStop()
-        {
-            m_audioManager.PlaySound("RunStop");
-        }
-
-        void AE_footstep()
-        {
-            m_audioManager.PlaySound("Footstep");
-        }
-
-        void AE_Jump()
-        {
-            m_audioManager.PlaySound("Jump");
-        }
-
-        void AE_Landing()
-        {
-            m_audioManager.PlaySound("Landing");
-
-        }
-
         if (hasHPBuffCD)
         {
 
@@ -298,8 +278,7 @@ public class character_movement : MonoBehaviour
         if (isPosioned)
         {
             posionTimer += Time.deltaTime;
-            m_body2d.gravityScale = 4;
-            if(posionTimer >= 1)
+            if(posionTimer >= 1 && currentHp >= 1)
             {
                 currentHp -= 1;
                 posionTimer = 0;
@@ -312,8 +291,7 @@ public class character_movement : MonoBehaviour
             posionTimer += Time.deltaTime;
             posionDebuffCD -= 1f / 5 * Time.deltaTime;
             m_maxSpeed = speed;
-            m_body2d.gravityScale = 3;
-            if (posionTimer >= 1)
+            if (posionTimer >= 1 && currentHp >= 1)
             {
                 currentHp -= 1;
                 posionTimer = 0;
@@ -343,8 +321,9 @@ public class character_movement : MonoBehaviour
 
         if (isTraping)
         {
+           
             Physics2D.IgnoreLayerCollision(3, 7, true);
-            m_body2d.velocity = transform.right * trapDistanceEvade * character_movement.m_facingDirection * -1f;
+            m_body2d.velocity = (transform.right + transform.up  * m_facingDirection * -1) * trapDistanceEvade * character_movement.m_facingDirection * -1f;
             currentDashTimmer -= Time.deltaTime;
 
 
@@ -596,7 +575,7 @@ public class character_movement : MonoBehaviour
         //FireWarrior
         if ((m_animator.GetCurrentAnimatorStateInfo(0).IsName("defend")
         || m_animator.GetCurrentAnimatorStateInfo(0).IsName("ultimate"))
-        && m_facingDirection != enemy_facingDirection
+        && m_facingDirection == enemy_facingDirection
         && gameObject.GetComponent<fire_warrior_controler>() != null && !fire_warrior_controler.isFuryActive)
         {
             damage = damage / 5;
@@ -613,7 +592,7 @@ public class character_movement : MonoBehaviour
         }
 
         if ((m_animator.GetCurrentAnimatorStateInfo(0).IsName("defend")
-            && m_facingDirection != enemy_facingDirection
+            && m_facingDirection == enemy_facingDirection
             && gameObject.GetComponent<fire_warrior_controler>() != null && fire_warrior_controler.isFuryActive))
             {
                 Debug.Log("Blocked");

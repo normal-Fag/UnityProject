@@ -13,7 +13,7 @@ public class Throw_skill_dagger : MonoBehaviour
     private bool d_grounded = false;
     public Transform t_dagger;
     public Transform trapPoint;
-    public Vector2 trap_atk_range = new Vector2(12f, 3f);
+    public Vector2 trap_atk_range = new Vector3(12f, 3f, -10f);
     public LayerMask enemyLayers;
     public bool isPosion = false;
     void Start()
@@ -39,7 +39,7 @@ public class Throw_skill_dagger : MonoBehaviour
         {
             d_grounded = true;
             d_animator.SetTrigger("Grounded");
-            t_dagger.position = new Vector2 (t_dagger.position.x, t_dagger.position.y + 0.6f);
+            t_dagger.position = new Vector3 (t_dagger.position.x, t_dagger.position.y + 0.6f, -10f);
             rb_dagger.velocity = transform.right * speed * 0;
             t_dagger.rotation = Quaternion.Euler(0, 0, 0);
             StartCoroutine(active_damage(trap_hitEnemies));

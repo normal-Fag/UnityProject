@@ -1,1 +1,1 @@
-{"max_number_of_dagger":15,"number_of_dagger":15,"majorBuff":0,"hasMajorBuff":false,"atk_dmg":10}
+{"max_number_of_dagger":15,"number_of_dagger":15,"majorBuff":10,"hasMajorBuff":true,"atk_dmg":10}

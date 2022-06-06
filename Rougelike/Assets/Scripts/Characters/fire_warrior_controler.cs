@@ -208,6 +208,22 @@ public class fire_warrior_controler : MonoBehaviour
             transform.Find("fury_effect").gameObject.SetActive(false);
         }
 
+
+
+        if (hasMajorBuff)
+        {
+            if (cacheItemMajor.itemType == Item.ItemType.SkullOfRage)
+            {
+                hasSkullOfRage = true;
+                fire_dmg = 1;
+            }
+            if (cacheItemMajor.itemType == Item.ItemType.PhoenixFeather)
+            {
+                hasSkullOfRage = false;
+                fire_dmg = 5;
+            }
+        }
+
         void Attack( )
         {
             m_animator.SetTrigger("Attack");
@@ -286,42 +302,18 @@ public class fire_warrior_controler : MonoBehaviour
                 max_rage += 10;
                 break;
             case Item.ItemType.PhoenixFeather:
-                if (!hasMajorBuff)
-                {
                     character_Movement.inventory.RemoveItem(item, index);
                     fire_dmg = 5;
                     hasMajorBuff = true;
                     cacheItemMajor = item;
-                }
-                else
-                {
-                    MajorBuffReset();
-                    character_Movement.inventory.RemoveItem(item, index);
-                    fire_dmg = 5;
-                    hasMajorBuff = true;
-                    cacheItemMajor = item;
-                    isFuryActive = false;
                     transform.Find("fury_effect").gameObject.SetActive(false);
-                }
                 break;
             case Item.ItemType.SkullOfRage:
-                if (!hasMajorBuff)
-                {
                     character_Movement.inventory.RemoveItem(item, index);
                     hasSkullOfRage = true;
                     hasMajorBuff = true;
                     cacheItemMajor = item;
-                }
-                else
-                {
-                    MajorBuffReset();
-                    character_Movement.inventory.RemoveItem(item, index);
-                    hasSkullOfRage = true;
-                    hasMajorBuff = true;
-                    cacheItemMajor = item;
-                    isFuryActive = false;
                     transform.Find("fury_effect").gameObject.SetActive(false);
-                }
                 break;
 
         }
@@ -342,18 +334,6 @@ public class fire_warrior_controler : MonoBehaviour
         yield return new WaitForSeconds(seconds);
 
         ult_dmg -= 10;
-    }
-
-    private void MajorBuffReset()
-    {
-       if(cacheItemMajor != null && cacheItemMajor.itemType == Item.ItemType.PhoenixFeather)
-        {
-            fire_dmg = 1;
-        }
-        if (cacheItemMajor != null && cacheItemMajor.itemType == Item.ItemType.SkullOfRage)
-        {
-            hasSkullOfRage = false;
-        }
     }
 
     public IEnumerator Ultimate(int cd)

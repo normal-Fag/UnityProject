@@ -55,7 +55,7 @@ public class MashroomEnemy : GroundEnemyBehavior2
     public void Poop()
     {
         Vector3 Vo = CalculateVelocity();
-
+        poopPrefab.GetComponent<MashroomPjectileLogic>().mashroomFacing = facingDirection;
         Instantiate(poopPrefab, transform.position, Quaternion.identity)
             .GetComponent<Rigidbody2D>().velocity = Vo;
         

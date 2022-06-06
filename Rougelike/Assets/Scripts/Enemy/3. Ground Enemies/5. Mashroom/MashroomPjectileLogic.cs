@@ -7,6 +7,7 @@ public class MashroomPjectileLogic : MonoBehaviour
     [HideInInspector] public int damage;
     private Animator anim;
     private Rigidbody2D rb;
+    public int mashroomFacing;
 
     // Start is called before the first frame update
     void Start()
@@ -20,13 +21,13 @@ public class MashroomPjectileLogic : MonoBehaviour
 
         if (collision.tag == "Player")
         {
-            collision.gameObject.GetComponent<playerMovement>().takeDamage(damage);
+            collision.gameObject.GetComponent<character_movement>().Take_Damage(damage, mashroomFacing);
             anim.SetTrigger("Destroy");
             rb.velocity = new Vector3(0, 0, 0);
             Destroy(gameObject, 0.2f);
         }
 
-        if (collision.gameObject.layer == 6)
+        if (collision.tag == "Ground")
         {
             anim.SetTrigger("Destroy");
             rb.velocity = new Vector3(0, 0, 0);

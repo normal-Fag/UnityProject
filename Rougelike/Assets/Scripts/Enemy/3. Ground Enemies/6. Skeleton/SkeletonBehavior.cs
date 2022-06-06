@@ -62,11 +62,12 @@ public class SkeletonBehavior : GroundEnemyBehavior2
         }
     }
 
-    public override void TakeDamage(float damage, int typeOfDamage)
+    public override void TakeDamage(float damage, int typeOfDamage, int id)
     {
-        if (facingDirection != -target.GetComponent<playerMovement>().facing && !isProtecting)
+        characterId = id;
+        if (facingDirection != -target.GetComponent<character_movement>().GetFacing() && !isProtecting)
         {
-            base.TakeDamage(damage, typeOfDamage);
+            base.TakeDamage(damage, typeOfDamage, id);
         }
     }
 }

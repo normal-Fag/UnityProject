@@ -9,6 +9,7 @@ public class PoisonLogic : MonoBehaviour
     private Enemy enemy;
     private float damage;
     private float timer;
+    public int id;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +31,7 @@ public class PoisonLogic : MonoBehaviour
     {
         for (int i = 0; i < timer; i++)
         {
-            enemy.TakeDamage(damage, 0);
+            enemy.TakeDamage(damage, 0, id);
             if (enemy.health <= 0)
                 Destroy(gameObject);
             yield return new WaitForSeconds(1);

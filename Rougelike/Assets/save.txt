@@ -1,1 +1,0 @@
-{"itemList":[],"itemAmount":[],"minorBuffList":[],"minorBuffAmount":[],"max_hp":100,"currentHp":95,"LevelId":1}

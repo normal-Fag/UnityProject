@@ -1,9 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.IO;
 
-public class heroManager : MonoBehaviour
+public class heroManager : SaveFromNextStage
 {
     [SerializeField] public GameObject[] characters;
 
@@ -29,7 +29,30 @@ public class heroManager : MonoBehaviour
 
     public void playGame()
     {
+        Directory.CreateDirectory(Application.persistentDataPath + "/Save");
+        SaveGeneral saveInventory = new SaveGeneral
+        {
+            LevelId = SceneManager.GetActiveScene().buildIndex + 1,
+            characterID = selectedCharecter,
+
+        };
+        string json = JsonUtility.ToJson(saveInventory);
+
+        File.WriteAllText(Application.persistentDataPath + "/Save/save.txt", json);
+        StartCoroutine(LoadScene());
+    }
+
+    private IEnumerator LoadScene()
+    {
         PlayerPrefs.SetInt("selectedcharacter", selectedCharecter);
-        SceneManager.LoadScene("testGame", LoadSceneMode.Single);
+        AsyncOperation operation = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+        LoadingScreen.SetActive(true);
+        while (!operation.isDone)
+        {
+            float progress = Mathf.Clamp01(operation.progress / .9f);
+            loading.value = progress;
+
+            yield return null;
+        }
     }
 }

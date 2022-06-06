@@ -21,8 +21,13 @@ public class Sensor_Prototype : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        m_ColCount++;
-        if(other.GetComponent<Bandit_test>() != null && transform.parent.GetComponent<character_movement>() != null)
+        if(other.tag == "Ground")
+        {
+            m_ColCount++;
+        }
+ 
+
+        if(other.GetComponent<Enemy>() != null && transform.parent.GetComponent<character_movement>() != null)
         {
             transform.parent.GetComponent<character_movement>().GetComponent<Collider2D>().isTrigger = true;
         }
@@ -34,7 +39,10 @@ public class Sensor_Prototype : MonoBehaviour {
 
     void OnTriggerExit2D(Collider2D other)
     {
-        m_ColCount--;
+        if (other.tag == "Ground")
+        {
+            m_ColCount--;
+        }
     }
 
     void Update()

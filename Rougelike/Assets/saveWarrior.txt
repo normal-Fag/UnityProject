@@ -1,0 +1,1 @@
+{"max_rage":100,"number_of_rage":45,"majorBuff":14,"hasMajorBuff":true,"atk_dmg":10}

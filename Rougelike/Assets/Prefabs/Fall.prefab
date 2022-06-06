@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2737832721686114126}
   - component: {fileID: 2737832721686114125}
-  - component: {fileID: 2737832721686114124}
+  - component: {fileID: 842881135497873248}
   m_Layer: 0
   m_Name: Fall
   m_TagString: Untagged
@@ -58,7 +58,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 9.4630375, y: 6.994652}
   m_EdgeRadius: 0
---- !u!114 &2737832721686114124
+--- !u!114 &842881135497873248
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2737832721686114131}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f1f823099074814089c744d8265714a, type: 3}
+  m_Script: {fileID: 11500000, guid: d30987cb9ec164e44b0701cd45efecbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Cinemachine: {fileID: 0}
