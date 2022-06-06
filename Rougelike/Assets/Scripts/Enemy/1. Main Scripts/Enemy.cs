@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(Collider))]
+[RequireComponent(typeof(Collider2D))]
 
 public class Enemy : MonoBehaviour
 {
