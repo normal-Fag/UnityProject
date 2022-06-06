@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Collider))]
+
 public class Enemy : MonoBehaviour
 {
     [Header("Targeting")]
@@ -161,6 +165,8 @@ public class Enemy : MonoBehaviour
         StopAttackPlayer();
         anim.SetTrigger("Death");
         rb.velocity = Vector2.zero;
+        rb.isKinematic = true;
+        GetComponent<Collider2D>().enabled = false;
         Destroy(this.gameObject, 2);
     }
 }

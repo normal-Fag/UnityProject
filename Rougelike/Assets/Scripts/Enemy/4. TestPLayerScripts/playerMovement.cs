@@ -33,6 +33,7 @@ public class playerMovement : MonoBehaviour
 
     void Update()
     {
+        isGrounded = true;
         float input = Input.GetAxis("Horizontal");
 
         float slowDownSpeed = isMoving ? 1.0f : 0.5f;

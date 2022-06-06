@@ -22,5 +22,10 @@ public class PlayerHitLogic : MonoBehaviour
             enemy.TakeDamage(damage, 2);
             StartCoroutine(enemy.PushAway(player.transform.position, 30));
         }
+
+        if (collision.tag == "Boss")
+        {
+            collision.gameObject.GetComponent<Boss>().TakeDamage(damage);
+        }
     }
 }

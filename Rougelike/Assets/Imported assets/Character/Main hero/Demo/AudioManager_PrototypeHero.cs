@@ -26,7 +26,7 @@ public class Sound
 
     public void Play()
     {
-        if(m_clips.Length > 1)
+        if (m_clips.Length > 1)
         {
             int randomClip = Random.Range(0, m_clips.Length - 1);
             m_source.clip = m_clips[randomClip];
@@ -47,7 +47,7 @@ public class AudioManager_PrototypeHero : MonoBehaviour
 
     private void Awake()
     {
-        if(instance != null)
+        if (instance != null)
         {
             Debug.LogError("More than one AudioManger in scene");
         }
@@ -59,7 +59,7 @@ public class AudioManager_PrototypeHero : MonoBehaviour
 
     private void Start()
     {
-        for(int i = 0; i < m_sounds.Length; i++)
+        for (int i = 0; i < m_sounds.Length; i++)
         {
             GameObject go = new GameObject("Sound_" + i + "_" + m_sounds[i].m_name);
             go.transform.SetParent(transform);
@@ -67,11 +67,11 @@ public class AudioManager_PrototypeHero : MonoBehaviour
         }
     }
 
-    public void PlaySound (string name)
+    public void PlaySound(string name)
     {
-        for(int i = 0; i < m_sounds.Length; i++)
+        for (int i = 0; i < m_sounds.Length; i++)
         {
-            if(m_sounds[i].m_name == name)
+            if (m_sounds[i].m_name == name)
             {
                 m_sounds[i].Play();
                 return;
