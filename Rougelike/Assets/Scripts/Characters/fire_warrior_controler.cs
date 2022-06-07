@@ -28,7 +28,7 @@ public class fire_warrior_controler : MonoBehaviour
     public int max_rage = 100;
     public static int max_rage_for_ui;
 
-    public int fire_dmg = 1;
+    public static int fire_dmg = 1;
     public int cache_atk_dmg;
     public int atk_dmg = 10;
     public int buff_atk_dmg;
@@ -127,7 +127,6 @@ public class fire_warrior_controler : MonoBehaviour
             && !hasUltCD && !isFuryActive)
         {
             StartCoroutine(ActionDelay(actionDelay * 1.5f, "ultimate"));
-            number_of_rage = 0;
 
         }
 
@@ -229,6 +228,7 @@ public class fire_warrior_controler : MonoBehaviour
             m_animator.SetTrigger("Attack");
             timer = 0;
             weapon.GetComponent<wp_hitbox>().damage = atk_dmg + buff_atk_dmg;
+            weapon.GetComponent<wp_hitbox>().isBurning = false;
 
 
         }
@@ -238,6 +238,7 @@ public class fire_warrior_controler : MonoBehaviour
             m_animator.SetTrigger("air_atk");
             timer = 0;
             weapon.GetComponent<wp_hitbox>().damage = atk_dmg + buff_atk_dmg;
+            weapon.GetComponent<wp_hitbox>().isBurning = false;
 
         }
         void Defend()
@@ -252,6 +253,7 @@ public class fire_warrior_controler : MonoBehaviour
             weapon_hb.hasRepulsion = true;
             weapon_hb.repulsion = 3;
             weapon.GetComponent<wp_hitbox>().damage = atk_dmg + buff_atk_dmg;
+            weapon.GetComponent<wp_hitbox>().isBurning = false;
 
         }
         IEnumerator ActionDelay(float time, string action)
@@ -340,11 +342,14 @@ public class fire_warrior_controler : MonoBehaviour
     {
         m_animator.SetTrigger("ultimate");
         weapon_hb.hasRepulsion = true;
-        weapon_hb.repulsion = 5;
+        weapon_hb.repulsion = 6;
         hasUltCD = true;
+        weapon.GetComponent<wp_hitbox>().damage = ult_dmg + (number_of_rage - 50);
+        number_of_rage = 0;
+        weapon.GetComponent<wp_hitbox>().isBurning = true;
         yield return new WaitForSeconds(cd);
         hasUltCD = false;
-        weapon.GetComponent<wp_hitbox>().damage = ult_dmg + (number_of_rage - 50);
+       
     }
 
 
@@ -354,9 +359,12 @@ public class fire_warrior_controler : MonoBehaviour
         weapon_hb.hasRepulsion = true;
         weapon_hb.repulsion = 4;
         hasSpCD = true;
+
+        weapon.GetComponent<wp_hitbox>().isBurning = true;
+        weapon.GetComponent<wp_hitbox>().damage = ult_dmg;
         yield return new WaitForSeconds(cd);
         hasSpCD = false;
-        weapon.GetComponent<wp_hitbox>().damage = ult_dmg;
+     
 
     }
 

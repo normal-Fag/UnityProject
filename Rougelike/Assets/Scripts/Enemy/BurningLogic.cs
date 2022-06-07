@@ -6,7 +6,7 @@ public class BurningLogic : MonoBehaviour
 {
     [HideInInspector] public GameObject enemyGameObject;
     private Enemy enemy;
-    private float damage;
+    public float damage;
     private float timer;
     private Animator anim;
     public int id;
@@ -16,7 +16,6 @@ public class BurningLogic : MonoBehaviour
         anim = GetComponent<Animator>();
         enemy = enemyGameObject.GetComponent<Enemy>();
         enemy.isBurning = true;
-        damage = enemy.poisonDamage;
         timer = enemy.poisonTimer;
         StartCoroutine(Burning());
     }
@@ -24,7 +23,7 @@ public class BurningLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3(enemy.transform.position.x, enemy.transform.position.y + 0.5f, -1);
+        transform.position = new Vector3(enemy.transform.position.x, enemy.transform.position.y + 0.5f, -11);
     }
 
     public IEnumerator Burning()

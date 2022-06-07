@@ -262,6 +262,7 @@ public class character_water_priest_controller : MonoBehaviour
             m_animator.SetTrigger("Attack_1");
             timer = 0;
             weapon.GetComponent<wp_hitbox>().damage = atk_dmg + buff_atk_dmg;
+            weapon_hb.hasRepulsion = false;
 
         }
 
@@ -270,6 +271,7 @@ public class character_water_priest_controller : MonoBehaviour
             m_animator.SetTrigger("Air_Attack");
             timer = 0;
             weapon.GetComponent<wp_hitbox>().damage = atk_dmg + buff_atk_dmg;
+            weapon_hb.hasRepulsion = false;
 
         }
         void Defend()
@@ -290,7 +292,7 @@ public class character_water_priest_controller : MonoBehaviour
         {
             m_animator.SetTrigger("Attack_2");
             weapon_hb.hasRepulsion = true;
-            weapon_hb.repulsion = 5;
+            weapon_hb.repulsion = 3;
             weapon.GetComponent<wp_hitbox>().damage = atk_dmg + buff_atk_dmg;
         }
 
@@ -299,7 +301,7 @@ public class character_water_priest_controller : MonoBehaviour
         {
             m_animator.SetTrigger("Attack_3");
             weapon_hb.hasRepulsion = true;
-            weapon_hb.repulsion = 3;
+            weapon_hb.repulsion = 4;
             weapon.GetComponent<wp_hitbox>().damage = atk_dmg + buff_atk_dmg;
 
         }
@@ -322,7 +324,7 @@ public class character_water_priest_controller : MonoBehaviour
                     AirAttack();
                     break;
                 case "tumble":
-                    character_Movement.TrapCast();
+                    character_Movement.Roll();
                     Tumble();
                     break;
                 case "defend":

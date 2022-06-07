@@ -39,29 +39,29 @@ public class character_movement : MonoBehaviour
     public static float max_hp_for_ui;
     public static int currentHp;
 
-
+    
     private bool hasHPBuff = false;
     private bool HealthRegCD = false;
     private int HealthPotionCD;
-    public static float currentHealthPotionCD;
-    private bool hasHealthPotionCD;
+   [HideInInspector] public static float currentHealthPotionCD;
+    public bool hasHealthPotionCD;
     private int HPBuffCD;
     public static float currentHPBuffCD;
-    private bool hasHPBuffCD;
+   [HideInInspector] public bool hasHPBuffCD;
 
 
 
     private int AttackBuffCD;
     public static float currentAttackBuffCD;
-    public bool hasAttackBuffCD;
+    [HideInInspector] public bool hasAttackBuffCD;
 
     private int SkillBuffCD;
     public static float currentSkillBuffCD;
-    public bool hasSkillBuffCD;
+    [HideInInspector] public bool hasSkillBuffCD;
 
 
     float currentDashTimmer;
-    public bool isRolling = false;
+    [HideInInspector] public bool isRolling = false;
     public float rollDistance;
     public  float startDashTimer;
     public float trapDistanceEvade;
@@ -307,7 +307,12 @@ public class character_movement : MonoBehaviour
         if (isRolling)
         {
             m_animator.SetInteger("RollingState", 1);
-            m_body2d.velocity = transform.right * rollDistance * character_movement.m_facingDirection;
+
+            if(transform.GetComponent<character_water_priest_controller>() != null)
+                m_body2d.velocity = transform.right * rollDistance * m_facingDirection * -1;
+            else
+                m_body2d.velocity = transform.right * rollDistance * m_facingDirection;
+
             Physics2D.IgnoreLayerCollision(3, 7, true);
             currentDashTimmer -= Time.deltaTime;
 
@@ -507,67 +512,16 @@ public class character_movement : MonoBehaviour
 
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+
+
+    public void PushAway(Vector3 pushFrom, float pushPower)
     {
-        ItemWorld itemWorld = collision.GetComponent<ItemWorld>();
 
-        if(collision.GetComponent<ItemWorld>() != null 
-            && itemWorld.GetItem().itemType == Item.ItemType.Dagger 
-            && gameObject.GetComponent<rouge_controller>() != null) {
-
-            itemWorld.DestroySelf();
-            rouge_controller.number_of_dagger += 1;
-        }
-        else if (collision.GetComponent<ItemWorld>() != null)
-        {
-            List<Item> items = inventory.GetItemList();
-            if(items.Count < 6)
-            {
-                if (itemWorld.GetItem().itemType == Item.ItemType.HealthPotion)
-                {
-                    itemWorld.GetItem().isCD = hasHealthPotionCD;
-                }
-                if (itemWorld.GetItem().itemType == Item.ItemType.HPBuff)
-                {
-                    itemWorld.GetItem().isCD = hasHPBuffCD;
-                }
-                if (itemWorld.GetItem().itemType == Item.ItemType.AttackBuff)
-                {
-                    itemWorld.GetItem().isCD = hasAttackBuffCD;
-                }
-                if (itemWorld.GetItem().itemType == Item.ItemType.SkillBuff)
-                {
-                    itemWorld.GetItem().isCD = hasSkillBuffCD;
-                }
-                if (itemWorld.GetItem().itemType == Item.ItemType.ManaPotion && gameObject.GetComponent<character_water_priest_controller>() != null)
-                {
-                   itemWorld.GetItem().isCD = gameObject.GetComponent<character_water_priest_controller>().isRefillMana;
-                }
-                if (itemWorld.GetItem().itemType == Item.ItemType.RegenManaPotion && gameObject.GetComponent<character_water_priest_controller>() != null)
-                {
-                    itemWorld.GetItem().isCD = gameObject.GetComponent<character_water_priest_controller>().hasManaRegen;
-                }
-                inventory.AddItem(itemWorld.GetItem());
-                itemWorld.DestroySelf();
-            }
-            else
-            {
-                foreach (Item item in items)
-                {
-                    if (itemWorld.GetItem().itemType == item.itemType && item.amount < inventory.max_stack && item.IsStackable())
-                    {
-                        inventory.AddItem(itemWorld.GetItem());
-                        itemWorld.DestroySelf();
-                        break;
-                    }
-                   
-                }
-            }
-           
-            
-        }
-
+        Vector3 pushDirection = (pushFrom - transform.position).normalized;
+        m_body2d.AddForce(-pushDirection * pushPower, ForceMode2D.Impulse);
+          
     }
+
 
 
     public void Take_Damage(int damage, int enemy_facingDirection)

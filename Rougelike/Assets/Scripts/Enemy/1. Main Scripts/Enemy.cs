@@ -150,6 +150,7 @@ public class Enemy : MonoBehaviour
         if (!isBurning && activeBurning)
         {
             firePrefab.GetComponent<BurningLogic>().id = characterId;
+            firePrefab.GetComponent<BurningLogic>().damage = fire_warrior_controler.fire_dmg;
             Instantiate(firePrefab, transform.position, Quaternion.identity)
                             .GetComponent<BurningLogic>().enemyGameObject = this.gameObject;
         }

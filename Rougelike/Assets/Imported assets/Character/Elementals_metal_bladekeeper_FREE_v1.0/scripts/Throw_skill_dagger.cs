@@ -44,9 +44,12 @@ public class Throw_skill_dagger : MonoBehaviour
             t_dagger.rotation = Quaternion.Euler(0, 0, 0);
             StartCoroutine(active_damage(trap_hitEnemies));
         }
-        else if(other.GetComponent<Bandit_test>() != null)
+        else if(other.GetComponent<Enemy>() != null)
         {
-            other.GetComponent<Bandit_test>().Take_Damage(dagger_damage / 2, 0);
+            if(isPosion)
+                other.GetComponent<Enemy>().TakeDamage(dagger_damage / 2, 2, 0);
+            else
+                other.GetComponent<Enemy>().TakeDamage(dagger_damage / 2, 0, 0);
             Destroy(gameObject);
         }
         else
@@ -62,9 +65,9 @@ public class Throw_skill_dagger : MonoBehaviour
          foreach (Collider2D enemy in trap_hitEnemies)
         {
             if(enemy.tag == "Enemy" && !isPosion)
-                enemy.GetComponent<Bandit_test>().Take_Damage(dagger_damage, 0);
+                enemy.GetComponent<Enemy>().TakeDamage(dagger_damage, 0, 0);
             else if(isPosion && enemy.tag == "Enemy")
-                enemy.GetComponent<Bandit_test>().Take_Damage(dagger_damage, 0);
+                enemy.GetComponent<Enemy>().TakeDamage(dagger_damage, 2, 0);
         }
         StartCoroutine(DestroyTrapDagger());
 

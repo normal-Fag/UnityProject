@@ -90,9 +90,9 @@ public class Loading : SaveFromNextStage
                 }
                 break;
             case 2:
-                if (File.Exists(Application.persistentDataPath + "/Save/saveRouge.txt"))
+                if (File.Exists(Application.persistentDataPath + "/Save/savePriest.txt"))
                 {
-                    string saveString = File.ReadAllText(Application.persistentDataPath + "/Save/saveRouge.txt");
+                    string saveString = File.ReadAllText(Application.persistentDataPath + "/Save/savePriest.txt");
 
                     SavePriest savePriest = JsonUtility.FromJson<SavePriest>(saveString);
                     Item item = new Item { itemType = savePriest.majorBuff, amount = 1 };

@@ -41,7 +41,7 @@ public class UI_Buttons_Rouge : MonoBehaviour
         if (isCDUlt)
         {
             ultimate.interactable = false;
-            ultimate.transform.Find("cd").GetComponent<Image>().fillAmount -= 1f / rouge_controller.UltCD_for_UI * Time.deltaTime;
+            ultimate.transform.Find("cd").GetComponent<Image>().fillAmount -= 1f / (rouge_controller.UltCD_for_UI + 0.1f) * Time.deltaTime;
             if (ultimate.transform.Find("cd").GetComponent<Image>().fillAmount <= 0)
             {
 

@@ -12,6 +12,7 @@ public class wp_hitbox : MonoBehaviour
     public int repulsion = 0;
     public int character_id;
     public bool isPosion = false;
+    public bool isBurning = false;
 
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -19,27 +20,27 @@ public class wp_hitbox : MonoBehaviour
 
         Enemy hit = collision.GetComponent<Enemy>();
 
-        //if(hasRepulsion && hit != null)
-        //{
-        //    hit.force_repulsion = repulsion;
-
-        //}else if (!hasRepulsion && hit != null)
-        //{
-        //    hit.force_repulsion = 0;
-        //}
-
-        if (isPosion)
+        if(hasRepulsion && hit != null)
         {
-            hit.TakeDamage(damage, 0, character_id); // posion
+            StartCoroutine(hit.PushAway(transform.parent.transform.position, repulsion));
         }
-       
-        if (hit != null && canAttack)
+
+        if (isPosion && hit != null && canAttack)
         {
+            hit.TakeDamage(damage, 2, character_id); 
+        }
+
+        else if (isBurning && hit != null && canAttack)
+        {
+            hit.TakeDamage(damage, 1, character_id);
+        }
+
+         else  if (hit != null && canAttack)
+         {
             hasContact = true;
             hit.TakeDamage(damage, 0, character_id);
-            hasRepulsion = false;
 
-        }
+         }
         else
             hasContact = false;
 

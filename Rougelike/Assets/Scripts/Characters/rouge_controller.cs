@@ -222,6 +222,7 @@ public class rouge_controller : MonoBehaviour
         m_animator.SetTrigger("Attack");
         timer = 0;
         weapon.GetComponent<wp_hitbox>().damage = atk_dmg + buff_atk_dmg;
+        weapon.GetComponent<wp_hitbox>().isPosion = false;
     }
 
     void Attack2()
@@ -230,6 +231,7 @@ public class rouge_controller : MonoBehaviour
         m_animator.SetTrigger("Attack_2");
         timer = 0;
         weapon.GetComponent<wp_hitbox>().damage = atk_dmg + buff_atk_dmg;
+        weapon.GetComponent<wp_hitbox>().isPosion = false;
     }
 
   
@@ -239,6 +241,7 @@ public class rouge_controller : MonoBehaviour
         m_animator.SetTrigger("Throw_dagger");
         throwPoint.rotation = Quaternion.Euler(0, 0, 0);
         StartCoroutine(Shoot());
+        weapon.GetComponent<wp_hitbox>().isPosion = false;
 
     }
 
@@ -252,6 +255,7 @@ public class rouge_controller : MonoBehaviour
         weapon_hb.repulsion = 3;
         timer = 0;
         weapon.GetComponent<wp_hitbox>().damage = (atk_dmg + buff_atk_dmg) / 2;
+        weapon.GetComponent<wp_hitbox>().isPosion = false;
 
 
     }
@@ -420,6 +424,10 @@ public class rouge_controller : MonoBehaviour
         weapon_hb.repulsion = 5;
         hasUltCD = true;
         weapon.GetComponent<wp_hitbox>().damage = ult_dmg;
+
+        if(hasPosion)
+            weapon.GetComponent<wp_hitbox>().isPosion = true;
+
         yield return new WaitForSeconds(cd);
         hasUltCD = false;
     }

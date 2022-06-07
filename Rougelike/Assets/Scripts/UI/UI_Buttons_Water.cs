@@ -57,7 +57,7 @@ public class UI_Buttons_Water : MonoBehaviour
 
         if (isCDUlt)
         {
-            ultimate.transform.Find("cd").GetComponent<Image>().fillAmount -= 1f / character_water_priest_controller.UltCD_for_UI * Time.deltaTime;
+            ultimate.transform.Find("cd").GetComponent<Image>().fillAmount -= 1f / (character_water_priest_controller.UltCD_for_UI + 0.1f) * Time.deltaTime;
             if (ultimate.transform.Find("cd").GetComponent<Image>().fillAmount <= 0 || (character_water_priest_controller.hasManaCharge && character_water_priest_controller.hasScrollOfKnowledgeBuff))
             {
 
@@ -68,7 +68,7 @@ public class UI_Buttons_Water : MonoBehaviour
         }
         if (isCDHeal)
         {
-            heal.transform.Find("cd").GetComponent<Image>().fillAmount -= 1f / character_water_priest_controller.HealCD_for_UI * Time.deltaTime;
+            heal.transform.Find("cd").GetComponent<Image>().fillAmount -= 1f / (character_water_priest_controller.HealCD_for_UI + 0.1f) * Time.deltaTime;
 
             if (heal.transform.Find("cd").GetComponent<Image>().fillAmount <= 0 || (character_water_priest_controller.hasManaCharge && character_water_priest_controller.hasScrollOfKnowledgeBuff))
             {

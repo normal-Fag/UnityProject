@@ -223,6 +223,7 @@ public class SaveFromNextStage : MonoBehaviour
 
             yield return null;
         }
+        LoadingScreen.SetActive(false);
     }
 }
 
