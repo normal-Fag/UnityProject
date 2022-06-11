@@ -7600,7 +7600,7 @@ GameObject:
   - component: {fileID: 968330289}
   - component: {fileID: 968330288}
   - component: {fileID: 968330283}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: KnightBoss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7901,6 +7901,10 @@ PrefabInstance:
     - target: {fileID: 3985124046017972353, guid: 5888d9ac9ff6748c89613709b3299f99, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3985124046017972353, guid: 5888d9ac9ff6748c89613709b3299f99, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3985124046017972412, guid: 5888d9ac9ff6748c89613709b3299f99, type: 3}
       propertyPath: m_RootOrder

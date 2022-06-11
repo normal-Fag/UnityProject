@@ -83,7 +83,7 @@ public class playerMovement : MonoBehaviour
 
         playerRb.AddForce(pushDirection * pushPower, ForceMode2D.Impulse);
 
-        yield return new WaitUntil(() => playerRb.velocity.x < 3);
+        yield return new WaitUntil(() => playerRb.velocity.x * pushDirection.x < 3);
 
         isPushed = false;
     }
