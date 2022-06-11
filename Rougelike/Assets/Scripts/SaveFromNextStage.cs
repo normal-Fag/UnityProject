@@ -13,6 +13,9 @@ public class SaveFromNextStage : MonoBehaviour
     protected int characterID;
     public GameObject LoadingScreen;
     public Slider loading;
+    protected Vector3 position;
+    protected bool isCheckpointed;
+    protected int LevelId;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -26,8 +29,12 @@ public class SaveFromNextStage : MonoBehaviour
                 characterID = collision.GetComponent<fire_warrior_controler>().id;
             if (collision.GetComponent<character_water_priest_controller>() != null)
                 characterID = collision.GetComponent<character_water_priest_controller>().id;
+            position = new Vector3(0, 0, -10);
+            LevelId = SceneManager.GetActiveScene().buildIndex + 1;
+            isCheckpointed = true;
             Save();
             StartCoroutine(LoadScene());
+
 
         }
     }
@@ -72,8 +79,6 @@ public class SaveFromNextStage : MonoBehaviour
             
         }
 
-        int LevelId = SceneManager.GetActiveScene().buildIndex + 1;
-
         SaveGeneral saveInventory = new SaveGeneral
         {
             itemList = itemList,
@@ -84,6 +89,8 @@ public class SaveFromNextStage : MonoBehaviour
             currentHp = currentHp,
             LevelId = LevelId,
             characterID = id,
+            character_position = position,
+            isCheckpointed = isCheckpointed,
 
         };
 
@@ -183,6 +190,9 @@ public class SaveFromNextStage : MonoBehaviour
         public int currentHp;
         public int LevelId;
         public int characterID;
+        public Vector3 character_position;
+        public bool isCheckpointed;
+
     }
 
     public class SaveRouge

@@ -52,7 +52,7 @@ public class Throw_skill_dagger : MonoBehaviour
                 other.GetComponent<Enemy>().TakeDamage(dagger_damage / 2, 0, 0);
             Destroy(gameObject);
         }
-        else
+        else if(other.tag == "Wall")
         {
             Destroy(gameObject);
         }

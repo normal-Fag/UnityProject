@@ -34,6 +34,7 @@ public class heroManager : SaveFromNextStage
         {
             LevelId = SceneManager.GetActiveScene().buildIndex + 1,
             characterID = selectedCharecter,
+            character_position = new Vector3(0, 0, -10),
 
         };
         string json = JsonUtility.ToJson(saveInventory);
