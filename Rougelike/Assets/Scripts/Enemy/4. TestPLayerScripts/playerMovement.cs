@@ -20,6 +20,7 @@ public class playerMovement : MonoBehaviour
     public bool isLiving = true;
 
     private Animator anim;
+    private bool isPushed;
 
     public bool isGrounded;
     public int facing;
@@ -38,7 +39,8 @@ public class playerMovement : MonoBehaviour
 
         float slowDownSpeed = isMoving ? 1.0f : 0.5f;
 
-        playerRb.velocity = new Vector2(input * playerSpeed * slowDownSpeed, playerRb.velocity.y);
+        if (!isPushed)
+            playerRb.velocity = new Vector2(input * playerSpeed * slowDownSpeed, playerRb.velocity.y);
 
         if (Input.GetButton("Jump"))
         {
@@ -49,13 +51,11 @@ public class playerMovement : MonoBehaviour
         {
             GetComponent<SpriteRenderer>().flipX = false;
             facing = 1;
-            //facingDiections = 1;
         }
         else if (input < 0)
         {
             GetComponent<SpriteRenderer>().flipX = true;
             facing = -1;
-            //facingDiections = -1;
         }
 
         if (Input.GetButtonDown("Fire1"))
@@ -72,14 +72,20 @@ public class playerMovement : MonoBehaviour
             playerDeath();
     }
 
-    public void PlayerPushAway(Vector3 pushFrom, float pushPower)
+    public IEnumerator PlayerPushAway(Vector3 pushFrom, float pushPower)
     {
-        if (pushPower == 0)
-            return;
+         if (pushPower == 0)
+            yield return null;
 
-        Vector3 pushDirection = (pushFrom - transform.position).normalized;
+        isPushed = true;
 
-        playerRb.AddForce(-1 * pushDirection * pushPower, ForceMode2D.Impulse);
+        Vector3 pushDirection = (transform.position - pushFrom).normalized;
+
+        playerRb.AddForce(pushDirection * pushPower, ForceMode2D.Impulse);
+
+        yield return new WaitUntil(() => playerRb.velocity.x < 3);
+
+        isPushed = false;
     }
 
     private void playerDeath()

@@ -5,12 +5,12 @@ using UnityEngine;
 public class MonsterBossBehavior : Boss
 {
     [Header("Attack")]
-    public float attackDistance = 2;
-    public int attackDamage = 30;
-    public float attackCooldown = 1;
+    public float        attackDistance = 2;
+    public int          attackDamage = 30;
+    public float        attackCooldown = 1;
     [Header("Spell settings")]
-    public GameObject spellPrefab;
-    public int spellDamage;
+    public GameObject   spellPrefab;
+    public int          spellDamage;
 
     [HideInInspector] public float distance;
 
