@@ -13,7 +13,6 @@ public class KnightBossBehavior : Boss
 
     public float jumpForce;
 
-    [HideInInspector] public bool isAttack;
     [HideInInspector] public bool isAirAttack;
     [HideInInspector] public bool isRunning;
     [HideInInspector] public bool isGrounded;
@@ -39,8 +38,8 @@ public class KnightBossBehavior : Boss
         else
             anim.ResetTrigger("Attack");
 
-        if (health < fullHp)
-            StartCoroutine(WaitForHealth());
+        //if (health < fullHp)
+        //    StartCoroutine(WaitForHealth());
 
         if (health <= 0)
             StartCoroutine(BossDeath());
@@ -51,8 +50,6 @@ public class KnightBossBehavior : Boss
         anim.ResetTrigger("Run");
 
         anim.SetTrigger("Attack");
-
-        //audio.PlayOneShot(audioClips[Random.Range(0, 2)]);
     }
 
     public void JumpToPlayer()
@@ -62,16 +59,6 @@ public class KnightBossBehavior : Boss
             Vector2 dir = target.transform.position - transform.position;
             rb.AddForce(new Vector2(dir.normalized.x, 1) * jumpForce, ForceMode2D.Impulse);
         }
-    }
-
-    public void RollToPlayer()
-    {
-
-    }
-
-    public void SlideToPlayer()
-    {
-
     }
 
     public void Health()
@@ -89,7 +76,7 @@ public class KnightBossBehavior : Boss
 
     public IEnumerator WaitForHealth()
     {
-        int waitForHealth = Random.Range(5, 20);
+        int waitForHealth = Random.Range(60, 120);
         yield return new WaitForSeconds(waitForHealth);
         anim.SetTrigger("Health");
     }

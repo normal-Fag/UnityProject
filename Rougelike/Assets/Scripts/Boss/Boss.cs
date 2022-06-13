@@ -18,7 +18,9 @@ public class Boss : MonoBehaviour
     protected Animator                  anim;
     protected Rigidbody2D               rb;
     protected CinemachineVirtualCamera  vCam;
-    protected int                       facingDirection;
+
+    [HideInInspector] public bool isAttack;
+    [HideInInspector] public int        facingDirection;
 
     private void Awake()
     {
@@ -42,7 +44,9 @@ public class Boss : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
-        anim.SetTrigger("Hurt");
+
+        if (!isAttack)
+            anim.SetTrigger("Hurt");
     }
 
     protected IEnumerator BossDeath()

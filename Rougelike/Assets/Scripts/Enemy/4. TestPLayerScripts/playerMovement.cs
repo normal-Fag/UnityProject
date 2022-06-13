@@ -79,11 +79,9 @@ public class playerMovement : MonoBehaviour
 
         isPushed = true;
 
-        Vector3 pushDirection = (transform.position - pushFrom).normalized;
+        playerRb.AddForce((transform.position - pushFrom).normalized * pushPower, ForceMode2D.Impulse);
 
-        playerRb.AddForce(pushDirection * pushPower, ForceMode2D.Impulse);
-
-        yield return new WaitUntil(() => playerRb.velocity.x * pushDirection.x < 3);
+        yield return new WaitUntil(() => Mathf.Abs(playerRb.velocity.x) < 3);
 
         isPushed = false;
     }

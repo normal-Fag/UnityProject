@@ -8582,6 +8582,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3665740951073471156, guid: f0c0bbe5fec634d92a25df7aefb68220, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3665740951073471156, guid: f0c0bbe5fec634d92a25df7aefb68220, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3665740951073471156, guid: f0c0bbe5fec634d92a25df7aefb68220, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3665740951073471158, guid: f0c0bbe5fec634d92a25df7aefb68220, type: 3}
       propertyPath: m_Name
       value: Necromant
