@@ -17,34 +17,68 @@ public class wp_hitbox : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-
-        Enemy hit = collision.GetComponent<Enemy>();
-
-        if(hasRepulsion && hit != null)
+        if (collision.GetComponent<Enemy>() != null)
         {
-            StartCoroutine(hit.PushAway(transform.parent.transform.position, repulsion));
-        }
+            Enemy hit = collision.GetComponent<Enemy>();
 
-        if (isPosion && hit != null && canAttack)
+            if (hasRepulsion && hit != null)
+            {
+                StartCoroutine(hit.PushAway(transform.parent.transform.position, repulsion));
+            }
+
+            if (isPosion && hit != null && canAttack)
+            {
+                hit.TakeDamage(damage, 2, character_id);
+            }
+
+            else if (isBurning && hit != null && canAttack)
+            {
+                hit.TakeDamage(damage, 1, character_id);
+            }
+
+            else if (hit != null && canAttack)
+            {
+                hasContact = true;
+                hit.TakeDamage(damage, 0, character_id);
+
+            }
+            else
+                hasContact = false;
+        }
+           
+        else if(collision.GetComponent<Boss>() != null)
         {
-            hit.TakeDamage(damage, 2, character_id); 
+            Boss hit = collision.GetComponent<Boss>();
+
+            if (hasRepulsion && hit != null)
+            {
+           // StartCoroutine(hit.PushAway(transform.parent.transform.position, repulsion));
+            }
+
+            if (isPosion && hit != null && canAttack)
+            {
+                hit.TakeDamage(damage);
+            }
+
+            else if (isBurning && hit != null && canAttack)
+            {
+                hit.TakeDamage(damage);
+            }
+
+            else if (hit != null && canAttack)
+            {
+                hasContact = true;
+                hit.TakeDamage(damage);
+
+            }
+            else
+                hasContact = false;
         }
-
-        else if (isBurning && hit != null && canAttack)
-        {
-            hit.TakeDamage(damage, 1, character_id);
-        }
-
-         else  if (hit != null && canAttack)
-         {
-            hasContact = true;
-            hit.TakeDamage(damage, 0, character_id);
-
-         }
-        else
-            hasContact = false;
+          
+       
 
     }
+
 
     public void OnTriggerExit(Collider other)
     {

@@ -10,8 +10,6 @@ public class rouge_controller : MonoBehaviour
     [SerializeField] float timer = 0;
     [SerializeField] int attackDamage = 20;
     private Animator m_animator;
-    private AudioSource m_audioSource;
-    private AudioEffects m_audioManager;
 
     private Rigidbody2D m_body2d;
 
@@ -69,8 +67,6 @@ public class rouge_controller : MonoBehaviour
         m_animator = GetComponent<Animator>();
         weapon_hb = weapon.GetComponent<wp_hitbox>();
         weapon_hb.canAttack = false;
-        m_audioSource = GetComponent<AudioSource>();
-        m_audioManager = AudioEffects.instance;
         number_of_dagger = max_number_of_daggers;
         weapon.GetComponent<wp_hitbox>().character_id = id;
         UltCD_for_UI = UltCD;

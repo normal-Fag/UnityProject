@@ -18,8 +18,6 @@ public class character_movement : MonoBehaviour
     private Animator m_animator;
     public Rigidbody2D m_body2d;
     private Sensor_Prototype m_groundSensor;
-    private AudioSource m_audioSource;
-    private AudioEffects m_audioManager;
 
     public bool m_grounded = false;
     private bool m_moving = false;
@@ -82,8 +80,6 @@ public class character_movement : MonoBehaviour
     {
         m_animator = GetComponent<Animator>();
         m_body2d = GetComponent<Rigidbody2D>();
-        m_audioSource = GetComponent<AudioSource>();
-        m_audioManager = AudioEffects.instance;
         m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Prototype>();
         stopingAction = false;
 

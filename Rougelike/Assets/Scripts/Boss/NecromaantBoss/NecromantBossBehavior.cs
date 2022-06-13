@@ -59,7 +59,7 @@ public class NecromantBossBehavior : Boss
                 }
                 break;
             case 1:
-                if (target.GetComponent<playerMovement>().isGrounded)
+                if (target.GetComponent<character_movement>().m_grounded)
                 {
                     spellSpawnPoint = new Vector3(target.position.x, target.position.y, -1);
                     Instantiate(spell2, spellSpawnPoint, Quaternion.identity);

@@ -14,7 +14,10 @@ public class playerMovement : MonoBehaviour
     private Rigidbody2D playerRb;
     private Animator playerAnimator;
 
+    private bool isGrounded;
+    private bool isPushed;
     private bool isMoving;
+    private int facing;
     [HideInInspector]
     public bool isLiving = true;
 
