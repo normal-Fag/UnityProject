@@ -86,7 +86,6 @@ public class SaveFromNextStage : MonoBehaviour
             minorBuffList = minorBuffList,
             minorBuffAmount = minorBuffAmount,
             max_hp = max_hp,
-            currentHp = currentHp,
             LevelId = LevelId,
             characterID = id,
             character_position = position,
@@ -138,7 +137,6 @@ public class SaveFromNextStage : MonoBehaviour
                 {
 
                     max_rage = max_rage,
-                    number_of_rage = number_of_rage,
                     hasMajorBuff = hasMajorBuffFire,
                     atk_dmg = atk_dmg_fire,
                     majorBuff = majorBuffFire,
@@ -164,7 +162,6 @@ public class SaveFromNextStage : MonoBehaviour
                 {
 
                     max_mana = max_mana,
-                    number_of_mana = number_of_mana,
                     hasMajorBuff = hasMajorBuffWater,
                     atk_dmg = atk_dmg_water,
                     majorBuff = majorBuffWater,
@@ -187,7 +184,6 @@ public class SaveFromNextStage : MonoBehaviour
         public List<Item.ItemType> minorBuffList;
         public List<int> minorBuffAmount;
         public int max_hp;
-        public int currentHp;
         public int LevelId;
         public int characterID;
         public Vector3 character_position;
@@ -207,7 +203,6 @@ public class SaveFromNextStage : MonoBehaviour
     public class SaveWarrior
     {
         public int max_rage;
-        public int number_of_rage;
         public Item.ItemType majorBuff;
         public bool hasMajorBuff;
         public int atk_dmg;
@@ -216,7 +211,6 @@ public class SaveFromNextStage : MonoBehaviour
     public class SavePriest
     {
         public int max_mana;
-        public int number_of_mana;
         public Item.ItemType majorBuff;
         public bool hasMajorBuff;
         public int atk_dmg;

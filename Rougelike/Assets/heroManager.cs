@@ -2,29 +2,38 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
+using TMPro; 
 
 public class heroManager : SaveFromNextStage
 {
     [SerializeField] public GameObject[] characters;
+    [SerializeField] private GameObject[] descriptions;
+    [SerializeField] private TMP_InputField nameField;
 
-    private int selectedCharecter = 0;
+    protected int selectedCharecter = 0;
 
     public void nextOption()
     {
         characters[selectedCharecter].SetActive(false);
+        descriptions[selectedCharecter].SetActive(false);
         selectedCharecter = (selectedCharecter + 1) % characters.Length;
         characters[selectedCharecter].SetActive(true);
+        descriptions[selectedCharecter].SetActive(true);
+        nameField.SetTextWithoutNotify(selectedCharecter.ToString());
     }
 
     public void backOption()
     {
         characters[selectedCharecter].SetActive(false);
+        descriptions[selectedCharecter].SetActive(false);
         selectedCharecter--;
         if(selectedCharecter < 0)
         {
             selectedCharecter += characters.Length;
         }
         characters[selectedCharecter].SetActive(true);
+        descriptions[selectedCharecter].SetActive(true);
+        nameField.SetTextWithoutNotify(selectedCharecter.ToString());
     }
 
     public void playGame()
@@ -35,6 +44,7 @@ public class heroManager : SaveFromNextStage
             LevelId = SceneManager.GetActiveScene().buildIndex + 1,
             characterID = selectedCharecter,
             character_position = new Vector3(0, 0, -10),
+            isCheckpointed = false,
 
         };
         string json = JsonUtility.ToJson(saveInventory);

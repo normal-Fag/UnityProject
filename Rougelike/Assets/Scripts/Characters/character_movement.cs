@@ -277,6 +277,7 @@ public class character_movement : MonoBehaviour
 
         if (isPosioned)
         {
+            transform.Find("Acid").gameObject.SetActive(true);
             posionTimer += Time.deltaTime;
             if(posionTimer >= 1 && currentHp >= 1)
             {
@@ -300,6 +301,7 @@ public class character_movement : MonoBehaviour
             {
                 posionDebuffCD = 1f;
                 isExitPosionPool = false;
+                transform.Find("Acid").gameObject.SetActive(false);
             }
         }
 
