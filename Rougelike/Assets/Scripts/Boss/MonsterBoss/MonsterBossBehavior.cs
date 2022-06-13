@@ -41,8 +41,6 @@ public class MonsterBossBehavior : Boss
         anim.ResetTrigger("Run");
 
         anim.SetTrigger("Attack");
-
-        audio.PlayOneShot(audioClips[Random.Range(0, 2)]);
     }
 
     public override void Flip()
@@ -60,7 +58,7 @@ public class MonsterBossBehavior : Boss
     public void Spellcast()
     {
         Vector2 targetPosition = target.transform.position;
-        Vector2 spawnPoint = new Vector2(targetPosition.x, targetPosition.y + 4);
+        Vector2 spawnPoint = new Vector2(targetPosition.x, targetPosition.y + 3.5f);
 
         Instantiate(spellPrefab, spawnPoint, Quaternion.identity);
     }
@@ -99,7 +97,11 @@ public class MonsterBossBehavior : Boss
     {
         yield return new WaitForSeconds(1);
 
-        audio.PlayOneShot(audioClips[2], 1);
-        //audio.pitch = Mathf.PingPong(Time.deltaTime, 1);
+        audio.PlayOneShot(audioClips[2], 0.8f);
+    }
+
+    public void PlayRandomClip()
+    {
+        audio.PlayOneShot(audioClips[Random.Range(0, 2)], 0.8f);
     }
 }
