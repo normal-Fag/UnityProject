@@ -26,11 +26,13 @@ public class playerMovement : MonoBehaviour
 
     void Update()
     {
+        isGrounded = true;
         float input = Input.GetAxis("Horizontal");
 
         float slowDownSpeed = isMoving ? 1.0f : 0.5f;
 
-        playerRb.velocity = new Vector2(input * playerSpeed * slowDownSpeed, playerRb.velocity.y);
+        if (!isPushed)
+            playerRb.velocity = new Vector2(input * playerSpeed * slowDownSpeed, playerRb.velocity.y);
 
         if (Input.GetButton("Jump"))
         {
@@ -40,12 +42,13 @@ public class playerMovement : MonoBehaviour
         if (input > 0)
         {
             GetComponent<SpriteRenderer>().flipX = false;
-            //facingDiections = 1;
+            facing = 1;
         }
         else if (input < 0)
         {
             GetComponent<SpriteRenderer>().flipX = true;
-            //facingDiections = -1;
+            facing = -1;
+
         }
     }
     public void takeDamage(int damage)
@@ -54,6 +57,21 @@ public class playerMovement : MonoBehaviour
         playerHP -= damage;
         if (playerHP < 1)
             playerDeath();
+    }
+
+
+    public IEnumerator PlayerPushAway(Vector3 pushFrom, float pushPower)
+    {
+         if (pushPower == 0)
+            yield return null;
+
+        isPushed = true;
+
+        playerRb.AddForce((transform.position - pushFrom).normalized * pushPower, ForceMode2D.Impulse);
+
+        yield return new WaitUntil(() => Mathf.Abs(playerRb.velocity.x) < 3);
+
+        isPushed = false;
     }
     private void playerDeath()
     {

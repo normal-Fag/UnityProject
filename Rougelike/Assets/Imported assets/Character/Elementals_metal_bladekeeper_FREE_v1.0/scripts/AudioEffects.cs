@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class CharacterSound
+public class Sound
 {
     public string m_name;
     public AudioClip[] m_clips;
@@ -26,7 +26,7 @@ public class CharacterSound
 
     public void Play()
     {
-        if(m_clips.Length > 1)
+        if (m_clips.Length > 1)
         {
             int randomClip = Random.Range(0, m_clips.Length - 1);
             m_source.clip = m_clips[randomClip];
@@ -37,14 +37,17 @@ public class CharacterSound
     }
 }
 
-public class AudioEffects : MonoBehaviour
+public class AudioManager_PrototypeHero : MonoBehaviour
 {
     // Make it a singleton class that can be accessible everywhere
-    public static AudioEffects instance;
+    public static AudioManager_PrototypeHero instance;
+
+    [SerializeField]
+    Sound[] m_sounds;
 
     private void Awake()
     {
-        if(instance != null)
+        if (instance != null)
         {
             Debug.LogError("More than one AudioManger in scene");
         }
@@ -54,27 +57,28 @@ public class AudioEffects : MonoBehaviour
         }
     }
 
-    //private void Start()
-    //{
-    //    for(int i = 0; i < m_sounds.Length; i++)
-    //    {
-    //        GameObject go = new GameObject("Sound_" + i + "_" + m_sounds[i].m_name);
-    //        go.transform.SetParent(transform);
-    //        m_sounds[i].SetSource(go.AddComponent<AudioSource>());
-    //    }
-    //}
+    private void Start()
+    {
+        for (int i = 0; i < m_sounds.Length; i++)
+        {
+            GameObject go = new GameObject("Sound_" + i + "_" + m_sounds[i].m_name);
+            go.transform.SetParent(transform);
+            m_sounds[i].SetSource(go.AddComponent<AudioSource>());
+        }
+    }
 
-    //public void PlaySound (string name)
-    //{
-    //    for(int i = 0; i < m_sounds.Length; i++)
-    //    {
-    //        if(m_sounds[i].m_name == name)
-    //        {
-    //            m_sounds[i].Play();
-    //            return;
-    //        }
-    //    }
+    public void PlaySound(string name)
+    {
+        for (int i = 0; i < m_sounds.Length; i++)
+        {
+            if (m_sounds[i].m_name == name)
+            {
+                m_sounds[i].Play();
+                return;
+            }
+        }
 
-    //    Debug.LogWarning("AudioManager: Sound name not found in list: " + name);
-    //}
+        Debug.LogWarning("AudioManager: Sound name not found in list: " + name);
+    }
 }
+
