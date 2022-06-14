@@ -4,22 +4,25 @@ using UnityEngine;
 
 public class KnightBossBehavior : Boss
 {
-    [Header("Attack")]
+    [Header("Knight Attack")]
     public int      attackDamage = 30;
     public int      attackDamageInAir = 30;
     public float    attackDistance = 2;
     public float    attackDistance2;
-    public float    attackCooldown = 2.5f;
-
-    public float jumpForce;
+    public float    attackCooldownMin = 1f;
+    public float    attackCooldownMax = 3.5f;
+    [Header("Knight jump")]
+    public float    jumpForce;
 
     [HideInInspector] public bool isAirAttack;
     [HideInInspector] public bool isRunning;
     [HideInInspector] public bool isGrounded;
+    [HideInInspector] public bool isHeald;
+
+    [HideInInspector] public float   fullHp;
+    [HideInInspector] public float   distance;
 
     private bool    isCooldown;
-    public float   distance;
-    private float   fullHp;
 
     private void Start()
     {
@@ -27,9 +30,9 @@ public class KnightBossBehavior : Boss
         fullHp = health;
     }
 
-    private void Update()
+    public override void Update()
     {
-        Flip();
+        base.Update();
 
         distance = Vector2.Distance(target.position, transform.position);
 
@@ -37,9 +40,6 @@ public class KnightBossBehavior : Boss
             AttackPlayer();
         else
             anim.ResetTrigger("Attack");
-
-        //if (health < fullHp)
-        //    StartCoroutine(WaitForHealth());
 
         if (health <= 0)
             StartCoroutine(BossDeath());
@@ -61,13 +61,9 @@ public class KnightBossBehavior : Boss
         }
     }
 
-    public void Health()
-    {
-        health += 30;
-    }
-
     public IEnumerator Cooldown()
     {
+        float attackCooldown = Random.Range(attackCooldownMin, attackCooldownMax);
         isCooldown = true;
         anim.ResetTrigger("Attack");
         yield return new WaitForSeconds(attackCooldown);
@@ -77,7 +73,13 @@ public class KnightBossBehavior : Boss
     public IEnumerator WaitForHealth()
     {
         int waitForHealth = Random.Range(60, 120);
+
+        anim.ResetTrigger("Health");
+        health += ((fullHp - health) / 100) * 50;
+        isHeald = true;
+
         yield return new WaitForSeconds(waitForHealth);
-        anim.SetTrigger("Health");
+
+        isHeald = false;
     }
 }

@@ -4,41 +4,29 @@ using UnityEngine;
 
 public class KnightHitLogic : MonoBehaviour
 {
-    //// Start is called before the first frame update
-    //void Start()
-    //{
-        
-    //}
-
-    //// Update is called once per frame
-    //void Update()
-    //{
-        
-    //}
-
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
             KnightBossBehavior boss = GetComponentInParent<KnightBossBehavior>();
-            playerMovement player = collision.gameObject.GetComponent<playerMovement>();
+            character_movement player = collision.gameObject.GetComponent<character_movement>();
 
             if (boss.isAirAttack)
             {
                 Vector3 pushDir = new Vector3(
                     player.transform.position.x - 10 * boss.facingDirection,
                     player.transform.position.y, 0);
-                StartCoroutine(player.PlayerPushAway(pushDir, 20));
+                //StartCoroutine(player.PlayerPushAway(pushDir, 20));
                 StartCoroutine(IgnorePlayer(boss, player));
-                player.takeDamage(boss.attackDamageInAir);
+                player.Take_Damage(boss.attackDamageInAir, boss.facingDirection);
                 return;
             }
 
-            //player.takeDamage(boss.attackDamage);
+            player.Take_Damage(boss.attackDamage, boss.facingDirection);
         }
     }
 
-    private IEnumerator IgnorePlayer(KnightBossBehavior boss, playerMovement player)
+    private IEnumerator IgnorePlayer(KnightBossBehavior boss, character_movement player)
     {
         Physics2D.IgnoreCollision(boss.GetComponent<Collider2D>(), player.GetComponent<Collider2D>(), true);
         yield return new WaitUntil(() => boss.isGrounded);

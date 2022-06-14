@@ -23,8 +23,10 @@ public class MonsterBossBehavior : Boss
         StartCoroutine(StartVoice());
     }
 
-    private void Update()
+    public override void Update()
     {
+        base.Update();
+
         distance = Vector2.Distance(transform.position, target.position);
 
         if (distance <= attackDistance && !isCooldown)
@@ -32,8 +34,6 @@ public class MonsterBossBehavior : Boss
 
         if (health <= 0)
             StartCoroutine(BossDeath());
-
-        Flip();
     }
 
     public void AttackPlayer()

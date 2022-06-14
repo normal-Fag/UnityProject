@@ -39,15 +39,15 @@ public class KnightBossRunBehavior : StateMachineBehaviour
             isRunning = false;
             animator.SetTrigger("Slide");
         }
+
         else if (timer <= 0 && nextState == 1 && boss.distance <= 10)
         {
             isRunning = false;
             animator.SetTrigger("Roll");
         }
-        else if (timer <= 0)
-        {
+
+        else if (timer <= 0 || boss.distance <= boss.attackDistance)
             animator.SetTrigger("Idle");
-        }
 
         if (isRunning)
             rb.velocity     = dir.normalized * speed;
@@ -58,6 +58,6 @@ public class KnightBossRunBehavior : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
  
-        animator.ResetTrigger("Run");
+        //animator.ResetTrigger("Run");
     }
 }

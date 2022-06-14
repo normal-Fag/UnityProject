@@ -13,20 +13,30 @@ public class Boss : MonoBehaviour
     [Header("Audio")]
     public AudioClip[]      audioClips;
     public new AudioSource  audio;
+    public CanvasGroup      canvas;
 
-    [HideInInspector] public Transform  target;
     protected Animator                  anim;
     protected Rigidbody2D               rb;
     protected CinemachineVirtualCamera  vCam;
 
-    [HideInInspector] public bool isAttack;
+    [HideInInspector] public Transform  target;
+    [HideInInspector] public bool       isAttack;
     [HideInInspector] public int        facingDirection;
+
+    private bool isStarted;
 
     private void Awake()
     {
         anim    = GetComponent<Animator>();
         rb      = GetComponent<Rigidbody2D>();
         vCam    = GetComponent<CinemachineVirtualCamera>();
+    }
+
+    virtual public void Update()
+    {
+        Flip();
+        if (isStarted)
+            ShowBossUI();
     }
 
     virtual public void Flip()
@@ -45,8 +55,14 @@ public class Boss : MonoBehaviour
     {
         health -= damage;
 
-        if (!isAttack)
-            anim.SetTrigger("Hurt");
+        anim.SetTrigger("Hurt");
+    }
+
+    private void ShowBossUI()
+    {
+        canvas.alpha = Mathf.Lerp(canvas.alpha, 1, Time.deltaTime * 2.5f);
+        if (canvas.alpha > 0.9f)
+            isStarted = false;
     }
 
     protected IEnumerator BossDeath()
@@ -71,6 +87,8 @@ public class Boss : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         anim.SetTrigger("Start");
+
+        isStarted = true;
 
         yield return new WaitForSeconds(2);
 
