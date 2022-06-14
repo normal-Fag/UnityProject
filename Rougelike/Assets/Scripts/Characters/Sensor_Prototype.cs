@@ -43,6 +43,10 @@ public class Sensor_Prototype : MonoBehaviour {
         {
             m_ColCount--;
         }
+        if (other.GetComponent<Enemy>() != null && transform.parent.GetComponent<character_movement>() != null)
+        {
+            transform.parent.GetComponent<character_movement>().GetComponent<Collider2D>().isTrigger = false;
+        }
     }
 
     void Update()

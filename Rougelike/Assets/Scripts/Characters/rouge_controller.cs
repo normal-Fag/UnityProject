@@ -315,7 +315,7 @@ public class rouge_controller : MonoBehaviour
         }
         else
         {
-            skill_dagger.GetComponent<Throw_skill_dagger>().isPosion = true;
+            skill_dagger.GetComponent<Throw_skill_dagger>().isPosion = false;
         }
         Instantiate(skill_dagger, throwPoint.position, throwPoint.rotation);
     
