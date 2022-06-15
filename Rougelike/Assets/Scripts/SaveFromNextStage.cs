@@ -52,7 +52,11 @@ public class SaveFromNextStage : MonoBehaviour
         int currentHp, max_hp;
         int id = characterID;
         currentHp = character_movement.currentHp;
-        max_hp = playerScript.max_hp;
+
+        if(playerScript.hasHPBuff)
+            max_hp = playerScript.max_hp - 50;
+        else
+            max_hp = playerScript.max_hp;
 
 
         for (int i = 0; i < items.Count; i++){

@@ -57,18 +57,18 @@ public class wp_hitbox : MonoBehaviour
 
             if (isPosion && hit != null && canAttack)
             {
-                hit.TakeDamage(damage);
+                hit.TakeDamage(damage, 2, character_id);
             }
 
             else if (isBurning && hit != null && canAttack)
             {
-                hit.TakeDamage(damage);
+                hit.TakeDamage(damage, 1, character_id);
             }
 
             else if (hit != null && canAttack)
             {
                 hasContact = true;
-                hit.TakeDamage(damage);
+                hit.TakeDamage(damage, 0, character_id);
 
             }
             else

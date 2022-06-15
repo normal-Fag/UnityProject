@@ -38,7 +38,7 @@ public class character_movement : MonoBehaviour
     public static int currentHp;
 
     
-    private bool hasHPBuff = false;
+    public bool hasHPBuff = false;
     private bool HealthRegCD = false;
     private int HealthPotionCD;
    [HideInInspector] public static float currentHealthPotionCD;

@@ -22,5 +22,6 @@ public class KnightBossRollBehavior : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         Physics2D.IgnoreLayerCollision(7, 3, false);
+        animator.ResetTrigger("Roll");
     }
 }
