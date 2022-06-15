@@ -22,6 +22,7 @@ public class KnightHitLogic : MonoBehaviour
                 return;
             }
 
+            boss.PlayAttackSound();
             player.Take_Damage(boss.attackDamage, boss.facingDirection);
         }
     }

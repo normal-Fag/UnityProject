@@ -12,6 +12,8 @@ public class KnightBossBehavior : Boss
     public float    attackDistance2;
     public float    attackCooldownMin = 1f;
     public float    attackCooldownMax = 3.5f;
+    public AudioClip[] attackSFX;
+
     [Header("Knight jump")]
     public float    jumpForce;
 
@@ -80,5 +82,10 @@ public class KnightBossBehavior : Boss
         yield return new WaitForSeconds(waitForHealth);
 
         isHeald = false;
+    }
+
+    public void PlayAttackSound()
+    {
+        audio.PlayOneShot(attackSFX[Random.Range(0, attackSFX.Length)], 0.2f);
     }
 }
