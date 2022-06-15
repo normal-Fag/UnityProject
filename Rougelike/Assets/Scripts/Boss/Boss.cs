@@ -1,19 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Cinemachine;
 
 
 public class Boss : MonoBehaviour
 {
+    [Space]
     [Header("General")]
     public float            health = 10000;
     public float            movementSpeed = 5;
-
+    [Space]
     [Header("Audio")]
     public AudioClip[]      audioClips;
     public new AudioSource  audio;
+    [Space]
+    [Header("UI")]
     public CanvasGroup      canvas;
+    public Image            hpFill; 
 
     protected Animator                  anim;
     protected Rigidbody2D               rb;
@@ -22,6 +27,7 @@ public class Boss : MonoBehaviour
     [HideInInspector] public Transform  target;
     [HideInInspector] public bool       isAttack;
     [HideInInspector] public int        facingDirection;
+    [HideInInspector] public float      fullHp;
 
     private bool isStarted;
 
@@ -30,11 +36,14 @@ public class Boss : MonoBehaviour
         anim    = GetComponent<Animator>();
         rb      = GetComponent<Rigidbody2D>();
         vCam    = GetComponent<CinemachineVirtualCamera>();
+        fullHp = health;
     }
 
     virtual public void Update()
     {
         Flip();
+        SetHpFillAmount();
+
         if (isStarted)
             ShowBossUI();
     }
@@ -63,6 +72,11 @@ public class Boss : MonoBehaviour
         canvas.alpha = Mathf.Lerp(canvas.alpha, 1, Time.deltaTime * 2.5f);
         if (canvas.alpha > 0.9f)
             isStarted = false;
+    }
+
+    private void SetHpFillAmount()
+    {
+        hpFill.fillAmount = health / fullHp; 
     }
 
     protected IEnumerator BossDeath()

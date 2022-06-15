@@ -16,7 +16,7 @@ public class bossHitLogic : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            collision.gameObject.GetComponent<playerMovement>().takeDamage(boss.attackDamage);
+            collision.gameObject.GetComponent<character_movement>().Take_Damage(boss.attackDamage, boss.facingDirection);
         }
     }
 }

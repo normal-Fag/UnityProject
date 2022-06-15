@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class KnightBossBehavior : Boss
 {
+    [Header("Knight Behavior")]
     [Header("Knight Attack")]
     public int      attackDamage = 30;
     public int      attackDamageInAir = 30;
@@ -19,7 +20,6 @@ public class KnightBossBehavior : Boss
     [HideInInspector] public bool isGrounded;
     [HideInInspector] public bool isHeald;
 
-    [HideInInspector] public float   fullHp;
     [HideInInspector] public float   distance;
 
     private bool    isCooldown;
@@ -27,7 +27,6 @@ public class KnightBossBehavior : Boss
     private void Start()
     {
         StartCoroutine(BossStart());
-        fullHp = health;
     }
 
     public override void Update()

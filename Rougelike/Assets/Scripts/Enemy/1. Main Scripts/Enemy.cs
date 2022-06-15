@@ -26,6 +26,7 @@ public class Enemy : MonoBehaviour
     public float                    poisonDamage = 5;
     public float                    poisonTimer = 5;
 
+    [Space]
     [Header("Attack")]
     [SerializeField] public int     damage = 10;
     [SerializeField] public float   attackDistance;
@@ -51,6 +52,7 @@ public class Enemy : MonoBehaviour
     private bool            isItemDroped;
 
 
+    [Space]
     [Header("Procent")]
     public float HealthPotionProcent = 30;
     public float AttackBuffProcent = 30;

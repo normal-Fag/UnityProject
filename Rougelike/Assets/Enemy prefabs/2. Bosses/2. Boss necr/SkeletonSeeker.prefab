@@ -213,6 +213,7 @@ GameObject:
   - component: {fileID: 4383115967534244209}
   - component: {fileID: 4383115967534244223}
   - component: {fileID: 4383115967534244220}
+  - component: {fileID: 1964546296093248742}
   - component: {fileID: 4383115967534244222}
   m_Layer: 7
   m_Name: SkeletonSeeker
@@ -345,6 +346,102 @@ CapsuleCollider2D:
   m_Offset: {x: 0.02092131, y: 0.025366267}
   m_Size: {x: 0.37463427, y: 0.7774269}
   m_Direction: 0
+--- !u!82 &1964546296093248742
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4383115967534244221}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &4383115967534244222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -360,7 +457,7 @@ MonoBehaviour:
   hotZone: {fileID: 4383115966861157341}
   triggerArea: {fileID: 4383115965700507297}
   health: 70
-  movementSpeed: 3
+  movementSpeed: 4
   activeBurning: 0
   firePrefab: {fileID: 0}
   fireDamage: 5
@@ -396,5 +493,13 @@ MonoBehaviour:
   ManaPotionProcent: 0
   ManaStoneProcent: 0
   RegenManaPotionrProcent: 0
-  BurstStoneProcent: 30
-  ScrollOfKnowledgeProcent: 30
+  BurstStoneProcent: 0
+  ScrollOfKnowledgeProcent: 0
+  SkeletonAwakeSFX:
+  - {fileID: 8300000, guid: a33f301674cf9410088aaaa1771c1937, type: 3}
+  - {fileID: 8300000, guid: e5912281eded542d290e0ff677ccadf1, type: 3}
+  - {fileID: 8300000, guid: c099c47fc390543dd9e4b037105f8562, type: 3}
+  - {fileID: 8300000, guid: 49c26dc0aa8a246b4a34b363e5bae965, type: 3}
+  - {fileID: 8300000, guid: bff767d190d6a421c80c0b015a923726, type: 3}
+  - {fileID: 8300000, guid: 04189e8277c874fa8bfc6ec5b3153f21, type: 3}
+  SkeletonFootstepSFX: []

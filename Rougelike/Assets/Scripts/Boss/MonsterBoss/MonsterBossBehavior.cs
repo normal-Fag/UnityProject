@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class MonsterBossBehavior : Boss
 {
+    [Space]
     [Header("Attack")]
     public float        attackDistance = 2;
     public int          attackDamage = 30;
     public float        attackCooldown = 1;
+    [Space]
     [Header("Spell settings")]
     public GameObject   spellPrefab;
     public int          spellDamage;
+    public AudioClip[]  spellAudioClips;
 
     [HideInInspector] public float distance;
 
@@ -81,7 +84,7 @@ public class MonsterBossBehavior : Boss
             targetPosition = target.transform.position;
             spawnPoint = new Vector2(targetPosition.x, targetPosition.y + 4.5f);
             Instantiate(spellPrefab, spawnPoint, Quaternion.identity);
-            yield return new WaitForSeconds(.8f);
+            yield return new WaitForSeconds(1f);
         }
     }
 
@@ -103,5 +106,10 @@ public class MonsterBossBehavior : Boss
     public void PlayRandomClip()
     {
         audio.PlayOneShot(audioClips[Random.Range(0, 2)], 0.8f);
+    }
+
+    public void PlayCastClip()
+    {
+        audio.PlayOneShot(spellAudioClips[Random.Range(0, 2)], 0.4f);
     }
 }

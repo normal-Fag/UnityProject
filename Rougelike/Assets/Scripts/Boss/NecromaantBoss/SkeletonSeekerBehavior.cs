@@ -4,13 +4,22 @@ using UnityEngine;
 
 public class SkeletonSeekerBehavior : Enemy
 {
+
+    [Header("Audio")]
+    [Space]
+    public AudioClip[] SkeletonAwakeSFX;
+    public AudioClip[] SkeletonFootstepSFX;
+
+    private AudioSource AS;
+
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
+        AS      = GetComponent<AudioSource>();
+        rb      = GetComponent<Rigidbody2D>();
+        anim    = GetComponent<Animator>();
 
-        intTimer = cooldownTimer;
-        target = transform;
+        intTimer    = cooldownTimer;
+        target      = transform;
 
         anim.SetTrigger("Spawn");
         StartCoroutine(SpawnStart());
@@ -91,5 +100,15 @@ public class SkeletonSeekerBehavior : Enemy
         isAttack = true;
         yield return new WaitForSeconds(.5f);
         isAttack = false;
+    }
+
+    public void PlayAwakeSound()
+    {
+        AS.PlayOneShot(SkeletonAwakeSFX[Random.Range(0, SkeletonAwakeSFX.Length)], 0.2f);
+    }
+
+    public void PlaySkeletonFootstepSound()
+    {
+        AS.PlayOneShot(SkeletonFootstepSFX[Random.Range(0, SkeletonFootstepSFX.Length)], 0.2f);
     }
 }
