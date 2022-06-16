@@ -427,4 +427,34 @@ public class rouge_controller : MonoBehaviour
         yield return new WaitForSeconds(cd);
         hasUltCD = false;
     }
+
+    void AE_Ult()
+    {
+        character_movement.m_audioManager.PlaySound("Ult");
+    }
+    void AE_StartTrap()
+    {
+        character_movement.m_audioManager.PlaySound("StartTrap");
+    }
+    void AE_Throw()
+    {
+        character_movement.m_audioManager.PlaySound("Throw");
+    }
+   
+    void AE_Attack()
+    {
+        character_movement.m_audioManager.PlaySound("Attack");
+    }
+    void AE_Attack2()
+    {
+        character_movement.m_audioManager.PlaySound("Attack2");
+    }
+    void AE_HAttackEnd()
+    {
+        character_movement.m_audioManager.PlaySound("HAttackEnd");
+    }
+    void AE_Roll()
+    {
+        character_movement.m_audioManager.PlaySound("Roll");
+    }
 }

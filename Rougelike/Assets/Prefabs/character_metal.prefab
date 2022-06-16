@@ -74,6 +74,62 @@ MonoBehaviour:
     pitch: 1
     m_randomVolumeRange: {x: 1, y: 1}
     m_randomPitchRange: {x: 1, y: 1}
+  - m_name: HAttackEnd
+    m_clips:
+    - {fileID: 8300000, guid: 508bcd6c75b222d479d0a2468f681733, type: 3}
+    volume: 1
+    pitch: 1
+    m_randomVolumeRange: {x: 1, y: 1}
+    m_randomPitchRange: {x: 1, y: 1}
+  - m_name: Attack
+    m_clips:
+    - {fileID: 8300000, guid: bf42df21a66de4241b8508e0a8ae0ef7, type: 3}
+    volume: 1
+    pitch: 1
+    m_randomVolumeRange: {x: 1, y: 1}
+    m_randomPitchRange: {x: 1, y: 1}
+  - m_name: Attack2
+    m_clips:
+    - {fileID: 8300000, guid: 38fef2c183e3ce149afde7bc0d64543a, type: 3}
+    volume: 1
+    pitch: 1
+    m_randomVolumeRange: {x: 1, y: 1}
+    m_randomPitchRange: {x: 1, y: 1}
+  - m_name: Roll
+    m_clips:
+    - {fileID: 8300000, guid: 7dc0dd9dc0b36f347acb46db95aef1f5, type: 3}
+    volume: 0.6
+    pitch: 1
+    m_randomVolumeRange: {x: 0.6, y: 0.6}
+    m_randomPitchRange: {x: 1, y: 1}
+  - m_name: Ult
+    m_clips:
+    - {fileID: 8300000, guid: 12428776d415908429cd1eb8e0e849b7, type: 3}
+    volume: 1
+    pitch: 1
+    m_randomVolumeRange: {x: 1, y: 1}
+    m_randomPitchRange: {x: 1, y: 1}
+  - m_name: Trap
+    m_clips:
+    - {fileID: 8300000, guid: a2f6422c1f67cc040b30d9f98c1d3622, type: 3}
+    volume: 0.6
+    pitch: 1
+    m_randomVolumeRange: {x: 0.6, y: 0.6}
+    m_randomPitchRange: {x: 1, y: 1}
+  - m_name: StartTrap
+    m_clips:
+    - {fileID: 8300000, guid: 5a18f2ef7db9f1943bedda13ff85ee89, type: 3}
+    volume: 1
+    pitch: 1
+    m_randomVolumeRange: {x: 1, y: 1}
+    m_randomPitchRange: {x: 1, y: 1}
+  - m_name: Throw
+    m_clips:
+    - {fileID: 8300000, guid: 46841148d3f3ce1418070ac295612ce8, type: 3}
+    volume: 0.8
+    pitch: 1
+    m_randomVolumeRange: {x: 0.8, y: 0.8}
+    m_randomPitchRange: {x: 1, y: 1}
 --- !u!1 &123824533979388655
 GameObject:
   m_ObjectHideFlags: 0
@@ -1393,6 +1449,7 @@ MonoBehaviour:
   trapDistanceEvade: 10
   isPosioned: 0
   isExitPosionPool: 0
+  m_audioSource: {fileID: 0}
 --- !u!70 &8234875250196443228
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
