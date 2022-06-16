@@ -93,6 +93,11 @@ IEnumerator DestroyTrapDagger()
         Gizmos.DrawWireCube(trapPoint.position, trap_atk_range);
 
     }
+
+    void AE_Trap()
+    {
+       character_movement.m_audioManager.PlaySound("Trap");
+    }
 }
 
 

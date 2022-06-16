@@ -78,7 +78,7 @@ public class character_movement : MonoBehaviour
 
 
     public AudioSource m_audioSource;
-    public CharactersAudioManager m_audioManager;
+    public static CharactersAudioManager m_audioManager;
 
 
     // Use this for initialization
@@ -546,12 +546,15 @@ public class character_movement : MonoBehaviour
             m_audioManager.PlaySound("BlockSuccess");
             Debug.Log("Blocked");
         }
-        else if (gameObject.GetComponent<fire_warrior_controler>() != null && !fire_warrior_controler.isFuryActive)
+        else if (gameObject.GetComponent<fire_warrior_controler>() != null && !fire_warrior_controler.isFuryActive && !m_animator.GetCurrentAnimatorStateInfo(0).IsName("ultimate"))
         {
             m_animator.SetTrigger("Hurt");
             fire_warrior_controler.number_of_rage += 3;
             currentHp -= damage;
             Debug.Log("Not Blocked");
+        }else if(gameObject.GetComponent<fire_warrior_controler>() != null && !fire_warrior_controler.isFuryActive && m_animator.GetCurrentAnimatorStateInfo(0).IsName("ultimate"))
+        {
+            currentHp -= damage/2;
         }
 
         if ((m_animator.GetCurrentAnimatorStateInfo(0).IsName("defend")
@@ -586,6 +589,7 @@ public class character_movement : MonoBehaviour
         {
             character_water_priest_controller.number_of_mana -= (character_water_priest_controller.max_mana_for_ui * (25 / character_water_priest_controller.scrollBuff)) / 100;
             character_water_priest_controller.manaCharge += 0.34f;
+            m_audioManager.PlaySound("DefendSuccess");
             Debug.Log("Blocked");
         }
         else if (gameObject.GetComponent<character_water_priest_controller>() != null)

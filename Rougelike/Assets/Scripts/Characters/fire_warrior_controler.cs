@@ -372,49 +372,49 @@ public class fire_warrior_controler : MonoBehaviour
 
     void AE_StartUlt()
     {
-        transform.GetComponent<character_movement>().m_audioManager.PlaySound("StartUlt");
+        character_movement.m_audioManager.PlaySound("StartUlt");
     }
     void AE_EndtUlt()
     {
-        transform.GetComponent<character_movement>().m_audioManager.PlaySound("EndtUlt");
+        character_movement.m_audioManager.PlaySound("EndtUlt");
     }
     void AE_MidUlt()
     {
-        transform.GetComponent<character_movement>().m_audioManager.PlaySound("MidUlt");
+        character_movement.m_audioManager.PlaySound("MidUlt");
     }
     void AE_StartSP()
     {
-        transform.GetComponent<character_movement>().m_audioManager.PlaySound("StartSP");
+        character_movement.m_audioManager.PlaySound("StartSP");
     }
     void AE_EndSP()
     {
-        transform.GetComponent<character_movement>().m_audioManager.PlaySound("EndSP");
+        character_movement.m_audioManager.PlaySound("EndSP");
     }
 
     void AE_Attack()
     {
-        transform.GetComponent<character_movement>().m_audioManager.PlaySound("Attack");
+        character_movement.m_audioManager.PlaySound("Attack");
     }
 
     void AE_AirAttack()
     {
-        transform.GetComponent<character_movement>().m_audioManager.PlaySound("AirAttack");
+        character_movement.m_audioManager.PlaySound("AirAttack");
     }
     void AE_HAttackStart()
     {
-        transform.GetComponent<character_movement>().m_audioManager.PlaySound("HAttackStart");
+        character_movement.m_audioManager.PlaySound("HAttackStart");
     }
     void AE_HAttackMid()
     {
-        transform.GetComponent<character_movement>().m_audioManager.PlaySound("HAttackMid");
+        character_movement.m_audioManager.PlaySound("HAttackMid");
     }
     void AE_HAttackEnd()
     {
-        transform.GetComponent<character_movement>().m_audioManager.PlaySound("HAttackEnd");
+        character_movement.m_audioManager.PlaySound("HAttackEnd");
     }
     void AE_Block()
     {
-        transform.GetComponent<character_movement>().m_audioManager.PlaySound("Block");
+        character_movement.m_audioManager.PlaySound("Block");
     }
 
 
