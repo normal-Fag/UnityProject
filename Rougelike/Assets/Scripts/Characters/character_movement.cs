@@ -15,6 +15,8 @@ public class character_movement : MonoBehaviour
     [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private GameObject UiController;
 
+
+
     private Animator m_animator;
     public Rigidbody2D m_body2d;
     private Sensor_Prototype m_groundSensor;
@@ -75,6 +77,10 @@ public class character_movement : MonoBehaviour
     private int trapUp = 1;
 
 
+    public AudioSource m_audioSource;
+    public CharactersAudioManager m_audioManager;
+
+
     // Use this for initialization
     private void Start()
     {
@@ -90,6 +96,9 @@ public class character_movement : MonoBehaviour
         uiInventory.SetInventory(inventory);
         uiInventory.SetCharacter(this);
         speed = m_maxSpeed;
+
+        m_audioSource = GetComponent<AudioSource>();
+        m_audioManager = CharactersAudioManager.instance;
 
     }
 
@@ -158,6 +167,7 @@ public class character_movement : MonoBehaviour
         if (CrossPlatformInputManager.GetButtonDown("Jump") && m_grounded && m_disableMovementTimer < 0.0f)
         {
             Jump();
+            m_audioManager.PlaySound("Jump");
         }
         //Run
         else if (m_moving)
@@ -533,6 +543,7 @@ public class character_movement : MonoBehaviour
             damage = damage / 5;
             currentHp -= damage;
             fire_warrior_controler.number_of_rage += 10;
+            m_audioManager.PlaySound("BlockSuccess");
             Debug.Log("Blocked");
         }
         else if (gameObject.GetComponent<fire_warrior_controler>() != null && !fire_warrior_controler.isFuryActive)
@@ -548,7 +559,8 @@ public class character_movement : MonoBehaviour
             && gameObject.GetComponent<fire_warrior_controler>() != null && fire_warrior_controler.isFuryActive))
             {
                 Debug.Log("Blocked");
-            }
+                m_audioManager.PlaySound("BlockSuccess");
+        }
             else if (gameObject.GetComponent<fire_warrior_controler>() != null && fire_warrior_controler.isFuryActive)
             {
                 m_animator.SetTrigger("Hurt");
@@ -679,4 +691,23 @@ public class character_movement : MonoBehaviour
         }
 
     }
+
+
+
+    //Audio
+    void AE_runStop()
+    {
+        m_audioManager.PlaySound("RunStop");
+    }
+
+    void AE_footstep()
+    {
+        m_audioManager.PlaySound("Footstep");
+    }
+
+    void AE_Landing()
+    {
+        m_audioManager.PlaySound("Landing");
+    }
+
 }

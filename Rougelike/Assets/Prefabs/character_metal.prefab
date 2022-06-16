@@ -1,5 +1,79 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1197485753
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1197485754}
+  - component: {fileID: 1197485755}
+  m_Layer: 0
+  m_Name: Audio Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1197485754
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197485753}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 24.628513, y: 0.71834636, z: 0}
+  m_LocalScale: {x: 8, y: 8, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6304703492741953727}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1197485755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197485753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 868e85005cd944945a5b046f9448ad35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_sounds:
+  - m_name: Footstep
+    m_clips:
+    - {fileID: 8300000, guid: 1a631ada4ecd9cf49a88b135aa70c396, type: 3}
+    - {fileID: 8300000, guid: ee00faf8b8432ff40a6e008c84d5ae59, type: 3}
+    - {fileID: 8300000, guid: 9b0833c02b71a294faba6438278d937a, type: 3}
+    volume: 1
+    pitch: 1
+    m_randomVolumeRange: {x: 0.6, y: 1}
+    m_randomPitchRange: {x: 0.6, y: 0.9}
+  - m_name: RunStop
+    m_clips:
+    - {fileID: 8300000, guid: 9b0833c02b71a294faba6438278d937a, type: 3}
+    volume: 1
+    pitch: 1
+    m_randomVolumeRange: {x: 1, y: 1}
+    m_randomPitchRange: {x: 1, y: 1}
+  - m_name: Jump
+    m_clips:
+    - {fileID: 8300000, guid: 5a18f2ef7db9f1943bedda13ff85ee89, type: 3}
+    volume: 1
+    pitch: 1.2
+    m_randomVolumeRange: {x: 1, y: 1}
+    m_randomPitchRange: {x: 1, y: 1}
+  - m_name: Landing
+    m_clips:
+    - {fileID: 8300000, guid: 5329b99920a6642409627b29d379aff7, type: 3}
+    volume: 1
+    pitch: 1
+    m_randomVolumeRange: {x: 1, y: 1}
+    m_randomPitchRange: {x: 1, y: 1}
 --- !u!1 &123824533979388655
 GameObject:
   m_ObjectHideFlags: 0
@@ -1165,6 +1239,7 @@ Transform:
   - {fileID: 251011807078589298}
   - {fileID: 3665341384295048931}
   - {fileID: 5933757416930171}
+  - {fileID: 1197485754}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1307,6 +1382,7 @@ MonoBehaviour:
   m_grounded: 0
   stopingAction: 0
   max_hp: 100
+  hasHPBuff: 0
   hasHealthPotionCD: 0
   hasHPBuffCD: 0
   hasAttackBuffCD: 0
@@ -8195,6 +8271,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 045be3817688a954a8a05c77b240cc2c, type: 3}
+--- !u!1 &251011807078589302 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7854060319195435495, guid: 045be3817688a954a8a05c77b240cc2c, type: 3}
+  m_PrefabInstance: {fileID: 8035828938070274705}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &251011807078589298 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7854060319195435491, guid: 045be3817688a954a8a05c77b240cc2c, type: 3}
@@ -8211,11 +8292,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &251011807078589302 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7854060319195435495, guid: 045be3817688a954a8a05c77b240cc2c, type: 3}
-  m_PrefabInstance: {fileID: 8035828938070274705}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8888892087615644017
 PrefabInstance:
   m_ObjectHideFlags: 0

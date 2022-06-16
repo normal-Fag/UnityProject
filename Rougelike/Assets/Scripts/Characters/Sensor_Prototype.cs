@@ -21,32 +21,12 @@ public class Sensor_Prototype : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag == "Ground")
-        {
-            m_ColCount++;
-        }
- 
-
-        if(other.GetComponent<Enemy>() != null && transform.parent.GetComponent<character_movement>() != null)
-        {
-            transform.parent.GetComponent<character_movement>().GetComponent<Collider2D>().isTrigger = true;
-        }
-        else if(transform.parent.GetComponent<character_movement>() != null)
-        {
-            transform.parent.GetComponent<character_movement>().GetComponent<Collider2D>().isTrigger = false;
-        }
+        m_ColCount++;
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.tag == "Ground")
-        {
-            m_ColCount--;
-        }
-        if (other.GetComponent<Enemy>() != null && transform.parent.GetComponent<character_movement>() != null)
-        {
-            transform.parent.GetComponent<character_movement>().GetComponent<Collider2D>().isTrigger = false;
-        }
+        m_ColCount--;
     }
 
     void Update()

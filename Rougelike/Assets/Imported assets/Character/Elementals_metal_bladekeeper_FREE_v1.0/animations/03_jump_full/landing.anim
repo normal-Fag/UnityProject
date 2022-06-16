@@ -20,14 +20,12 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: -139464735563526887, guid: 1be63481c4efe4d6c8cab402f692a1dc, type: 3}
-    - time: 0.083333336
       value: {fileID: -6505651057174327432, guid: c36a09833c3734cddbf00dc15bb60f44, type: 3}
-    - time: 0.16666667
+    - time: 0.083333336
       value: {fileID: -2880672350650647258, guid: 9ab5824e8aa0f4558ad72c6dafead022, type: 3}
-    - time: 0.25
+    - time: 0.16666667
       value: {fileID: -299538748953359802, guid: 12df858d0f7124080b3d2f452165c515, type: 3}
-    - time: 0.33333334
+    - time: 0.25
       value: {fileID: -1891416491716489663, guid: f6cdf42be797b4df78ebb5f422e02e42, type: 3}
     attribute: m_Sprite
     path: 
@@ -48,7 +46,6 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: -139464735563526887, guid: 1be63481c4efe4d6c8cab402f692a1dc, type: 3}
     - {fileID: -6505651057174327432, guid: c36a09833c3734cddbf00dc15bb60f44, type: 3}
     - {fileID: -2880672350650647258, guid: 9ab5824e8aa0f4558ad72c6dafead022, type: 3}
     - {fileID: -299538748953359802, guid: 12df858d0f7124080b3d2f452165c515, type: 3}
@@ -58,7 +55,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.35000002
+    m_StopTime: 0.26666668
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -77,4 +74,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0
+    functionName: AE_Landing
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
