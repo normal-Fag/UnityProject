@@ -56,6 +56,8 @@ public class character_water_priest_controller : MonoBehaviour
     public static int UltCD_for_UI;
     public static int HealCD_for_UI;
     public static int manaCostShield;
+    public static bool hasBurstStone = false;
+    
 
 
     void Start()
@@ -343,6 +345,21 @@ public class character_water_priest_controller : MonoBehaviour
         }
 
 
+        if (hasMajorBuff)
+        {
+            if (cacheItemMajor.itemType == Item.ItemType.ScrollOfKnowledge)
+            {
+                hasScrollOfKnowledgeBuff = true;
+                moreManaChargeTime = 1f;
+            }
+            if (cacheItemMajor.itemType == Item.ItemType.BurstStone)
+            {
+                hasBurstStone = false;
+                hasScrollOfKnowledgeBuff = false;
+                scrollBuff = 1;
+            }
+        }
+
 
     }
 
@@ -353,12 +370,19 @@ public class character_water_priest_controller : MonoBehaviour
             default:
             case Item.ItemType.AttackBuff:
                 StartCoroutine(useAttackBuff(item.Cooldown()));
+                character_movement.m_audioManager.PlaySound("UsePotion");
+                break;
+            case Item.ItemType.InfinityAttackBuff:
+                character_movement.m_audioManager.PlaySound("UseMinor");
+                atk_dmg += 10;
                 break;
             case Item.ItemType.SkillBuff:
                 StartCoroutine(useSkillBuff(item.Cooldown()));
+                character_movement.m_audioManager.PlaySound("UsePotion");
                 break;
             case Item.ItemType.ManaPotion:
                 ManaPotionCD = item.Cooldown();
+                character_movement.m_audioManager.PlaySound("UsePotion");
                 currentManaPotionCD = 1f;
                 character_Movement.CheckCDinInventory(item);
                 character_Movement.inventory.RemoveItem(item, index);
@@ -366,6 +390,7 @@ public class character_water_priest_controller : MonoBehaviour
                 break;
             case Item.ItemType.RegenManaPotion:
                 regManaCD = item.Cooldown();
+                character_movement.m_audioManager.PlaySound("UsePotion");
                 currentRegenManaCD = 1f;
                 character_Movement.CheckCDinInventory(item);
                 character_Movement.inventory.RemoveItem(item, index);
@@ -373,43 +398,24 @@ public class character_water_priest_controller : MonoBehaviour
                 break;
             case Item.ItemType.ManaStone:
                 character_Movement.inventory.RemoveItem(item, index);
+                character_movement.m_audioManager.PlaySound("UseMinor");
                 max_mana += 25;
                 break;
             case Item.ItemType.BurstStone:
-                if (!hasMajorBuff)
-                {
                     character_Movement.inventory.RemoveItem(item, index);
                     moreManaChargeTime = 2f;
                     hasMajorBuff = true;
+                    hasBurstStone = true;
                     cacheItemMajor = item;
-                }
-                else
-                {
-                    MajorBuffReset();
-                    character_Movement.inventory.RemoveItem(item, index);
-                    moreManaChargeTime = 2f;
-                    hasMajorBuff = true;
-        
-                }
+                    character_movement.m_audioManager.PlaySound("UseMajor");
                 break;
             case Item.ItemType.ScrollOfKnowledge:
-                if (!hasMajorBuff)
-                {
                     character_Movement.inventory.RemoveItem(item, index);
+                    character_movement.m_audioManager.PlaySound("UseMajor");
                     hasScrollOfKnowledgeBuff = true;
                     hasMajorBuff = true;
                     cacheItemMajor = item;
-                }
-                else
-                {
-                    MajorBuffReset();
-                    character_Movement.inventory.RemoveItem(item, index);
-                    hasScrollOfKnowledgeBuff = true;
-                    hasMajorBuff = true;
-                    cacheItemMajor = item;
-
-
-                }
+             
                 break;
 
         }
@@ -431,18 +437,6 @@ public class character_water_priest_controller : MonoBehaviour
         yield return new WaitForSeconds(seconds);
 
         ult_dmg -= 10;
-    }
-    private void MajorBuffReset()
-    {
-        if (cacheItemMajor != null && cacheItemMajor.itemType == Item.ItemType.BurstStone)
-        {
-            moreManaChargeTime = 1f;
-        }
-        if (cacheItemMajor != null && cacheItemMajor.itemType == Item.ItemType.ScrollOfKnowledge)
-        {
-            hasScrollOfKnowledgeBuff = false;
-            scrollBuff = 1;
-        }
     }
 
     public IEnumerator useManaPotion(int seconds)
@@ -489,5 +483,58 @@ public class character_water_priest_controller : MonoBehaviour
         hasHealCD = false;
 
     }
+
+
+
+    void AE_UltStart()
+    {
+        character_movement.m_audioManager.PlaySound("UltStart");
+    }
+    void AE_UltMid()
+    {
+        character_movement.m_audioManager.PlaySound("UltMid");
+    }
+    void AE_UltEnd()
+    {
+        character_movement.m_audioManager.PlaySound("UltEnd");
+    }
+    void AE_Heal()
+    {
+        character_movement.m_audioManager.PlaySound("Heal");
+    }
+    void AE_Attack()
+    {
+        character_movement.m_audioManager.PlaySound("Attack");
+    }
+    void AE_AttackToAttack2()
+    {
+        character_movement.m_audioManager.PlaySound("AttackToAttack2");
+    }
+    void AE_Attack2()
+    {
+        character_movement.m_audioManager.PlaySound("Attack2");
+    }
+    void AE_AirAttack()
+    {
+        character_movement.m_audioManager.PlaySound("AirAttack");
+    }
+    void AE_HAttackEnd()
+    {
+        character_movement.m_audioManager.PlaySound("HAttackEnd");
+    }
+    void AE_Tumble()
+    {
+        character_movement.m_audioManager.PlaySound("Tumble");
+    }
+    void AE_Defend()
+    {
+        character_movement.m_audioManager.PlaySound("Defend");
+    }
+    void AE_DefendEnd()
+    {
+        character_movement.m_audioManager.PlaySound("DefendEnd");
+    }
+
+
 }
 

@@ -358,30 +358,37 @@ public class rouge_controller : MonoBehaviour
             default:
             case Item.ItemType.AttackBuff:
                 StartCoroutine(useAttackBuff(item.Cooldown()));
+                character_movement.m_audioManager.PlaySound("UsePotion");
                 break;
             case Item.ItemType.InfinityAttackBuff:
+                character_movement.m_audioManager.PlaySound("UseMinor");
                 atk_dmg += 10;
                 break;
             case Item.ItemType.SkillBuff:
                 StartCoroutine(useSkillBuff(item.Cooldown()));
+                character_movement.m_audioManager.PlaySound("UsePotion");
                 break;
             case Item.ItemType.Poison:
                 character_Movement.inventory.RemoveItem(item, index);
+                character_movement.m_audioManager.PlaySound("UsePotion");
                 StartCoroutine(usePosion(item.Cooldown()));
                 break;
             case Item.ItemType.PosionBag:
                     character_Movement.inventory.RemoveItem(item, index);
                     hasMajorBuff = true;
                     cacheItemMajor = item;
+                character_movement.m_audioManager.PlaySound("UseMajor");
                 break;
             case Item.ItemType.SpareBag:
                 character_Movement.inventory.RemoveItem(item, index);
+                character_movement.m_audioManager.PlaySound("UseMinor");
                 max_number_of_daggers += 5; 
                 break;
             case Item.ItemType.InfinityBag:
                     character_Movement.inventory.RemoveItem(item, index);
                     hasMajorBuff = true;
                     cacheItemMajor = item;
+                character_movement.m_audioManager.PlaySound("UseMajor");
                 break;
 
         }
@@ -426,5 +433,35 @@ public class rouge_controller : MonoBehaviour
 
         yield return new WaitForSeconds(cd);
         hasUltCD = false;
+    }
+
+    void AE_Ult()
+    {
+        character_movement.m_audioManager.PlaySound("Ult");
+    }
+    void AE_StartTrap()
+    {
+        character_movement.m_audioManager.PlaySound("StartTrap");
+    }
+    void AE_Throw()
+    {
+        character_movement.m_audioManager.PlaySound("Throw");
+    }
+   
+    void AE_Attack()
+    {
+        character_movement.m_audioManager.PlaySound("Attack");
+    }
+    void AE_Attack2()
+    {
+        character_movement.m_audioManager.PlaySound("Attack2");
+    }
+    void AE_HAttackEnd()
+    {
+        character_movement.m_audioManager.PlaySound("HAttackEnd");
+    }
+    void AE_Roll()
+    {
+        character_movement.m_audioManager.PlaySound("Roll");
     }
 }

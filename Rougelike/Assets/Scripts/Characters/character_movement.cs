@@ -15,6 +15,8 @@ public class character_movement : MonoBehaviour
     [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private GameObject UiController;
 
+
+
     private Animator m_animator;
     public Rigidbody2D m_body2d;
     private Sensor_Prototype m_groundSensor;
@@ -75,6 +77,10 @@ public class character_movement : MonoBehaviour
     private int trapUp = 1;
 
 
+    public AudioSource m_audioSource;
+    public static CharactersAudioManager m_audioManager;
+
+
     // Use this for initialization
     private void Start()
     {
@@ -90,6 +96,9 @@ public class character_movement : MonoBehaviour
         uiInventory.SetInventory(inventory);
         uiInventory.SetCharacter(this);
         speed = m_maxSpeed;
+
+        m_audioSource = GetComponent<AudioSource>();
+        m_audioManager = CharactersAudioManager.instance;
 
     }
 
@@ -158,6 +167,7 @@ public class character_movement : MonoBehaviour
         if (CrossPlatformInputManager.GetButtonDown("Jump") && m_grounded && m_disableMovementTimer < 0.0f)
         {
             Jump();
+            m_audioManager.PlaySound("Jump");
         }
         //Run
         else if (m_moving)
@@ -359,6 +369,7 @@ public class character_movement : MonoBehaviour
                 CheckCDinInventory(item);
                 inventory.RemoveItem(item, index);
                 currentHealthPotionCD = 1f;
+                m_audioManager.PlaySound("UsePotion");
                 StartCoroutine(useHealthPotion(item.Cooldown()));
                 break;
             case Item.ItemType.HPBuff:
@@ -367,12 +378,14 @@ public class character_movement : MonoBehaviour
                 CheckCDinInventory(item);
                 inventory.RemoveItem(item, index);
                 currentHPBuffCD = 1f;
+                m_audioManager.PlaySound("UsePotion");
                 StartCoroutine(useHealthBuff(item.Cooldown()));
                 break;
             case Item.ItemType.InfinityHpBuff:
                 minorBufflist.Add(item);
                 inventory.RemoveItem(item, index);
                 max_hp += 50;
+                m_audioManager.PlaySound("UseMinor");
                 break;
             case Item.ItemType.InfinityAttackBuff:
                 if (gameObject.GetComponent<fire_warrior_controler>() != null)
@@ -533,14 +546,18 @@ public class character_movement : MonoBehaviour
             damage = damage / 5;
             currentHp -= damage;
             fire_warrior_controler.number_of_rage += 10;
+            m_audioManager.PlaySound("BlockSuccess");
             Debug.Log("Blocked");
         }
-        else if (gameObject.GetComponent<fire_warrior_controler>() != null && !fire_warrior_controler.isFuryActive)
+        else if (gameObject.GetComponent<fire_warrior_controler>() != null && !fire_warrior_controler.isFuryActive && !m_animator.GetCurrentAnimatorStateInfo(0).IsName("ultimate"))
         {
             m_animator.SetTrigger("Hurt");
             fire_warrior_controler.number_of_rage += 3;
             currentHp -= damage;
             Debug.Log("Not Blocked");
+        }else if(gameObject.GetComponent<fire_warrior_controler>() != null && !fire_warrior_controler.isFuryActive && m_animator.GetCurrentAnimatorStateInfo(0).IsName("ultimate"))
+        {
+            currentHp -= damage/2;
         }
 
         if ((m_animator.GetCurrentAnimatorStateInfo(0).IsName("defend")
@@ -548,7 +565,8 @@ public class character_movement : MonoBehaviour
             && gameObject.GetComponent<fire_warrior_controler>() != null && fire_warrior_controler.isFuryActive))
             {
                 Debug.Log("Blocked");
-            }
+                m_audioManager.PlaySound("BlockSuccess");
+        }
             else if (gameObject.GetComponent<fire_warrior_controler>() != null && fire_warrior_controler.isFuryActive)
             {
                 m_animator.SetTrigger("Hurt");
@@ -574,6 +592,7 @@ public class character_movement : MonoBehaviour
         {
             character_water_priest_controller.number_of_mana -= (character_water_priest_controller.max_mana_for_ui * (25 / character_water_priest_controller.scrollBuff)) / 100;
             character_water_priest_controller.manaCharge += 0.34f;
+            m_audioManager.PlaySound("DefendSuccess");
             Debug.Log("Blocked");
         }
         else if (gameObject.GetComponent<character_water_priest_controller>() != null)
@@ -679,4 +698,23 @@ public class character_movement : MonoBehaviour
         }
 
     }
+
+
+
+    //Audio
+    void AE_runStop()
+    {
+        m_audioManager.PlaySound("RunStop");
+    }
+
+    void AE_footstep()
+    {
+        m_audioManager.PlaySound("Footstep");
+    }
+
+    void AE_Landing()
+    {
+        m_audioManager.PlaySound("Landing");
+    }
+
 }

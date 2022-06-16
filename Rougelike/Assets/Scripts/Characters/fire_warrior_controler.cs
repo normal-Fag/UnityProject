@@ -97,6 +97,7 @@ public class fire_warrior_controler : MonoBehaviour
         {
             StartCoroutine(ActionDelay(actionDelay, "Attack"));
 
+
         }
         
         if (CrossPlatformInputManager.GetButtonDown("Attack") && !isDelayAction && !character_Movement.m_grounded)
@@ -293,25 +294,29 @@ public class fire_warrior_controler : MonoBehaviour
         {
             default:
             case Item.ItemType.AttackBuff:
-         
+                character_movement.m_audioManager.PlaySound("UsePotion");
                 StartCoroutine(useAttackBuff(item.Cooldown()));
                 break;
             case Item.ItemType.SkillBuff:
+                character_movement.m_audioManager.PlaySound("UsePotion");
                 StartCoroutine(useSkillBuff(item.Cooldown()));
                 break;
             case Item.ItemType.DropOfFury:
+                character_movement.m_audioManager.PlaySound("UseMinor");
                 character_Movement.inventory.RemoveItem(item, index);
                 max_rage += 10;
                 break;
             case Item.ItemType.PhoenixFeather:
-                    character_Movement.inventory.RemoveItem(item, index);
+                character_movement.m_audioManager.PlaySound("UseMajor");
+                character_Movement.inventory.RemoveItem(item, index);
                     fire_dmg = 5;
                     hasMajorBuff = true;
                     cacheItemMajor = item;
                     transform.Find("fury_effect").gameObject.SetActive(false);
                 break;
             case Item.ItemType.SkullOfRage:
-                    character_Movement.inventory.RemoveItem(item, index);
+                character_movement.m_audioManager.PlaySound("UseMajor");
+                character_Movement.inventory.RemoveItem(item, index);
                     hasSkullOfRage = true;
                     hasMajorBuff = true;
                     cacheItemMajor = item;
@@ -367,5 +372,54 @@ public class fire_warrior_controler : MonoBehaviour
      
 
     }
+
+    void AE_StartUlt()
+    {
+        character_movement.m_audioManager.PlaySound("StartUlt");
+    }
+    void AE_EndtUlt()
+    {
+        character_movement.m_audioManager.PlaySound("EndtUlt");
+    }
+    void AE_MidUlt()
+    {
+        character_movement.m_audioManager.PlaySound("MidUlt");
+    }
+    void AE_StartSP()
+    {
+        character_movement.m_audioManager.PlaySound("StartSP");
+    }
+    void AE_EndSP()
+    {
+        character_movement.m_audioManager.PlaySound("EndSP");
+    }
+
+    void AE_Attack()
+    {
+        character_movement.m_audioManager.PlaySound("Attack");
+    }
+
+    void AE_AirAttack()
+    {
+        character_movement.m_audioManager.PlaySound("AirAttack");
+    }
+    void AE_HAttackStart()
+    {
+        character_movement.m_audioManager.PlaySound("HAttackStart");
+    }
+    void AE_HAttackMid()
+    {
+        character_movement.m_audioManager.PlaySound("HAttackMid");
+    }
+    void AE_HAttackEnd()
+    {
+        character_movement.m_audioManager.PlaySound("HAttackEnd");
+    }
+    void AE_Block()
+    {
+        character_movement.m_audioManager.PlaySound("Block");
+    }
+
+
 
 }

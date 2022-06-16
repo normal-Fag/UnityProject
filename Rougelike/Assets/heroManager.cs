@@ -19,7 +19,18 @@ public class heroManager : SaveFromNextStage
         selectedCharecter = (selectedCharecter + 1) % characters.Length;
         characters[selectedCharecter].SetActive(true);
         descriptions[selectedCharecter].SetActive(true);
-        nameField.SetTextWithoutNotify(selectedCharecter.ToString());
+        if(selectedCharecter == 0)
+        {
+            nameField.SetTextWithoutNotify("Rouge");
+        }else if(selectedCharecter == 1)
+        {
+            nameField.SetTextWithoutNotify("Warrior");
+        }
+        else
+        {
+            nameField.SetTextWithoutNotify("Priest");
+        }
+        
     }
 
     public void backOption()
@@ -33,7 +44,18 @@ public class heroManager : SaveFromNextStage
         }
         characters[selectedCharecter].SetActive(true);
         descriptions[selectedCharecter].SetActive(true);
-        nameField.SetTextWithoutNotify(selectedCharecter.ToString());
+        if (selectedCharecter == 0)
+        {
+            nameField.SetTextWithoutNotify("Rouge");
+        }
+        else if (selectedCharecter == 1)
+        {
+            nameField.SetTextWithoutNotify("Warrior");
+        }
+        else
+        {
+            nameField.SetTextWithoutNotify("Priest");
+        }
     }
 
     public void playGame()

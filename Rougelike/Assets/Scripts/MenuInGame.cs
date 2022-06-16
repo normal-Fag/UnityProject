@@ -32,10 +32,31 @@ public class MenuInGame : MonoBehaviour
         gameObject.transform.parent.Find("ButtonsContoller").gameObject.SetActive(false);
     }
 
+    public void Restart()
+    {
+        Time.timeScale = 1f;
+        openMenu.SetActive(false);
+        menuButton.gameObject.SetActive(true);
+        gameObject.transform.parent.Find("ButtonsContoller").gameObject.SetActive(true);
+        StartCoroutine(RestartScene());
+    }
+
 
     private IEnumerator LoadScene()
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(0);
+        LoadingScreen.SetActive(true);
+        while (!operation.isDone)
+        {
+            float progress = Mathf.Clamp01(operation.progress / .9f);
+            loading.value = progress;
+
+            yield return null;
+        }
+    }
+    private IEnumerator RestartScene()
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
         LoadingScreen.SetActive(true);
         while (!operation.isDone)
         {
