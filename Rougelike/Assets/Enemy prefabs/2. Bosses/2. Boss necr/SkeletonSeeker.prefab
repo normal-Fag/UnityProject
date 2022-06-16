@@ -466,7 +466,7 @@ MonoBehaviour:
   poisonPrefab: {fileID: 0}
   poisonDamage: 5
   poisonTimer: 5
-  damage: 10
+  damage: 1
   attackDistance: 3
   cooldownTimer: 2
   repulsiveForce: 0

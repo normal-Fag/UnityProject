@@ -18,6 +18,8 @@ public class walkBehaviour : StateMachineBehaviour
         boss        = animator.GetComponent<MonsterBossBehavior>();
         rb          = animator.GetComponent<Rigidbody2D>();
 
+        boss.PlayRandomVoiceSound();
+
         timer       = Random.Range(minTime, maxTime);
         nextState   = Random.Range(0, 2);
         target      = boss.target.transform;

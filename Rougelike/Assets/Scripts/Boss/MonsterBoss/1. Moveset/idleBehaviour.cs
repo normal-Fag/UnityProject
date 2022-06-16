@@ -10,9 +10,11 @@ public class idleBehaviour : StateMachineBehaviour
     public float timer;
 
     private int nextState;
+    private MonsterBossBehavior boss;
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        boss = animator.GetComponent<MonsterBossBehavior>();
         timer = Random.Range(minTime, maxTime);
         nextState = Random.Range(0, 2);
     }
@@ -21,9 +23,12 @@ public class idleBehaviour : StateMachineBehaviour
     {
         if (timer <= 0 && nextState == 0)
         {
-            animator.SetTrigger("Cast");
+            if (!boss.isStageTwo)
+                animator.SetTrigger("Cast");
+            else
+                animator.SetTrigger("SpecCast");
         }
-        else if (timer <= 0 && nextState == 1)
+        else if (timer <= 0 && nextState == 1 && boss.distance > boss.attackDistance)
         {
             animator.SetTrigger("Run");
         }

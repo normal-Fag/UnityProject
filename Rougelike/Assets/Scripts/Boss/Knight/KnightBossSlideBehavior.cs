@@ -6,10 +6,14 @@ public class KnightBossSlideBehavior : StateMachineBehaviour
 {
 
     private Transform target;
+    private KnightBossBehavior boss;
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        target = animator.GetComponent<KnightBossBehavior>().target;
+        boss = animator.GetComponent<KnightBossBehavior>();
+        target = boss.target;
+        boss.audio.PlayOneShot(boss.slideSound, 0.3f);
+
         Vector2 slideDiraction = target.position - animator.transform.position;
         slideDiraction.y = 0;
         animator.GetComponent<Rigidbody2D>().AddForce(slideDiraction * 10, ForceMode2D.Impulse);

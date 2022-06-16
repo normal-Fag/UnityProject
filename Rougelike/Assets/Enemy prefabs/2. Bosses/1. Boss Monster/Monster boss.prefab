@@ -198,9 +198,9 @@ MonoBehaviour:
   health: 10000
   movementSpeed: 6
   audioClips:
+  - {fileID: 8300000, guid: 338d8cd957803ca4fa997957ad08d919, type: 3}
   - {fileID: 8300000, guid: 51baa8861f07d154b96d7d9cf5176953, type: 3}
   - {fileID: 8300000, guid: e95a98115556c5c4f8a6154dbc927318, type: 3}
-  - {fileID: 8300000, guid: 338d8cd957803ca4fa997957ad08d919, type: 3}
   audio: {fileID: 2900322324241436896}
   canvas: {fileID: 6019218153955165946}
   hpFill: {fileID: 6019218153743150881}
@@ -208,6 +208,16 @@ MonoBehaviour:
   isAttack: 0
   facingDirection: 0
   fullHp: 0
+  InfinityAttackBuffProcent: 30
+  InfinityBagProcent: 30
+  SpareBagnProcent: 30
+  PosionBagProcent: 30
+  SkullOfRageProcent: 30
+  DropOfFuryProcent: 30
+  PhoenixFeatherProcent: 30
+  ManaStoneProcent: 30
+  BurstStoneProcent: 30
+  ScrollOfKnowledgeProcent: 30
   attackDistance: 6
   attackDamage: 1
   attackCooldown: 2
@@ -216,7 +226,25 @@ MonoBehaviour:
   spellAudioClips:
   - {fileID: 8300000, guid: c031914e7471e421093ad6fd12f3705e, type: 3}
   - {fileID: 8300000, guid: 87fb22c20186a4cb9b6ae907d46d3989, type: 3}
+  whooshesSounds:
+  - {fileID: 8300000, guid: e0f87ad772fa045bfb183977ee4dc42f, type: 3}
+  - {fileID: 8300000, guid: 94ad17c9c8ae84aeca69ba0761fb6803, type: 3}
+  hitSounds:
+  - {fileID: 8300000, guid: 87da7b2657726473b88ca63fc4c0cebf, type: 3}
+  - {fileID: 8300000, guid: a7b21fedec2b64c0a8572e7a96d7b4c1, type: 3}
+  - {fileID: 8300000, guid: 33c1357a74509421093425226a520540, type: 3}
+  footsteps:
+  - {fileID: 8300000, guid: de7c8dc397f7b408bab059e1941c7051, type: 3}
+  - {fileID: 8300000, guid: b1657de9d8209432288f5a30fece02f0, type: 3}
+  - {fileID: 8300000, guid: 5c09c288b726a473bb7c94ea8629a994, type: 3}
+  - {fileID: 8300000, guid: 5c906f94b4c074526a5cfc0e4d46b8e7, type: 3}
+  - {fileID: 8300000, guid: 77886c77cef764b4bb3f69b54b10c492, type: 3}
+  - {fileID: 8300000, guid: 96cacd00fc36e40b78f5538df23c4842, type: 3}
+  voices:
+  - {fileID: 8300000, guid: 439d1ea6419264f4eabe90a79994360c, type: 3}
+  - {fileID: 8300000, guid: 930de522c679e4da790fe9892289ab69, type: 3}
   distance: 0
+  isStageTwo: 0
 --- !u!1 &2900322324241436898
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,8 +286,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 877daad7649da0b4695c9941d61074d7, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

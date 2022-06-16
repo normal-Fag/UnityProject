@@ -6,29 +6,32 @@ using UnityEngine.Experimental.Rendering.Universal;
 [RequireComponent(typeof(Rigidbody2D))]
 public class NecromantSpell1Logic : MonoBehaviour
 {
-    public Transform target;
-    [HideInInspector] public int damage;
-    public float spellSpeed;
-    public GameObject pointLight;
+    public GameObject       pointLight;
+    public AudioClip[]      spellBlowSFX;
 
-    private Rigidbody2D rb;
-    private Animator anim;
-    private new Light2D light;
-    private float facing = 1;
-    private bool isDestroy;
-    private bool isPushed;
+    [HideInInspector] public float      spellSpeed;
+    [HideInInspector] public int        damage;
+    [HideInInspector] public Transform  target;
 
-    // Start is called before the first frame update
+    private Rigidbody2D     rb;
+    private Animator        anim;
+    private AudioSource     _AS;
+    private new Light2D     light;
+    private float           facing = 1;
+    private bool            isDestroy;
+    private bool            isPushed;
+
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
-        light = pointLight.GetComponent<Light2D>();
+        rb      = GetComponent<Rigidbody2D>();
+        anim    = GetComponent<Animator>();
+        _AS     = GetComponent<AudioSource>();
+        light   = pointLight.GetComponent<Light2D>();
+
         StartCoroutine(DestroyIfNotDamaged());
         StartCoroutine(AddStartForce());
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         if (!isDestroy && !isPushed)
@@ -66,7 +69,7 @@ public class NecromantSpell1Logic : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<playerMovement>().takeDamage(damage);
+            collision.gameObject.GetComponent<character_movement>().Take_Damage(damage, 0);
 
             DestorySpell();
         }
@@ -98,7 +101,11 @@ public class NecromantSpell1Logic : MonoBehaviour
 
         anim.SetTrigger("Destroy");
 
-        Destroy(gameObject, 1);
+        Destroy(gameObject, 4);
     }
 
+    public void PlayBlowSound()
+    {
+        _AS.PlayOneShot(spellBlowSFX[Random.Range(0, spellBlowSFX.Length)], 0.3f);
+    }
 }

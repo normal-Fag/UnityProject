@@ -61,6 +61,9 @@ public class Boss : MonoBehaviour
 
         if (isStarted)
             ShowBossUI();
+
+        if (health <= 0)
+            audio.volume = Mathf.Lerp(audio.volume, 0, Time.deltaTime);
     }
 
     virtual public void Flip()
@@ -79,7 +82,8 @@ public class Boss : MonoBehaviour
     {
         health -= damage;
         characterId = id;
-        anim.SetTrigger("Hurt");
+        if (health > 0)
+            anim.SetTrigger("Hurt");
     }
 
     private void ShowBossUI()
@@ -124,6 +128,7 @@ public class Boss : MonoBehaviour
 
         yield return new WaitForSeconds(2);
 
+        audio.Play();
         vCam.Priority = 1;
     }
 

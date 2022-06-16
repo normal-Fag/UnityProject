@@ -17,6 +17,7 @@ public class bossHitLogic : MonoBehaviour
         if (collision.tag == "Player")
         {
             collision.gameObject.GetComponent<character_movement>().Take_Damage(boss.attackDamage, boss.facingDirection);
+            boss.audio.PlayOneShot(boss.hitSounds[Random.Range(0, boss.hitSounds.Length)], 0.3f);
         }
     }
 }
