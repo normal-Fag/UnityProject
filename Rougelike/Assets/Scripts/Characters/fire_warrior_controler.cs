@@ -67,7 +67,6 @@ public class fire_warrior_controler : MonoBehaviour
         UltCD_for_UI = UltCD;
         SPCD_for_UI = SPCD;
         weapon.GetComponent<wp_hitbox>().character_id = id;
-        number_of_rage = 100;
     }
 
     // Update is called once per frame
@@ -295,25 +294,29 @@ public class fire_warrior_controler : MonoBehaviour
         {
             default:
             case Item.ItemType.AttackBuff:
-         
+                character_movement.m_audioManager.PlaySound("UsePotion");
                 StartCoroutine(useAttackBuff(item.Cooldown()));
                 break;
             case Item.ItemType.SkillBuff:
+                character_movement.m_audioManager.PlaySound("UsePotion");
                 StartCoroutine(useSkillBuff(item.Cooldown()));
                 break;
             case Item.ItemType.DropOfFury:
+                character_movement.m_audioManager.PlaySound("UseMinor");
                 character_Movement.inventory.RemoveItem(item, index);
                 max_rage += 10;
                 break;
             case Item.ItemType.PhoenixFeather:
-                    character_Movement.inventory.RemoveItem(item, index);
+                character_movement.m_audioManager.PlaySound("UseMajor");
+                character_Movement.inventory.RemoveItem(item, index);
                     fire_dmg = 5;
                     hasMajorBuff = true;
                     cacheItemMajor = item;
                     transform.Find("fury_effect").gameObject.SetActive(false);
                 break;
             case Item.ItemType.SkullOfRage:
-                    character_Movement.inventory.RemoveItem(item, index);
+                character_movement.m_audioManager.PlaySound("UseMajor");
+                character_Movement.inventory.RemoveItem(item, index);
                     hasSkullOfRage = true;
                     hasMajorBuff = true;
                     cacheItemMajor = item;

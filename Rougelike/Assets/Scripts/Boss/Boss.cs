@@ -45,6 +45,7 @@ public class Boss : MonoBehaviour
     private bool isStarted;
     private bool isItemDroped;
     protected int characterId;
+    public GameObject finalWall;
 
     private void Awake()
     {
@@ -108,6 +109,7 @@ public class Boss : MonoBehaviour
         if (!isItemDroped)
             DropItem(characterId);
         Destroy(gameObject, 1);
+        Destroy(finalWall);
 
     }
 
