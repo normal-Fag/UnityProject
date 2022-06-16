@@ -8027,6 +8027,46 @@ PrefabInstance:
       propertyPath: health
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 2900322324240479540, guid: 96744bebe6cdf4deebc173e2d3e51340, type: 3}
+      propertyPath: ManaStoneProcent
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2900322324240479540, guid: 96744bebe6cdf4deebc173e2d3e51340, type: 3}
+      propertyPath: PosionBagProcent
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2900322324240479540, guid: 96744bebe6cdf4deebc173e2d3e51340, type: 3}
+      propertyPath: SpareBagnProcent
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2900322324240479540, guid: 96744bebe6cdf4deebc173e2d3e51340, type: 3}
+      propertyPath: BurstStoneProcent
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2900322324240479540, guid: 96744bebe6cdf4deebc173e2d3e51340, type: 3}
+      propertyPath: DropOfFuryProcent
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2900322324240479540, guid: 96744bebe6cdf4deebc173e2d3e51340, type: 3}
+      propertyPath: InfinityBagProcent
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2900322324240479540, guid: 96744bebe6cdf4deebc173e2d3e51340, type: 3}
+      propertyPath: SkullOfRageProcent
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2900322324240479540, guid: 96744bebe6cdf4deebc173e2d3e51340, type: 3}
+      propertyPath: PhoenixFeatherProcent
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2900322324240479540, guid: 96744bebe6cdf4deebc173e2d3e51340, type: 3}
+      propertyPath: ScrollOfKnowledgeProcent
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2900322324240479540, guid: 96744bebe6cdf4deebc173e2d3e51340, type: 3}
+      propertyPath: InfinityAttackBuffProcent
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 2900322324240479542, guid: 96744bebe6cdf4deebc173e2d3e51340, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -8041,7 +8081,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2900322324240479542, guid: 96744bebe6cdf4deebc173e2d3e51340, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 2900322324240479542, guid: 96744bebe6cdf4deebc173e2d3e51340, type: 3}
       propertyPath: m_LocalRotation.w

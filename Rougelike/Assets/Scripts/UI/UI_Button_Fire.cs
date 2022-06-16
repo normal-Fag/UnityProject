@@ -24,7 +24,7 @@ public class UI_Button_Fire : MonoBehaviour
         {
             special.interactable = true;
         }
-        if (fire_warrior_controler.number_of_rage < 45f || fire_warrior_controler.isFuryActive || isCDUlt)
+        if (fire_warrior_controler.number_of_rage < 50f || fire_warrior_controler.isFuryActive || isCDUlt)
         {
             ultimate.interactable = false;
         }

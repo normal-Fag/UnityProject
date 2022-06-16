@@ -5,6 +5,8 @@ using UnityEngine;
 public class BossScriptTrigger : MonoBehaviour
 {
     private Boss boss;
+    public GameObject firstWall;
+    public GameObject secondWall;
 
     void Start()
     {
@@ -18,6 +20,8 @@ public class BossScriptTrigger : MonoBehaviour
             boss.target = collision.gameObject.transform;
             boss.enabled = true;
             gameObject.SetActive(false);
+            firstWall.SetActive(true);
+            secondWall.SetActive(true);
         }
     }
 }

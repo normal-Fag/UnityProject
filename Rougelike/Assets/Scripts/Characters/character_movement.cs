@@ -369,6 +369,7 @@ public class character_movement : MonoBehaviour
                 CheckCDinInventory(item);
                 inventory.RemoveItem(item, index);
                 currentHealthPotionCD = 1f;
+                m_audioManager.PlaySound("UsePotion");
                 StartCoroutine(useHealthPotion(item.Cooldown()));
                 break;
             case Item.ItemType.HPBuff:
@@ -377,12 +378,14 @@ public class character_movement : MonoBehaviour
                 CheckCDinInventory(item);
                 inventory.RemoveItem(item, index);
                 currentHPBuffCD = 1f;
+                m_audioManager.PlaySound("UsePotion");
                 StartCoroutine(useHealthBuff(item.Cooldown()));
                 break;
             case Item.ItemType.InfinityHpBuff:
                 minorBufflist.Add(item);
                 inventory.RemoveItem(item, index);
                 max_hp += 50;
+                m_audioManager.PlaySound("UseMinor");
                 break;
             case Item.ItemType.InfinityAttackBuff:
                 if (gameObject.GetComponent<fire_warrior_controler>() != null)

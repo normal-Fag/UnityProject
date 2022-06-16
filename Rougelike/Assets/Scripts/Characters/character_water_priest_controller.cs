@@ -56,6 +56,8 @@ public class character_water_priest_controller : MonoBehaviour
     public static int UltCD_for_UI;
     public static int HealCD_for_UI;
     public static int manaCostShield;
+    public static bool hasBurstStone = false;
+    
 
 
     void Start()
@@ -343,6 +345,21 @@ public class character_water_priest_controller : MonoBehaviour
         }
 
 
+        if (hasMajorBuff)
+        {
+            if (cacheItemMajor.itemType == Item.ItemType.ScrollOfKnowledge)
+            {
+                hasScrollOfKnowledgeBuff = true;
+                moreManaChargeTime = 1f;
+            }
+            if (cacheItemMajor.itemType == Item.ItemType.BurstStone)
+            {
+                hasBurstStone = false;
+                hasScrollOfKnowledgeBuff = false;
+                scrollBuff = 1;
+            }
+        }
+
 
     }
 
@@ -354,6 +371,10 @@ public class character_water_priest_controller : MonoBehaviour
             case Item.ItemType.AttackBuff:
                 StartCoroutine(useAttackBuff(item.Cooldown()));
                 character_movement.m_audioManager.PlaySound("UsePotion");
+                break;
+            case Item.ItemType.InfinityAttackBuff:
+                character_movement.m_audioManager.PlaySound("UseMinor");
+                atk_dmg += 10;
                 break;
             case Item.ItemType.SkillBuff:
                 StartCoroutine(useSkillBuff(item.Cooldown()));
@@ -381,44 +402,20 @@ public class character_water_priest_controller : MonoBehaviour
                 max_mana += 25;
                 break;
             case Item.ItemType.BurstStone:
-                if (!hasMajorBuff)
-                {
                     character_Movement.inventory.RemoveItem(item, index);
                     moreManaChargeTime = 2f;
                     hasMajorBuff = true;
+                    hasBurstStone = true;
                     cacheItemMajor = item;
                     character_movement.m_audioManager.PlaySound("UseMajor");
-                }
-                else
-                {
-                    MajorBuffReset();
-                    character_movement.m_audioManager.PlaySound("UseMajor");
-                    character_Movement.inventory.RemoveItem(item, index);
-                    moreManaChargeTime = 2f;
-                    hasMajorBuff = true;
-        
-                }
                 break;
             case Item.ItemType.ScrollOfKnowledge:
-                if (!hasMajorBuff)
-                {
                     character_Movement.inventory.RemoveItem(item, index);
                     character_movement.m_audioManager.PlaySound("UseMajor");
                     hasScrollOfKnowledgeBuff = true;
                     hasMajorBuff = true;
                     cacheItemMajor = item;
-                }
-                else
-                {
-                    MajorBuffReset();
-                    character_Movement.inventory.RemoveItem(item, index);
-                    character_movement.m_audioManager.PlaySound("UseMajor");
-                    hasScrollOfKnowledgeBuff = true;
-                    hasMajorBuff = true;
-                    cacheItemMajor = item;
-
-
-                }
+             
                 break;
 
         }
@@ -440,18 +437,6 @@ public class character_water_priest_controller : MonoBehaviour
         yield return new WaitForSeconds(seconds);
 
         ult_dmg -= 10;
-    }
-    private void MajorBuffReset()
-    {
-        if (cacheItemMajor != null && cacheItemMajor.itemType == Item.ItemType.BurstStone)
-        {
-            moreManaChargeTime = 1f;
-        }
-        if (cacheItemMajor != null && cacheItemMajor.itemType == Item.ItemType.ScrollOfKnowledge)
-        {
-            hasScrollOfKnowledgeBuff = false;
-            scrollBuff = 1;
-        }
     }
 
     public IEnumerator useManaPotion(int seconds)

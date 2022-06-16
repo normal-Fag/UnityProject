@@ -358,30 +358,37 @@ public class rouge_controller : MonoBehaviour
             default:
             case Item.ItemType.AttackBuff:
                 StartCoroutine(useAttackBuff(item.Cooldown()));
+                character_movement.m_audioManager.PlaySound("UsePotion");
                 break;
             case Item.ItemType.InfinityAttackBuff:
+                character_movement.m_audioManager.PlaySound("UseMinor");
                 atk_dmg += 10;
                 break;
             case Item.ItemType.SkillBuff:
                 StartCoroutine(useSkillBuff(item.Cooldown()));
+                character_movement.m_audioManager.PlaySound("UsePotion");
                 break;
             case Item.ItemType.Poison:
                 character_Movement.inventory.RemoveItem(item, index);
+                character_movement.m_audioManager.PlaySound("UsePotion");
                 StartCoroutine(usePosion(item.Cooldown()));
                 break;
             case Item.ItemType.PosionBag:
                     character_Movement.inventory.RemoveItem(item, index);
                     hasMajorBuff = true;
                     cacheItemMajor = item;
+                character_movement.m_audioManager.PlaySound("UseMajor");
                 break;
             case Item.ItemType.SpareBag:
                 character_Movement.inventory.RemoveItem(item, index);
+                character_movement.m_audioManager.PlaySound("UseMinor");
                 max_number_of_daggers += 5; 
                 break;
             case Item.ItemType.InfinityBag:
                     character_Movement.inventory.RemoveItem(item, index);
                     hasMajorBuff = true;
                     cacheItemMajor = item;
+                character_movement.m_audioManager.PlaySound("UseMajor");
                 break;
 
         }
