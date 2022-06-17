@@ -8062,6 +8062,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2269011065785934865, guid: b0bb39a0ce2004e588e3205147afd80e, type: 3}
+      propertyPath: m_Volume
+      value: 0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 2269011065785934865, guid: b0bb39a0ce2004e588e3205147afd80e, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: e282fb835f19b164993b375858ecbeb8, type: 3}
+    - target: {fileID: 2269011065785934865, guid: b0bb39a0ce2004e588e3205147afd80e, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3780624244257480361, guid: b0bb39a0ce2004e588e3205147afd80e, type: 3}
       propertyPath: m_Alpha
       value: 1
@@ -8090,17 +8102,29 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -100
       objectReference: {fileID: 0}
+    - target: {fileID: 3780624245314788104, guid: b0bb39a0ce2004e588e3205147afd80e, type: 3}
+      propertyPath: m_Lens.FarClipPlane
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3780624245314788104, guid: b0bb39a0ce2004e588e3205147afd80e, type: 3}
+      propertyPath: m_Lens.NearClipPlane
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3780624245314788104, guid: b0bb39a0ce2004e588e3205147afd80e, type: 3}
+      propertyPath: m_Lens.OrthographicSize
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 3780624245314788105, guid: b0bb39a0ce2004e588e3205147afd80e, type: 3}
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3780624245314788105, guid: b0bb39a0ce2004e588e3205147afd80e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1
+      value: 10.47
       objectReference: {fileID: 0}
     - target: {fileID: 3780624245314788105, guid: b0bb39a0ce2004e588e3205147afd80e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.66
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 3780624245314788105, guid: b0bb39a0ce2004e588e3205147afd80e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8136,6 +8160,46 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3780624245314788108, guid: b0bb39a0ce2004e588e3205147afd80e, type: 3}
       propertyPath: health
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3780624245314788108, guid: b0bb39a0ce2004e588e3205147afd80e, type: 3}
+      propertyPath: ManaStoneProcent
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3780624245314788108, guid: b0bb39a0ce2004e588e3205147afd80e, type: 3}
+      propertyPath: PosionBagProcent
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3780624245314788108, guid: b0bb39a0ce2004e588e3205147afd80e, type: 3}
+      propertyPath: SpareBagnProcent
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3780624245314788108, guid: b0bb39a0ce2004e588e3205147afd80e, type: 3}
+      propertyPath: BurstStoneProcent
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3780624245314788108, guid: b0bb39a0ce2004e588e3205147afd80e, type: 3}
+      propertyPath: DropOfFuryProcent
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3780624245314788108, guid: b0bb39a0ce2004e588e3205147afd80e, type: 3}
+      propertyPath: InfinityBagProcent
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3780624245314788108, guid: b0bb39a0ce2004e588e3205147afd80e, type: 3}
+      propertyPath: SkullOfRageProcent
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3780624245314788108, guid: b0bb39a0ce2004e588e3205147afd80e, type: 3}
+      propertyPath: PhoenixFeatherProcent
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3780624245314788108, guid: b0bb39a0ce2004e588e3205147afd80e, type: 3}
+      propertyPath: ScrollOfKnowledgeProcent
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3780624245314788108, guid: b0bb39a0ce2004e588e3205147afd80e, type: 3}
+      propertyPath: InfinityAttackBuffProcent
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3780624245314788109, guid: b0bb39a0ce2004e588e3205147afd80e, type: 3}

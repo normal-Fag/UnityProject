@@ -23,4 +23,9 @@ public class castBehaviour : StateMachineBehaviour
     //    //else if (timer <= 0 && nextState == 1)  animator.SetTrigger("Run");
     //    //else                                    timer -= Time.deltaTime;
     //}
+
+    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        animator.ResetTrigger("Cast");
+    }
 }

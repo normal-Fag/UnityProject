@@ -15,7 +15,7 @@ public class NecromantSpell2Logic : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<playerMovement>().takeDamage(damage);
+            collision.gameObject.GetComponent<character_movement>().Take_Damage(damage, 0);
         }
     }
 }

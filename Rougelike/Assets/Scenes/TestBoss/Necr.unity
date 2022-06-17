@@ -8656,6 +8656,26 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3665740951073471146, guid: f0c0bbe5fec634d92a25df7aefb68220, type: 3}
+      propertyPath: spell1Speed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3665740951073471146, guid: f0c0bbe5fec634d92a25df7aefb68220, type: 3}
+      propertyPath: spell1Damage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3665740951073471146, guid: f0c0bbe5fec634d92a25df7aefb68220, type: 3}
+      propertyPath: spell2Damage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3665740951073471146, guid: f0c0bbe5fec634d92a25df7aefb68220, type: 3}
+      propertyPath: skeletonspawnCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3665740951073471146, guid: f0c0bbe5fec634d92a25df7aefb68220, type: 3}
+      propertyPath: spell1CountOfSpells
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3665740951073471146, guid: f0c0bbe5fec634d92a25df7aefb68220, type: 3}
       propertyPath: movePoints.Array.data[0]
       value: 
       objectReference: {fileID: 1625004712}

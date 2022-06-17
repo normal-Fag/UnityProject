@@ -19,6 +19,8 @@ public class KnightBossRunBehavior : StateMachineBehaviour
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        animator.ResetTrigger("Idle");
+
         boss    = animator.GetComponent<KnightBossBehavior>();
         rb      = boss.GetComponent<Rigidbody2D>();
         speed   = boss.movementSpeed;

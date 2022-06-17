@@ -441,7 +441,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 5000
   movementSpeed: 8
-  audioClips: []
+  audioClips:
+  - {fileID: 8300000, guid: c15f8e83277794e07b28b882d9b71e97, type: 3}
+  - {fileID: 8300000, guid: c3b2817424e404cb69209a3f7bfdac46, type: 3}
+  - {fileID: 8300000, guid: a10801e6e9e94434c95973447429c0a0, type: 3}
+  - {fileID: 8300000, guid: 5f38af88d19844e5e979954e6d4e5fb0, type: 3}
+  - {fileID: 8300000, guid: 139422809e135470ca306301ea4b5df3, type: 3}
+  - {fileID: 8300000, guid: 95bbf2aa5703e4939af264cccd8f1e96, type: 3}
+  - {fileID: 8300000, guid: b2e07990dcc2e4e218cf24519fed4238, type: 3}
   audio: {fileID: 2269011065785934865}
   canvas: {fileID: 3780624244257480361}
   hpFill: {fileID: 3780624244041824114}
@@ -465,13 +472,32 @@ MonoBehaviour:
   attackDistance2: 20
   attackCooldownMin: 1
   attackCooldownMax: 3.5
-  attackSFX:
+  attackHitSFX:
+  - {fileID: 8300000, guid: c8d47e3e75b4846eda4b97b27c40508f, type: 3}
+  - {fileID: 8300000, guid: 843b4ba29f97d4ca79be8c961854f893, type: 3}
+  - {fileID: 8300000, guid: b6f795f32bf794d0191e0821ba6d18e4, type: 3}
+  attackBlockHitSFX:
   - {fileID: 8300000, guid: f153e1caf746b4f78a505166d01d383d, type: 3}
   - {fileID: 8300000, guid: 7313fe0e35ccd4969992bfaeec6d30ee, type: 3}
   - {fileID: 8300000, guid: 72615aaca14a14e0d8a044a18d54799d, type: 3}
   - {fileID: 8300000, guid: e6ecb94767df649cbab331b68ccc2511, type: 3}
   - {fileID: 8300000, guid: bc82e42428ac64cf5931315e4c05bfa3, type: 3}
   - {fileID: 8300000, guid: 6792067578ff34b10b5f17c2a28d33ae, type: 3}
+  attackWhooshSFX:
+  - {fileID: 8300000, guid: e0f87ad772fa045bfb183977ee4dc42f, type: 3}
+  - {fileID: 8300000, guid: 94ad17c9c8ae84aeca69ba0761fb6803, type: 3}
+  attackInAirHitSFX:
+  - {fileID: 8300000, guid: 704987e61d59646038bef0c405689026, type: 3}
+  attackInAirWhooshSFX:
+  - {fileID: 8300000, guid: 2a73ee18475fa46ceb2f74614b674f65, type: 3}
+  landingSounds:
+  - {fileID: 8300000, guid: 8544b29474f24496da31f9cf8d07df99, type: 3}
+  - {fileID: 8300000, guid: 37bfe0efd03d74926ac032039c39575b, type: 3}
+  - {fileID: 8300000, guid: 70bd348320ceb430cbffed2ba7008efa, type: 3}
+  - {fileID: 8300000, guid: 0d2db8c86beda4f20adfce0166da981c, type: 3}
+  - {fileID: 8300000, guid: 8c0520041909e4f51a4ef5b9d5a29e21, type: 3}
+  slideSound: {fileID: 8300000, guid: 272fef9da5bae4932b8773ae3eaad87f, type: 3}
+  rollSound: {fileID: 8300000, guid: 9cb3c841d0b1a4633aad256f888c4abe, type: 3}
   jumpForce: 110
   isAirAttack: 0
   isRunning: 0
@@ -519,7 +545,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: e282fb835f19b164993b375858ecbeb8, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

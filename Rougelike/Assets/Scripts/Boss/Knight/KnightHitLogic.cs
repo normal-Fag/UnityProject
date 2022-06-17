@@ -18,11 +18,16 @@ public class KnightHitLogic : MonoBehaviour
                     player.transform.position.y, 0);
                 //StartCoroutine(player.PlayerPushAway(pushDir, 20));
                 StartCoroutine(IgnorePlayer(boss, player));
+                boss.audio.PlayOneShot(boss.attackInAirHitSFX[0], 0.3f);
                 player.Take_Damage(boss.attackDamageInAir, boss.facingDirection);
                 return;
             }
 
-            boss.PlayAttackSound();
+            if (player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("defend"))
+                boss.PlayBlockHitSound();
+            else
+                boss.PlayAttackSound();
+
             player.Take_Damage(boss.attackDamage, boss.facingDirection);
         }
     }

@@ -208,12 +208,28 @@ MonoBehaviour:
   isAttack: 0
   facingDirection: 0
   fullHp: 0
+  InfinityAttackBuffProcent: 30
+  InfinityBagProcent: 30
+  SpareBagnProcent: 30
+  PosionBagProcent: 30
+  SkullOfRageProcent: 30
+  DropOfFuryProcent: 30
+  PhoenixFeatherProcent: 30
+  ManaStoneProcent: 30
+  BurstStoneProcent: 30
+  ScrollOfKnowledgeProcent: 30
   movePoints:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  spellCastSFX:
+  - {fileID: 8300000, guid: a282c728a89c94986b6568130728ebd3, type: 3}
+  - {fileID: 8300000, guid: f68116f19c0b44204bf3c4d578aa7460, type: 3}
+  - {fileID: 8300000, guid: 117d50e1d63584fd7b9ed99859f95cc3, type: 3}
+  - {fileID: 8300000, guid: e67c25e1ac57640918763ee40f1e0f9a, type: 3}
+  - {fileID: 8300000, guid: c85a60274a82047278f3217313b3153f, type: 3}
   spell1: {fileID: 8807165758491477714, guid: 46754f8b220dd469f8db43581eb2132e, type: 3}
   spell1Damage: 10
   spell1Speed: 14
@@ -453,11 +469,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 23bdb1bec94f0f94a80bf6f70b105fb8, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

@@ -6,25 +6,38 @@ public class KnightBossBehavior : Boss
 {
     [Header("Knight Behavior")]
     [Header("Knight Attack")]
-    public int      attackDamage = 30;
-    public int      attackDamageInAir = 30;
-    public float    attackDistance = 2;
-    public float    attackDistance2;
-    public float    attackCooldownMin = 1f;
-    public float    attackCooldownMax = 3.5f;
-    public AudioClip[] attackSFX;
+    public int attackDamage = 30;
+    public int attackDamageInAir = 30;
+    public float attackDistance = 2;
+    public float attackDistance2;
+    public float attackCooldownMin = 1f;
+    public float attackCooldownMax = 3.5f;
+
+    [Header("Knight audio")]
+    public AudioClip[] attackHitSFX;
+    public AudioClip[] attackBlockHitSFX;
+    public AudioClip[] attackWhooshSFX;
+    public AudioClip[] attackInAirHitSFX;
+    public AudioClip[] attackInAirWhooshSFX;
+    [Space]
+    public AudioClip[] landingSounds;
+
+    public AudioClip slideSound;
+    public AudioClip rollSound;
+
+    //public AudioClip[]
 
     [Header("Knight jump")]
-    public float    jumpForce;
+    public float jumpForce;
 
     [HideInInspector] public bool isAirAttack;
     [HideInInspector] public bool isRunning;
     [HideInInspector] public bool isGrounded;
     [HideInInspector] public bool isHeald;
 
-    [HideInInspector] public float   distance;
+    [HideInInspector] public float distance;
 
-    private bool    isCooldown;
+    private bool isCooldown;
 
     private void Start()
     {
@@ -49,6 +62,9 @@ public class KnightBossBehavior : Boss
     private void AttackPlayer()
     {
         anim.ResetTrigger("Run");
+        anim.ResetTrigger("Roll");
+        anim.ResetTrigger("Slide");
+        anim.ResetTrigger("Idle");
 
         anim.SetTrigger("Attack");
     }
@@ -86,6 +102,36 @@ public class KnightBossBehavior : Boss
 
     public void PlayAttackSound()
     {
-        audio.PlayOneShot(attackSFX[Random.Range(0, attackSFX.Length)], 0.2f);
+        audio.PlayOneShot(attackHitSFX[Random.Range(1, attackHitSFX.Length)], 0.3f);
+    }
+
+    public void PlayBlockHitSound()
+    {
+        audio.PlayOneShot(attackBlockHitSFX[Random.Range(0, attackBlockHitSFX.Length)], 0.3f);
+    }
+
+    public void PlayWhooshSound()
+    {
+        audio.PlayOneShot(attackWhooshSFX[Random.Range(0, attackWhooshSFX.Length)], 0.3f);
+    }
+
+    public void PlayWhooshInAir()
+    {
+        audio.PlayOneShot(attackInAirWhooshSFX[Random.Range(0, attackInAirWhooshSFX.Length)], 0.3f);
+    }
+
+    public void PlayStartSound()
+    {
+        audio.PlayOneShot(audioClips[0], 0.3f);
+    }
+
+    public void PlayFootstepSound()
+    {
+        audio.PlayOneShot(audioClips[Random.Range(1, audioClips.Length)], 0.05f);
+    }
+
+    public void PlayLandingSound()
+    {
+        audio.PlayOneShot(landingSounds[Random.Range(1, landingSounds.Length)], 0.3f);
     }
 }
