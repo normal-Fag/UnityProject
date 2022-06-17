@@ -239,7 +239,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4498784275353591133}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.66, y: -3.27, z: 0}
+  m_LocalPosition: {x: 9.66, y: -3.27, z: -10}
   m_LocalScale: {x: -4, y: 4, z: 1}
   m_Children:
   - {fileID: 8130393862809771955}
@@ -380,7 +380,7 @@ MonoBehaviour:
   poisonDamage: 5
   poisonTimer: 5
   damage: 10
-  attackDistance: 2
+  attackDistance: 7
   cooldownTimer: 1
   repulsiveForce: 0
   target: {fileID: 0}
@@ -390,6 +390,24 @@ MonoBehaviour:
   isBurning: 0
   isPoisoning: 0
   isAttack: 0
+  HealthPotionProcent: 20
+  AttackBuffProcent: 30
+  SkillBuffProcent: 0
+  HpBuffProcent: 0
+  InfinityAttackBuffProcent: 0
+  PosionProcent: 30
+  InfinityBagProcent: 0
+  SpareBagnProcent: 0
+  DaggerProcent: 50
+  PosionBagProcent: 0
+  SkullOfRageProcent: 0
+  DropOfFuryProcent: 0
+  PhoenixFeatherProcent: 0
+  ManaPotionProcent: 30
+  ManaStoneProcent: 0
+  RegenManaPotionrProcent: 0
+  BurstStoneProcent: 0
+  ScrollOfKnowledgeProcent: 0
   staticEnemy: 1
   activePatroling: 0
   leftLimit: {fileID: 0}

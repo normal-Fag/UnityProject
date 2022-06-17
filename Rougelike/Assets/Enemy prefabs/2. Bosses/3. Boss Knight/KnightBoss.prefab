@@ -130,6 +130,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29fa34f5a869e4f55877f6b28de555c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firstWall: {fileID: 0}
+  secondWall: {fileID: 0}
 --- !u!1 &3780624244410039733
 GameObject:
   m_ObjectHideFlags: 0
@@ -273,7 +275,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3780624245314788109}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 3.66, z: 0}
+  m_LocalPosition: {x: 1, y: 3.66, z: -10}
   m_LocalScale: {x: 12, y: 12, z: 1}
   m_Children:
   - {fileID: 3780624244271760963}
@@ -466,6 +468,7 @@ MonoBehaviour:
   ManaStoneProcent: 30
   BurstStoneProcent: 30
   ScrollOfKnowledgeProcent: 30
+  finalWall: {fileID: 0}
   attackDamage: 0
   attackDamageInAir: 0
   attackDistance: 5
