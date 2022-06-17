@@ -18,7 +18,8 @@ public class LootSensor : MonoBehaviour
 
         if (collision.GetComponent<ItemWorld>() != null
             && itemWorld.GetItem().itemType == Item.ItemType.Dagger
-            && gameObject.GetComponent<rouge_controller>() != null)
+            && transform.parent.gameObject.GetComponent<rouge_controller>() != null 
+            && rouge_controller.number_of_dagger < transform.parent.gameObject.GetComponent<rouge_controller>().max_number_of_daggers)
         {
 
             itemWorld.DestroySelf();
@@ -45,16 +46,19 @@ public class LootSensor : MonoBehaviour
                 {
                     itemWorld.GetItem().isCD = character_Movement.hasSkillBuffCD;
                 }
-                if (itemWorld.GetItem().itemType == Item.ItemType.ManaPotion && gameObject.GetComponent<character_water_priest_controller>() != null)
+                if (itemWorld.GetItem().itemType == Item.ItemType.ManaPotion && transform.parent.gameObject.GetComponent<character_water_priest_controller>() != null)
                 {
-                    itemWorld.GetItem().isCD = gameObject.GetComponent<character_water_priest_controller>().isRefillMana;
+                    itemWorld.GetItem().isCD = transform.parent.gameObject.GetComponent<character_water_priest_controller>().isRefillMana;
                 }
-                if (itemWorld.GetItem().itemType == Item.ItemType.RegenManaPotion && gameObject.GetComponent<character_water_priest_controller>() != null)
+                if (itemWorld.GetItem().itemType == Item.ItemType.RegenManaPotion && transform.parent.gameObject.GetComponent<character_water_priest_controller>() != null)
                 {
-                    itemWorld.GetItem().isCD = gameObject.GetComponent<character_water_priest_controller>().hasManaRegen;
+                    itemWorld.GetItem().isCD = transform.parent.gameObject.GetComponent<character_water_priest_controller>().hasManaRegen;
                 }
-                character_Movement.inventory.AddItem(itemWorld.GetItem());
-                itemWorld.DestroySelf();
+                if(itemWorld.GetItem().itemType != Item.ItemType.Dagger)
+                {
+                    character_Movement.inventory.AddItem(itemWorld.GetItem());
+                    itemWorld.DestroySelf();
+                }  
             }
             else
             {

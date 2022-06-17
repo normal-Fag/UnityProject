@@ -6,7 +6,7 @@ using UnityEngine.Experimental.Rendering.Universal;
 public class ItemWorld : MonoBehaviour
 {
 
-    public static ItemWorld SpawnItemWorld(Vector2 position, Item item)
+    public static ItemWorld SpawnItemWorld(Vector3 position, Item item)
     {
         Transform transform = Instantiate(ItemAssets.Instance.pfItemWorld, position, Quaternion.identity);
 
@@ -55,20 +55,19 @@ public class ItemWorld : MonoBehaviour
     }
 
 
-    public static ItemWorld DropItem(Vector2 dropPosition, Item item, float m_facingDirection, bool enemy)
+    public static ItemWorld DropItem(Vector3 dropPosition, Item item, float m_facingDirection, bool enemy)
     {
         ItemWorld itemWorld;
-
         if (enemy)
         {
-            itemWorld = SpawnItemWorld(dropPosition + Vector2.up * m_facingDirection * 2f, item);
+            itemWorld = SpawnItemWorld(dropPosition + Vector3.up * m_facingDirection * 2f, item);
         }
 
         else
         {
-            itemWorld = SpawnItemWorld(dropPosition + Vector2.right * m_facingDirection * 2f, item);
+            itemWorld = SpawnItemWorld(dropPosition + Vector3.right * m_facingDirection * 2f, item);
         }
-        itemWorld.GetComponent<Rigidbody2D>().AddForce(Vector2.right * m_facingDirection * 2f, ForceMode2D.Impulse);
+        itemWorld.GetComponent<Rigidbody2D>().AddForce(Vector3.right * m_facingDirection * 2f, ForceMode2D.Impulse);
         return itemWorld;
     }
 
