@@ -27,7 +27,8 @@ public class Throw_Dagger : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D hitInfo)
     {
         Enemy enemy = hitInfo.GetComponent<Enemy>();
-        if (enemy != null && !isPosion)
+        Boss boss = hitInfo.GetComponent<Boss>();
+        if ((enemy != null || boss != null) && !isPosion)
         {
             enemy.TakeDamage(dagger_damage, 0, 0);
             Destroy(gameObject);

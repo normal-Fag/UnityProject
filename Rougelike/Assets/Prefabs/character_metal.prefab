@@ -130,6 +130,13 @@ MonoBehaviour:
     pitch: 1
     m_randomVolumeRange: {x: 0.8, y: 0.8}
     m_randomPitchRange: {x: 1, y: 1}
+  - m_name: Death
+    m_clips:
+    - {fileID: 8300000, guid: f476d54f39c166642951e77c47be82e7, type: 3}
+    volume: 1
+    pitch: 1
+    m_randomVolumeRange: {x: 1, y: 1}
+    m_randomPitchRange: {x: 1, y: 1}
 --- !u!1 &123824533979388655
 GameObject:
   m_ObjectHideFlags: 0

@@ -642,6 +642,7 @@ public class character_movement : MonoBehaviour
     public IEnumerator ResetLevel()
     {
         UiController.SetActive(false);
+        m_audioManager.PlaySound("Death");
         gameOverScreen.SetActive(true);
         yield return new WaitForSeconds(5);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
