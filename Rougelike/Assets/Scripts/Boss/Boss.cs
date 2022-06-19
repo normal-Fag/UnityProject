@@ -29,19 +29,6 @@ public class Boss : MonoBehaviour
     [HideInInspector] public int        facingDirection;
     [HideInInspector] public float      fullHp;
 
-    [Space]
-    [Header("Procent")]
-    public float InfinityAttackBuffProcent = 30;
-    public float InfinityBagProcent = 30;
-    public float SpareBagnProcent = 30;
-    public float PosionBagProcent = 30;
-    public float SkullOfRageProcent = 30;
-    public float DropOfFuryProcent = 30;
-    public float PhoenixFeatherProcent = 30;
-    public float ManaStoneProcent = 30;
-    public float BurstStoneProcent = 30;
-    public float ScrollOfKnowledgeProcent = 30;
-
     private bool isStarted;
     private bool isItemDroped;
     protected int characterId;
@@ -139,75 +126,116 @@ public class Boss : MonoBehaviour
     {
         float dropHeight = 1;
         Item item;
-
-        if (Random.Range(0f, 1.0f) > 1.0f - InfinityAttackBuffProcent / 100)
-        {
-            item = new Item { itemType = Item.ItemType.InfinityAttackBuff, amount = 1 };
-            ItemWorld.DropItem(transform.position, item, dropHeight, true);
-            dropHeight += 0.2f;
-        }
+        float random = Random.Range(0f, 1.0f);
         switch (id)
         {
             default:
             case 0:
-                if (Random.Range(0f, 1.0f) > 1.0f - InfinityBagProcent / 100)
+                if (random <= 0.33f)
                 {
-                    item = new Item { itemType = Item.ItemType.InfinityBag, amount = 1 };
+                    item = new Item { itemType = Item.ItemType.InfinityAttackBuff, amount = 1 };
+                    ItemWorld.DropItem(transform.position, item, dropHeight, true);
+                    dropHeight += 0.2f;
+
+                }else if (random > 0.33f && random <= 0.66f)
+                {
+                    item = new Item { itemType = Item.ItemType.InfinityHpBuff, amount = 1 };
                     ItemWorld.DropItem(transform.position, item, dropHeight, true);
                     dropHeight += 0.2f;
                 }
-                if (Random.Range(0f, 1.0f) > 1.0f - SpareBagnProcent / 100)
+                else
                 {
                     item = new Item { itemType = Item.ItemType.SpareBag, amount = 1 };
                     ItemWorld.DropItem(transform.position, item, dropHeight, true);
                     dropHeight += 0.2f;
                 }
-                if (Random.Range(0f, 1.0f) > 1.0f - PosionBagProcent / 100)
+                if (Random.Range(0f, 1.0f) >= 0.5f)
                 {
-                    item = new Item { itemType = Item.ItemType.PosionBag, amount = 1 };
-                    ItemWorld.DropItem(transform.position, item, dropHeight, true);
-                    dropHeight += 0.2f;
+                    if(Random.Range(0f, 1.0f) >= 0.5f)
+                    {
+                        item = new Item { itemType = Item.ItemType.InfinityBag, amount = 1 };
+                        ItemWorld.DropItem(transform.position, item, dropHeight, true);
+                        dropHeight += 0.2f;
+                    }
+                    else
+                    {
+                        item = new Item { itemType = Item.ItemType.PosionBag, amount = 1 };
+                        ItemWorld.DropItem(transform.position, item, dropHeight, true);
+                        dropHeight += 0.2f;
+                    }
                 }
                 break;
             case 1:
-                if (Random.Range(0f, 1.0f) > 1.0f - SkullOfRageProcent / 100)
+                if (random <= 0.33f)
                 {
-                    item = new Item { itemType = Item.ItemType.SkullOfRage, amount = 1 };
+                    item = new Item { itemType = Item.ItemType.InfinityAttackBuff, amount = 1 };
                     ItemWorld.DropItem(transform.position, item, dropHeight, true);
                     dropHeight += 0.2f;
 
                 }
-                if (Random.Range(0f, 1.0f) > 1.0f - DropOfFuryProcent / 100)
+                else if (random > 0.33f && random <= 0.66f)
+                {
+                    item = new Item { itemType = Item.ItemType.InfinityHpBuff, amount = 1 };
+                    ItemWorld.DropItem(transform.position, item, dropHeight, true);
+                    dropHeight += 0.2f;
+                }
+                else
                 {
                     item = new Item { itemType = Item.ItemType.DropOfFury, amount = 1 };
                     ItemWorld.DropItem(transform.position, item, dropHeight, true);
                     dropHeight += 0.2f;
                 }
-                if (Random.Range(0f, 1.0f) > 1.0f - PhoenixFeatherProcent / 100)
+
+                if (Random.Range(0f, 1.0f) >= 0.5f)
                 {
-                    item = new Item { itemType = Item.ItemType.PhoenixFeather, amount = 1 };
-                    ItemWorld.DropItem(transform.position, item, dropHeight, true);
-                    dropHeight += 0.2f;
+                    if (Random.Range(0f, 1.0f) >= 0.5f)
+                    {
+                        item = new Item { itemType = Item.ItemType.SkullOfRage, amount = 1 };
+                        ItemWorld.DropItem(transform.position, item, dropHeight, true);
+                        dropHeight += 0.2f;
+                    }
+                    else
+                    {
+                        item = new Item { itemType = Item.ItemType.PhoenixFeather, amount = 1 };
+                        ItemWorld.DropItem(transform.position, item, dropHeight, true);
+                        dropHeight += 0.2f;
+                    }
                 }
                 break;
             case 2:
-                if (Random.Range(0f, 1.0f) > 1.0f - ManaStoneProcent / 100)
+                if (random <= 0.33f)
+                {
+                    item = new Item { itemType = Item.ItemType.InfinityAttackBuff, amount = 1 };
+                    ItemWorld.DropItem(transform.position, item, dropHeight, true);
+                    dropHeight += 0.2f;
+
+                }
+                else if (random > 0.33f && random <= 0.66f)
+                {
+                    item = new Item { itemType = Item.ItemType.InfinityHpBuff, amount = 1 };
+                    ItemWorld.DropItem(transform.position, item, dropHeight, true);
+                    dropHeight += 0.2f;
+                }
+                else
                 {
                     item = new Item { itemType = Item.ItemType.ManaStone, amount = 1, isCD = false };
                     ItemWorld.DropItem(transform.position, item, dropHeight, true);
                     dropHeight += 0.2f;
                 }
-                if (Random.Range(0f, 1.0f) > 1.0f - BurstStoneProcent / 100)
+                if (Random.Range(0f, 1.0f) >= 0.5f)
                 {
-                    item = new Item { itemType = Item.ItemType.BurstStone, amount = 1, isCD = false };
-                    ItemWorld.DropItem(transform.position, item, dropHeight, true);
-                    dropHeight += 0.2f;
-                }
-                if (Random.Range(0f, 1.0f) > 1.0f - ScrollOfKnowledgeProcent / 100)
-                {
-                    item = new Item { itemType = Item.ItemType.ScrollOfKnowledge, amount = 1, isCD = false };
-                    ItemWorld.DropItem(transform.position, item, dropHeight, true);
-                    dropHeight += 0.2f;
+                    if (Random.Range(0f, 1.0f) >= 0.5f)
+                    {
+                        item = new Item { itemType = Item.ItemType.BurstStone, amount = 1, isCD = false };
+                        ItemWorld.DropItem(transform.position, item, dropHeight, true);
+                        dropHeight += 0.2f;
+                    }
+                    else
+                    {
+                        item = new Item { itemType = Item.ItemType.ScrollOfKnowledge, amount = 1, isCD = false };
+                        ItemWorld.DropItem(transform.position, item, dropHeight, true);
+                        dropHeight += 0.2f;
+                    }
                 }
                 break;
         }

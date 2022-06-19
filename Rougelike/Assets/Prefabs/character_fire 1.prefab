@@ -151,6 +151,34 @@ MonoBehaviour:
     pitch: 1
     m_randomVolumeRange: {x: 0.6, y: 0.7}
     m_randomPitchRange: {x: 1, y: 1}
+  - m_name: UsePotion
+    m_clips:
+    - {fileID: 8300000, guid: 3587fdd92a4f38846affc5763871fef4, type: 3}
+    volume: 0.7
+    pitch: 1
+    m_randomVolumeRange: {x: 0.7, y: 0.7}
+    m_randomPitchRange: {x: 1, y: 1}
+  - m_name: UseMinor
+    m_clips:
+    - {fileID: 8300000, guid: fbc8d9d25550cb949b6265f28e582c8c, type: 3}
+    volume: 0.7
+    pitch: 1
+    m_randomVolumeRange: {x: 0.7, y: 0.7}
+    m_randomPitchRange: {x: 1, y: 1}
+  - m_name: UseMajor
+    m_clips:
+    - {fileID: 8300000, guid: 8483e0250e5b46f41bb61db1b0f50b5c, type: 3}
+    volume: 0.6
+    pitch: 1
+    m_randomVolumeRange: {x: 0.7, y: 0.7}
+    m_randomPitchRange: {x: 1, y: 1}
+  - m_name: Death
+    m_clips:
+    - {fileID: 8300000, guid: f476d54f39c166642951e77c47be82e7, type: 3}
+    volume: 1
+    pitch: 1
+    m_randomVolumeRange: {x: 1, y: 1}
+    m_randomPitchRange: {x: 1, y: 1}
 --- !u!1 &33138035764359457
 GameObject:
   m_ObjectHideFlags: 0
@@ -935,7 +963,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 554963618611783248}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 12.6, z: 1}
+  m_LocalPosition: {x: 15.1, y: 12.6, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5003310210013422574}
@@ -1131,7 +1159,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 656754946303770426}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.05, y: 5.18, z: -10}
+  m_LocalPosition: {x: -7.05, y: 5.18, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 656754945254968413}

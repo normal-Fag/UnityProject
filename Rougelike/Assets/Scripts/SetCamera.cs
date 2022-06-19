@@ -12,8 +12,6 @@ public class SetCamera : MonoBehaviour
         {
             cinemachine.Follow = collision.transform;
             cinemachine.LookAt = collision.transform;
-            point.GetComponent<Cinemachine.CinemachineVirtualCamera>().m_Lens.NearClipPlane = 0;
-            point.GetComponent<Cinemachine.CinemachineVirtualCamera>().Priority = 1;
             collision.transform.Find("Audio Manager").gameObject.SetActive(true);
         }
     }

@@ -44,7 +44,7 @@ public class Throw_skill_dagger : MonoBehaviour
             t_dagger.rotation = Quaternion.Euler(0, 0, 0);
             StartCoroutine(active_damage(trap_hitEnemies));
         }
-        else if(other.GetComponent<Enemy>() != null)
+        else if(other.GetComponent<Enemy>() != null || other.GetComponent<Boss>() != null)
         {
             if(isPosion)
                 other.GetComponent<Enemy>().TakeDamage(dagger_damage / 2, 2, 0);

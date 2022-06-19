@@ -349,7 +349,7 @@ public class character_movement : MonoBehaviour
 
     }
 
-    public Vector2 GetPosition()
+    public Vector3 GetPosition()
     {
         return transform.position;
     }
@@ -595,15 +595,19 @@ public class character_movement : MonoBehaviour
             m_audioManager.PlaySound("DefendSuccess");
             Debug.Log("Blocked");
         }
-        else if (gameObject.GetComponent<character_water_priest_controller>() != null)
+        else if (gameObject.GetComponent<character_water_priest_controller>() != null && !m_animator.GetCurrentAnimatorStateInfo(0).IsName("ultimate"))
         {
             m_animator.SetTrigger("Hurt");
             currentHp -= damage;
             Debug.Log("Not Blocked");
         }
+        else if (gameObject.GetComponent<character_water_priest_controller>() != null && m_animator.GetCurrentAnimatorStateInfo(0).IsName("ultimate"))
+        {
+            currentHp -= damage / 2;
+        }
 
 
-        if(m_animator.GetCurrentAnimatorStateInfo(0).IsName("ultimate") 
+        if (m_animator.GetCurrentAnimatorStateInfo(0).IsName("ultimate") 
             || m_animator.GetCurrentAnimatorStateInfo(0).IsName("defend")
             || m_animator.GetCurrentAnimatorStateInfo(0).IsName("heal")
             || m_animator.GetCurrentAnimatorStateInfo(0).IsName("roll") 
@@ -642,6 +646,7 @@ public class character_movement : MonoBehaviour
     public IEnumerator ResetLevel()
     {
         UiController.SetActive(false);
+        m_audioManager.PlaySound("Death");
         gameOverScreen.SetActive(true);
         yield return new WaitForSeconds(5);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

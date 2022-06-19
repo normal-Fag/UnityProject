@@ -577,7 +577,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4498784275353591133}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.66, y: -3.27, z: 0}
+  m_LocalPosition: {x: 9.66, y: -3.27, z: -10}
   m_LocalScale: {x: -4, y: 4, z: 1}
   m_Children:
   - {fileID: 8130393862809771955}
@@ -720,7 +720,7 @@ MonoBehaviour:
   poisonDamage: 5
   poisonTimer: 5
   damage: 10
-  attackDistance: 4
+  attackDistance: 7
   cooldownTimer: 1
   repulsiveForce: 0
   target: {fileID: 0}
@@ -747,24 +747,24 @@ MonoBehaviour:
   - {fileID: 8300000, guid: bedfcbec492194dc985c9466a5915edc, type: 3}
   - {fileID: 8300000, guid: e415ebab7ed354111b322166e5ca5b78, type: 3}
   - {fileID: 8300000, guid: d046e8489d048409483645079ff26a4c, type: 3}
-  HealthPotionProcent: 30
+  HealthPotionProcent: 20
   AttackBuffProcent: 30
-  SkillBuffProcent: 30
-  HpBuffProcent: 30
-  InfinityAttackBuffProcent: 30
+  SkillBuffProcent: 0
+  HpBuffProcent: 0
+  InfinityAttackBuffProcent: 0
   PosionProcent: 30
-  InfinityBagProcent: 30
-  SpareBagnProcent: 30
-  DaggerProcent: 30
-  PosionBagProcent: 30
-  SkullOfRageProcent: 30
-  DropOfFuryProcent: 30
-  PhoenixFeatherProcent: 30
+  InfinityBagProcent: 0
+  SpareBagnProcent: 0
+  DaggerProcent: 50
+  PosionBagProcent: 0
+  SkullOfRageProcent: 0
+  DropOfFuryProcent: 0
+  PhoenixFeatherProcent: 0
   ManaPotionProcent: 30
-  ManaStoneProcent: 30
-  RegenManaPotionrProcent: 30
-  BurstStoneProcent: 30
-  ScrollOfKnowledgeProcent: 30
+  ManaStoneProcent: 0
+  RegenManaPotionrProcent: 0
+  BurstStoneProcent: 0
+  ScrollOfKnowledgeProcent: 0
   staticEnemy: 1
   activePatroling: 0
   leftLimit: {fileID: 0}

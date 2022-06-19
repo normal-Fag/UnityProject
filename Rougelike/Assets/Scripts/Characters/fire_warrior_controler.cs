@@ -297,6 +297,10 @@ public class fire_warrior_controler : MonoBehaviour
                 character_movement.m_audioManager.PlaySound("UsePotion");
                 StartCoroutine(useAttackBuff(item.Cooldown()));
                 break;
+            case Item.ItemType.InfinityAttackBuff:
+                character_movement.m_audioManager.PlaySound("UseMinor");
+                atk_dmg += 10;
+                break;
             case Item.ItemType.SkillBuff:
                 character_movement.m_audioManager.PlaySound("UsePotion");
                 StartCoroutine(useSkillBuff(item.Cooldown()));
