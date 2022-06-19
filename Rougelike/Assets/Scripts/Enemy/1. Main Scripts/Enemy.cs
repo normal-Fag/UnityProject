@@ -51,6 +51,15 @@ public class Enemy : MonoBehaviour
     protected int           characterId;
     private bool            isItemDroped;
 
+    [Space]
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip[] hitSounds;
+    public AudioClip[] whooshSounds;
+    public AudioClip[] voiceSounds;
+    public AudioClip[] deathSounds;
+
+
 
     [Space]
     [Header("Procent")]
@@ -78,6 +87,7 @@ public class Enemy : MonoBehaviour
         rb          = GetComponent<Rigidbody2D>();
         anim        = GetComponent<Animator>();
         intTimer    = cooldownTimer;
+        Physics2D.IgnoreLayerCollision(7, 7, true);
     }
 
     virtual public void Update()
@@ -202,12 +212,31 @@ public class Enemy : MonoBehaviour
         rb.velocity = Vector2.zero;
         rb.isKinematic = true;
         GetComponent<Collider2D>().enabled = false;
-        Destroy(this.gameObject, 2);
+        Destroy(this.gameObject, 4);
         if(!isItemDroped)
             DropItem(characterId);
     }
 
+    public void PlayHitSound()
+    {
+        audioSource.PlayOneShot(hitSounds[Random.Range(0, hitSounds.Length)], 0.3f);
+    }
 
+    public void PlayWhooshSound()
+    {
+        audioSource.PlayOneShot(whooshSounds[Random.Range(0, whooshSounds.Length)], 0.3f);
+    }
+
+    public void PlayDeathSound()
+    {
+        audioSource.PlayOneShot(deathSounds[Random.Range(0, deathSounds.Length)], 0.3f);
+    }
+
+    public void PlayVoiceSound()
+    {
+        if (voiceSounds.Length > 0)
+            audioSource.PlayOneShot(voiceSounds[Random.Range(0, voiceSounds.Length)], 0.3f);
+    }
 
     private void DropItem(int id)
     {

@@ -9,9 +9,13 @@ public class MashroomPjectileLogic : MonoBehaviour
     private Rigidbody2D rb;
     public int mashroomFacing;
 
+    public AudioClip[] clips;
+    private AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
@@ -24,14 +28,19 @@ public class MashroomPjectileLogic : MonoBehaviour
             collision.gameObject.GetComponent<character_movement>().Take_Damage(damage, mashroomFacing);
             anim.SetTrigger("Destroy");
             rb.velocity = new Vector3(0, 0, 0);
-            Destroy(gameObject, 0.2f);
+            Destroy(gameObject, 1f);
         }
 
         if (collision.tag == "Ground")
         {
             anim.SetTrigger("Destroy");
             rb.velocity = new Vector3(0, 0, 0);
-            Destroy(gameObject, 0.2f);
+            Destroy(gameObject, 1f);
         }
+    }
+
+    public void PlayRandomClip()
+    {
+        audioSource.PlayOneShot(clips[Random.Range(0, clips.Length)], 0.3f);
     }
 }

@@ -130,6 +130,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29fa34f5a869e4f55877f6b28de555c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firstWall: {fileID: 0}
+  secondWall: {fileID: 0}
 --- !u!1 &3780624244410039733
 GameObject:
   m_ObjectHideFlags: 0
@@ -466,6 +468,7 @@ MonoBehaviour:
   ManaStoneProcent: 30
   BurstStoneProcent: 30
   ScrollOfKnowledgeProcent: 30
+  finalWall: {fileID: 0}
   attackDamage: 0
   attackDamageInAir: 0
   attackDistance: 5
@@ -486,6 +489,8 @@ MonoBehaviour:
   attackWhooshSFX:
   - {fileID: 8300000, guid: e0f87ad772fa045bfb183977ee4dc42f, type: 3}
   - {fileID: 8300000, guid: 94ad17c9c8ae84aeca69ba0761fb6803, type: 3}
+  - {fileID: 8300000, guid: d97baf62965c64be88c0d0008f332cc6, type: 3}
+  - {fileID: 8300000, guid: e96a7fe34c7464654a42528c1db8a869, type: 3}
   attackInAirHitSFX:
   - {fileID: 8300000, guid: 704987e61d59646038bef0c405689026, type: 3}
   attackInAirWhooshSFX:

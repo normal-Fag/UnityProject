@@ -15,6 +15,8 @@ public class HellBeastEnemyBehavio : Enemy
     private float shootIntTimer;
     private bool isShootCooldown;
 
+    public AudioClip[] fireballSounds;
+
     private void Awake()
     {
         shootIntTimer = shootCooldownTimer;
@@ -46,15 +48,13 @@ public class HellBeastEnemyBehavio : Enemy
         base.AttackPlayer();
 
         anim.SetTrigger("Attack");
-        //anim.SetBool("isRunning", false);
     }
 
     protected void ShootPlayer()
     {
         anim.ResetTrigger("Attack");
 
-        //if (!isShootCooldown)
-            anim.SetTrigger("Fire");
+        anim.SetTrigger("Fire");
     }
 
     public void ShootFireball()
@@ -99,5 +99,10 @@ public class HellBeastEnemyBehavio : Enemy
     public void TriggerShootCooling()
     {
         isShootCooldown = true;
+    }
+
+    public void PlayFireballSound()
+    {
+        audioSource.PlayOneShot(fireballSounds[Random.Range(0, fireballSounds.Length)], 0.08f);
     }
 }

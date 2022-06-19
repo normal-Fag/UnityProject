@@ -16,6 +16,7 @@ public class HotZoneCheck : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            enemyParent.PlayVoiceSound();
             inRange = true;
         }
     }

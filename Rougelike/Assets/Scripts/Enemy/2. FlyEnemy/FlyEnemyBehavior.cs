@@ -5,6 +5,8 @@ using UnityEngine;
 public class FlyEnemyBehavior : Enemy
 {
 
+    public AudioClip[] flySounds;
+
     public override void Update()
     {
         if (inRange && health > 0)
@@ -47,5 +49,10 @@ public class FlyEnemyBehavior : Enemy
     {
         base.StopAttackPlayer();
         anim.ResetTrigger("Attack");
+    }
+
+    public void PlayFlySound()
+    {
+        audioSource.PlayOneShot(flySounds[Random.Range(0, flySounds.Length)], 0.3f);
     }
 }

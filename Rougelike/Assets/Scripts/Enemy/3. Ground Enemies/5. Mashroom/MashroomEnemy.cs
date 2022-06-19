@@ -85,4 +85,9 @@ public class MashroomEnemy : GroundEnemyBehavior2
 
         return res;
     }
+
+    public void PlayAttack2Sound()
+    {
+        audioSource.PlayOneShot(voiceSounds[2], 0.3f);
+    }
 }

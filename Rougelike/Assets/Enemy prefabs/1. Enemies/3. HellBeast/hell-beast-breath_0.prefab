@@ -1,5 +1,132 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6658584550418107151
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3799386366596559901}
+  - component: {fileID: 2692583674620020225}
+  m_Layer: 7
+  m_Name: AudioSorce
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3799386366596559901
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6658584550418107151}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.36775437, y: 0.43408728, z: -513.12634}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6898817450874905337}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &2692583674620020225
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6658584550418107151}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &6898817450804897296
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,7 +138,7 @@ GameObject:
   - component: {fileID: 6898817450804897295}
   - component: {fileID: 6898817450804897293}
   - component: {fileID: 6898817450804897294}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HitTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,7 +196,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6898817450816810412}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Handle Slide Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +237,7 @@ GameObject:
   - component: {fileID: 6898817450874905334}
   - component: {fileID: 6898817450874905335}
   - component: {fileID: 6898817450874905333}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: hell-beast-breath_0
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -132,6 +259,7 @@ Transform:
   - {fileID: 6898817452794720526}
   - {fileID: 6898817450804897295}
   - {fileID: 6898817452773225423}
+  - {fileID: 3799386366596559901}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -277,10 +405,43 @@ MonoBehaviour:
   isBurning: 0
   isPoisoning: 0
   isAttack: 0
+  audioSource: {fileID: 2692583674620020225}
+  hitSounds: []
+  whooshSounds:
+  - {fileID: 8300000, guid: 2cbe06049bf584817a2084179dab6245, type: 3}
+  voiceSounds:
+  - {fileID: 8300000, guid: dfcadc18a234e4a95bbb83ec40a48622, type: 3}
+  - {fileID: 8300000, guid: b2c1707c3818b4ff3aceb3ef5354d9b1, type: 3}
+  - {fileID: 8300000, guid: 52dbfde307a5d48c58cf617bf896d794, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: 7e57a913456834dc5ba1831dd1199165, type: 3}
+  HealthPotionProcent: 30
+  AttackBuffProcent: 30
+  SkillBuffProcent: 30
+  HpBuffProcent: 30
+  InfinityAttackBuffProcent: 30
+  PosionProcent: 30
+  InfinityBagProcent: 30
+  SpareBagnProcent: 30
+  DaggerProcent: 30
+  PosionBagProcent: 30
+  SkullOfRageProcent: 30
+  DropOfFuryProcent: 30
+  PhoenixFeatherProcent: 30
+  ManaPotionProcent: 30
+  ManaStoneProcent: 30
+  RegenManaPotionrProcent: 30
+  BurstStoneProcent: 30
+  ScrollOfKnowledgeProcent: 30
   fireballPrefab: {fileID: 4343280718757735825, guid: 2b1a73393c2524680a343563659e1c38, type: 3}
   shootForce: 500
   shootCooldownTimer: 2
   shootDamage: 15
+  fireballSounds:
+  - {fileID: 8300000, guid: 563b39baf2b934e59820024787187c47, type: 3}
+  - {fileID: 8300000, guid: dc657979d785b401d8ff71fef19c95c7, type: 3}
+  - {fileID: 8300000, guid: d0e80c6f33a504415842b33be1f770c4, type: 3}
+  - {fileID: 8300000, guid: d66fc6e5f4be54b5e9400321a53da411, type: 3}
 --- !u!114 &6898817450874905333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,7 +467,7 @@ GameObject:
   - component: {fileID: 6898817450998226440}
   - component: {fileID: 6898817450998226438}
   - component: {fileID: 6898817450998226439}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hot zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -376,7 +537,7 @@ GameObject:
   - component: {fileID: 6898817451270870146}
   - component: {fileID: 6898817451270870144}
   - component: {fileID: 6898817451270870145}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -451,7 +612,7 @@ GameObject:
   - component: {fileID: 6898817451851559028}
   - component: {fileID: 6898817451851559026}
   - component: {fileID: 6898817451851559027}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -524,7 +685,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6898817451980033452}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -561,7 +722,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6898817452370641847}
   - component: {fileID: 6898817452370641848}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -653,7 +814,7 @@ GameObject:
   - component: {fileID: 6898817452773225420}
   - component: {fileID: 6898817452773225421}
   - component: {fileID: 6898817452773225422}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -752,7 +913,7 @@ GameObject:
   - component: {fileID: 6898817452794720526}
   - component: {fileID: 6898817452794720524}
   - component: {fileID: 6898817452794720525}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Trigger area
   m_TagString: Untagged
   m_Icon: {fileID: 0}

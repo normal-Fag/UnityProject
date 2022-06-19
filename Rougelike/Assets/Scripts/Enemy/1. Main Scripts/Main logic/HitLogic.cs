@@ -11,8 +11,10 @@ public class HitLogic : MonoBehaviour
             Enemy enemy = GetComponentInParent<Enemy>();
             character_movement player = collision.gameObject.GetComponent<character_movement>();
             
-           player.Take_Damage(enemy.damage, enemy.facingDirection);
-           //StartCoroutine(player.PushAway(enemy.transform.position, enemy.repulsiveForce));
+            player.Take_Damage(enemy.damage, enemy.facingDirection);
+            //StartCoroutine(player.PushAway(enemy.transform.position, enemy.repulsiveForce));
+
+            enemy.PlayHitSound();
         }
     }
 }
