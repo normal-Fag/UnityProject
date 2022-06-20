@@ -342,7 +342,7 @@ GameObject:
   - component: {fileID: 4498784275353591132}
   - component: {fileID: 2225890482764501438}
   - component: {fileID: 3138665992238819008}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bandit-prefab
   m_TagString: Enemy
   m_Icon: {fileID: 0}

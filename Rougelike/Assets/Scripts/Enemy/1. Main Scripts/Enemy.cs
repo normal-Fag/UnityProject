@@ -87,7 +87,7 @@ public class Enemy : MonoBehaviour
         rb          = GetComponent<Rigidbody2D>();
         anim        = GetComponent<Animator>();
         intTimer    = cooldownTimer;
-        Physics2D.IgnoreLayerCollision(7, 7, true);
+        //Physics2D.IgnoreCollision(7, 7, true);
     }
 
     virtual public void Update()
