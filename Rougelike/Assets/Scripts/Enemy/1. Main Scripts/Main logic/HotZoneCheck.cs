@@ -5,7 +5,7 @@ using UnityEngine;
 public class HotZoneCheck : MonoBehaviour
 {
     private Enemy enemyParent;
-    private bool inRange;
+    //private bool inRange;
 
     private void Awake()
     {
@@ -17,7 +17,7 @@ public class HotZoneCheck : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             enemyParent.PlayVoiceSound();
-            inRange = true;
+            //inRange = true;
         }
     }
 
@@ -25,7 +25,7 @@ public class HotZoneCheck : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            inRange = false;
+            //inRange = false;
             gameObject.SetActive(false);
             enemyParent.inRange = false;
             enemyParent.triggerArea.SetActive(true);

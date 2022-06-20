@@ -5,6 +5,8 @@ using UnityEngine;
 public class MashroomEnemy : GroundEnemyBehavior2
 {
 
+    public AudioClip[] biteSounds;
+
     [Header("Mashroom settings")]
     public GameObject poopPrefab;
     public float poopSpeed = 5;
@@ -41,12 +43,12 @@ public class MashroomEnemy : GroundEnemyBehavior2
 
     protected override void StopAttackPlayer()
     {
-        attackType = Random.Range(0, 2);
+        //attackType = Random.Range(0, 10);
 
         anim.ResetTrigger("Attack1");
         anim.ResetTrigger("Attack2");
 
-        if (attackType == 1 && !isCooldown)
+        if (Random.Range(0, 10) == 1 && !isCooldown)
         {
             anim.SetBool("isAttack3", true);
         }
@@ -86,8 +88,8 @@ public class MashroomEnemy : GroundEnemyBehavior2
         return res;
     }
 
-    public void PlayAttack2Sound()
+    public void PlayBiteSound()
     {
-        audioSource.PlayOneShot(voiceSounds[2], 0.3f);
+        audioSource.PlayOneShot(biteSounds[Random.Range(0, biteSounds.Length)], 0.3f);
     }
 }

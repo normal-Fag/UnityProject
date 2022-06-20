@@ -3,20 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GroundEnemyBehavior2 : Enemy
-{
+{ 
     [Header("State settings")]
-    public bool staticEnemy = false;[Space]
+    public bool         staticEnemy = false;[Space]
 
     [Header("Patroling mode")]
     [Tooltip("Активировать патрулирование у врага.\nРаботает при отключенном 'static enemy'.")]
-    public bool activePatroling = true;
-    public Transform leftLimit;
-    public Transform rightLimit;[Space]
+    public bool         activePatroling = true;
+    public Transform    leftLimit;
+    public Transform    rightLimit;[Space]
 
     [Header("Back to point mode")]
     [Tooltip("Точка возвращения врага.\nРаботает при отключенном 'activate patroling' и 'static enemy'.")]
-    public Transform backPoint;
+    public bool         activateBackToPoint = false;
+    public Transform    backPoint;
 
+    [HideInInspector] public bool isGrounded;
     private bool isPointed;
 
     private void Awake()
@@ -45,7 +47,8 @@ public class GroundEnemyBehavior2 : Enemy
         if (isCooldown)
             Cooldown();
 
-        if (!staticEnemy && distance > attackDistance && target.position.y - transform.position.y < 3.5f)
+        if (!staticEnemy && distance > attackDistance &&
+            target.position.y - transform.position.y < 3.5f && isGrounded)
             Move();
         else if (!isPushed)
             StopMoving();
@@ -77,7 +80,7 @@ public class GroundEnemyBehavior2 : Enemy
 
     public override void SelectTarget()
     {
-        if (activePatroling && !staticEnemy)
+        if (activePatroling && !staticEnemy && !activateBackToPoint)
         {
             float distanceToLeft    = Vector2.Distance(transform.position, leftLimit.position);
             float distanceToRight   = Vector2.Distance(transform.position, rightLimit.position);
@@ -87,12 +90,12 @@ public class GroundEnemyBehavior2 : Enemy
             else
                 target  = rightLimit;
         }
-        else if (!activePatroling && !staticEnemy)
+        else if (activateBackToPoint && !activePatroling && !staticEnemy)
         {
             target      = transform.position.x != backPoint.position.x ? backPoint : transform;
-            isPointed   = Vector2.Distance(transform.position, backPoint.position) < 2 ? true : false;
+            isPointed   = Vector2.Distance(transform.position, backPoint.position) < 3 ? true : false;
         }
-        else
+        else if (staticEnemy) 
             target      = transform;
     }
 
@@ -124,7 +127,7 @@ public class GroundEnemyBehavior2 : Enemy
         SelectTarget();
         Move();
 
-        if (Vector2.Distance(transform.position, target.position) < 2)
+        if (isPointed)
         {
             anim.SetBool("isRunning", false);
         }
