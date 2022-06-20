@@ -43,8 +43,6 @@ public class MashroomEnemy : GroundEnemyBehavior2
 
     protected override void StopAttackPlayer()
     {
-        //attackType = Random.Range(0, 10);
-
         anim.ResetTrigger("Attack1");
         anim.ResetTrigger("Attack2");
 

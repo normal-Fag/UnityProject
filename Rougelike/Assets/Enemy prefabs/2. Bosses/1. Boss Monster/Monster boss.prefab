@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2900322324240479538}
   - component: {fileID: 2900322324240479541}
   - component: {fileID: 2900322324240479540}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Monster boss
   m_TagString: Boss
   m_Icon: {fileID: 0}
@@ -208,16 +208,6 @@ MonoBehaviour:
   isAttack: 0
   facingDirection: 0
   fullHp: 0
-  InfinityAttackBuffProcent: 30
-  InfinityBagProcent: 30
-  SpareBagnProcent: 30
-  PosionBagProcent: 30
-  SkullOfRageProcent: 30
-  DropOfFuryProcent: 30
-  PhoenixFeatherProcent: 30
-  ManaStoneProcent: 30
-  BurstStoneProcent: 30
-  ScrollOfKnowledgeProcent: 30
   finalWall: {fileID: 0}
   attackDistance: 6
   attackDamage: 1
