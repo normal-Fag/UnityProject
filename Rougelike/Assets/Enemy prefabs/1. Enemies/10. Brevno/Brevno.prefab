@@ -566,13 +566,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5175408164868949697}
     m_Modifications:
+    - target: {fileID: 412091328484567928, guid: 477b10b9ccf164e4382a334cec52ef27, type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1309092565254368927, guid: 477b10b9ccf164e4382a334cec52ef27, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1309092565254368927, guid: 477b10b9ccf164e4382a334cec52ef27, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4821917060309355787, guid: 477b10b9ccf164e4382a334cec52ef27, type: 3}
       propertyPath: m_Name
       value: Enemy UI
       objectReference: {fileID: 0}
+    - target: {fileID: 4821917060309355787, guid: 477b10b9ccf164e4382a334cec52ef27, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6759050967752577725, guid: 477b10b9ccf164e4382a334cec52ef27, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.00195
+      value: -0.00195
       objectReference: {fileID: 0}
     - target: {fileID: 6759050967752577725, guid: 477b10b9ccf164e4382a334cec52ef27, type: 3}
       propertyPath: m_LocalScale.y
@@ -617,6 +633,10 @@ PrefabInstance:
     - target: {fileID: 8790318975224734456, guid: 477b10b9ccf164e4382a334cec52ef27, type: 3}
       propertyPath: m_SizeDelta.y
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8790318975224734456, guid: 477b10b9ccf164e4382a334cec52ef27, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8790318975224734456, guid: 477b10b9ccf164e4382a334cec52ef27, type: 3}
       propertyPath: m_LocalPosition.x

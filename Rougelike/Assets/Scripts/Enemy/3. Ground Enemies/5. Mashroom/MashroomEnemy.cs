@@ -5,7 +5,6 @@ using UnityEngine;
 public class MashroomEnemy : GroundEnemyBehavior2
 {
 
-    public AudioClip[] biteSounds;
 
     [Header("Mashroom settings")]
     public GameObject poopPrefab;
@@ -14,6 +13,8 @@ public class MashroomEnemy : GroundEnemyBehavior2
 
     private int attackType;
     private float time = 1f;
+    [Space]
+    public AudioClip[] biteSounds;
 
     private void Awake()
     {

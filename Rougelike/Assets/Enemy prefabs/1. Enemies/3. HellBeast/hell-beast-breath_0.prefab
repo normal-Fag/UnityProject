@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 6898817450804897295}
   - component: {fileID: 6898817450804897293}
   - component: {fileID: 6898817450804897294}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: HitTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -432,7 +432,7 @@ GameObject:
   - component: {fileID: 6898817450998226440}
   - component: {fileID: 6898817450998226438}
   - component: {fileID: 6898817450998226439}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Hot zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -502,7 +502,7 @@ GameObject:
   - component: {fileID: 6898817452794720526}
   - component: {fileID: 6898817452794720524}
   - component: {fileID: 6898817452794720525}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Trigger area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
