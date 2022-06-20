@@ -752,7 +752,7 @@ GameObject:
   - component: {fileID: 3791616376942857279}
   - component: {fileID: 1000922468369608780}
   - component: {fileID: 1826908202823128893}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: lootSensor
   m_TagString: Untagged
   m_Icon: {fileID: 0}

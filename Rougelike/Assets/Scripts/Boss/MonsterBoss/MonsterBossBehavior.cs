@@ -73,8 +73,8 @@ public class MonsterBossBehavior : Boss
 
     public void Spellcast()
     {
-        Vector2 targetPosition = target.transform.position;
-        Vector2 spawnPoint = new Vector2(targetPosition.x, targetPosition.y + 3.5f);
+        Vector3 targetPosition = target.transform.position;
+        Vector3 spawnPoint = new Vector3(targetPosition.x, targetPosition.y + 3.5f, targetPosition.z);
 
         Instantiate(spellPrefab, spawnPoint, Quaternion.identity);
     }
@@ -91,12 +91,12 @@ public class MonsterBossBehavior : Boss
 
     public IEnumerator StartSpecialAttack()
     {
-        Vector2 targetPosition;
-        Vector2 spawnPoint;
+        Vector3 targetPosition;
+        Vector3 spawnPoint;
         for (int i = 0; i < 4; i++)
         {
             targetPosition = target.transform.position;
-            spawnPoint = new Vector2(targetPosition.x, targetPosition.y + 4.5f);
+            spawnPoint = new Vector3(targetPosition.x, targetPosition.y + 4.5f, targetPosition.z);
             Instantiate(spellPrefab, spawnPoint, Quaternion.identity);
             yield return new WaitForSeconds(1f);
         }

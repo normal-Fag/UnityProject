@@ -75,7 +75,7 @@ public class UI_Button_Fire : MonoBehaviour
 
         if (isCDUlt)
         {
-            ultimate.transform.Find("cd").GetComponent<Image>().fillAmount -= 1f / (fire_warrior_controler.UltCD_for_UI + 0.1f) * Time.deltaTime;
+            ultimate.transform.Find("cd").GetComponent<Image>().fillAmount -= 1f / (fire_warrior_controler.UltCD_for_UI + 0.15f) * Time.deltaTime;
             if(ultimate.transform.Find("cd").GetComponent<Image>().fillAmount <= 0) {
 
                 isCDUlt = false;
@@ -85,7 +85,7 @@ public class UI_Button_Fire : MonoBehaviour
         }
         if (isCDSP)
         {
-            special.transform.Find("cd").GetComponent<Image>().fillAmount -= 1f / (fire_warrior_controler.SPCD_for_UI + 0.1f) * Time.deltaTime;
+            special.transform.Find("cd").GetComponent<Image>().fillAmount -= 1f / (fire_warrior_controler.SPCD_for_UI + 0.15f) * Time.deltaTime;
 
             if (special.transform.Find("cd").GetComponent<Image>().fillAmount <= 0)
             {
