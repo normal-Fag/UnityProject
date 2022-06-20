@@ -207,6 +207,7 @@ public class Enemy : MonoBehaviour
 
     virtual public void Death()
     {
+        target = transform;
         StopAttackPlayer();
         anim.SetTrigger("Death");
         rb.velocity = Vector2.zero;
