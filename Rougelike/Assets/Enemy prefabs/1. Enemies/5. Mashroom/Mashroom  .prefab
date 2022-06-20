@@ -418,12 +418,12 @@ MonoBehaviour:
   activateBackToPoint: 0
   backPoint: {fileID: 0}
   isGrounded: 0
-  biteSounds:
-  - {fileID: 8300000, guid: 696b28700268340b79d03768e9227f07, type: 3}
-  - {fileID: 8300000, guid: a6c9c67416893496e9ff9c65b110bb20, type: 3}
   poopPrefab: {fileID: 7646970888568605652, guid: a7301522a30864295a81e605fbfa2832, type: 3}
   poopSpeed: 2
   poopDamage: 3
+  biteSounds:
+  - {fileID: 8300000, guid: 696b28700268340b79d03768e9227f07, type: 3}
+  - {fileID: 8300000, guid: a6c9c67416893496e9ff9c65b110bb20, type: 3}
 --- !u!114 &6445762091410015984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -655,6 +655,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6274800246030348160}
     m_Modifications:
+    - target: {fileID: 412091328484567928, guid: 477b10b9ccf164e4382a334cec52ef27, type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1309092565254368927, guid: 477b10b9ccf164e4382a334cec52ef27, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -673,7 +677,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6759050967752577725, guid: 477b10b9ccf164e4382a334cec52ef27, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.0017
+      value: -0.0017
       objectReference: {fileID: 0}
     - target: {fileID: 6759050967752577725, guid: 477b10b9ccf164e4382a334cec52ef27, type: 3}
       propertyPath: m_LocalScale.y

@@ -19,6 +19,7 @@ public class HellBeastEnemyBehavio : Enemy
 
     private void Awake()
     {
+        target = transform;
         shootIntTimer = shootCooldownTimer;
     }
 

@@ -119,7 +119,10 @@ public class GroundEnemyBehavior2 : Enemy
             yield return new WaitForSeconds(2f);
         }
 
-        Move();
+        if (isGrounded)
+            Move();
+        else
+            SelectTarget();
     }
 
     protected virtual void BackToPoint()

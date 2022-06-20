@@ -643,13 +643,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 45532891556178315}
     m_Modifications:
+    - target: {fileID: 412091328484567928, guid: 477b10b9ccf164e4382a334cec52ef27, type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1309092565254368927, guid: 477b10b9ccf164e4382a334cec52ef27, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1309092565254368927, guid: 477b10b9ccf164e4382a334cec52ef27, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4821917060309355787, guid: 477b10b9ccf164e4382a334cec52ef27, type: 3}
       propertyPath: m_Name
       value: Enemy UI
       objectReference: {fileID: 0}
+    - target: {fileID: 4821917060309355787, guid: 477b10b9ccf164e4382a334cec52ef27, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6759050967752577725, guid: 477b10b9ccf164e4382a334cec52ef27, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.0025
+      value: -0.0025
       objectReference: {fileID: 0}
     - target: {fileID: 6759050967752577725, guid: 477b10b9ccf164e4382a334cec52ef27, type: 3}
       propertyPath: m_AnchoredPosition.y
