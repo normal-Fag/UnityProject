@@ -24,7 +24,6 @@ public class CharactersSound
         m_source = source;
         int randomClip = Random.Range(0, m_clips.Length - 1);
         m_source.clip = m_clips[randomClip];
-
     }
 
     public void Play()

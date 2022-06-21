@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 
-public class WorldAudioManager : SaveAudio
+public class WorldAudioManager : MonoBehaviour
 {
     public AudioClip defaulAudioClip;
 
@@ -11,7 +10,7 @@ public class WorldAudioManager : SaveAudio
     private bool isPlayingTrack1;
 
     public static WorldAudioManager instance;
-    private float musicVolume;
+
     private void Awake()
     {
         if (instance == null)
@@ -23,18 +22,6 @@ public class WorldAudioManager : SaveAudio
     {
         track1 = gameObject.AddComponent<AudioSource>();
         track2 = gameObject.AddComponent<AudioSource>();
-        if (File.Exists(Application.persistentDataPath + "/Save/options.txt"))
-        {
-            string saveString = File.ReadAllText(Application.persistentDataPath + "/Save/options.txt");
-            SaveGeneral saveOption = JsonUtility.FromJson<SaveGeneral>(saveString);
-            if (saveOption.allSoundsOff)
-            {
-                track2.mute = true;
-                track1.mute = true;
-            }
-            else
-                musicVolume = saveOption.musicVolume;
-          }
         track1.loop = true;
         track2.loop = true;
         isPlayingTrack1 = true;
@@ -65,8 +52,8 @@ public class WorldAudioManager : SaveAudio
 
             while(timeElapsed < timeToFade)
             {
-                track2.volume = Mathf.Lerp(0, musicVolume, timeElapsed / timeToFade);
-                track1.volume = Mathf.Lerp(musicVolume, 0, timeElapsed / timeToFade);
+                track2.volume = Mathf.Lerp(0, 1, timeElapsed / timeToFade);
+                track1.volume = Mathf.Lerp(1, 0, timeElapsed / timeToFade);
                 timeElapsed += Time.deltaTime;
                 yield return null;
             }
@@ -79,8 +66,8 @@ public class WorldAudioManager : SaveAudio
             track1.Play();
             while (timeElapsed < timeToFade)
             {
-                track1.volume = Mathf.Lerp(0, musicVolume, timeElapsed / timeToFade);
-                track2.volume = Mathf.Lerp(musicVolume, 0, timeElapsed / timeToFade);
+                track1.volume = Mathf.Lerp(0, 1, timeElapsed / timeToFade);
+                track2.volume = Mathf.Lerp(1, 0, timeElapsed / timeToFade);
                 timeElapsed += Time.deltaTime;
                 yield return null;
             }
