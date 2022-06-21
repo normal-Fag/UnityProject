@@ -33,8 +33,7 @@ public class KnightBossRunBehavior : StateMachineBehaviour
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Vector2 dir     = target.position - animator.transform.position;
-        dir.y           = animator.transform.position.y;
+        Vector2 dir     = new Vector2 (target.position.x - animator.transform.position.x, 0);
 
         if (timer <= 0 && nextState == 0 && boss.distance <= 12 && boss.distance >= 6)
         {
