@@ -163,7 +163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hotZone: {fileID: 917780366613999348}
   triggerArea: {fileID: 917780366545576445}
-  health: 100
+  health: 80
   movementSpeed: 4
   activeBurning: 1
   firePrefab: {fileID: 6863192391745941111, guid: ac1acad79b6be4a319a95a4a8976a355, type: 3}
@@ -171,7 +171,7 @@ MonoBehaviour:
   fireTimer: 5
   activePoisoning: 1
   poisonPrefab: {fileID: 5298019677433071509, guid: 4c3ac61d27cc94bd3b5167ba1064381b, type: 3}
-  poisonDamage: 5
+  poisonDamage: 3
   poisonTimer: 5
   damage: 10
   attackDistance: 5
@@ -199,23 +199,24 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d754fef5d86ba44a59d20a77ef38094d, type: 3}
   - {fileID: 8300000, guid: fa616ec628cde465496df143c9a02d4b, type: 3}
   HealthPotionProcent: 30
-  AttackBuffProcent: 30
-  SkillBuffProcent: 30
-  HpBuffProcent: 30
-  InfinityAttackBuffProcent: 30
-  PosionProcent: 30
-  InfinityBagProcent: 30
-  SpareBagnProcent: 30
-  DaggerProcent: 30
-  PosionBagProcent: 30
-  SkullOfRageProcent: 30
-  DropOfFuryProcent: 30
-  PhoenixFeatherProcent: 30
+  AttackBuffProcent: 0
+  SkillBuffProcent: 0
+  HpBuffProcent: 0
+  InfinityAttackBuffProcent: 0
+  InfinityHPBuffProcent: 1
+  PosionProcent: 0
+  InfinityBagProcent: 0
+  SpareBagnProcent: 0
+  DaggerProcent: 60
+  PosionBagProcent: 0
+  SkullOfRageProcent: 0
+  DropOfFuryProcent: 0
+  PhoenixFeatherProcent: 0
   ManaPotionProcent: 30
-  ManaStoneProcent: 30
-  RegenManaPotionrProcent: 30
-  BurstStoneProcent: 30
-  ScrollOfKnowledgeProcent: 30
+  ManaStoneProcent: 0
+  RegenManaPotionrProcent: 0
+  BurstStoneProcent: 0
+  ScrollOfKnowledgeProcent: 0
   flySounds: []
   projectilePrefab: {fileID: 4484984091852639831, guid: ca468a18426df456383719108b4e8bfe, type: 3}
   projectileDamage: 5

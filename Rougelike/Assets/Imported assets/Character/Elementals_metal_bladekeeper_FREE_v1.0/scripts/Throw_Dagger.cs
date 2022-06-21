@@ -35,7 +35,7 @@ public class Throw_Dagger : MonoBehaviour
         }
         else if(isPosion)
         {
-            enemy.TakeDamage(dagger_damage, 1, 0);
+            enemy.TakeDamage(dagger_damage, 2, 0);
             Destroy(gameObject);
         }
         if(hitInfo.tag == "Ground" || hitInfo.tag == "Wall")
