@@ -1285,7 +1285,7 @@ MonoBehaviour:
   m_body2d: {fileID: 656754946303770429}
   m_grounded: 1
   stopingAction: 0
-  max_hp: 100
+  max_hp: 200
   hasHPBuff: 0
   hasHealthPotionCD: 0
   hasHPBuffCD: 0

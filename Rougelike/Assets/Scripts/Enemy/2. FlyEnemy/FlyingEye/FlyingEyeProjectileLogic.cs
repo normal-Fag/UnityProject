@@ -21,9 +21,9 @@ public class FlyingEyeProjectileLogic : MonoBehaviour
         if (collision.tag == "Player")
         {
             //HellBeastEnemyBehavio enemy = GetComponent<HellBeastEnemyBehavio>();
-            playerMovement player = collision.gameObject.GetComponent<playerMovement>();
+            character_movement player = collision.gameObject.GetComponent<character_movement>();
 
-            player.takeDamage(damage);
+            player.Take_Damage(damage, 0);
             rb.gravityScale = 0;
             rb.velocity = Vector2.zero;
             anim.SetTrigger("Destroy");
