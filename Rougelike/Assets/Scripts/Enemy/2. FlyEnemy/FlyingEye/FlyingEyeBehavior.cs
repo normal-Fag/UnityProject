@@ -7,8 +7,10 @@ public class FlyingEyeBehavior : FlyEnemyBehavior
     [Header("Projectile settings")]
     public GameObject projectilePrefab;
     public int projectileDamage = 10;
+    [Space]
+    public AudioClip[] spitSounds;
 
-    public bool isGrounded;
+    [HideInInspector] public bool isGrounded;
 
     private void Awake()
     {
@@ -30,6 +32,7 @@ public class FlyingEyeBehavior : FlyEnemyBehavior
     public IEnumerator StartAttack()
     {
         isAttack = true;
+        rb.velocity = Vector2.zero;
         yield return new WaitForSeconds(1);
 
         anim.SetTrigger(Random.Range(0,  2) == 1 ? "Attack1" : "Attack2");
@@ -87,5 +90,10 @@ public class FlyingEyeBehavior : FlyEnemyBehavior
             anim.SetTrigger("Death");
         else
             anim.SetTrigger("Death2");
+    }
+
+    public void PlaySpitSound()
+    {
+        audioSource.PlayOneShot(spitSounds[Random.Range(0, spitSounds.Length)], 0.2f);
     }
 }
