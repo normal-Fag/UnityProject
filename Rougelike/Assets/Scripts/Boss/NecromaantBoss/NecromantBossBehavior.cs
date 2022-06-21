@@ -58,14 +58,14 @@ public class NecromantBossBehavior : Boss
             case 0:
                 for (int i = 0; i < spell1CountOfSpells; i++)
                 {
-                    spellSpawnPoint = new Vector3(transform.position.x + 0.1f, transform.position.y + 0.1f, -1);
+                    spellSpawnPoint = new Vector3(transform.position.x + 0.1f, transform.position.y + 0.1f, -9);
                     Instantiate(spell1, spellSpawnPoint, Quaternion.identity);
                 }
                 break;
             case 1:
                 if (target.GetComponent<character_movement>().m_grounded)
                 {
-                    spellSpawnPoint = new Vector3(target.position.x, target.position.y, -1);
+                    spellSpawnPoint = new Vector3(target.position.x, target.position.y, -9);
                     Instantiate(spell2, spellSpawnPoint, Quaternion.identity);
                 }
                 else NecromantSpell();
