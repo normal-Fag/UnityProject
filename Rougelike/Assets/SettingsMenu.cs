@@ -6,28 +6,33 @@ using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
 {
+    public AudioSource music;
+    public AudioSource fx;
     [SerializeField]
-    public AudioMixer musicMixer;
+    public Slider musicMixer;
+    public Slider fxMixer;
     [SerializeField]
     public Toggle audioToggle;
 
-    public void setMusicVolume(float musicVolume)
+    public void setMusicVolume()
     {
-        musicMixer.SetFloat("musVolume", musicVolume);
+        music.volume = musicMixer.value;
     }
-    public void setFxVolume(float fxVolume)
+    public void setFxVolume()
     {
-        musicMixer.SetFloat("fxVolume", fxVolume);
+        fx.volume = fxMixer.value;
     }
     public void offSound(bool off)
     {
         if (off)
         {
-            musicMixer.SetFloat("master", -80);
+            music.mute = true;
+            fx.mute = true;
         }
         else
         {
-            musicMixer.SetFloat("master", 0);
+            music.mute = false;
+            fx.mute = false;
         }
     }
 }

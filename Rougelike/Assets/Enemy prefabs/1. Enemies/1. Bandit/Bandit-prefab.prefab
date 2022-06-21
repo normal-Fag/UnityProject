@@ -70,6 +70,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2742354301719700073}
   - component: {fileID: 8240125137300814639}
+  - component: {fileID: 8081347441007339742}
   m_Layer: 0
   m_Name: AudioSorce
   m_TagString: Untagged
@@ -187,6 +188,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8081347441007339742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3644227312914610531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dba588ca94825d14b8dcfe0d0c4235a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicVolume: {fileID: 0}
+  fxVolume: {fileID: 0}
+  allSoundsOff: {fileID: 0}
 --- !u!1 &4498784274422282625
 GameObject:
   m_ObjectHideFlags: 0

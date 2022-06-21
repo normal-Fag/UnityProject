@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 187003846}
   - component: {fileID: 187003847}
+  - component: {fileID: 7763368323877208243}
   m_Layer: 0
   m_Name: Audio Manager
   m_TagString: Untagged
@@ -179,6 +180,18 @@ MonoBehaviour:
     pitch: 1
     m_randomVolumeRange: {x: 1, y: 1}
     m_randomPitchRange: {x: 1, y: 1}
+--- !u!114 &7763368323877208243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187003845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a891ecada401955408cf20eb65e24e7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &33138035764359457
 GameObject:
   m_ObjectHideFlags: 0
@@ -9183,9 +9196,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 045be3817688a954a8a05c77b240cc2c, type: 3}
---- !u!224 &206354861200534765 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7854060319195435491, guid: 045be3817688a954a8a05c77b240cc2c, type: 3}
+--- !u!1 &206354861200534761 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7854060319195435495, guid: 045be3817688a954a8a05c77b240cc2c, type: 3}
   m_PrefabInstance: {fileID: 7935945729936915726}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &206354862082578998 stripped
@@ -9199,8 +9212,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &206354861200534761 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7854060319195435495, guid: 045be3817688a954a8a05c77b240cc2c, type: 3}
+--- !u!224 &206354861200534765 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7854060319195435491, guid: 045be3817688a954a8a05c77b240cc2c, type: 3}
   m_PrefabInstance: {fileID: 7935945729936915726}
   m_PrefabAsset: {fileID: 0}

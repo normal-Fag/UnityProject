@@ -246,6 +246,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2900322324241436899}
   - component: {fileID: 2900322324241436896}
+  - component: {fileID: 1744889930916173458}
   m_Layer: 0
   m_Name: Audio Manager
   m_TagString: Untagged
@@ -277,7 +278,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 877daad7649da0b4695c9941d61074d7, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -363,6 +364,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1744889930916173458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2900322324241436898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dba588ca94825d14b8dcfe0d0c4235a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicVolume: {fileID: 0}
+  fxVolume: {fileID: 0}
+  allSoundsOff: {fileID: 0}
 --- !u!1 &2900322324374498088
 GameObject:
   m_ObjectHideFlags: 0
@@ -434,6 +450,7 @@ GameObject:
   - component: {fileID: 2900322324745044115}
   - component: {fileID: 2900322324745044113}
   - component: {fileID: 2900322324745044112}
+  - component: {fileID: 8466742395754587576}
   m_Layer: 0
   m_Name: ScriptTrigger
   m_TagString: Untagged
@@ -495,6 +512,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.12223673, y: 1.6887656}
   m_EdgeRadius: 0
+--- !u!114 &8466742395754587576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2900322324745044114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd5b5045f4808a54b9407c08b4436c37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  swapTrigger: {fileID: 0}
+  newTrack: {fileID: 8300000, guid: 877daad7649da0b4695c9941d61074d7, type: 3}
 --- !u!1 &2900322325063658341
 GameObject:
   m_ObjectHideFlags: 0
