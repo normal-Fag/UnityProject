@@ -276,7 +276,7 @@ Transform:
   m_GameObject: {fileID: 3780624245314788109}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1, y: 3.66, z: -10}
-  m_LocalScale: {x: 12, y: 12, z: 1}
+  m_LocalScale: {x: 15, y: 15, z: 1}
   m_Children:
   - {fileID: 3780624244271760963}
   - {fileID: 3780624244410039732}
@@ -458,16 +458,6 @@ MonoBehaviour:
   isAttack: 0
   facingDirection: 0
   fullHp: 0
-  InfinityAttackBuffProcent: 30
-  InfinityBagProcent: 30
-  SpareBagnProcent: 30
-  PosionBagProcent: 30
-  SkullOfRageProcent: 30
-  DropOfFuryProcent: 30
-  PhoenixFeatherProcent: 30
-  ManaStoneProcent: 30
-  BurstStoneProcent: 30
-  ScrollOfKnowledgeProcent: 30
   finalWall: {fileID: 0}
   attackDamage: 0
   attackDamageInAir: 0
@@ -550,11 +540,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: e282fb835f19b164993b375858ecbeb8, type: 3}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 1b197323357862a44b90b0f13b8f26d0, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

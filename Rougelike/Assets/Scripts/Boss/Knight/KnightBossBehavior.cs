@@ -12,7 +12,7 @@ public class KnightBossBehavior : Boss
     public float attackDistance2;
     public float attackCooldownMin = 1f;
     public float attackCooldownMax = 3.5f;
-
+    [Space]
     [Header("Knight audio")]
     public AudioClip[] attackHitSFX;
     public AudioClip[] attackBlockHitSFX;
@@ -21,11 +21,9 @@ public class KnightBossBehavior : Boss
     public AudioClip[] attackInAirWhooshSFX;
     [Space]
     public AudioClip[] landingSounds;
-
+    [Space]
     public AudioClip slideSound;
     public AudioClip rollSound;
-
-    //public AudioClip[]
 
     [Header("Knight jump")]
     public float jumpForce;

@@ -26,9 +26,9 @@ public class KnightBossRunBehavior : StateMachineBehaviour
         speed   = boss.movementSpeed;
         target  = boss.target;
 
-        timer = Random.Range(minTime, maxTime);
-        nextState = Random.Range(0, 2);
-        isRunning = true;
+        timer       = Random.Range(minTime, maxTime);
+        nextState   = Random.Range(0, 2);
+        isRunning   = true;
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -55,11 +55,5 @@ public class KnightBossRunBehavior : StateMachineBehaviour
             rb.velocity     = dir.normalized * speed;
 
         timer -= Time.deltaTime;
-    }
-
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
- 
-        //animator.ResetTrigger("Run");
     }
 }

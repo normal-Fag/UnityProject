@@ -17,7 +17,7 @@ public class KnightBossRollBehavior : StateMachineBehaviour
 
         Vector2 rollDir = target.position - animator.transform.position;
         rollDir.y = 0;
-        animator.GetComponent<Rigidbody2D>().AddForce(rollDir * 20, ForceMode2D.Impulse);
+        animator.GetComponent<Rigidbody2D>().AddForce(rollDir * 18, ForceMode2D.Impulse);
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
