@@ -1417,11 +1417,11 @@ MonoBehaviour:
   max_number_of_daggers: 15
   id: 0
   cache_atk_dmg: 0
-  atk_dmg: 10
+  atk_dmg: 13
   buff_atk_dmg: 0
-  ult_dmg: 20
+  ult_dmg: 100
   hasMajorBuff: 0
-  UltCD: 12
+  UltCD: 20
 --- !u!114 &8234875249341877971
 MonoBehaviour:
   m_ObjectHideFlags: 0

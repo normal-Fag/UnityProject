@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SaveFromBoss : SaveFromNextStage
 {
+    public GameObject wall;
 
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -24,7 +25,7 @@ public class SaveFromBoss : SaveFromNextStage
             isCheckpointed = true;
             LevelId =  SceneManager.GetActiveScene().buildIndex;
             Save();
-
+            wall.SetActive(true);
         }
     }
 }

@@ -349,7 +349,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hotZone: {fileID: 6898817450998226441}
   triggerArea: {fileID: 6898817452794720527}
-  health: 100
+  health: 175
   movementSpeed: 0
   activeBurning: 0
   firePrefab: {fileID: 0}
@@ -357,10 +357,10 @@ MonoBehaviour:
   fireTimer: 5
   activePoisoning: 1
   poisonPrefab: {fileID: 0}
-  poisonDamage: 5
+  poisonDamage: 3
   poisonTimer: 5
-  damage: 30
-  attackDistance: 3
+  damage: 50
+  attackDistance: 4
   cooldownTimer: 5
   repulsiveForce: 0
   target: {fileID: 0}
@@ -385,6 +385,7 @@ MonoBehaviour:
   SkillBuffProcent: 30
   HpBuffProcent: 30
   InfinityAttackBuffProcent: 30
+  InfinityHPBuffProcent: 1
   PosionProcent: 30
   InfinityBagProcent: 30
   SpareBagnProcent: 30

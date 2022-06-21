@@ -498,10 +498,10 @@ MonoBehaviour:
   fireTimer: 5
   activePoisoning: 1
   poisonPrefab: {fileID: 5298019677433071509, guid: 4c3ac61d27cc94bd3b5167ba1064381b, type: 3}
-  poisonDamage: 5
+  poisonDamage: 3
   poisonTimer: 5
   damage: 10
-  attackDistance: 7
+  attackDistance: 4.6
   cooldownTimer: 1
   repulsiveForce: 0
   target: {fileID: 0}
@@ -529,11 +529,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e415ebab7ed354111b322166e5ca5b78, type: 3}
   - {fileID: 8300000, guid: d046e8489d048409483645079ff26a4c, type: 3}
   HealthPotionProcent: 20
-  AttackBuffProcent: 30
+  AttackBuffProcent: 15
   SkillBuffProcent: 0
   HpBuffProcent: 0
   InfinityAttackBuffProcent: 0
-  PosionProcent: 30
+  InfinityHPBuffProcent: 1
+  PosionProcent: 15
   InfinityBagProcent: 0
   SpareBagnProcent: 0
   DaggerProcent: 50
@@ -541,7 +542,7 @@ MonoBehaviour:
   SkullOfRageProcent: 0
   DropOfFuryProcent: 0
   PhoenixFeatherProcent: 0
-  ManaPotionProcent: 30
+  ManaPotionProcent: 20
   ManaStoneProcent: 0
   RegenManaPotionrProcent: 0
   BurstStoneProcent: 0

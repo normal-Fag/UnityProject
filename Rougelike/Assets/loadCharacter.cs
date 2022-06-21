@@ -18,7 +18,20 @@ public class loadCharacter : SaveFromNextStage
 
 
             SaveGeneral saveInventory = JsonUtility.FromJson<SaveGeneral>(saveString);
-            transform.position = saveInventory.character_position;
+
+            if (saveInventory.LevelId == 3 && !saveInventory.isCheckpointed)
+            {
+                transform.position = new Vector3(-68.39f, 32.75f, -10);
+            } else if (saveInventory.LevelId == 2 && saveInventory.isCheckpointed)
+            {
+                Vector3 newposition = saveInventory.character_position;
+                newposition.x += 5;
+                newposition.y += 3;
+                transform.position = newposition;
+            }
+           
+            else
+                    transform.position = saveInventory.character_position;
 
         }
 

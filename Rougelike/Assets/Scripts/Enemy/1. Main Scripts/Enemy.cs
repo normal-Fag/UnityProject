@@ -68,6 +68,7 @@ public class Enemy : MonoBehaviour
     public float SkillBuffProcent = 30;
     public float HpBuffProcent = 30;
     public float InfinityAttackBuffProcent = 30;
+    public float InfinityHPBuffProcent = 1;
     public float PosionProcent = 30;
     public float InfinityBagProcent = 30;
     public float SpareBagnProcent = 30;
@@ -271,6 +272,12 @@ public class Enemy : MonoBehaviour
         if (Random.Range(0f, 1.0f) > 1.0f - InfinityAttackBuffProcent / 100)
         {
             item = new Item { itemType = Item.ItemType.InfinityAttackBuff, amount = 1 };
+            ItemWorld.DropItem(transform.position, item, dropHeight, true);
+            dropHeight += 0.2f;
+        }
+        if (Random.Range(0f, 1.0f) > 1.0f - InfinityHPBuffProcent / 100)
+        {
+            item = new Item { itemType = Item.ItemType.InfinityHpBuff, amount = 1 };
             ItemWorld.DropItem(transform.position, item, dropHeight, true);
             dropHeight += 0.2f;
         }

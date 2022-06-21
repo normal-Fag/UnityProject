@@ -3281,9 +3281,9 @@ MonoBehaviour:
   sword_collider: {fileID: 0}
   actionDelay: 0.5
   cache_atk_dmg: 0
-  atk_dmg: 10
+  atk_dmg: 20
   buff_atk_dmg: 0
-  ult_dmg: 20
+  ult_dmg: 50
   id: 2
   max_mana: 100
   hasMajorBuff: 0

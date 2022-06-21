@@ -360,7 +360,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hotZone: {fileID: 5932168726164248918}
   triggerArea: {fileID: 5932168725964804066}
-  health: 100
+  health: 120
   movementSpeed: 3
   activeBurning: 0
   firePrefab: {fileID: 0}
@@ -368,10 +368,10 @@ MonoBehaviour:
   fireTimer: 5
   activePoisoning: 0
   poisonPrefab: {fileID: 0}
-  poisonDamage: 5
+  poisonDamage: 3
   poisonTimer: 5
-  damage: 10
-  attackDistance: 4
+  damage: 15
+  attackDistance: 4.6
   cooldownTimer: 4
   repulsiveForce: 0
   target: {fileID: 0}
@@ -396,24 +396,25 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 82a8b4243217f4b3eaaa45b34b238451, type: 3}
   - {fileID: 8300000, guid: a3b19a3a27d74483ebbba32f5bef0ccc, type: 3}
   - {fileID: 8300000, guid: 61058a01a16d049cc8ce8887a96851ca, type: 3}
-  HealthPotionProcent: 30
-  AttackBuffProcent: 30
-  SkillBuffProcent: 30
-  HpBuffProcent: 30
-  InfinityAttackBuffProcent: 30
-  PosionProcent: 30
-  InfinityBagProcent: 30
-  SpareBagnProcent: 30
-  DaggerProcent: 30
-  PosionBagProcent: 30
-  SkullOfRageProcent: 30
-  DropOfFuryProcent: 30
-  PhoenixFeatherProcent: 30
-  ManaPotionProcent: 30
-  ManaStoneProcent: 30
-  RegenManaPotionrProcent: 30
-  BurstStoneProcent: 30
-  ScrollOfKnowledgeProcent: 30
+  HealthPotionProcent: 25
+  AttackBuffProcent: 15
+  SkillBuffProcent: 0
+  HpBuffProcent: 10
+  InfinityAttackBuffProcent: 0
+  InfinityHPBuffProcent: 1
+  PosionProcent: 0
+  InfinityBagProcent: 0
+  SpareBagnProcent: 0
+  DaggerProcent: 50
+  PosionBagProcent: 0
+  SkullOfRageProcent: 0
+  DropOfFuryProcent: 0
+  PhoenixFeatherProcent: 0
+  ManaPotionProcent: 25
+  ManaStoneProcent: 0
+  RegenManaPotionrProcent: 0
+  BurstStoneProcent: 0
+  ScrollOfKnowledgeProcent: 0
   staticEnemy: 0
   activePatroling: 0
   leftLimit: {fileID: 0}

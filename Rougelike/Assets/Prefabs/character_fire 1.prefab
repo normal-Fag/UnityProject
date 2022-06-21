@@ -1316,10 +1316,10 @@ MonoBehaviour:
   actionDelay: 0.7
   max_rage: 100
   cache_atk_dmg: 0
-  atk_dmg: 10
+  atk_dmg: 25
   buff_atk_dmg: 0
-  ult_dmg: 20
-  UltCD: 10
+  ult_dmg: 40
+  UltCD: 15
   SPCD: 6
   id: 1
   hasMajorBuff: 0
