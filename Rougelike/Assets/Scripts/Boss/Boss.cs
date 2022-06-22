@@ -33,6 +33,7 @@ public class Boss : MonoBehaviour
     private bool isItemDroped;
     protected int characterId;
     public GameObject finalWall;
+    public AudioClip deathTrack;
 
     private void Awake()
     {
@@ -98,7 +99,10 @@ public class Boss : MonoBehaviour
   
         vCam.Priority = 1;
         if (!isItemDroped)
+        {
             DropItem(characterId);
+            WorldAudioManager.instance.SwapTrack(deathTrack);
+        }
         Destroy(gameObject, 1);
         Destroy(finalWall);
 

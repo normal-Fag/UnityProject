@@ -379,7 +379,7 @@ MonoBehaviour:
   damage: 20
   attackDistance: 4.6
   cooldownTimer: 2
-  repulsiveForce: 0
+  repulsiveForce: 10
   target: {fileID: 0}
   player: {fileID: 0}
   facingDirection: 0

@@ -58,6 +58,9 @@ public class rouge_controller : MonoBehaviour
     public static int UltCD_for_UI;
     public static bool hasUltCD = false;
 
+    public static float currentPosionCD;
+    private int poisonCD;
+
     // Use this for initialization
     void Start()
     {
@@ -210,6 +213,23 @@ public class rouge_controller : MonoBehaviour
             hasPosion = true;
         }
 
+        if (hasPosion)
+        {
+
+            currentPosionCD -= 1f / poisonCD * Time.deltaTime;
+            gameObject.GetComponent<character_movement>().CheckCDinInventory(new Item { itemType = Item.ItemType.Poison, amount = 1 });
+            if (currentPosionCD <= 0)
+            {
+                hasPosion = false;
+                foreach (Item item in gameObject.GetComponent<character_movement>().inventory.GetItemList())
+                {
+                    if (item.itemType == Item.ItemType.Poison)
+                    {
+                        item.isCD = false;
+                    }
+                }
+            }
+        }
     }
 
     void Attack1()
@@ -370,6 +390,8 @@ public class rouge_controller : MonoBehaviour
                 break;
             case Item.ItemType.Poison:
                 character_Movement.inventory.RemoveItem(item, index);
+                poisonCD = item.Cooldown();
+                currentPosionCD = 1f;
                 character_movement.m_audioManager.PlaySound("UsePotion");
                 StartCoroutine(usePosion(item.Cooldown()));
                 break;
@@ -405,11 +427,11 @@ public class rouge_controller : MonoBehaviour
 
     public IEnumerator useSkillBuff(int seconds)
     {
-        ult_dmg += 10;
+        ult_dmg += 30;
 
         yield return new WaitForSeconds(seconds);
 
-        ult_dmg -= 10;
+        ult_dmg -= 30;
     }
 
     public IEnumerator usePosion(int seconds)

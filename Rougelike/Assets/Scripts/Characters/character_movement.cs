@@ -75,7 +75,7 @@ public class character_movement : MonoBehaviour
     private float posionDebuffCD = 1;
     private float posionTimer = 0;
     private int trapUp = 1;
-
+    private bool isPushed;
 
     public AudioSource m_audioSource;
     public static CharactersAudioManager m_audioManager;
@@ -155,8 +155,8 @@ public class character_movement : MonoBehaviour
 
         // SlowDownSpeed helps decelerate the characters when stopping
 
-        // Set movement
-        m_body2d.velocity = new Vector2(inputX * m_maxSpeed * stopMoving, m_body2d.velocity.y);
+        if(!isPushed)
+            m_body2d.velocity = new Vector2(inputX * m_maxSpeed * stopMoving, m_body2d.velocity.y);
 
         // Set AirSpeed in animator
         m_animator.SetFloat("AirSpeedY", m_body2d.velocity.y);
@@ -524,13 +524,18 @@ public class character_movement : MonoBehaviour
         }
     }
 
-
-    public void PushAway(Vector3 pushFrom, float pushPower)
+    public IEnumerator PlayerPushAway(Vector3 pushFrom, float pushPower)
     {
+        if (pushPower == 0)
+            yield return null;
 
-        Vector3 pushDirection = (pushFrom - transform.position).normalized;
-        m_body2d.AddForce(-pushDirection * pushPower, ForceMode2D.Impulse);
-          
+        isPushed = true;
+
+        m_body2d.AddForce((transform.position - pushFrom).normalized * pushPower, ForceMode2D.Impulse);
+
+        yield return new WaitUntil(() => Mathf.Abs(m_body2d.velocity.x) < 3);
+
+        isPushed = false;
     }
 
 

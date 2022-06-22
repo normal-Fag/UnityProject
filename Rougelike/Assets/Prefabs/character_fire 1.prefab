@@ -192,6 +192,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a891ecada401955408cf20eb65e24e7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  musicVolume: {fileID: 0}
+  fxVolume: {fileID: 0}
+  allSoundsOff: {fileID: 0}
 --- !u!1 &33138035764359457
 GameObject:
   m_ObjectHideFlags: 0
@@ -643,7 +646,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Gradually restores mana
+  m_Text: gives poison to daggers.
 --- !u!1 &396562963161622390
 GameObject:
   m_ObjectHideFlags: 0
@@ -2886,7 +2889,7 @@ RectTransform:
   - {fileID: 8234528070506889577}
   - {fileID: 7617606359185129899}
   m_Father: {fileID: 6172703281567773827}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3027,7 +3030,7 @@ Transform:
   - {fileID: 4431398563541299263}
   - {fileID: 4702017164967826389}
   m_Father: {fileID: 6172703281567773827}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7546841655487336935
 MonoBehaviour:
@@ -4247,8 +4250,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 5725379311797044030}
   - {fileID: 3995651309491056772}
+  - {fileID: 5725379311797044030}
   - {fileID: 4462912487454679977}
   - {fileID: 8123018150508051445}
   m_Father: {fileID: 1031143969676958031}
@@ -4542,7 +4545,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5090593167553561390}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.649751, y: 1.2389474, z: -3174.6785}
+  m_LocalPosition: {x: 5.649751, y: 1.2389474, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6172703281567773827}
@@ -4960,7 +4963,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5404077969777254439}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -105.6, y: 92.3, z: 0}
+  m_LocalPosition: {x: -118, y: 92.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5729735050274437594}
@@ -5817,7 +5820,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7022361871680610253}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.9, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6264619742878601850}
@@ -8273,7 +8276,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 24.1, y: 32.3}
+  m_AnchoredPosition: {x: 24.1, y: 37.3}
   m_SizeDelta: {x: 128.9302, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7376602255593015709
@@ -8317,7 +8320,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Mana Regeneration Potion
+  m_Text: Posion
 --- !u!1 &8980262559160991057
 GameObject:
   m_ObjectHideFlags: 0
@@ -9201,6 +9204,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7854060319195435495, guid: 045be3817688a954a8a05c77b240cc2c, type: 3}
   m_PrefabInstance: {fileID: 7935945729936915726}
   m_PrefabAsset: {fileID: 0}
+--- !u!224 &206354861200534765 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7854060319195435491, guid: 045be3817688a954a8a05c77b240cc2c, type: 3}
+  m_PrefabInstance: {fileID: 7935945729936915726}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &206354862082578998 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7854060317711640376, guid: 045be3817688a954a8a05c77b240cc2c, type: 3}
@@ -9212,8 +9220,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &206354861200534765 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7854060319195435491, guid: 045be3817688a954a8a05c77b240cc2c, type: 3}
-  m_PrefabInstance: {fileID: 7935945729936915726}
-  m_PrefabAsset: {fileID: 0}

@@ -97,26 +97,26 @@ public class Item
         switch (itemType)
         {
             default:
-            case ItemType.HealthPotion:     return "Heal 50 health point";
-            case ItemType.HPBuff:           return "Gives 50 health point for max hp";
-            case ItemType.InfinityHpBuff:   return "Gives 50 health point for max hp (all time)";
+            case ItemType.HealthPotion:     return "Heal 40% health point from max health";
+            case ItemType.HPBuff:           return "Gives 50 health point for max health";
+            case ItemType.InfinityHpBuff:   return "Gives 50 health point for max health. Minor buff. Stackable";
             case ItemType.AttackBuff:       return "Gives 15 attack damage";
-            case ItemType.SkillBuff:        return "Gives 10 damage for ultimate";
+            case ItemType.SkillBuff:        return "Gives 30 damage for ultimate";
 
 
-            case ItemType.Poison: return "give dagger posion";
-            case ItemType.ManaPotion: return "give 50 mana point";
-            case ItemType.RegenManaPotion: return "Gradually restores mana";
-            case ItemType.ManaStone: return "give 25 mana point (all time)";
-            case ItemType.InfinityBag: return "Gradually restores daggers";
-            case ItemType.PosionBag: return "give dagger posion (all time)";
-            case ItemType.InfinityAttackBuff: return "give 5 atk point";
-            case ItemType.SpareBag: return "+ 5 daggers";
-            case ItemType.PhoenixFeather: return "fire DOT +2 atk";
-            case ItemType.BurstStone: return "x2 burst mode";
-            case ItemType.DropOfFury: return "+10 rage";
-            case ItemType.SkullOfRage: return "give rage spell";
-            case ItemType.ScrollOfKnowledge: return "in burst mode, spell cd = 0, manacost /2";
+            case ItemType.Poison: return "gives poison to daggers.";
+            case ItemType.ManaPotion: return "gives 40% mana point for max mana.";
+            case ItemType.RegenManaPotion: return "Increases mana regeneration over time.";
+            case ItemType.ManaStone: return "gives 25 mana point. Minor buff. Stackable.";
+            case ItemType.InfinityBag: return "Gradually restores daggers.";
+            case ItemType.PosionBag: return "gives poison to daggers and ultimate. Major buff. Replaces another major buff.";
+            case ItemType.InfinityAttackBuff: return "give 10 attack point. Minor buff. Stackable.";
+            case ItemType.SpareBag: return "gives 5 daggers for the max number of daggers. Minor buff. Stackable.";
+            case ItemType.PhoenixFeather: return "Your ignite deals 5 times more damage. Major buff. Replaces another major buff.";
+            case ItemType.BurstStone: return "Your burst mode lasts twice as long. Major buff. Replaces another major buff.";
+            case ItemType.DropOfFury: return "gives 10 rage point. Minor buff. Stackable.";
+            case ItemType.SkullOfRage: return "gives extra spell: Fury. Major buff. Replaces another major buff.";
+            case ItemType.ScrollOfKnowledge: return "in burst mode, your spells cost half as much mana and have no cooldown. Major buff. Replaces another major buff.";
         }
     }
 

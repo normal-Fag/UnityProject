@@ -14,7 +14,7 @@ public class Throw_skill_dagger : MonoBehaviour
     public Transform t_dagger;
     public Transform trapPoint;
     public Vector2 trap_atk_range = new Vector3(12f, 3f, -10f);
-    public LayerMask enemyLayers;
+    public LayerMask enemyLayers, bossLayers;
     public bool isPosion = false;
     void Start()
     {
@@ -35,29 +35,38 @@ public class Throw_skill_dagger : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         Collider2D[] trap_hitEnemies = Physics2D.OverlapBoxAll(trapPoint.position, trap_atk_range, 0f, enemyLayers);
+        Collider2D[] trap_hitBoss = Physics2D.OverlapBoxAll(trapPoint.position, trap_atk_range, 0f, bossLayers);
         if (other.tag == "Ground")
         {
             d_grounded = true;
             d_animator.SetTrigger("Grounded");
-            t_dagger.position = new Vector3 (t_dagger.position.x, t_dagger.position.y + 0.6f, -10f);
+            t_dagger.position = new Vector3(t_dagger.position.x, t_dagger.position.y + 0.6f, -10f);
             rb_dagger.velocity = transform.right * speed * 0;
             t_dagger.rotation = Quaternion.Euler(0, 0, 0);
-            StartCoroutine(active_damage(trap_hitEnemies));
+            StartCoroutine(active_damage(trap_hitEnemies, trap_hitBoss));
         }
-        else if(other.GetComponent<Enemy>() != null || other.GetComponent<Boss>() != null)
+        else if (other.GetComponent<Enemy>() != null)
         {
-            if(isPosion)
+            if (isPosion)
                 other.GetComponent<Enemy>().TakeDamage(dagger_damage / 2, 2, 0);
             else
                 other.GetComponent<Enemy>().TakeDamage(dagger_damage / 2, 0, 0);
             Destroy(gameObject);
         }
-        else if(other.tag == "Wall")
+        else if (other.GetComponent<Boss>() != null)
+        {
+            if (isPosion)
+                other.GetComponent<Boss>().TakeDamage(dagger_damage / 2, 2, 0);
+            else
+                other.GetComponent<Boss>().TakeDamage(dagger_damage / 2, 0, 0);
+            Destroy(gameObject);
+        }
+        else if (other.tag == "Wall")
         {
             Destroy(gameObject);
         }
     }
-    IEnumerator active_damage(Collider2D[] trap_hitEnemies)
+    IEnumerator active_damage(Collider2D[] trap_hitEnemies, Collider2D[] trap_hitBoss)
     {
 
         yield return new WaitForSeconds(0.5f);
@@ -68,6 +77,17 @@ public class Throw_skill_dagger : MonoBehaviour
                 enemy.GetComponent<Enemy>().TakeDamage(dagger_damage, 0, 0);
             else if(isPosion && enemy.tag == "Enemy")
                 enemy.GetComponent<Enemy>().TakeDamage(dagger_damage, 2, 0);
+            if (enemy.tag == "Boss" && !isPosion)
+                enemy.GetComponent<Enemy>().TakeDamage(dagger_damage, 0, 0);
+            else if (isPosion && enemy.tag == "Boss")
+                enemy.GetComponent<Enemy>().TakeDamage(dagger_damage, 2, 0);
+        }
+        foreach (Collider2D boss in trap_hitBoss)
+        {
+            if (boss.tag == "Boss" && !isPosion)
+                boss.GetComponent<Enemy>().TakeDamage(dagger_damage, 0, 0);
+            else if (isPosion && boss.tag == "Boss")
+                boss.GetComponent<Enemy>().TakeDamage(dagger_damage, 2, 0);
         }
         StartCoroutine(DestroyTrapDagger());
 

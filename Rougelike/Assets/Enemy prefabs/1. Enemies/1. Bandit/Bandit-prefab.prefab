@@ -549,7 +549,7 @@ MonoBehaviour:
   SkillBuffProcent: 0
   HpBuffProcent: 0
   InfinityAttackBuffProcent: 0
-  InfinityHPBuffProcent: 1
+  InfinityHPBuffProcent: 0
   PosionProcent: 15
   InfinityBagProcent: 0
   SpareBagnProcent: 0

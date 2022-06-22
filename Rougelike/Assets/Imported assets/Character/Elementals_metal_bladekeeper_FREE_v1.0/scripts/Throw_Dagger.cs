@@ -28,17 +28,28 @@ public class Throw_Dagger : MonoBehaviour
     {
         Enemy enemy = hitInfo.GetComponent<Enemy>();
         Boss boss = hitInfo.GetComponent<Boss>();
-        if ((enemy != null || boss != null) && !isPosion)
+        if (enemy != null  && !isPosion)
         {
             enemy.TakeDamage(dagger_damage, 0, 0);
             Destroy(gameObject);
         }
-        else if(isPosion)
+        else if(enemy != null && isPosion)
         {
             enemy.TakeDamage(dagger_damage, 2, 0);
             Destroy(gameObject);
         }
-        if(hitInfo.tag == "Ground" || hitInfo.tag == "Wall")
+
+        if (boss != null && !isPosion)
+        {
+            boss.TakeDamage(dagger_damage, 0, 0);
+            Destroy(gameObject);
+        }
+        else if (boss != null && isPosion)
+        {
+            boss.TakeDamage(dagger_damage, 2, 0);
+            Destroy(gameObject);
+        }
+        if (hitInfo.tag == "Ground" || hitInfo.tag == "Wall")
         {
             Destroy(gameObject);
         }

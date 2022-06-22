@@ -209,6 +209,7 @@ MonoBehaviour:
   facingDirection: 0
   fullHp: 0
   finalWall: {fileID: 0}
+  deathTrack: {fileID: 8300000, guid: a53819cc521b1f24689b00c663d8fbb4, type: 3}
   movePoints:
   - {fileID: 0}
   - {fileID: 0}

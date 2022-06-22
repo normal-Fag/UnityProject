@@ -195,6 +195,9 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 128
+  bossLayers:
+    serializedVersion: 2
+    m_Bits: 256
   isPosion: 0
 --- !u!95 &2783015541315535606
 Animator:

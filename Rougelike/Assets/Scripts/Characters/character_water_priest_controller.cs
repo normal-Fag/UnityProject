@@ -432,11 +432,11 @@ public class character_water_priest_controller : MonoBehaviour
 
     public IEnumerator useSkillBuff(int seconds)
     {
-        ult_dmg += 10;
+        ult_dmg += 30;
 
         yield return new WaitForSeconds(seconds);
 
-        ult_dmg -= 10;
+        ult_dmg -= 30;
     }
 
     public IEnumerator useManaPotion(int seconds)

@@ -340,11 +340,11 @@ public class fire_warrior_controler : MonoBehaviour
 
     public IEnumerator useSkillBuff(int seconds)
     {
-        ult_dmg += 10;
+        ult_dmg += 30;
         
         yield return new WaitForSeconds(seconds);
 
-        ult_dmg -= 10;
+        ult_dmg -= 30;
     }
 
     public IEnumerator Ultimate(int cd)

@@ -70,7 +70,7 @@ public class ItemCooldown : MonoBehaviour
         if (item.itemType == Item.ItemType.Poison)
         {
 
-            image.fillAmount = character_movement.currentSkillBuffCD;
+            image.fillAmount = rouge_controller.currentPosionCD;
 
         }
 

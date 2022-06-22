@@ -16,7 +16,7 @@ public class KnightHitLogic : MonoBehaviour
                 Vector3 pushDir = new Vector3(
                     player.transform.position.x - 10 * boss.facingDirection,
                     player.transform.position.y, 0);
-                //StartCoroutine(player.PlayerPushAway(pushDir, 20));
+                StartCoroutine(player.PlayerPushAway(pushDir, 10));
                 StartCoroutine(IgnorePlayer(boss, player));
                 boss.audio.PlayOneShot(boss.attackInAirHitSFX[0], 0.3f);
                 player.Take_Damage(boss.attackDamageInAir, boss.facingDirection * -1);
@@ -29,6 +29,7 @@ public class KnightHitLogic : MonoBehaviour
                 boss.PlayAttackSound();
 
             player.Take_Damage(boss.attackDamage, boss.facingDirection* -1);
+     
         }
     }
 

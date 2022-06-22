@@ -19,14 +19,16 @@ public class CharacterFXload : SaveAudio
             }
             else
                 fxVolumeCharacter = saveOption.fxVolume;
-        }
-        foreach (Transform child in transform)
-        {
-            if (muteOn)
-                child.GetComponent<AudioSource>().mute = muteOn;
 
-            child.GetComponent<AudioSource>().volume = fxVolumeCharacter;
+            foreach (Transform child in transform)
+            {
+                if (muteOn)
+                    child.GetComponent<AudioSource>().mute = muteOn;
+
+                child.GetComponent<AudioSource>().volume = fxVolumeCharacter;
+            }
         }
+     
     }
 
    

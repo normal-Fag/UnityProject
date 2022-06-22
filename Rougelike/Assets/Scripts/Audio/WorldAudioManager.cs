@@ -11,7 +11,7 @@ public class WorldAudioManager : SaveAudio
     private bool isPlayingTrack1;
 
     public static WorldAudioManager instance;
-    private float musicVolume;
+    private float musicVolume = 1f;
     private void Awake()
     {
         if (instance == null)
@@ -34,7 +34,7 @@ public class WorldAudioManager : SaveAudio
             }
             else
                 musicVolume = saveOption.musicVolume;
-          }
+        }
         track1.loop = true;
         track2.loop = true;
         isPlayingTrack1 = true;
