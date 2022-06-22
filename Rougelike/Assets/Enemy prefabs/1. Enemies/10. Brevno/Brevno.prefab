@@ -317,7 +317,7 @@ MonoBehaviour:
   poisonDamage: 3
   poisonTimer: 5
   damage: 20
-  attackDistance: 4.6
+  attackDistance: 5
   cooldownTimer: 2
   repulsiveForce: 10
   target: {fileID: 0}

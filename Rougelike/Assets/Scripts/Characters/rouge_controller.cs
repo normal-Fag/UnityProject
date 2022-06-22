@@ -237,6 +237,7 @@ public class rouge_controller : MonoBehaviour
     {
         isAttack1 = true;
         m_animator.SetTrigger("Attack");
+        weapon_hb.canAttack = true;
         timer = 0;
         weapon.GetComponent<wp_hitbox>().damage = atk_dmg + buff_atk_dmg;
         weapon.GetComponent<wp_hitbox>().isPosion = false;
@@ -246,6 +247,7 @@ public class rouge_controller : MonoBehaviour
     {
         isAttack1 = false;
         m_animator.SetTrigger("Attack_2");
+        weapon_hb.canAttack = true;
         timer = 0;
         weapon.GetComponent<wp_hitbox>().damage = atk_dmg + buff_atk_dmg;
         weapon.GetComponent<wp_hitbox>().isPosion = false;
@@ -446,6 +448,7 @@ public class rouge_controller : MonoBehaviour
     public IEnumerator SpecialAttack(int cd)
     {
         m_animator.SetTrigger("sp_atk");
+        weapon_hb.canAttack = true;
         weapon_hb.hasRepulsion = true;
         weapon_hb.repulsion = 10;
         hasUltCD = true;
