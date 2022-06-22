@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 8892951521504575732}
   - component: {fileID: 266421969631374022}
   - component: {fileID: 638422166733155259}
+  - component: {fileID: 7466212730731195809}
   m_Layer: 0
   m_Name: Dark VFX 1 red (40x32)1
   m_TagString: Untagged
@@ -335,3 +336,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7466212730731195809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8807165758491477714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dba588ca94825d14b8dcfe0d0c4235a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicVolume: {fileID: 0}
+  fxVolume: {fileID: 0}
+  allSoundsOff: {fileID: 0}

@@ -10,11 +10,8 @@ public class SkeletonSeekerBehavior : Enemy
     public AudioClip[] SkeletonAwakeSFX;
     public AudioClip[] SkeletonFootstepSFX;
 
-    private AudioSource AS;
-
     void Start()
     {
-        AS      = GetComponent<AudioSource>();
         rb      = GetComponent<Rigidbody2D>();
         anim    = GetComponent<Animator>();
 
@@ -104,11 +101,11 @@ public class SkeletonSeekerBehavior : Enemy
 
     public void PlayAwakeSound()
     {
-        AS.PlayOneShot(SkeletonAwakeSFX[Random.Range(0, SkeletonAwakeSFX.Length)], 0.2f);
+        audioSource.PlayOneShot(SkeletonAwakeSFX[Random.Range(0, SkeletonAwakeSFX.Length)], 0.2f);
     }
 
     public void PlaySkeletonFootstepSound()
     {
-        AS.PlayOneShot(SkeletonFootstepSFX[Random.Range(0, SkeletonFootstepSFX.Length)], 0.2f);
+        audioSource.PlayOneShot(SkeletonFootstepSFX[Random.Range(0, SkeletonFootstepSFX.Length)], 0.2f);
     }
 }

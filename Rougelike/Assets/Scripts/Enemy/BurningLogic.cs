@@ -20,7 +20,6 @@ public class BurningLogic : MonoBehaviour
         StartCoroutine(Burning());
     }
 
-    // Update is called once per frame
     void Update()
     {
         transform.position = new Vector3(enemy.transform.position.x, enemy.transform.position.y + 0.5f, -11);
@@ -31,7 +30,7 @@ public class BurningLogic : MonoBehaviour
         anim.SetBool("Loop", true);
         for (int i = 0; i < timer; i++)
         {
-            enemy.GetComponent<Enemy>().TakeDamage(damage, 0, id);
+            enemy.TakeDamage(damage, 0, id);
             if (enemy.health <= 0)
                 Destroy(gameObject);
             yield return new WaitForSeconds(1);

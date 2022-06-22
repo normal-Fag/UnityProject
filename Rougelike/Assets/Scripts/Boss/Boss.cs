@@ -18,21 +18,34 @@ public class Boss : MonoBehaviour
     [Space]
     [Header("UI")]
     public CanvasGroup      canvas;
-    public Image            hpFill; 
+    public Image            hpFill;
+    [Space]
+    [Header("Burning / Poisoning")]
+    public GameObject   firePrefab;
+    public float        fireDamage = 5;
+    public float        fireTimer = 5;
+    [Space]
+    public GameObject   poisonPrefab;
+    public float        poisonDamage = 5;
+    public float        poisonTimer = 5;
+    [Space]
+    [Header("Final wall")]
+    public GameObject finalWall;
 
     protected Animator                  anim;
     protected Rigidbody2D               rb;
     protected CinemachineVirtualCamera  vCam;
 
-    public Transform  target;
+    [HideInInspector] public Transform  target;
     [HideInInspector] public bool       isAttack;
+    [HideInInspector] public bool       isBurning = false;
+    [HideInInspector] public bool       isPoisoning = false;
     [HideInInspector] public int        facingDirection;
     [HideInInspector] public float      fullHp;
 
     private bool isStarted;
     private bool isItemDroped;
     protected int characterId;
-    public GameObject finalWall;
 
     private void Awake()
     {
@@ -72,6 +85,16 @@ public class Boss : MonoBehaviour
         characterId = id;
         if (health > 0)
             anim.SetTrigger("Hurt");
+
+        switch (typeOfDamage)
+        {
+            case 1:
+                IgniteTheEnemy();
+                break;
+            case 2:
+                PoisonTheEnemy();
+                break;
+        }
     }
 
     private void ShowBossUI()
@@ -240,7 +263,28 @@ public class Boss : MonoBehaviour
                 break;
         }
         isItemDroped = true;
+    }
 
+    private void IgniteTheEnemy()
+    {
+        if (!isBurning)
+        {
+            firePrefab.GetComponent<BurningBossLogic>().id = characterId;
+            firePrefab.GetComponent<BurningBossLogic>().damage = fire_warrior_controler.fire_dmg;
+            Instantiate(firePrefab, new Vector3(transform.position.x, transform.position.y, -14), Quaternion.identity)
+                            .GetComponent<BurningBossLogic>().bossGameObject = this.gameObject;
+        }
+
+    }
+
+    private void PoisonTheEnemy()
+    {
+        if (!isPoisoning)
+        {
+            poisonPrefab.GetComponent<PoisonBossLogic>().id = characterId;
+            Instantiate(poisonPrefab, new Vector3(transform.position.x, transform.position.y, -14), Quaternion.identity)
+                .GetComponent<PoisonBossLogic>().bossGameObject = this.gameObject;
+        }
 
     }
 }
