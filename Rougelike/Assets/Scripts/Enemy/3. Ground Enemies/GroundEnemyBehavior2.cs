@@ -121,7 +121,7 @@ public class GroundEnemyBehavior2 : Enemy
 
         if (isGrounded)
             Move();
-        else
+        else if (!inRange)
             SelectTarget();
     }
 
