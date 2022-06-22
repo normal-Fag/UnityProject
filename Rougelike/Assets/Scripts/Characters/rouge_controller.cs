@@ -72,6 +72,7 @@ public class rouge_controller : MonoBehaviour
         weapon_hb.canAttack = false;
         number_of_dagger = max_number_of_daggers;
         weapon.GetComponent<wp_hitbox>().character_id = id;
+        hasUltCD = false;
         UltCD_for_UI = UltCD;
     }
 
@@ -446,7 +447,7 @@ public class rouge_controller : MonoBehaviour
     {
         m_animator.SetTrigger("sp_atk");
         weapon_hb.hasRepulsion = true;
-        weapon_hb.repulsion = 5;
+        weapon_hb.repulsion = 10;
         hasUltCD = true;
         weapon.GetComponent<wp_hitbox>().damage = ult_dmg;
 

@@ -67,7 +67,9 @@ public class fire_warrior_controler : MonoBehaviour
         UltCD_for_UI = UltCD;
         SPCD_for_UI = SPCD;
         weapon.GetComponent<wp_hitbox>().character_id = id;
-    }
+        hasUltCD = false;
+        hasSpCD = false;
+}
 
     // Update is called once per frame
     void Update()

@@ -42,6 +42,7 @@ public class Loading : SaveFromNextStage
             {
 
                 playerScript.max_hp = saveInventory.max_hp;
+                character_movement.currentHp = saveInventory.max_hp;
                 playerScript.SetInventory(saveInventory.itemList, saveInventory.itemAmount);
                 for (int i = 0; i < saveInventory.minorBuffList.Count; i++)
                 {
@@ -98,11 +99,13 @@ public class Loading : SaveFromNextStage
 
                             SavePriest savePriest = JsonUtility.FromJson<SavePriest>(saveStr);
                             Item item = new Item { itemType = savePriest.majorBuff, amount = 1 };
-
+             
                             player.transform.Find("UI").Find("Canvas").Find("UI_Inventory").GetComponent<UI_Inventory>().SetBuffCD(item);
                             player.GetComponent<character_water_priest_controller>().atk_dmg = savePriest.atk_dmg;
                             player.GetComponent<character_water_priest_controller>().cacheItemMajor = item;
                             player.GetComponent<character_water_priest_controller>().max_mana = savePriest.max_mana;
+                            character_water_priest_controller.number_of_mana = savePriest.max_mana;
+                            character_water_priest_controller.manaCharge = 0;
                             player.GetComponent<character_water_priest_controller>().hasMajorBuff = savePriest.hasMajorBuff;
 
 

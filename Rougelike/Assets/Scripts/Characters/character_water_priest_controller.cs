@@ -72,8 +72,10 @@ public class character_water_priest_controller : MonoBehaviour
         weapon.GetComponent<wp_hitbox>().character_id = id;
         UltCD_for_UI = UltCD;
         HealCD_for_UI = HealCD;
+        hasUltCD = false;
+        hasHealCD = false;
 
-    }
+}
 
     // Update is called once per frame
     void Update()
