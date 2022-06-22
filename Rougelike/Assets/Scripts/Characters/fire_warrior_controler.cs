@@ -110,6 +110,7 @@ public class fire_warrior_controler : MonoBehaviour
             isFuryActive = !isFuryActive;
             if (isFuryActive)
             {
+                character_movement.m_audioManager.PlaySound("Fury");
                 cache_atk_dmg = atk_dmg;
                 atk_dmg = cache_atk_dmg * 2;
                 transform.Find("fury_effect").gameObject.SetActive(true);

@@ -630,8 +630,17 @@ public class character_movement : MonoBehaviour
         {
             m_animator.SetTrigger("Death");
             GetComponent<CapsuleCollider2D>().enabled = false;
-            GetComponent<Rigidbody2D>().isKinematic = true;
+            Destroy(GetComponent<Rigidbody2D>());
+            if(GetComponent<fire_warrior_controler>() != null)
+            {
+               if(fire_warrior_controler.isFuryActive)
+                {
+                    transform.Find("fury_effect").gameObject.SetActive(false);
+                }
+            }
+            transform.Find("Acid").gameObject.SetActive(false);
             StartCoroutine(ResetLevel());
+
 
         }
     }

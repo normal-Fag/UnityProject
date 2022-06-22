@@ -30,8 +30,17 @@ AnimationClip:
       - serializedVersion: 3
         time: 0.083333336
         value: {x: 0.35, y: -0.19, z: 118.11616}
-        inSlope: {x: 5.2799997, y: 0.4799995, z: 0}
-        outSlope: {x: 5.2799997, y: 0.4799995, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+      - serializedVersion: 3
+        time: 0.11666667
+        value: {x: 0.35, y: -0.19, z: 118.11616}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
@@ -39,8 +48,8 @@ AnimationClip:
       - serializedVersion: 3
         time: 0.16666667
         value: {x: 2.73, y: -0.17, z: 118.11616}
-        inSlope: {x: 0, y: 0.42000002, z: 0}
-        outSlope: {x: 0, y: 0.42000002, z: 0}
+        inSlope: {x: 0, y: 0.52500004, z: 0}
+        outSlope: {x: 0, y: 0.52500004, z: 0}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
@@ -219,6 +228,8 @@ AnimationClip:
       value: {fileID: 4387101832441374223, guid: 129c7ecba83c3c74bb3fc01bf3602838, type: 3}
     - time: 0.083333336
       value: {fileID: -6656079881536087509, guid: 026c36e07364a70448be3285dc447b6c, type: 3}
+    - time: 0.11666667
+      value: {fileID: -6656079881536087509, guid: 026c36e07364a70448be3285dc447b6c, type: 3}
     - time: 0.16666667
       value: {fileID: -2251252477167851837, guid: e7c2936a60c1a43499fb21c8c98f0cea, type: 3}
     - time: 0.25
@@ -285,6 +296,7 @@ AnimationClip:
     pptrCurveMapping:
     - {fileID: 4387101832441374223, guid: 129c7ecba83c3c74bb3fc01bf3602838, type: 3}
     - {fileID: -6656079881536087509, guid: 026c36e07364a70448be3285dc447b6c, type: 3}
+    - {fileID: -6656079881536087509, guid: 026c36e07364a70448be3285dc447b6c, type: 3}
     - {fileID: -2251252477167851837, guid: e7c2936a60c1a43499fb21c8c98f0cea, type: 3}
     - {fileID: 8709850340355974689, guid: 5c29550cd626cf8449e8ad271f7a3ea3, type: 3}
     - {fileID: -6094916327719933861, guid: 838acf22ca1288c44adaaa260ab0203e, type: 3}
@@ -340,8 +352,17 @@ AnimationClip:
       - serializedVersion: 3
         time: 0.083333336
         value: 0.35
-        inSlope: 5.2799997
-        outSlope: 5.2799997
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.11666667
+        value: 0.35
+        inSlope: 0
+        outSlope: 0
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
@@ -539,8 +560,17 @@ AnimationClip:
       - serializedVersion: 3
         time: 0.083333336
         value: -0.19
-        inSlope: 0.4799995
-        outSlope: 0.4799995
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.11666667
+        value: -0.19
+        inSlope: 0
+        outSlope: 0
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
@@ -548,8 +578,8 @@ AnimationClip:
       - serializedVersion: 3
         time: 0.16666667
         value: -0.17
-        inSlope: 0.42000002
-        outSlope: 0.42000002
+        inSlope: 0.52500004
+        outSlope: 0.52500004
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
@@ -737,6 +767,15 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.083333336
+        value: 118.11616
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.11666667
         value: 118.11616
         inSlope: 0
         outSlope: 0

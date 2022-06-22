@@ -467,8 +467,8 @@ MonoBehaviour:
   isPoisoning: 0
   facingDirection: 0
   fullHp: 0
-  finalWall: {fileID: 0}
   deathTrack: {fileID: 8300000, guid: a53819cc521b1f24689b00c663d8fbb4, type: 3}
+  EndGameScreen: {fileID: 0}
   attackDamage: 0
   attackDamageInAir: 0
   attackDistance: 5
@@ -745,7 +745,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2405498492945950884, guid: cfa032f21ab3d45dcb88b7e2578a3bea, type: 3}
       propertyPath: m_Text
-      value: Soulless king
+      value: Auris, Soulless king
       objectReference: {fileID: 0}
     - target: {fileID: 2405498492945950906, guid: cfa032f21ab3d45dcb88b7e2578a3bea, type: 3}
       propertyPath: m_Name

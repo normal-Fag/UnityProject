@@ -19,9 +19,10 @@ public class BossScriptTrigger : MonoBehaviour
         {
             boss.target = collision.gameObject.transform;
             boss.enabled = true;
-            gameObject.SetActive(false);
             firstWall.SetActive(true);
             secondWall.SetActive(true);
+            gameObject.SetActive(false);
+            
         }
     }
 }

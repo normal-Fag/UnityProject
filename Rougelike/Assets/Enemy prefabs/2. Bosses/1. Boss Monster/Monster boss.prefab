@@ -217,8 +217,8 @@ MonoBehaviour:
   isPoisoning: 0
   facingDirection: 0
   fullHp: 0
-  finalWall: {fileID: 0}
   deathTrack: {fileID: 8300000, guid: a53819cc521b1f24689b00c663d8fbb4, type: 3}
+  EndGameScreen: {fileID: 0}
   attackDistance: 6
   attackDamage: 1
   attackCooldown: 2
@@ -680,7 +680,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2405498492945950884, guid: cfa032f21ab3d45dcb88b7e2578a3bea, type: 3}
       propertyPath: m_Text
-      value: Kingdom executioner
+      value: A'sherk, demonic pilgrim
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfa032f21ab3d45dcb88b7e2578a3bea, type: 3}

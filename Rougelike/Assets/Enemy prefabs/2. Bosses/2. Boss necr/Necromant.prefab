@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5605346a64f547d9a6d881bf811dde1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 5000
+  health: 3000
   movementSpeed: 8
   audioClips:
   - {fileID: 8300000, guid: 9e37314e626ee9e49b46adeea440ef7e, type: 3}
@@ -217,8 +217,8 @@ MonoBehaviour:
   isPoisoning: 0
   facingDirection: 0
   fullHp: 0
-  finalWall: {fileID: 0}
   deathTrack: {fileID: 8300000, guid: a53819cc521b1f24689b00c663d8fbb4, type: 3}
+  EndGameScreen: {fileID: 0}
   movePoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -232,11 +232,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e67c25e1ac57640918763ee40f1e0f9a, type: 3}
   - {fileID: 8300000, guid: c85a60274a82047278f3217313b3153f, type: 3}
   spell1: {fileID: 8807165758491477714, guid: 46754f8b220dd469f8db43581eb2132e, type: 3}
-  spell1Damage: 10
+  spell1Damage: 15
   spell1Speed: 14
   spell1CountOfSpells: 2
   spell2: {fileID: 2999375768301839840, guid: 2a191386898c94c928507fec55228fa9, type: 3}
-  spell2Damage: 5
+  spell2Damage: 20
   skeletonPrefab: {fileID: 4383115967534244221, guid: 6942c3eb08b7b43f8a2fd437e08429c1, type: 3}
   skeletonspawnCount: 2
   spawnPoints:
@@ -684,9 +684,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2405498492537628090, guid: cfa032f21ab3d45dcb88b7e2578a3bea, type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2405498492945950884, guid: cfa032f21ab3d45dcb88b7e2578a3bea, type: 3}
       propertyPath: m_Text
-      value: Dead soul seeker
+      value: Kharon, Dead soul seeker
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfa032f21ab3d45dcb88b7e2578a3bea, type: 3}

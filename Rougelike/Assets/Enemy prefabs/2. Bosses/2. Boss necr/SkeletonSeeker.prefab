@@ -529,10 +529,10 @@ MonoBehaviour:
   poisonPrefab: {fileID: 0}
   poisonDamage: 5
   poisonTimer: 5
-  damage: 1
-  attackDistance: 3
+  damage: 10
+  attackDistance: 5
   cooldownTimer: 2
-  repulsiveForce: 0
+  repulsiveForce: 3
   target: {fileID: 0}
   player: {fileID: 0}
   facingDirection: 0

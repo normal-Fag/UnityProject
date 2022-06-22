@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
-
+using UnityEngine.SceneManagement;
 
 public class Boss : MonoBehaviour
 {
@@ -46,8 +46,8 @@ public class Boss : MonoBehaviour
     private bool isStarted;
     private bool isItemDroped;
     protected int characterId;
-    public GameObject finalWall;
     public AudioClip deathTrack;
+    public GameObject EndGameScreen;
 
     private void Awake()
     {
@@ -126,6 +126,10 @@ public class Boss : MonoBehaviour
         {
             DropItem(characterId);
             WorldAudioManager.instance.SwapTrack(deathTrack);
+        }
+        if (GetComponent<KnightBossBehavior>() != null)
+        {
+            EndGameScreen.SetActive(true);
         }
         Destroy(gameObject, 1);
         Destroy(finalWall);
@@ -292,4 +296,5 @@ public class Boss : MonoBehaviour
         }
 
     }
+
 }
