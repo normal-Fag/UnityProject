@@ -33,7 +33,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] public float   cooldownTimer;
     [SerializeField] public float   repulsiveForce;
 
-    [HideInInspector] public Transform target;
+     public Transform target;
     [HideInInspector] public playerMovement player;
     [HideInInspector] public int    facingDirection;
     [HideInInspector] public bool   inRange;
