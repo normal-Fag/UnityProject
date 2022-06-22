@@ -19,7 +19,7 @@ public class KnightHitLogic : MonoBehaviour
                 //StartCoroutine(player.PlayerPushAway(pushDir, 20));
                 StartCoroutine(IgnorePlayer(boss, player));
                 boss.audio.PlayOneShot(boss.attackInAirHitSFX[0], 0.3f);
-                player.Take_Damage(boss.attackDamageInAir, boss.facingDirection);
+                player.Take_Damage(boss.attackDamageInAir, boss.facingDirection * -1);
                 return;
             }
 
@@ -28,7 +28,7 @@ public class KnightHitLogic : MonoBehaviour
             else
                 boss.PlayAttackSound();
 
-            player.Take_Damage(boss.attackDamage, boss.facingDirection);
+            player.Take_Damage(boss.attackDamage, boss.facingDirection* -1);
         }
     }
 
