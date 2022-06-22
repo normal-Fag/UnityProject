@@ -97,15 +97,15 @@ public class Item
         switch (itemType)
         {
             default:
-            case ItemType.HealthPotion:     return "Heal 40% health point from max health";
-            case ItemType.HPBuff:           return "Gives 50 health point for max health";
-            case ItemType.InfinityHpBuff:   return "Gives 50 health point for max health. Minor buff. Stackable";
+            case ItemType.HealthPotion:     return "Heal 40% health point of max health";
+            case ItemType.HPBuff:           return "Gives 50 health point of max health";
+            case ItemType.InfinityHpBuff:   return "Gives 50 health point of max health. Minor buff. Stackable";
             case ItemType.AttackBuff:       return "Gives 15 attack damage";
             case ItemType.SkillBuff:        return "Gives 30 damage for ultimate";
 
 
             case ItemType.Poison: return "gives poison to daggers.";
-            case ItemType.ManaPotion: return "gives 40% mana point for max mana.";
+            case ItemType.ManaPotion: return "gives 40% mana point of max mana.";
             case ItemType.RegenManaPotion: return "Increases mana regeneration over time.";
             case ItemType.ManaStone: return "gives 25 mana point. Minor buff. Stackable.";
             case ItemType.InfinityBag: return "Gradually restores daggers.";
