@@ -24,7 +24,7 @@ public class Boss : MonoBehaviour
     protected Rigidbody2D               rb;
     protected CinemachineVirtualCamera  vCam;
 
-    [HideInInspector] public Transform  target;
+    public Transform  target;
     [HideInInspector] public bool       isAttack;
     [HideInInspector] public int        facingDirection;
     [HideInInspector] public float      fullHp;
