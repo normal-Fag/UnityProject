@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 29489841836276719}
   - component: {fileID: 6061025139131555447}
   - component: {fileID: 2174763275925447364}
-  - component: {fileID: 7532922460198907857}
   - component: {fileID: 7784713081675582410}
   - component: {fileID: -2968854206447525193}
+  - component: {fileID: 7532922460198907857}
   m_Layer: 0
   m_Name: FireballPrefab
   m_TagString: Untagged
@@ -106,19 +106,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7532922460198907857
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4343280718757735825}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66352699b13a049caa73dca12b901598, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyFireballDamage: 15
 --- !u!58 &7784713081675582410
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -156,6 +143,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &7532922460198907857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4343280718757735825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66352699b13a049caa73dca12b901598, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyFireballDamage: 15
 --- !u!1 &5102210456138270728
 GameObject:
   m_ObjectHideFlags: 0

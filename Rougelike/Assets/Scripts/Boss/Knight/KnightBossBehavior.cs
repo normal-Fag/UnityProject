@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class KnightBossBehavior : Boss
 {
-    [Header("Knight Behavior")]
+    [Space]
     [Header("Knight Attack")]
     public int attackDamage = 30;
     public int attackDamageInAir = 30;

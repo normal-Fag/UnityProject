@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 3101740792492357849}
   - component: {fileID: 3379937125311059155}
   - component: {fileID: 1326527486348786076}
-  - component: {fileID: -6252678230017875285}
   - component: {fileID: 2339055083527309130}
+  - component: {fileID: -6252678230017875285}
+  - component: {fileID: 2256992664629942441}
   m_Layer: 0
   m_Name: Mashroom_projectile
   m_TagString: Untagged
@@ -143,24 +144,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.0017741442}
   serializedVersion: 2
   m_Radius: 0.040315412
---- !u!114 &-6252678230017875285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7646970888568605652}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1bde609d24cc44df8ef7fd8153338ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 0
-  mashroomFacing: 0
-  clips:
-  - {fileID: 8300000, guid: ca3a4ccdbf2c444349f4b247e6facfa3, type: 3}
-  - {fileID: 8300000, guid: ca5015b1377a64c5a92c02e128976398, type: 3}
-  - {fileID: 8300000, guid: 538d3f3feedc24e28a463d667d82aa3d, type: 3}
 --- !u!82 &2339055083527309130
 AudioSource:
   m_ObjectHideFlags: 0
@@ -257,3 +240,36 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-6252678230017875285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7646970888568605652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1bde609d24cc44df8ef7fd8153338ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+  mashroomFacing: 0
+  clips:
+  - {fileID: 8300000, guid: ca3a4ccdbf2c444349f4b247e6facfa3, type: 3}
+  - {fileID: 8300000, guid: ca5015b1377a64c5a92c02e128976398, type: 3}
+  - {fileID: 8300000, guid: 538d3f3feedc24e28a463d667d82aa3d, type: 3}
+--- !u!114 &2256992664629942441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7646970888568605652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dba588ca94825d14b8dcfe0d0c4235a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicVolume: {fileID: 0}
+  fxVolume: {fileID: 0}
+  allSoundsOff: {fileID: 0}

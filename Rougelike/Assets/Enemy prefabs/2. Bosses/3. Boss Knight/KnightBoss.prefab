@@ -454,8 +454,17 @@ MonoBehaviour:
   audio: {fileID: 2269011065785934865}
   canvas: {fileID: 3780624244257480361}
   hpFill: {fileID: 3780624244041824114}
+  firePrefab: {fileID: 6373086111606444802, guid: 2f3a2bf2ea5cd41dfa8684e0b78896e9, type: 3}
+  fireDamage: 5
+  fireTimer: 5
+  poisonPrefab: {fileID: 7204468032616607636, guid: 296cfc28d40f64253b6a6e520001c85f, type: 3}
+  poisonDamage: 5
+  poisonTimer: 5
+  finalWall: {fileID: 0}
   target: {fileID: 0}
   isAttack: 0
+  isBurning: 0
+  isPoisoning: 0
   facingDirection: 0
   fullHp: 0
   finalWall: {fileID: 0}
