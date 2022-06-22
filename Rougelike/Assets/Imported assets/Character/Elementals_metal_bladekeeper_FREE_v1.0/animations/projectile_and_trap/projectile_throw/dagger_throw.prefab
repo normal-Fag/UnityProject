@@ -151,6 +151,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
-  dagger_damage: 5
+  dagger_damage: 15
   rb_dagger: {fileID: 1534735700759450167}
   isPosion: 0

@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  dagger_damage: 5
+  dagger_damage: 20
   rb_dagger: {fileID: 6801055810249677648}
   t_dagger: {fileID: 3365896644409670183}
   trapPoint: {fileID: 5549049699801571358}
