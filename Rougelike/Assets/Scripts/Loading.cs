@@ -34,13 +34,13 @@ public class Loading : SaveFromNextStage
 
         if (File.Exists(Application.persistentDataPath + "/Save/save.txt"))
         {
+
             string saveString = File.ReadAllText(Application.persistentDataPath + "/Save/save.txt");
             SaveGeneral saveInventory = JsonUtility.FromJson<SaveGeneral>(saveString);
 
-
-            if (saveInventory.isCheckpointed)
+            if(saveInventory.LevelId == 1 && !saveInventory.isCheckpointed) { }
+            else
             {
-
                 playerScript.max_hp = saveInventory.max_hp;
                 character_movement.currentHp = saveInventory.max_hp;
                 playerScript.SetInventory(saveInventory.itemList, saveInventory.itemAmount);
@@ -53,7 +53,7 @@ public class Loading : SaveFromNextStage
 
                 }
 
-            
+
                 switch (characterID)
                 {
                     default:
@@ -99,7 +99,7 @@ public class Loading : SaveFromNextStage
 
                             SavePriest savePriest = JsonUtility.FromJson<SavePriest>(saveStr);
                             Item item = new Item { itemType = savePriest.majorBuff, amount = 1 };
-             
+
                             player.transform.Find("UI").Find("Canvas").Find("UI_Inventory").GetComponent<UI_Inventory>().SetBuffCD(item);
                             player.GetComponent<character_water_priest_controller>().atk_dmg = savePriest.atk_dmg;
                             player.GetComponent<character_water_priest_controller>().cacheItemMajor = item;
@@ -113,10 +113,8 @@ public class Loading : SaveFromNextStage
                         break;
                 }
             }
+              
+            }
         }
 
-       
-
-
-    }
 }

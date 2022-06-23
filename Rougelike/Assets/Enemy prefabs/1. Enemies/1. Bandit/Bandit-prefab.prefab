@@ -514,7 +514,7 @@ MonoBehaviour:
   fireTimer: 5
   activePoisoning: 1
   poisonPrefab: {fileID: 5298019677433071509, guid: 4c3ac61d27cc94bd3b5167ba1064381b, type: 3}
-  poisonDamage: 3
+  poisonDamage: 5
   poisonTimer: 5
   damage: 10
   attackDistance: 4.5

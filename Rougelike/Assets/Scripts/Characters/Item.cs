@@ -112,7 +112,7 @@ public class Item
             case ItemType.PosionBag: return "gives poison to daggers and ultimate. Major buff. Replaces another major buff.";
             case ItemType.InfinityAttackBuff: return "give 10 attack point. Minor buff. Stackable.";
             case ItemType.SpareBag: return "gives 5 daggers for the max number of daggers. Minor buff. Stackable.";
-            case ItemType.PhoenixFeather: return "Your ignite deals 5 times more damage. Major buff. Replaces another major buff.";
+            case ItemType.PhoenixFeather: return "Your ignite deals 10 times more damage. Major buff. Replaces another major buff.";
             case ItemType.BurstStone: return "Your burst mode lasts twice as long. Major buff. Replaces another major buff.";
             case ItemType.DropOfFury: return "gives 10 rage point. Minor buff. Stackable.";
             case ItemType.SkullOfRage: return "gives extra spell: Fury. Major buff. Replaces another major buff.";

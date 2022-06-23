@@ -378,17 +378,17 @@ MonoBehaviour:
   triggerArea: {fileID: 5932168725964804066}
   health: 120
   movementSpeed: 3
-  activeBurning: 0
+  activeBurning: 1
   firePrefab: {fileID: 0}
   fireDamage: 5
   fireTimer: 5
-  activePoisoning: 0
+  activePoisoning: 1
   poisonPrefab: {fileID: 0}
-  poisonDamage: 3
+  poisonDamage: 5
   poisonTimer: 5
   damage: 15
-  attackDistance: 4.6
-  cooldownTimer: 4
+  attackDistance: 6.5
+  cooldownTimer: 1
   repulsiveForce: 0
   target: {fileID: 0}
   player: {fileID: 0}

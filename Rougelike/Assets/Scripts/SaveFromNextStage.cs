@@ -31,7 +31,7 @@ public class SaveFromNextStage : MonoBehaviour
                 characterID = collision.GetComponent<character_water_priest_controller>().id;
             position = new Vector3(0, 0, -10);
             LevelId = SceneManager.GetActiveScene().buildIndex + 1;
-            isCheckpointed = true;
+            isCheckpointed = false;
             Save();
             StartCoroutine(LoadScene());
 

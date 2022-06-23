@@ -28,7 +28,7 @@ public class fire_warrior_controler : MonoBehaviour
     public int max_rage = 100;
     public static int max_rage_for_ui;
 
-    public static int fire_dmg = 1;
+    public static int fire_dmg = 2;
     public int cache_atk_dmg;
     public int atk_dmg = 10;
     public int buff_atk_dmg;
@@ -218,12 +218,12 @@ public class fire_warrior_controler : MonoBehaviour
             if (cacheItemMajor.itemType == Item.ItemType.SkullOfRage)
             {
                 hasSkullOfRage = true;
-                fire_dmg = 1;
+                fire_dmg = 2;
             }
             if (cacheItemMajor.itemType == Item.ItemType.PhoenixFeather)
             {
                 hasSkullOfRage = false;
-                fire_dmg = 5;
+                fire_dmg = 20;
             }
         }
 
@@ -233,6 +233,8 @@ public class fire_warrior_controler : MonoBehaviour
             timer = 0;
             weapon.GetComponent<wp_hitbox>().damage = atk_dmg + buff_atk_dmg;
             weapon.GetComponent<wp_hitbox>().isBurning = false;
+            weapon_hb.hasRepulsion = false;
+            weapon_hb.repulsion = 0;
 
 
         }
@@ -243,6 +245,8 @@ public class fire_warrior_controler : MonoBehaviour
             timer = 0;
             weapon.GetComponent<wp_hitbox>().damage = atk_dmg + buff_atk_dmg;
             weapon.GetComponent<wp_hitbox>().isBurning = false;
+            weapon_hb.hasRepulsion = false;
+            weapon_hb.repulsion = 0;
 
         }
         void Defend()
@@ -316,7 +320,7 @@ public class fire_warrior_controler : MonoBehaviour
             case Item.ItemType.PhoenixFeather:
                 character_movement.m_audioManager.PlaySound("UseMajor");
                 character_Movement.inventory.RemoveItem(item, index);
-                    fire_dmg = 5;
+                    fire_dmg = 20;
                     hasMajorBuff = true;
                     cacheItemMajor = item;
                     transform.Find("fury_effect").gameObject.SetActive(false);
@@ -354,7 +358,7 @@ public class fire_warrior_controler : MonoBehaviour
     {
         m_animator.SetTrigger("ultimate");
         weapon_hb.hasRepulsion = true;
-        weapon_hb.repulsion = 6;
+        weapon_hb.repulsion = 10;
         hasUltCD = true;
         weapon.GetComponent<wp_hitbox>().damage = ult_dmg + (number_of_rage - 50);
         number_of_rage = 0;
@@ -369,7 +373,7 @@ public class fire_warrior_controler : MonoBehaviour
     {
         m_animator.SetTrigger("sp_attack");
         weapon_hb.hasRepulsion = true;
-        weapon_hb.repulsion = 4;
+        weapon_hb.repulsion = 7;
         hasSpCD = true;
 
         weapon.GetComponent<wp_hitbox>().isBurning = true;

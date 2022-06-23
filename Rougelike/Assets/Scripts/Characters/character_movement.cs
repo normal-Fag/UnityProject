@@ -600,13 +600,13 @@ public class character_movement : MonoBehaviour
             m_audioManager.PlaySound("DefendSuccess");
             Debug.Log("Blocked");
         }
-        else if (gameObject.GetComponent<character_water_priest_controller>() != null && !m_animator.GetCurrentAnimatorStateInfo(0).IsName("ultimate"))
+        else if (gameObject.GetComponent<character_water_priest_controller>() != null && (!m_animator.GetCurrentAnimatorStateInfo(0).IsName("ultimate") || !m_animator.GetCurrentAnimatorStateInfo(0).IsName("2_atk")))
         {
             m_animator.SetTrigger("Hurt");
             currentHp -= damage;
             Debug.Log("Not Blocked");
         }
-        else if (gameObject.GetComponent<character_water_priest_controller>() != null && m_animator.GetCurrentAnimatorStateInfo(0).IsName("ultimate"))
+        else if (gameObject.GetComponent<character_water_priest_controller>() != null && (m_animator.GetCurrentAnimatorStateInfo(0).IsName("ultimate") || m_animator.GetCurrentAnimatorStateInfo(0).IsName("2_atk")))
         {
             currentHp -= damage / 2;
         }

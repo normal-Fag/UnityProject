@@ -90,7 +90,7 @@ public class KnightBossBehavior : Boss
         int waitForHealth = Random.Range(60, 120);
 
         anim.ResetTrigger("Health");
-        health += ((fullHp - health) / 100) * 50;
+        health += ((fullHp - health) / 100) * 35;
         isHeald = true;
 
         yield return new WaitForSeconds(waitForHealth);

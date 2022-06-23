@@ -5,9 +5,18 @@ using UnityEngine;
 public class HellBeastFireballLogic : MonoBehaviour
 {
     public int enemyFireballDamage;
+    public int enemyDirection;
 
     private void Start()
     {
+        if (enemyDirection == 1)
+        {
+            transform.localScale = new Vector3(9f, 9f, 1.0f);
+        }
+        else
+        {
+            transform.localScale = new Vector3(-9f, 9f, 1.0f);
+        }
         StartCoroutine(DestroyFireball());
     }
 
@@ -16,9 +25,9 @@ public class HellBeastFireballLogic : MonoBehaviour
         if (collision.tag == "Player")
         {
             //HellBeastEnemyBehavio enemy = GetComponent<HellBeastEnemyBehavio>();
-            playerMovement player = collision.gameObject.GetComponent<playerMovement>();
+            character_movement player = collision.gameObject.GetComponent<character_movement>();
 
-            player.takeDamage(enemyFireballDamage);
+            player.Take_Damage(enemyFireballDamage, enemyDirection);
 
             Destroy(gameObject);
         }

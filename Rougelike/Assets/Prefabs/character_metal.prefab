@@ -1577,7 +1577,7 @@ MonoBehaviour:
   max_number_of_daggers: 15
   id: 0
   cache_atk_dmg: 0
-  atk_dmg: 13
+  atk_dmg: 15
   buff_atk_dmg: 0
   ult_dmg: 100
   hasMajorBuff: 0

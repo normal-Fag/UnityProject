@@ -48,6 +48,7 @@ public class rouge_controller : MonoBehaviour
     public bool hasMajorBuff;
 
     private bool hasPosion = false;
+    private bool hasPosionMajor = false;
 
     private bool hasInfinityBag = false;
     private bool hasPosionBag = false;
@@ -69,11 +70,12 @@ public class rouge_controller : MonoBehaviour
         m_body2d = GetComponent<Rigidbody2D>();
         m_animator = GetComponent<Animator>();
         weapon_hb = weapon.GetComponent<wp_hitbox>();
-        weapon_hb.canAttack = false;
         number_of_dagger = max_number_of_daggers;
         weapon.GetComponent<wp_hitbox>().character_id = id;
         hasUltCD = false;
         UltCD_for_UI = UltCD;
+        weapon_hb.canAttack = true;
+     
     }
 
     // Update is called once per frame
@@ -159,17 +161,6 @@ public class rouge_controller : MonoBehaviour
         }
   
 
-        if (m_animator.GetCurrentAnimatorStateInfo(0).IsName("3_atk")
-         || m_animator.GetCurrentAnimatorStateInfo(0).IsName("2_atk")
-         || m_animator.GetCurrentAnimatorStateInfo(0).IsName("1_atk")
-         || m_animator.GetCurrentAnimatorStateInfo(0).IsName("sp_atk"))
-        {
-            weapon_hb.canAttack = true;
-        }
-        else
-        {
-            weapon_hb.canAttack = false;
-        }
 
         if(number_of_dagger >= max_number_of_daggers)
         {
@@ -191,7 +182,7 @@ public class rouge_controller : MonoBehaviour
             {
                 hasInfinityBag = true;
                 hasPosionBag = false;
-                hasPosion = false;
+                hasPosionMajor = false;
             }
         }
 
@@ -211,7 +202,7 @@ public class rouge_controller : MonoBehaviour
 
         if (hasPosionBag)
         {
-            hasPosion = true;
+            hasPosionMajor = true;
         }
 
         if (hasPosion)
@@ -237,20 +228,22 @@ public class rouge_controller : MonoBehaviour
     {
         isAttack1 = true;
         m_animator.SetTrigger("Attack");
-        weapon_hb.canAttack = true;
         timer = 0;
         weapon.GetComponent<wp_hitbox>().damage = atk_dmg + buff_atk_dmg;
         weapon.GetComponent<wp_hitbox>().isPosion = false;
+        weapon_hb.hasRepulsion = false;
+        weapon_hb.repulsion = 0;
     }
 
     void Attack2()
     {
         isAttack1 = false;
         m_animator.SetTrigger("Attack_2");
-        weapon_hb.canAttack = true;
         timer = 0;
         weapon.GetComponent<wp_hitbox>().damage = atk_dmg + buff_atk_dmg;
         weapon.GetComponent<wp_hitbox>().isPosion = false;
+        weapon_hb.hasRepulsion = false;
+        weapon_hb.repulsion = 0;
     }
 
   
@@ -317,7 +310,7 @@ public class rouge_controller : MonoBehaviour
     {
         yield return new WaitForSeconds(0.3f);
         number_of_dagger--;
-        if (hasPosion)
+        if (hasPosion || hasPosionMajor)
         {
             dagger_throw.GetComponent<Throw_Dagger>().isPosion = true;
         }
@@ -332,7 +325,7 @@ public class rouge_controller : MonoBehaviour
     IEnumerator SkillDagger()
     {
         yield return new WaitForSeconds(0.5f);
-        if (hasPosion)
+        if (hasPosion || hasPosionMajor)
         {
             skill_dagger.GetComponent<Throw_skill_dagger>().isPosion = true;
         }
@@ -454,7 +447,7 @@ public class rouge_controller : MonoBehaviour
         hasUltCD = true;
         weapon.GetComponent<wp_hitbox>().damage = ult_dmg;
 
-        if(hasPosion)
+        if(hasPosionMajor)
             weapon.GetComponent<wp_hitbox>().isPosion = true;
 
         yield return new WaitForSeconds(cd);

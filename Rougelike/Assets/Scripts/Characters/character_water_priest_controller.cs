@@ -74,6 +74,7 @@ public class character_water_priest_controller : MonoBehaviour
         HealCD_for_UI = HealCD;
         hasUltCD = false;
         hasHealCD = false;
+        manaCharge = 0;
 
 }
 
@@ -296,7 +297,7 @@ public class character_water_priest_controller : MonoBehaviour
         {
             m_animator.SetTrigger("Attack_2");
             weapon_hb.hasRepulsion = true;
-            weapon_hb.repulsion = 3;
+            weapon_hb.repulsion = 6;
             weapon.GetComponent<wp_hitbox>().damage = atk_dmg + buff_atk_dmg;
         }
 
@@ -305,7 +306,7 @@ public class character_water_priest_controller : MonoBehaviour
         {
             m_animator.SetTrigger("Attack_3");
             weapon_hb.hasRepulsion = true;
-            weapon_hb.repulsion = 4;
+            weapon_hb.repulsion = 6;
             weapon.GetComponent<wp_hitbox>().damage = atk_dmg + buff_atk_dmg;
 
         }
@@ -466,12 +467,13 @@ public class character_water_priest_controller : MonoBehaviour
     public IEnumerator Ultimate(int cd)
     {
         m_animator.SetTrigger("Ultimate");
+        weapon.GetComponent<wp_hitbox>().damage = ult_dmg;
         weapon_hb.hasRepulsion = true;
-        weapon_hb.repulsion = 5;
+        weapon_hb.repulsion = 7;
         hasUltCD = true;
         yield return new WaitForSeconds(cd);
         hasUltCD = false;
-        weapon.GetComponent<wp_hitbox>().damage = ult_dmg;
+
     }
 
 

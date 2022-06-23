@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 3780624245314788118}
   - component: {fileID: 3780624245314788119}
   - component: {fileID: 3780624245314788108}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: KnightBoss
   m_TagString: Boss
   m_Icon: {fileID: 0}

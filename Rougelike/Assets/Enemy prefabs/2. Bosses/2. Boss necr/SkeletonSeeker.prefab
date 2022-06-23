@@ -521,11 +521,11 @@ MonoBehaviour:
   triggerArea: {fileID: 4383115965700507297}
   health: 70
   movementSpeed: 4
-  activeBurning: 0
+  activeBurning: 1
   firePrefab: {fileID: 0}
   fireDamage: 5
   fireTimer: 5
-  activePoisoning: 0
+  activePoisoning: 1
   poisonPrefab: {fileID: 0}
   poisonDamage: 5
   poisonTimer: 5

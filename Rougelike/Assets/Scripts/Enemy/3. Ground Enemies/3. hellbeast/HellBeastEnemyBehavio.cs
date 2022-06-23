@@ -65,12 +65,13 @@ public class HellBeastEnemyBehavio : Enemy
             targetPosition.x - transform.position.x,
             targetPosition.y - transform.position.y).normalized;
 
-        Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y, -2);
+        Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y, -10);
 
         Instantiate(fireballPrefab, spawnPosition, Quaternion.EulerRotation(shootDirection))
             .GetComponent<Rigidbody2D>().AddForce(shootDirection * shootForce);
 
         fireballPrefab.GetComponent<HellBeastFireballLogic>().enemyFireballDamage = shootDamage;
+        fireballPrefab.GetComponent<HellBeastFireballLogic>().enemyDirection = facingDirection;
     }
 
     protected override void Cooldown()
