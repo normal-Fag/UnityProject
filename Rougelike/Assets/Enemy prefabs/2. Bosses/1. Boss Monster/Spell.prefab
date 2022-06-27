@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 3442666198999579210}
   - component: {fileID: 2571852623369246470}
   - component: {fileID: 8228888835813647715}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Spell
   m_TagString: Untagged
   m_Icon: {fileID: 0}

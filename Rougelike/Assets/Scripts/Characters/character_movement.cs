@@ -100,6 +100,9 @@ public class character_movement : MonoBehaviour
         m_audioSource = GetComponent<AudioSource>();
         m_audioManager = CharactersAudioManager.instance;
 
+        Physics2D.IgnoreLayerCollision(3, 7, false);
+        Physics2D.IgnoreLayerCollision(3, 8, false);
+
     }
 
     // Update is called once per frame
@@ -600,7 +603,7 @@ public class character_movement : MonoBehaviour
             m_audioManager.PlaySound("DefendSuccess");
             Debug.Log("Blocked");
         }
-        else if (gameObject.GetComponent<character_water_priest_controller>() != null && (!m_animator.GetCurrentAnimatorStateInfo(0).IsName("ultimate") || !m_animator.GetCurrentAnimatorStateInfo(0).IsName("2_atk")))
+        else if (gameObject.GetComponent<character_water_priest_controller>() != null && !m_animator.GetCurrentAnimatorStateInfo(0).IsName("ultimate") && !m_animator.GetCurrentAnimatorStateInfo(0).IsName("2_atk"))
         {
             m_animator.SetTrigger("Hurt");
             currentHp -= damage;
@@ -614,8 +617,8 @@ public class character_movement : MonoBehaviour
 
         if (m_animator.GetCurrentAnimatorStateInfo(0).IsName("ultimate") 
             || m_animator.GetCurrentAnimatorStateInfo(0).IsName("defend")
+            || m_animator.GetCurrentAnimatorStateInfo(0).IsName("2_atk")
             || m_animator.GetCurrentAnimatorStateInfo(0).IsName("heal")
-            || m_animator.GetCurrentAnimatorStateInfo(0).IsName("roll") 
             || m_animator.GetCurrentAnimatorStateInfo(0).IsName("trap_cast")
             || m_animator.GetCurrentAnimatorStateInfo(0).IsName("tumble")
             || m_animator.GetCurrentAnimatorStateInfo(0).IsName("sp_atk")
@@ -629,9 +632,10 @@ public class character_movement : MonoBehaviour
         if (currentHp <= 0)
         {
             m_animator.SetTrigger("Death");
-            GetComponent<CapsuleCollider2D>().enabled = false;
-            Destroy(GetComponent<Rigidbody2D>());
-            if(GetComponent<fire_warrior_controler>() != null)
+            stopingAction = true;
+            Physics2D.IgnoreLayerCollision(3, 7, true);
+            Physics2D.IgnoreLayerCollision(3, 8, true);
+            if (GetComponent<fire_warrior_controler>() != null)
             {
                if(fire_warrior_controler.isFuryActive)
                 {

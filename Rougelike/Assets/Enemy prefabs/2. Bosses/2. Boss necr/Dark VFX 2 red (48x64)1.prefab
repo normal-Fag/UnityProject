@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2999375768301839871}
   - component: {fileID: 2156353105528181737}
   - component: {fileID: 2941511722459687563}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dark VFX 2 red (48x64)1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

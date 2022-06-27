@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 4383115966861157342}
   - component: {fileID: 4383115966861157340}
   - component: {fileID: 4383115966861157343}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: HotZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}

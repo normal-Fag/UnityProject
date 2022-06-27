@@ -454,7 +454,7 @@ GameObject:
   - component: {fileID: 917780366613999351}
   - component: {fileID: 917780366613999337}
   - component: {fileID: 917780366613999350}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Hot zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}

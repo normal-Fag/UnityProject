@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1216696297968722176}
   - component: {fileID: 58320903024715401}
   - component: {fileID: 7436845984766590082}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FlyongEye_projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}

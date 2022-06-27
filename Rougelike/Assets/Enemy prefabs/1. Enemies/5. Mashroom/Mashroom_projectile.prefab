@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2339055083527309130}
   - component: {fileID: -6252678230017875285}
   - component: {fileID: 2256992664629942441}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mashroom_projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}

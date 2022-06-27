@@ -377,7 +377,7 @@ public class fire_warrior_controler : MonoBehaviour
         hasSpCD = true;
 
         weapon.GetComponent<wp_hitbox>().isBurning = true;
-        weapon.GetComponent<wp_hitbox>().damage = ult_dmg;
+        weapon.GetComponent<wp_hitbox>().damage = ult_dmg / (15 / 10);
         yield return new WaitForSeconds(cd);
         hasSpCD = false;
      

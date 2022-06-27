@@ -515,7 +515,7 @@ GameObject:
   - component: {fileID: 6096701570500625309}
   - component: {fileID: 6096701570500625282}
   - component: {fileID: 6096701570500625283}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Hot zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -778,6 +778,10 @@ PrefabInstance:
     - target: {fileID: 8425778386932180011, guid: 389f1b86e5519428f90ebed86c7da302, type: 3}
       propertyPath: m_Name
       value: EnemyGroundSensor
+      objectReference: {fileID: 0}
+    - target: {fileID: 8425778386932180011, guid: 389f1b86e5519428f90ebed86c7da302, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 389f1b86e5519428f90ebed86c7da302, type: 3}

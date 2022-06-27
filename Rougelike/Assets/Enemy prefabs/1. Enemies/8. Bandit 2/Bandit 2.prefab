@@ -312,7 +312,7 @@ GameObject:
   - component: {fileID: 2564380749190967277}
   - component: {fileID: 2564380749190967276}
   - component: {fileID: 2564380749190967279}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: HotZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -638,6 +638,10 @@ PrefabInstance:
     - target: {fileID: 8425778386932180011, guid: 389f1b86e5519428f90ebed86c7da302, type: 3}
       propertyPath: m_Name
       value: EnemyGroundSensor
+      objectReference: {fileID: 0}
+    - target: {fileID: 8425778386932180011, guid: 389f1b86e5519428f90ebed86c7da302, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8425778386932180014, guid: 389f1b86e5519428f90ebed86c7da302, type: 3}
       propertyPath: m_Size.x

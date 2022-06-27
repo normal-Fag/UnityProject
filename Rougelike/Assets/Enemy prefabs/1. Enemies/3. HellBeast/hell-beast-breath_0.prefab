@@ -154,7 +154,7 @@ GameObject:
   - component: {fileID: 6898817450804897295}
   - component: {fileID: 6898817450804897293}
   - component: {fileID: 6898817450804897294}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HitTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}

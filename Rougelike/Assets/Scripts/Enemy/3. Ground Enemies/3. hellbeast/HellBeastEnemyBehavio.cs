@@ -67,7 +67,7 @@ public class HellBeastEnemyBehavio : Enemy
 
         Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y, -10);
 
-        Instantiate(fireballPrefab, spawnPosition, Quaternion.EulerRotation(shootDirection))
+        Instantiate(fireballPrefab, spawnPosition, Quaternion.Euler(shootDirection))
             .GetComponent<Rigidbody2D>().AddForce(shootDirection * shootForce);
 
         fireballPrefab.GetComponent<HellBeastFireballLogic>().enemyFireballDamage = shootDamage;

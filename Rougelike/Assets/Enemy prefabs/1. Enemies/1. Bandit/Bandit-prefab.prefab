@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8130393862809771955}
   - component: {fileID: 5101788291407042886}
   - component: {fileID: 8662319783965414999}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HitTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -784,6 +784,10 @@ PrefabInstance:
     - target: {fileID: 8425778386932180011, guid: 389f1b86e5519428f90ebed86c7da302, type: 3}
       propertyPath: m_Name
       value: EnemyGroundSensor
+      objectReference: {fileID: 0}
+    - target: {fileID: 8425778386932180011, guid: 389f1b86e5519428f90ebed86c7da302, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 389f1b86e5519428f90ebed86c7da302, type: 3}

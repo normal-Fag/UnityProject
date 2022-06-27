@@ -400,7 +400,7 @@ GameObject:
   - component: {fileID: 2900322324374498089}
   - component: {fileID: 2900322324374498071}
   - component: {fileID: 2900322324374498070}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: hitTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
